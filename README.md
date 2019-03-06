@@ -6,7 +6,7 @@ All credits go to Phillip Piper for creating the original project [ObjectListVie
 This readme is Copyrighted © 2006-2019 by Phillip Piper.
 
 
-I’m too impatient! Just show me what it can do![¶](#i-m-too-impatient-just-show-me-what-it-can-do "Permalink to this headline")
+I’m too impatient! Just show me what it can do!
 -------------------------------------------------------------------------------------------------------------------------------
 
 Here is an example of what your ListView can look like with a few callbacks in place:
@@ -29,7 +29,7 @@ With a little work, you can even pretend to live in the halls of cool with somet
 
 ![_images/foobar-lookalike.png](_images/foobar-lookalike.png)
 
-Without wasting my time, just tell me what it does![¶](#without-wasting-my-time-just-tell-me-what-it-does "Permalink to this headline")
+Without wasting my time, just tell me what it does!
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 OK, here’s the bullet point feature list:
@@ -405,7 +405,7 @@ Don’t forget: Use The Source Luke! You have all the source code. If you can’
 
 
 
-## Features
+# Features
 
 Why take the time to learn how to use an FluentListView? What’s the benefit? The return on investment? This page tries to document the useful features of an FluentListView. Not all features are equally useful, but it’s better to be aware of what’s available so that you can use it when the need arises.
 
