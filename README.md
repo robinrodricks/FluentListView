@@ -172,7 +172,6 @@ class Song {
         ...
 }
 ```
-You can download all the projects and source used in this getting started section here: [getting-started.zip (250 KB)](http://sourceforge.net/projects/objectlistview/files/objectlistview/examples/getting-started.zip/download).
 
 This bit goes here, that bit goes there
 ----------------------------------------------------------------------------------------------------------------
