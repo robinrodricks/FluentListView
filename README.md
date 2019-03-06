@@ -40,35 +40,34 @@ OK, here’s the bullet point feature list:
 *   Supports all ListView views (report, list, large and small icons).
 *   Supports [owner drawing](ownerDraw.html#owner-draw-label), including rendering animated graphics and images stored in a database.
 *   Supports automatic grouping.
-*   Supports sophisticated [group formatting](recipes.html#recipe-groupformatting), including collapsible groups (Vista and later only).
-*   Columns can be fixed-width, have a minimum and/or maximum width, or be space-filling ([Column Widths](recipes.html#recipe-column-width))
-*   Displays a [“list is empty” message](recipes.html#recipe-emptymsg) when the list is empty (obviously).
-*   Supports fancy [tooltips](recipes.html#recipe-tooltips) for cells and for headers.
-*   Supports [buttons in cells](recipes.html#recipe-buttons).
-*   Supports [checkboxes in any column](recipes.html#recipe-checkbox) as well as tri-state checkboxes.
-*   Supports [hierarchical checkboxes](recipes.html#recipe-hierarchical-checkboxes) in TreeListView.
+*   Supports sophisticated [group formatting](#recipe-groupformatting), including collapsible groups (Vista and later only).
+*   Columns can be fixed-width, have a minimum and/or maximum width, or be space-filling ([Column Widths](#recipe-column-width))
+*   Displays a [“list is empty” message](#recipe-emptymsg) when the list is empty (obviously).
+*   Supports fancy [tooltips](#recipe-tooltips) for cells and for headers.
+*   Supports [buttons in cells](#recipe-buttons).
+*   Supports [checkboxes in any column](#recipe-checkbox) as well as tri-state checkboxes.
+*   Supports [hierarchical checkboxes](#recipe-hierarchical-checkboxes) in TreeListView.
 *   Supports alternate rows background colors.
-*   Supports [custom formatting of rows](recipes.html#recipe-formatter).
-*   Supports [searching (by typing) on any column](recipes.html#recipe-search).
-*   Supports [image and text overlays](recipes.html#recipe-overlays) as well as arbitrary [decorations](recipes.html#recipe-decorations).
-*   Supports [hyperlinks](recipes.html#recipe-hyperlink).
-*   Supports [hot tracking](recipes.html#recipe-hottracking) with text font/color changes and with decorations.
-*   Supports [column header formatting](recipes.html#recipe-headerformatting) including [checkboxes](recipes.html#recipe-checkbox-in-header), word wrapping and [vertical text](recipes.html#recipe-column-header-vertical).
-*   Supports [groups on virtual lists](recipes.html#recipe-virtualgroups) (Vista and later only).
-*   Supports [transluscent hot item and selection](recipes.html#recipe-vistascheme) like Vista even on XP.
-*   Supports [filtering](recipes.html#recipe-filtering), including the very common [iTunes-like text filtering](recipes.html#recipe-text-filtering).
-*   Supports [animations](animations.html#animations-label) on cells, row, and the entire list.
-*   Supports [column selection](recipes.html#recipe-column-selection) through right-click on header.
+*   Supports [custom formatting of rows](#recipe-formatter).
+*   Supports [searching (by typing) on any column](#recipe-search).
+*   Supports [image and text overlays](#recipe-overlays) as well as arbitrary [decorations](#recipe-decorations).
+*   Supports [hyperlinks](#recipe-hyperlink).
+*   Supports [hot tracking](#recipe-hottracking) with text font/color changes and with decorations.
+*   Supports [column header formatting](#recipe-headerformatting) including [checkboxes](#recipe-checkbox-in-header), word wrapping and [vertical text](#recipe-column-header-vertical).
+*   Supports [groups on virtual lists](#recipe-virtualgroups) (Vista and later only).
+*   Supports [transluscent hot item and selection](#recipe-vistascheme) like Vista even on XP.
+*   Supports [filtering](#recipe-filtering), including the very common [iTunes-like text filtering](#recipe-text-filtering).
+*   Supports [column selection](#recipe-column-selection) through right-click on header.
 *   Supports [Excel-like column filtering](filtering.html#column-filtering-label).
-*   Supports [native background images](recipes.html#recipe-native-backgrounds) with all their inherent limitations.
-*   Supports [disabled rows](recipes.html#recipe-disabled-rows)
-*   Supports [automatic updates](recipes.html#recipe-auto-updates) via standard INotifyPropertyChanged.
+*   Supports [native background images](#recipe-native-backgrounds) with all their inherent limitations.
+*   Supports [disabled rows](#recipe-disabled-rows)
+*   Supports [automatic updates](#recipe-auto-updates) via standard INotifyPropertyChanged.
 
 There are several flavours of FluentListView:
 
 *   FastFluentListView can build a list of 10,000 objects in less than 0.1 seconds.
-*   TreeListView control combines [an expandable tree structure with the columns of a ListView](recipes.html#recipe-treelistview).
-*   There are [data binding versions of each flavour](recipes.html#recipe-databinding).
+*   TreeListView control combines [an expandable tree structure with the columns of a ListView](#recipe-treelistview).
+*   There are [data binding versions of each flavour](#recipe-databinding).
 
 Seriously, after using an FluentListView, you will never go back to using a plain ListView.
 
@@ -399,11 +398,11 @@ And they’re off and running[¶](#and-they-re-off-and-running "Permalink to thi
 
 Well done! You’ve made it to the end of the tutorial. You should by now have a reasonable grasp of some of the things an FluentListView can do, and how to use it in your application.
 
-If you need further help, you can look at the [Cookbook](recipes.html#cookbook-label) and the [Forum](https://sourceforge.net/forum/forum.php?forum_id=812922) for those questions that just don’t have answer anywhere else.
+If you need further help, you can look at the [Cookbook](#cookbook-label) and the [Forum](https://sourceforge.net/forum/forum.php?forum_id=812922) for those questions that just don’t have answer anywhere else.
 
 Don’t forget: Use The Source Luke! You have all the source code. If you can’t figure something out, read the code and see what is actually happening.
 
-[Welcome To The New World of Loving .NET’s ListView](./recipes.html)
+[Welcome To The New World of Loving .NET’s ListView](./)
 
 
 
@@ -512,7 +511,7 @@ Under Vista and later, groups can now have icons, sub titles, footers and tasks.
 
 ![_images/group-formatting.png](_images/group-formatting.png)
 
-See [27\. How do I put an image next to a group heading?](recipes.html#recipe-groupformatting)
+See [27\. How do I put an image next to a group heading?](#recipe-groupformatting)
 
 Automatic sorting[¶](#automatic-sorting "Permalink to this headline")
 ---------------------------------------------------------------------
@@ -581,9 +580,9 @@ Finally, the programmer can specify that a column should resize automatically to
 
 See these recipes:
 
-*   [5\. How can I stop the user from making a column too narrow or too wide?](recipes.html#recipe-column-width)
-*   [6\. How can I stop the user from resizing a column?](recipes.html#recipe-fixed-column)
-*   [7\. How can I make a column get bigger when the FluentListView is made bigger?](recipes.html#recipe-column-filling)
+*   [5\. How can I stop the user from making a column too narrow or too wide?](#recipe-column-width)
+*   [6\. How can I stop the user from resizing a column?](#recipe-fixed-column)
+*   [7\. How can I make a column get bigger when the FluentListView is made bigger?](#recipe-column-filling)
 
 Displays a “list is empty” message[¶](#displays-a-list-is-empty-message "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------
@@ -592,21 +591,21 @@ An empty ListView can be confusing to the user: did something go wrong? Do I nee
 
 An FluentListView can show a “this list is empty” message when there is nothing to show in the list, so that the user knows the control is supposed to be empty. You can even apply some fairly customizations to the appearance of the message.
 
-See this recipe: [12\. How do I change the message that’s shown when the FluentListView is empty?](recipes.html#recipe-emptymsg)
+See this recipe: [12\. How do I change the message that’s shown when the FluentListView is empty?](#recipe-emptymsg)
 
 Buttons in cells[¶](#buttons-in-cells "Permalink to this headline")
 -------------------------------------------------------------------
 
 An FluentListView can put clickable buttons into cells.
 
-See this recipe for more details: [52\. How can I put a button into a cell?](recipes.html#recipe-buttons).
+See this recipe for more details: [52\. How can I put a button into a cell?](#recipe-buttons).
 
 Checkboxes in any column[¶](#checkboxes-in-any-column "Permalink to this headline")
 -----------------------------------------------------------------------------------
 
 An FluentListView supports checkboxes on rows. In fact, it supports checkboxes in subitems, if you are really keen. These work even in virtual mode (which a normal ListView cannot do).
 
-See this recipe for more details: [10\. How do I use checkboxes in my FluentListView?](recipes.html#recipe-checkbox).
+See this recipe for more details: [10\. How do I use checkboxes in my FluentListView?](#recipe-checkbox).
 
 Alternate rows background colors[¶](#alternate-rows-background-colors "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------
@@ -616,7 +615,7 @@ Having subtly different row colours for even and odd rows can make a ListView ea
 Custom row and cell formatting[¶](#custom-row-and-cell-formatting "Permalink to this headline")
 -----------------------------------------------------------------------------------------------
 
-An FluentListView allows rows and even cells to be formatted with custom colours and fonts. For example, you could draw clients with debts in red, or big spending customers could be given a gold background. See here: [8\. How can I change the colours of a row or just a cell?](recipes.html#recipe-formatter)
+An FluentListView allows rows and even cells to be formatted with custom colours and fonts. For example, you could draw clients with debts in red, or big spending customers could be given a gold background. See here: [8\. How can I change the colours of a row or just a cell?](#recipe-formatter)
 
 Model object level operations[¶](#model-object-level-operations "Permalink to this headline")
 ---------------------------------------------------------------------------------------------
@@ -637,7 +636,7 @@ Hot item tracking[¶](#hot-item-tracking "Permalink to this headline")
 
 It sometimes useful to emphasis the row that the mouse is currently over. This is called “hot tracking.” The normal ListView can underline the text of the hot item. In an FluentListView, the font, font style, text color, and background color can all be set for the hot item.
 
-See this recipe for details: [18\. How can I emphasise the row under the mouse?](recipes.html#recipe-hottracking)
+See this recipe for details: [18\. How can I emphasise the row under the mouse?](#recipe-hottracking)
 
 Copy selected rows to clipboard[¶](#copy-selected-rows-to-clipboard "Permalink to this headline")
 -------------------------------------------------------------------------------------------------
@@ -687,7 +686,7 @@ Tool Tips[¶](#tool-tips "Permalink to this headline")
 
 A standard ListView cannot display tooltips on individual cells (apart from showing truncated cell values when FullRowSelect is true).
 
-But an FluentListView can show arbitrary tool tips for both cells and headers. See [17\. How can I show more information in the tooltip when the mouse hovers over a cell?](recipes.html#recipe-tooltips) for details.
+But an FluentListView can show arbitrary tool tips for both cells and headers. See [17\. How can I show more information in the tooltip when the mouse hovers over a cell?](#recipe-tooltips) for details.
 
 In-place modifications of the list[¶](#in-place-modifications-of-the-list "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------
@@ -707,7 +706,7 @@ FluentListViews can draw images and text over the top of the control. This drawi
 
 Overlays are drawing over the control itself. Decorations are added to rows and subitems.
 
-See: \* [19\. How can I put an image (or some text) over the top of the ListView?](recipes.html#recipe-overlays) for how to use them; \* [Overlays and Decorations](overlays.html#overlays-label) for some gotchas \* [Technical Blog - Overlays](blog1.html#blog-overlays) for the history of their development.
+See: \* [19\. How can I put an image (or some text) over the top of the ListView?](#recipe-overlays) for how to use them; \* [Overlays and Decorations](overlays.html#overlays-label) for some gotchas \* [Technical Blog - Overlays](blog1.html#blog-overlays) for the history of their development.
 
 Cell events[¶](#cell-events "Permalink to this headline")
 ---------------------------------------------------------
@@ -719,7 +718,7 @@ Header check boxes[¶](#header-check-boxes "Permalink to this headline")
 
 Each column header can show a checkbox. Checking or uncheckeding this checkbox can change the checkedness of all checkboxes in the column.
 
-See [50\. How can I put a checkbox in a column header?](recipes.html#recipe-checkbox-in-header).
+See [50\. How can I put a checkbox in a column header?](#recipe-checkbox-in-header).
 
 Header formatting[¶](#header-formatting "Permalink to this headline")
 ---------------------------------------------------------------------
@@ -728,21 +727,21 @@ Each column header can be given its own font, text color, background color and b
 
 The text of column header can also be word wrapped, rather than truncated.
 
-See [25\. How do I change the font or color of the column headers?](recipes.html#recipe-headerformatting).
+See [25\. How do I change the font or color of the column headers?](#recipe-headerformatting).
 
 Header images[¶](#header-images "Permalink to this headline")
 -------------------------------------------------------------
 
 Each column can have an image drawn to the left of the text by setting the HeaderImageKey property.
 
-See [36\. How can I put an image in the column header?](recipes.html#recipe-column-header-image).
+See [36\. How can I put an image in the column header?](#recipe-column-header-image).
 
 Header drawn vertically[¶](#header-drawn-vertically "Permalink to this headline")
 ---------------------------------------------------------------------------------
 
 To save horizonal space, a header can be drawn vertically.
 
-See [37\. Can I make a header take up even less space? Can it be drawn vertical?](recipes.html#recipe-column-header-vertical).
+See [37\. Can I make a header take up even less space? Can it be drawn vertical?](#recipe-column-header-vertical).
 
 Header visible in all views[¶](#header-visible-in-all-views "Permalink to this headline")
 -----------------------------------------------------------------------------------------
@@ -754,14 +753,12 @@ Animations[¶](#animations "Permalink to this headline")
 
 FluentListView integrates with the Sparkle library to allow animations on cells, rows, or whole lists.
 
-See [Sparkle Animations](animations.html#animations-label).
-
 Filtering[¶](#filtering "Permalink to this headline")
 -----------------------------------------------------
 
-FluentListViews (in all flavours) support filtering of their contents. This filtering is done by installing ModelFilters (or less often ListFilters) which select which rows will be shown in the list. See [32\. Can I filter the contents of the FluentListView?](recipes.html#recipe-filtering).
+FluentListViews (in all flavours) support filtering of their contents. This filtering is done by installing ModelFilters (or less often ListFilters) which select which rows will be shown in the list. See [32\. Can I filter the contents of the FluentListView?](#recipe-filtering).
 
-FluentListView comes with some standard filters, most usefully a text match filter which includes only rows that contains a certain string in any cell. This can be combined with a special renderer to highlight the text matches. See [33\. Is there an easy way to only show rows that contain some text?](recipes.html#recipe-text-filtering).
+FluentListView comes with some standard filters, most usefully a text match filter which includes only rows that contains a certain string in any cell. This can be combined with a special renderer to highlight the text matches. See [33\. Is there an easy way to only show rows that contain some text?](#recipe-text-filtering).
 
 These filters are of course extensible.
 
@@ -779,7 +776,7 @@ Hierarchical checkboxes[¶](#hierarchical-checkboxes "Permalink to this headline
 
 TreeListView has hierarchical check boxes, which is where the checkedness of the parent summaries the checkedness of the all the subitems. Checking the parent checks all the descendent items. Similarly, unchecking the parent unchecks all the descendent items.
 
-See [48\. Can a TreeListView calculate checkboxes based on subitems?](recipes.html#recipe-hierarchical-checkboxes) and this blog entry: [Hierarchy-aware checkboxes](blog7.html#blog-hierarchicalcheckboxes)
+See [48\. Can a TreeListView calculate checkboxes based on subitems?](#recipe-hierarchical-checkboxes) and this blog entry: [Hierarchy-aware checkboxes](blog7.html#blog-hierarchicalcheckboxes)
 
 
 
@@ -1860,7 +1857,7 @@ Remember: the list has to be owner drawn for the renderer to have any effect.
 34\. How do I put something animated onto my FluentListView?[¶](#how-do-i-put-something-animated-onto-my-objectlistview "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-This needs a whole page to itself: [Sparkle Animations](animations.html#animations-label)
+To Do
 
 35\. How can I save and restore the state of the FluentListView?[¶](#how-can-i-save-and-restore-the-state-of-the-objectlistview "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
