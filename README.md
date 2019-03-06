@@ -840,7 +840,6 @@ Learning to cook.
 *   [52\. How can I put a button into a cell?](#how-can-i-put-a-button-into-a-cell)
 *   [53\. How can I reduce the CPU usage on mouse move?](#how-can-i-reduce-the-cpu-usage-on-mouse-move)
 *   [54\. How can I put a description under something that looks like a title?](#how-can-i-put-a-description-under-something-that-looks-like-a-title)
-*   [In Use](#in-use)
 
 1\. What flavour of FluentListView do I want to use?[¶](#what-flavour-of-objectlistview-do-i-want-to-use "Permalink to this headline")
 --------------------------------------------------------------------------------------------------------------------------------------
@@ -2532,9 +2531,6 @@ If you want to make something that looks pretty like this, FluentListView can he
 The format shown in the “Task” column is done via a renderer called a DecribedTaskRenderer (not a very elegant name, I admit).
 
 It consists of three parts: the normal Aspect, the normal Image and a description. The first two are setup in the normal way, but the third is done via a property on the renderer DescriptionAspectName.
-
-In Use[¶](#in-use "Permalink to this headline")
------------------------------------------------
 
 You will normally have to give the FluentListView a specific RowHeight that allows for both the title and description. This is not auto calculated for you.
 
