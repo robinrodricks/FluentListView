@@ -1,0 +1,548 @@
+Change log of FluentListView
+
+ * v2.9.1
+ * 2015-12-30  JPP  - Added CellRendererGetter to allow each cell to have a different renderer.
+ *                  - Obsolete properties are no longer code-gen'ed.
+ *
+ * v2.9.0
+ * 2015-08-22  JPP  - Allow selected row back/fore colours to be specified for each row
+ *                  - Renamed properties related to selection colours:
+ *                       - HighlightBackgroundColor -> SelectedBackColor
+ *                       - HighlightForegroundColor -> SelectedForeColor
+ *                       - UnfocusedHighlightBackgroundColor -> UnfocusedSelectedBackColor
+ *                       - UnfocusedHighlightForegroundColor -> UnfocusedSelectedForeColor
+ *                  - UseCustomSelectionColors is no longer used
+ * 2015-08-03  JPP  - Added FluentListView.CellEditFinished event
+ *                  - Added EditorRegistry.Unregister()
+ * 2015-07-08  JPP  - All FluentListViews are now OwnerDrawn by default. This allows all the great features
+ *                    of FluentListView to work correctly at the slight cost of more processing at render time.
+ *                    It also avoids the annoying "hot item background ignored in column 0" behaviour that native
+ *                    ListView has. Programmers can still turn it back off if they wish.
+ * 2015-06-27  JPP  - Yet another attempt to disable ListView's "shift click toggles checkboxes" behaviour.
+ *                    The last strategy (fake right click) worked, but had nasty side effects. This one works
+ *                    by intercepting a HITTEST message so that it fails. It no longer creates fake right mouse events.
+ *                  - Trigger SelectionChanged when filter is changed
+ * 2015-06-23  JPP  - [BIG] Added support for Buttons
+ * 2015-06-22  JPP  - Added OLVColumn.SearchValueGetter to allow the text used when text filtering to be customised
+ *                  - The default DefaultRenderer is now a HighlightTextRenderer, since that seems more generally useful
+ * 2015-06-17  JPP  - Added FocusedObject property
+ *                  - Hot item is now always applied to the row even if FullRowSelect is false
+ * 2015-06-11  JPP  - Added DefaultHotItemStyle property
+ * 2015-06-07  JPP  - Added HeaderMinimumHeight property
+ *                  - Added FluentListView.CellEditUsesWholeCell and OLVColumn.CellEditUsesWholeCell properties.
+ * 2015-05-15  JPP  - Allow ImageGetter to return an Image (which I can't believe didn't work from the beginning!)
+ * 2015-04-27  JPP  - Fix bug where setting View to LargeIcon in the designer was not persisted
+ * 2015-04-07  JPP  - Ensure changes to row.Font in FormatRow are not wiped out by FormatCell (SF #141)
+ * 
+ * v2.8.1
+ * 2014-10-15  JPP  - Added CellEditActivateMode.SingleClickAlways mode
+ *                  - Fire Filter event event if ModelFilter and ListFilter are null (SF #126)
+ *                  - Fixed issue where single-click editing didn't work (SF #128)
+ * v2.8.0
+ * 2014-10-11  JPP  - Fixed some XP-only flicker issues
+ * 2014-09-26  JPP  - Fixed intricate bug involving checkboxes on non-owner-drawn virtual lists.
+ *                  - Fixed long standing (but previously unreported) error on non-details virtual lists where
+ *                    users could not click on checkboxes.
+ * 2014-09-07  JPP  - (Major) Added ability to have checkboxes in headers
+ *                  - CellOver events are raised when the mouse moves over the header. Set TriggerCellOverEventsWhenOverHeader
+ *                    to false to disable this behaviour.
+ *                  - Freeze/Unfreeze now use BeginUpdate/EndUpdate to disable Window level drawing
+ *                  - Changed default value of FluentListView.HeaderUsesThemes from true to false. Too many people were
+ *                    being confused, trying to make something interesting appear in the header and nothing showing up
+ * 2014-08-04  JPP  - Final attempt to fix the multiple hyperlink events being raised. This involves turning
+ *                    a NM_CLICK notification into a NM_RCLICK.
+ * 2014-05-21  JPP  - (Major) Added ability to disable rows. DisabledObjects, DisableObjects(), DisabledItemStyle.
+ * 2014-04-25  JPP  - Fixed issue where virtual lists containing a single row didn't update hyperlinks on MouseOver
+ *                  - Added sanity check before BuildGroups()
+ * 2014-03-22  JPP  - Fixed some subtle bugs resulting from misuse of TryGetValue()
+ * 2014-03-09  JPP  - Added CollapsedGroups property
+ *                  - Several minor Resharper complaints quiesced.
+ * v2.7
+ * 2014-02-14  JPP  - Fixed issue with ShowHeaderInAllViews (another one!) where setting it to false caused the list to lose
+ *                    its other extended styles, leading to nasty flickering and worse.
+ * 2014-02-06  JPP  - Fix issue on virtual lists where the filter was not correctly reapplied after columns were added or removed.
+ *                  - Made disposing of cell editors optional (defaults to true). This allows controls to be cached and reused.
+ *                  - Bracketed column resizing with BeginUpdate/EndUpdate to smooth redraws (thanks to Davide)
+ * 2014-02-01  JPP  - Added static property FluentListView.GroupTitleDefault to allow the default group title to be localised.
+ * 2013-09-24  JPP  - Fixed issue in RefreshObjects() when model objects overrode the Equals()/GetHashCode() methods.
+ *                  - Made sure get state checker were used when they should have been
+ * 2013-04-21  JPP  - Clicking on a non-groupable column header when showing groups will now sort
+ *                    the group contents by that column.
+ * v2.6
+ * 2012-08-16  JPP  - Added FluentListView.EditModel() -- a convenience method to start an edit operation on a model
+ * 2012-08-10  JPP  - Don't trigger selection changed events during sorting/grouping or add/removing columns
+ * 2012-08-06  JPP  - Don't start a cell edit operation when the user clicks on the background of a checkbox cell.
+ *                  - Honor values from the BeforeSorting event when calling a CustomSorter
+ * 2012-08-02  JPP  - Added CellVerticalAlignment and CellPadding properties.
+ * 2012-07-04  JPP  - Fixed issue with cell editing where the cell editing didn't finish until the first idle event.
+ *                    This meant that if you clicked and held on the scroll thumb to finish a cell edit, the editor
+ *                    wouldn't be removed until the mouse was released.
+ * 2012-07-03  JPP  - Fixed issue with SingleClick cell edit mode where the cell editing would not begin until the
+ *                    mouse moved after the click.
+ * 2012-06-25  JPP  - Fixed bug where removing a column from a LargeIcon or SmallIcon view would crash the control. 
+ * 2012-06-15  JPP  - Added Reset() method, which definitively removes all rows *and* columns from an FluentListView.
+ * 2012-06-11  JPP  - Added FilteredObjects property which returns the collection of objects that survives any installed filters.
+ * 2012-06-04  JPP  - [Big] Added UseNotifyPropertyChanged to allow OLV to listen for INotifyPropertyChanged events on models.
+ * 2012-05-30  JPP  - Added static property FluentListView.IgnoreMissingAspects. If this is set to true, all 
+ *                    FluentListViews will silently ignore missing aspect errors. Read the remarks to see why this would be useful.
+ * 2012-05-23  JPP  - Setting UseFilterIndicator to true now sets HeaderUsesTheme to false. 
+ *                    Also, changed default value of UseFilterIndicator to false. Previously, HeaderUsesTheme and UseFilterIndicator
+ *                    defaulted to true, which was pointless since when the HeaderUsesTheme is true, UseFilterIndicator does nothing.  
+ * v2.5.1
+ * 2012-05-06  JPP  - Fix bug where collapsing the first group would cause decorations to stop being drawn (SR #3502608)
+ * 2012-04-23  JPP  - Trigger GroupExpandingCollapsing event to allow the expand/collapse to be cancelled
+ *                  - Fixed SetGroupSpacing() so it corrects updates the space between all groups.
+ *                  - ResizeLastGroup() now does nothing since it was broken and I can't remember what it was
+ *                    even supposed to do :)
+ * 2012-04-18  JPP  - Upgraded hit testing to include hits on groups. 
+ *                  - HotItemChanged is now correctly recalculated on each mouse move. Includes "hot" group information.
+ * 2012-04-14  JPP  - Added GroupStateChanged event. Useful for knowing when a group is collapsed/expanded.
+ *                  - Added AdditionalFilter property. This filter is combined with the Excel-like filtering that
+ *                    the end user might enact at runtime.
+ * 2012-04-10  JPP  - Added PersistentCheckBoxes property to allow primary checkboxes to remember their values
+ *                    across list rebuilds.
+ * 2012-04-05  JPP  - Reverted some code to .NET 2.0 standard.
+ *                  - Tweaked some code
+ * 2012-02-05  JPP  - Fixed bug when selecting a separator on a drop down menu
+ * 2011-06-24  JPP  - Added CanUseApplicationIdle property to cover cases where Application.Idle events
+ *                    are not triggered. For example, when used within VS (and probably Office) extensions
+ *                    Application.Idle is never triggered. Set CanUseApplicationIdle to false to handle 
+ *                    these cases.
+ *                  - Handle cases where a second tool tip is installed onto the FluentListView.
+ *                  - Correctly recolour rows after an Insert or Move
+ *                  - Removed m.LParam cast which could cause overflow issues on Win7/64 bit.
+ * v2.5.0
+ * 2011-05-31  JPP  - SelectObject() and SelectObjects() no longer deselect all other rows.
+                      Set the SelectedObject or SelectedObjects property to do that.
+ *                  - Added CheckedObjectsEnumerable
+ *                  - Made setting CheckedObjects more efficient on large collections
+ *                  - Deprecated GetSelectedObject() and GetSelectedObjects()
+ * 2011-04-25  JPP  - Added SubItemChecking event
+ *                  - Fixed bug in handling of NewValue on CellEditFinishing event
+ * 2011-04-12  JPP  - Added UseFilterIndicator 
+ *                  - Added some more localizable messages
+ * 2011-04-10  JPP  - FormatCellEventArgs now has a CellValue property, which is the model value displayed
+ *                    by the cell. For example, for the Birthday column, the CellValue might be 
+ *                    DateTime(1980, 12, 31), whereas the cell's text might be 'Dec 31, 1980'.
+ * 2011-04-04  JPP  - Tweaked UseTranslucentSelection and UseTranslucentHotItem to look (a little) more
+ *                    like Vista/Win7.
+ *                  - Alternate colours are now only applied in Details view (as they always should have been)
+ *                  - Alternate colours are now correctly recalculated after removing objects
+ * 2011-03-29  JPP  - Added SelectColumnsOnRightClickBehaviour to allow the selecting of columns mechanism 
+ *                    to be changed. Can now be InlineMenu (the default), SubMenu, or ModelDialog.
+ *                  - ColumnSelectionForm was moved from the demo into the FluentListView project itself.
+ *                  - Ctrl-C copying is now able to use the DragSource to create the data transfer object.
+ * 2011-03-19  JPP  - All model object comparisons now use Equals rather than == (thanks to vulkanino)
+ *                  - [Small Break] GetNextItem() and GetPreviousItem() now accept and return OLVListView
+ *                    rather than ListViewItems.
+ * 2011-03-07  JPP  - [Big] Added Excel-style filtering. Right click on a header to show a Filtering menu.
+ *                  - Added CellEditKeyEngine to allow key handling when cell editing to be completely customised.
+ *                    Add CellEditTabChangesRows and CellEditEnterChangesRows to show some of these abilities.
+ * 2011-03-06  JPP  - Added OLVColumn.AutoCompleteEditorMode in preference to AutoCompleteEditor 
+ *                    (which is now just a wrapper). Thanks to Clive Haskins 
+ *                  - Added lots of docs to new classes
+ * 2011-02-25  JPP  - Preserve word wrap settings on TreeListView
+ *                  - Resize last group to keep it on screen (thanks to ?)
+ * 2010-11-16  JPP  - Fixed (once and for all) DisplayIndex problem with Generator
+ *                  - Changed the serializer used in SaveState()/RestoreState() so that it resolves on
+ *                    class name alone.
+ *                  - Fixed bug in GroupWithItemCountSingularFormatOrDefault
+ *                  - Fixed strange flickering in grouped, owner drawn OLV's using RefreshObject()
+ * v2.4.1
+ * 2010-08-25  JPP  - Fixed bug where setting OLVColumn.CheckBoxes to false gave it a renderer
+ *                    specialized for checkboxes. Oddly, this made Generator created owner drawn
+ *                    lists appear to be completely empty.
+ *                  - In IDE, all FluentListView properties are now in a single "FluentListView" category,
+ *                    rather than splitting them between "Appearance" and "Behavior" categories.
+ *                  - Added GroupingParameters.GroupComparer to allow groups to be sorted in a customizable fashion.
+ *                  - Sorting of items within a group can be disabled by setting 
+ *                    GroupingParameters.PrimarySortOrder to None.
+ * 2010-08-24  JPP  - Added OLVColumn.IsHeaderVertical to make a column draw its header vertical.
+ *                  - Added OLVColumn.HeaderTextAlign to control the alignment of a column's header text.
+ *                  - Added HeaderMaximumHeight to limit how tall the header section can become
+ * 2010-08-18  JPP  - Fixed long standing bug where having 0 columns caused a InvalidCast exception.
+ *                  - Added IncludeAllColumnsInDataObject property
+ *                  - Improved BuildList(bool) so that it preserves scroll position even when
+ *                    the listview is grouped.
+ * 2010-08-08  JPP  - Added OLVColumn.HeaderImageKey to allow column headers to have an image.
+ *                  - CellEdit validation and finish events now have NewValue property.
+ * 2010-08-03  JPP  - Subitem checkboxes improvements: obey IsEditable, can be hot, can be disabled.
+ *                  - No more flickering of selection when tabbing between cells
+ *                  - Added EditingCellBorderDecoration to make it clearer which cell is being edited.
+ * 2010-08-01  JPP  - Added FluentListView.SmoothingMode to control the smoothing of all graphics
+ *                    operations
+ *                  - Columns now cache their group item format strings so that they still work as 
+ *                    grouping columns after they have been removed from the listview. This cached
+ *                    value is only used when the column is not part of the listview.
+ * 2010-07-25  JPP  - Correctly trigger a Click event when the mouse is clicked.
+ * 2010-07-16  JPP  - Invalidate the control before and after cell editing to make sure it looks right
+ * 2010-06-23  JPP  - Right mouse clicks on checkboxes no longer confuse them
+ * 2010-06-21  JPP  - Avoid bug in underlying ListView control where virtual lists in SmallIcon view
+ *                    generate GETTOOLINFO msgs with invalid item indices.
+ *                  - Fixed bug where FastFluentListView would throw an exception when showing hyperlinks
+ *                    in any view except Details.
+ * 2010-06-15  JPP  - Fixed bug in ChangeToFilteredColumns() that resulted in column display order
+ *                    being lost when a column was hidden.
+ *                  - Renamed IsVista property to IsVistaOrLater which more accurately describes its function.
+ * v2.4
+ * 2010-04-14  JPP  - Prevent object disposed errors when mouse event handlers cause the
+ *                    FluentListView to be destroyed (e.g. closing a form during a 
+ *                    double click event).
+ *                  - Avoid checkbox munging bug in standard ListView when shift clicking on non-primary
+ *                    columns when FullRowSelect is true.
+ * 2010-04-12  JPP  - Fixed bug in group sorting (thanks Mike).
+ * 2010-04-07  JPP  - Prevent hyperlink processing from triggering spurious MouseUp events.
+ *                    This showed itself by launching the same url multiple times.
+ * 2010-04-06  JPP  - Space filling columns correctly resize upon initial display
+ *                  - ShowHeaderInAllViews is better but still not working reliably.
+ *                    See comments on property for more details.
+ * 2010-03-23  JPP  - Added FluentListView.HeaderFormatStyle and OLVColumn.HeaderFormatStyle.
+ *                    This makes HeaderFont and HeaderForeColor properties unnecessary -- 
+ *                    they will be marked obsolete in the next version and removed after that.
+ * 2010-03-16  JPP  - Changed object checking so that objects can be pre-checked before they
+ *                    are added to the list. Normal FluentListViews managed "checkedness" in
+ *                    the ListViewItem, so this won't work for them, unless check state getters
+ *                    and putters have been installed. It will work on on virtual lists (thus fast lists and
+ *                    tree views) since they manage their own check state.
+ * 2010-03-06  JPP  - Hide "Items" and "Groups" from the IDE properties grid since they shouldn't be set like that.
+ *                    They can still be accessed through "Custom Commands" and there's nothing we can do
+ *                    about that.
+ * 2010-03-05  JPP  - Added filtering
+ * 2010-01-18  JPP  - Overlays can be turned off. They also only work on 32-bit displays
+ * v2.3
+ * 2009-10-30  JPP  - Plugged possible resource leak by using using() with CreateGraphics()
+ * 2009-10-28  JPP  - Fix bug when right clicking in the empty area of the header
+ * 2009-10-20  JPP  - Redraw the control after setting EmptyListMsg property
+ * v2.3
+ * 2009-09-30  JPP  - Added Dispose() method to properly release resources
+ * 2009-09-16  JPP  - Added OwnerDrawnHeader, which you can set to true if you want to owner draw
+ *                    the header yourself.
+ * 2009-09-15  JPP  - Added UseExplorerTheme, which allow complete visual compliance with Vista explorer.
+ *                    But see property documentation for its many limitations.
+ *                  - Added ShowHeaderInAllViews. To make this work, Columns are no longer
+ *                    changed when switching to/from Tile view.
+ * 2009-09-11  JPP  - Added OLVColumn.AutoCompleteEditor to allow the autocomplete of cell editors
+ *                    to be disabled.
+ * 2009-09-01  JPP  - Added FluentListView.TextRenderingHint property which controls the
+ *                    text rendering hint of all drawn text.
+ * 2009-08-28  JPP  - [BIG] Added group formatting to supercharge what is possible with groups
+ *                  - [BIG] Virtual groups now work
+ *                  - Extended MakeGroupies() to handle more aspects of group creation
+ * 2009-08-19  JPP  - Added ability to show basic column commands when header is right clicked
+ *                  - Added SelectedRowDecoration, UseTranslucentSelection and UseTranslucentHotItem.
+ *                  - Added PrimarySortColumn and PrimarySortOrder
+ * 2009-08-15  JPP  - Correct problems with standard hit test and subitems
+ * 2009-08-14  JPP  - [BIG] Support Decorations
+ *                  - [BIG] Added header formatting capabilities: font, color, word wrap
+ *                  - Gave FluentListView its own designer to hide unwanted properties
+ *                  - Separated design time stuff into separate file
+ *                  - Added FormatRow and FormatCell events
+ * 2009-08-09  JPP  - Get around bug in HitTest when not FullRowSelect
+ *                  - Added OLVListItem.GetSubItemBounds() method which works correctly
+ *                    for all columns including column 0
+ * 2009-08-07  JPP  - Added Hot* properties that track where the mouse is
+ *                  - Added HotItemChanged event
+ *                  - Overrode TextAlign on columns so that column 0 can have something other
+ *                    than just left alignment. This is only honored when owner drawn.
+ * v2.2.1
+ * 2009-08-03  JPP  - Subitem edit rectangles always allowed for an image in the cell, even if there was none.
+ *                    Now they only allow for an image when there actually is one.
+ *                  - Added Bounds property to OLVListItem which handles items being part of collapsed groups.
+ * 2009-07-29  JPP  - Added GetSubItem() methods to FluentListView and OLVListItem
+ * 2009-07-26  JPP  - Avoided bug in .NET framework involving column 0 of owner drawn listviews not being
+ *                    redrawn when the listview was scrolled horizontally (this was a LOT of work to track
+ *                    down and fix!)
+ *                  - The cell edit rectangle is now correctly calculated when the listview is scrolled
+ *                    horizontally.
+ * 2009-07-14  JPP  - If the user clicks/double clicks on a tree list cell, an edit operation will no longer begin
+ *                    if the click was to the left of the expander. This is implemented in such a way that
+ *                    other renderers can have similar "dead" zones.
+ * 2009-07-11  JPP  - CalculateCellBounds() messed with the FullRowSelect property, which confused the
+ *                    tooltip handling on the underlying control. It no longer does this.
+ *                  - The cell edit rectangle is now correctly calculated for owner-drawn, non-Details views.
+ * 2009-07-08  JPP  - Added Cell events (CellClicked, CellOver, CellRightClicked)
+ *                  - Made BuildList(), AddObject() and RemoveObject() thread-safe
+ * 2009-07-04  JPP  - Space bar now properly toggles checkedness of selected rows
+ * 2009-07-02  JPP  - Fixed bug with tooltips when the underlying Windows control was destroyed.
+ *                  - CellToolTipShowing events are now triggered in all views.
+ * v2.2
+ * 2009-06-02  JPP  - BeforeSortingEventArgs now has a Handled property to let event handlers do
+ *                    the item sorting themselves.
+ *                  - AlwaysGroupByColumn works again, as does SortGroupItemsByPrimaryColumn and all their
+ *                    various permutations.
+ *                  - SecondarySortOrder and SecondarySortColumn are now "null" by default
+ * 2009-05-15  JPP  - Fixed bug so that KeyPress events are again triggered
+ * 2009-05-10  JPP  - Removed all unsafe code
+ * 2009-05-07  JPP  - Don't use glass panel for overlays when in design mode. It's too confusing.
+ * 2009-05-05  JPP  - Added Scroll event (thanks to Christophe Hosten for the complete patch to implement this)
+ *                  - Added Unfocused foreground and background colors (also thanks to Christophe Hosten)
+ * 2009-04-29  JPP  - Added SelectedColumn property, which puts a slight tint on that column. Combine
+ *                    this with TintSortColumn property and the sort column is automatically tinted.
+ *                  - Use an overlay to implement "empty list" msg. Default empty list msg is now prettier.
+ * 2009-04-28  JPP  - Fixed bug where DoubleClick events were not triggered when CheckBoxes was true
+ * 2009-04-23  JPP  - Fixed various bugs under Vista.
+ *                  - Made groups collapsible - Vista only. Thanks to Crustyapplesniffer.
+ *                  - Forward events from DropSink to the control itself. This allows handlers to be defined
+ *                    within the IDE for drop events
+ * 2009-04-16  JPP  - Made several properties localizable.
+ * 2009-04-11  JPP  - Correctly renderer checkboxes when RowHeight is non-standard
+ * 2009-04-11  JPP  - Implemented overlay architecture, based on CustomDraw scheme.
+ *                    This unified drag drop feedback, empty list msgs and overlay images.
+ *                  - Added OverlayImage and friends, which allows an image to be drawn
+ *                    transparently over the listview
+ * 2009-04-10  JPP  - Fixed long-standing annoying flicker on owner drawn virtual lists!
+ *                    This means, amongst other things, that grid lines no longer get confused,
+ *                    and drag-select no longer flickers.
+ * 2009-04-07  JPP  - Calculate edit rectangles more accurately
+ * 2009-04-06  JPP  - Double-clicking no longer toggles the checkbox
+ *                  - Double-clicking on a checkbox no longer confuses the checkbox
+ * 2009-03-16  JPP  - Optimized the build of autocomplete lists
+ * v2.1
+ * 2009-02-24  JPP  - Fix bug where double-clicking VERY quickly on two different cells
+ *                    could give two editors
+ *                  - Maintain focused item when rebuilding list (SF #2547060)
+ * 2009-02-22  JPP  - Reworked checkboxes so that events are triggered for virtual lists
+ * 2009-02-15  JPP  - Added FluentListView.ConfigureAutoComplete utility method
+ * 2009-02-02  JPP  - Fixed bug with AlwaysGroupByColumn where column header clicks would not resort groups.
+ * 2009-02-01  JPP  - OLVColumn.CheckBoxes and TriStateCheckBoxes now work.
+ * 2009-01-28  JPP  - Complete overhaul of renderers!
+ *                       - Use IRenderer
+ *                       - Added FluentListView.ItemRenderer to draw whole items
+ * 2009-01-23  JPP  - Simple Checkboxes now work properly
+ *                  - Added TriStateCheckBoxes property to control whether the user can
+ *                    set the row checkbox to have the Indeterminate value
+ *                  - CheckState property is now just a wrapper around the StateImageIndex property
+ * 2009-01-20  JPP  - Changed to always draw columns when owner drawn, rather than falling back on DrawDefault.
+ *                    This simplified several owner drawn problems
+ *                  - Added DefaultRenderer property to help with the above
+ *                  - HotItem background color is applied to all cells even when FullRowSelect is false
+ *                  - Allow grouping by CheckedAspectName columns
+ *                  - Commented out experimental animations. Still needs work.
+ * 2009-01-17  JPP  - Added HotItemStyle and UseHotItem to highlight the row under the cursor
+ *                  - Added UseCustomSelectionColors property
+ *                  - Owner draw mode now honors ForeColor and BackColor settings on the list
+ * 2009-01-16  JPP  - Changed to use EditorRegistry rather than hard coding cell editors
+ * 2009-01-10  JPP  - Changed to use Equals() method rather than == to compare model objects.
+ * v2.0.1
+ * 2009-01-08  JPP  - Fixed long-standing "multiple columns generated" problem.
+ *                    Thanks to pinkjones for his help with solving this one!
+ *                  - Added EnsureGroupVisible()
+ * 2009-01-07  JPP  - Made all public and protected methods virtual
+ *                  - FinishCellEditing, PossibleFinishCellEditing and CancelCellEditing are now public
+ * 2008-12-20  JPP  - Fixed bug with group comparisons when a group key was null (SF#2445761)
+ * 2008-12-19  JPP  - Fixed bug with space filling columns and layout events
+ *                  - Fixed RowHeight so that it only changes the row height, not the width of the images.
+ * v2.0
+ * 2008-12-10  JPP  - Handle Backspace key. Resets the search-by-typing state without delay
+ *                  - Made some changes to the column collection editor to try and avoid
+ *                    the multiple column generation problem.
+ *                  - Updated some documentation
+ * 2008-12-07  JPP  - Search-by-typing now works when showing groups
+ *                  - Added BeforeSearching and AfterSearching events which are triggered when the user types
+ *                    into the list.
+ *                  - Added secondary sort information to Before/AfterSorting events
+ *                  - Reorganized group sorting code. Now triggers Sorting events.
+ *                  - Added GetItemIndexInDisplayOrder()
+ *                  - Tweaked in the interaction of the column editor with the IDE so that we (normally)
+ *                    don't rely on a hack to find the owning FluentListView
+ *                  - Changed all 'DefaultValue(typeof(Color), "Empty")' to 'DefaultValue(typeof(Color), "")'
+ *                    since the first does not given Color.Empty as I thought, but the second does.
+ * 2008-11-28  JPP  - Fixed long standing bug with horizontal scrollbar when shrinking the window.
+ *                    (thanks to Bartosz Borowik)
+ * 2008-11-25  JPP  - Added support for dynamic tooltips
+ *                  - Split out comparers and header controls stuff into their own files
+ * 2008-11-21  JPP  - Fixed bug where enabling grouping when there was not a sort column would not
+ *                    produce a grouped list. Grouping column now defaults to column 0.
+ *                  - Preserve selection on virtual lists when sorting
+ * 2008-11-20  JPP  - Added ability to search by sort column to FluentListView. Unified this with
+ *                    ability that was already in VirtualFluentListView
+ * 2008-11-19  JPP  - Fixed bug in ChangeToFilteredColumns() where DisplayOrder was not always restored correctly.
+ * 2008-10-29  JPP  - Event argument blocks moved to directly within the namespace, rather than being
+ *                    nested inside FluentListView class.
+ *                  - Removed OLVColumn.CellEditor since it was never used.
+ *                  - Marked OLVColumn.AspectGetterAutoGenerated as obsolete (it has not been used for
+ *                    several versions now).
+ * 2008-10-28  JPP  - SelectedObjects is now an IList, rather than an ArrayList. This allows
+ *                    it to accept generic list (eg List<File>).
+ * 2008-10-09  JPP  - Support indeterminate checkbox values.
+ *                    [BREAKING CHANGE] CheckStateGetter/CheckStatePutter now use CheckState types only.
+ *                    BooleanCheckStateGetter and BooleanCheckStatePutter added to ease transition.
+ * 2008-10-08  JPP  - Added setFocus parameter to SelectObject(), which allows focus to be set
+ *                    at the same time as selecting.
+ * 2008-09-27  JPP  - BIG CHANGE: Fissioned this file into separate files for each component
+ * 2008-09-24  JPP  - Corrected bug with owner drawn lists where a column 0 with a renderer
+ *                    would draw at column 0 even if column 0 was dragged to another position.
+ *                  - Correctly handle space filling columns when columns are added/removed
+ * 2008-09-16  JPP  - Consistently use try..finally for BeginUpdate()/EndUpdate() pairs
+ * 2008-08-24  JPP  - If LastSortOrder is None when adding objects, don't force a resort.
+ * 2008-08-22  JPP  - Catch and ignore some problems with setting TopIndex on FastFluentListViews.
+ * 2008-08-05  JPP  - In the right-click column select menu, columns are now sorted by display order, rather than alphabetically
+ * v1.13
+ * 2008-07-23  JPP  - Consistently use copy-on-write semantics with Add/RemoveObject methods
+ * 2008-07-10  JPP  - Enable validation on cell editors through a CellEditValidating event.
+ *                    (thanks to Artiom Chilaru for the initial suggestion and implementation).
+ * 2008-07-09  JPP  - Added HeaderControl.Handle to allow OLV to be used within UserControls.
+ *                    (thanks to Michael Coffey for tracking this down).
+ * 2008-06-23  JPP  - Split the more generally useful CopyObjectsToClipboard() method
+ *                    out of CopySelectionToClipboard()
+ * 2008-06-22  JPP  - Added AlwaysGroupByColumn and AlwaysGroupBySortOrder, which
+ *                    force the list view to always be grouped by a particular column.
+ * 2008-05-31  JPP  - Allow check boxes on FastFluentListViews
+ *                  - Added CheckedObject and CheckedObjects properties
+ * 2008-05-11  JPP  - Allow selection foreground and background colors to be changed.
+ *                    Windows doesn't allow this, so we can only make it happen when owner
+ *                    drawing. Set the HighlightForegroundColor and  HighlightBackgroundColor
+ *                    properties and then call EnableCustomSelectionColors().
+ * v1.12
+ * 2008-05-08  JPP  - Fixed bug where the column select menu would not appear if the
+ *                    FluentListView has a context menu installed.
+ * 2008-05-05  JPP  - Non detail views can now be owner drawn. The renderer installed for
+ *                    primary column is given the chance to render the whole item.
+ *                    See BusinessCardRenderer in the demo for an example.
+ *                  - BREAKING CHANGE: RenderDelegate now returns a bool to indicate if default
+ *                    rendering should be done. Previously returned void. Only important if your
+ *                    code used RendererDelegate directly. Renderers derived from BaseRenderer
+ *                    are unchanged.
+ * 2008-05-03  JPP  - Changed cell editing to use values directly when the values are Strings.
+ *                    Previously, values were always handed to the AspectToStringConverter.
+ *                  - When editing a cell, tabbing no longer tries to edit the next subitem
+ *                    when not in details view!
+ * 2008-05-02  JPP  - MappedImageRenderer can now handle a Aspects that return a collection
+ *                    of values. Each value will be drawn as its own image.
+ *                  - Made AddObjects() and RemoveObjects() work for all flavours (or at least not crash)
+ *                  - Fixed bug with clearing virtual lists that has been scrolled vertically
+ *                  - Made TopItemIndex work with virtual lists.
+ * 2008-05-01  JPP  - Added AddObjects() and RemoveObjects() to allow faster mods to the list
+ *                  - Reorganised public properties. Now alphabetical.
+ *                  - Made the class FluentListViewState internal, as it always should have been.
+ * v1.11
+ * 2008-04-29  JPP  - Preserve scroll position when building the list or changing columns.
+ *                  - Added TopItemIndex property. Due to problems with the underlying control, this
+ *                    property is not always reliable. See property docs for info.
+ * 2008-04-27  JPP  - Added SelectedIndex property.
+ *                  - Use a different, more general strategy to handle Invoke(). Removed all delegates
+ *                    that were only declared to support Invoke().
+ *                  - Check all native structures for 64-bit correctness.
+ * 2008-04-25  JPP  - Released on SourceForge.
+ * 2008-04-13  JPP  - Added ColumnRightClick event.
+ *                  - Made the assembly CLS-compliant. To do this, our cell editors were made internal, and
+ *                    the constraint on FlagRenderer template parameter was removed (the type must still
+ *                    be an IConvertible, but if it isn't, the error will be caught at runtime, not compile time).
+ * 2008-04-12  JPP  - Changed HandleHeaderRightClick() to have a columnIndex parameter, which tells
+ *                    exactly which column was right-clicked.
+ * 2008-03-31  JPP  - Added SaveState() and RestoreState()
+ *                  - When cell editing, scrolling with a mouse wheel now ends the edit operation.
+ * v1.10
+ * 2008-03-25  JPP  - Added space filling columns. See OLVColumn.FreeSpaceProportion property for details.
+ *                    A space filling columns fills all (or a portion) of the width unoccupied by other columns.
+ * 2008-03-23  JPP  - Finished tinkering with support for Mono. Compile with conditional compilation symbol 'MONO'
+ *                    to enable. On Windows, current problems with Mono:
+ *                    - grid lines on virtual lists crashes
+ *                    - when grouped, items sometimes are not drawn when any item is scrolled out of view
+ *                    - i can't seem to get owner drawing to work
+ *                    - when editing cell values, the editing controls always appear behind the listview,
+ *                      where they function fine -- the user just can't see them :-)
+ * 2008-03-16  JPP  - Added some methods suggested by Chris Marlowe (thanks for the suggestions Chris)
+ *                    - ClearObjects()
+ *                    - GetCheckedObject(), GetCheckedObjects()
+ *                    - GetItemAt() variation that gets both the item and the column under a point
+ * 2008-02-28  JPP  - Fixed bug with subitem colors when using OwnerDrawn lists and a RowFormatter.
+ * v1.9.1
+ * 2008-01-29  JPP  - Fixed bug that caused owner-drawn virtual lists to use 100% CPU
+ *                  - Added FlagRenderer to help draw bitwise-OR'ed flag values
+ * 2008-01-23  JPP  - Fixed bug (introduced in v1.9) that made alternate row colour with groups not quite right
+ *                  - Ensure that DesignerSerializationVisibility.Hidden is set on all non-browsable properties
+ *                  - Make sure that sort indicators are shown after changing which columns are visible
+ * 2008-01-21  JPP  - Added FastFluentListView
+ * v1.9
+ * 2008-01-18  JPP  - Added IncrementalUpdate()
+ * 2008-01-16  JPP  - Right clicking on column header will allow the user to choose which columns are visible.
+ *                    Set SelectColumnsOnRightClick to false to prevent this behaviour.
+ *                  - Added ImagesRenderer to draw more than one images in a column
+ *                  - Changed the positioning of the empty list m to use all the client area. Thanks to Matze.
+ * 2007-12-13  JPP  - Added CopySelectionToClipboard(). Ctrl-C invokes this method. Supports text
+ *                    and HTML formats.
+ * 2007-12-12  JPP  - Added support for checkboxes via CheckStateGetter and CheckStatePutter properties.
+ *                  - Made FluentListView and OLVColumn into partial classes so that others can extend them.
+ * 2007-12-09  JPP  - Added ability to have hidden columns, i.e. columns that the FluentListView knows
+ *                    about but that are not visible to the user. Controlled by OLVColumn.IsVisible.
+ *                    Added ColumnSelectionForm to the project to show how it could be used in an application.
+ *
+ * v1.8
+ * 2007-11-26  JPP  - Cell editing fully functional
+ * 2007-11-21  JPP  - Added SelectionChanged event. This event is triggered once when the
+ *                    selection changes, no matter how many items are selected or deselected (in
+ *                    contrast to SelectedIndexChanged which is called once for every row that
+ *                    is selected or deselected). Thanks to lupokehl42 (Daniel) for his suggestions and
+ *                    improvements on this idea.
+ * 2007-11-19  JPP  - First take at cell editing
+ * 2007-11-17  JPP  - Changed so that items within a group are not sorted if lastSortOrder == None
+ *                  - Only call MakeSortIndicatorImages() if we haven't already made the sort indicators
+ *                    (Corrected misspelling in the name of the method too)
+ * 2007-11-06  JPP  - Added ability to have secondary sort criteria when sorting
+ *                    (SecondarySortColumn and SecondarySortOrder properties)
+ *                  - Added SortGroupItemsByPrimaryColumn to allow group items to be sorted by the
+ *                    primary column. Previous default was to sort by the grouping column.
+ * v1.7
+ * No big changes to this version but made to work with ListViewPrinter and released with it.
+ *
+ * 2007-11-05  JPP  - Changed BaseRenderer to use DrawString() rather than TextRenderer, since TextRenderer
+ *                    does not work when printing.
+ * v1.6
+ * 2007-11-03  JPP  - Fixed some bugs in the rebuilding of DataListView.
+ * 2007-10-31  JPP  - Changed to use builtin sort indicators on XP and later. This also avoids alignment
+ *                    problems on Vista. (thanks to gravybod for the suggestion and example implementation)
+ * 2007-10-21  JPP  - Added MinimumWidth and MaximumWidth properties to OLVColumn.
+ *                  - Added ability for BuildList() to preserve selection. Calling BuildList() directly
+ *                    tries to preserve selection; calling SetObjects() does not.
+ *                  - Added SelectAll() and DeselectAll() methods. Useful for working with large lists.
+ * 2007-10-08  JPP  - Added GetNextItem() and GetPreviousItem(), which walk sequentially through the
+ *                    listview items, even when the view is grouped.
+ *                  - Added SelectedItem property
+ * 2007-09-28  JPP  - Optimized aspect-to-string conversion. BuildList() 15% faster.
+ *                  - Added empty implementation of RefreshObjects() to VirtualFluentListView since
+ *                    RefreshObjects() cannot work on virtual lists.
+ * 2007-09-13  JPP  - Corrected bug with custom sorter in VirtualFluentListView (thanks for mpgjunky)
+ * 2007-09-07  JPP  - Corrected image scaling bug in DrawAlignedImage() (thanks to krita970)
+ * 2007-08-29  JPP  - Allow item count labels on groups to be set per column (thanks to cmarlow for idea)
+ * 2007-08-14  JPP  - Major rework of DataListView based on Ian Griffiths's great work
+ * 2007-08-11  JPP  - When empty, the control can now draw a "List Empty" m
+ *                  - Added GetColumn() and GetItem() methods
+ * v1.5
+ * 2007-08-03  JPP  - Support animated GIFs in ImageRenderer
+ *                  - Allow height of rows to be specified - EXPERIMENTAL!
+ * 2007-07-26  JPP  - Optimised redrawing of owner-drawn lists by remembering the update rect
+ *                  - Allow sort indicators to be turned off
+ * 2007-06-30  JPP  - Added RowFormatter delegate
+ *                  - Allow a different label when there is only one item in a group (thanks to cmarlow)
+ * v1.4
+ * 2007-04-12  JPP  - Allow owner drawn on steriods!
+ *                  - Column headers now display sort indicators
+ *                  - ImageGetter delegates can now return ints, strings or Images
+ *                    (Images are only visible if the list is owner drawn)
+ *                  - Added OLVColumn.MakeGroupies to help with group partitioning
+ *                  - All normal listview views are now supported
+ *                  - Allow dotted aspect names, e.g. Owner.Workgroup.Name (thanks to OlafD)
+ *                  - Added SelectedObject and SelectedObjects properties
+ * v1.3
+ * 2007-03-01  JPP  - Added DataListView
+ *                  - Added VirtualFluentListView
+ * 					- Added Freeze/Unfreeze capabilities
+ *                  - Allowed sort handler to be installed
+ *                  - Simplified sort comparisons: handles 95% of cases with only 6 lines of code!
+ *                  - Fixed bug with alternative line colors on unsorted lists (thanks to cmarlow)
+ * 2007-01-13  JPP  - Fixed bug with lastSortOrder (thanks to Kwan Fu Sit)
+ *                  - Non-OLVColumns are no longer allowed
+ * 2007-01-04  JPP  - Clear sorter before rebuilding list. 10x faster! (thanks to aaberg)
+ *                  - Include GetField in GetAspectByName() so field values can be Invoked too.
+ * 					- Fixed subtle bug in RefreshItem() that erased background colors.
+ * 2006-11-01  JPP  - Added alternate line colouring
+ * 2006-10-20  JPP  - Refactored all sorting comparisons and made it extendable. See ComparerManager.
+ *                  - Improved IDE integration
+ *                  - Made control DoubleBuffered
+ *                  - Added object selection methods
+ * 2006-10-13  JPP  Implemented grouping and column sorting
+ * 2006-10-09  JPP  Initial version
+ *
+ * TO DO:
+ * - Support undocumented group features: subseted groups, group footer items

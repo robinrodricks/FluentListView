@@ -1410,7 +1410,7 @@ Isn’t there are way to get rid of all the casts in the delegates?
 
 Yes. You can use a TypedFluentListView wrapper.
 
-One annoyance with FluentListView is all the casting that is needed. Because the FluentListView makes no assumptions about what sort of model objects you will be using, it handles all models as objects and it#8217;s up to you to cast them to the right type when you need to. This leads to many delegates starting with a cast like this:
+One annoyance with FluentListView is all the casting that is needed. Because the FluentListView makes no assumptions about what sort of model objects you will be using, it handles all models as objects and it's up to you to cast them to the right type when you need to. This leads to many delegates starting with a cast like this:
 ```
 this.fluentListView1.SomeDelegate = delegate(object x) {
     MyModelObject model = (MyModelObject)x;
