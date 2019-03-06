@@ -3,6 +3,7 @@ FluentListView is a C# wrapper around a .NET ListView, supporting model-bound li
 
 All credits go to Phillip Piper for creating the original project [ObjectListView](http://objectlistview.sourceforge.net/).
 
+This readme is Copyrighted © 2006-2019 by Phillip Piper.
 
 
 I’m too impatient! Just show me what it can do![¶](#i-m-too-impatient-just-show-me-what-it-can-do "Permalink to this headline")
