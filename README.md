@@ -36,7 +36,7 @@ OK, here’s the bullet point feature list:
 
 *   Automatically transforms a list of model objects into a fully functional ListView, including automatically sorting and grouping rows.
 *   Easily [edit cell values](#how-do-i-let-the-user-edit-the-values-shown-in-the-list).
-*   Easily [use drag and drop](dragdrop.html#dragdrop-label).
+*   Easily [use drag and drop](#how-can-i-use-drag-and-drop-in-an-objectlistview).
 *   Supports all ListView views (report, list, large and small icons).
 *   Supports [owner drawing](ownerDraw.html#owner-draw-label), including rendering animated graphics and images stored in a database.
 *   Supports automatic grouping.
@@ -554,7 +554,7 @@ In many cases, an FluentListView becomes a full drag source by setting IsSimpleD
 
 Similarly, to accept drops, it is usually enough to set IsSimpleDropSink to _true_, and then handle the CanDrop and Dropped events (or the ModelCanDrop and ModelDropped events, if you only want to handle drops from other FluentListViews in your application).
 
-See [FluentListView and Drag & Drop](dragdrop.html#dragdrop-label) for more information.
+See [FluentListView and Drag & Drop](#how-can-i-use-drag-and-drop-in-an-objectlistview) for more information.
 
 Supports all ListView views
 -----------------------------------------------------------------------------------------
@@ -1077,7 +1077,7 @@ When the user wants to finish the edit operation, a CellEditFinishing event is t
 
 No prizes for guessing that you can refer to the Control property to extract the value that the user has entered and then use that value to do whatever you want. During this event, you should also undo any event listening that you have setup during the CellEditStarting event.
 
-You can look in the demo at listViewComplex\_CellEditStarting(), listViewComplex\_CellEditValidating() and listViewComplex\_CellEditFinishing() to see an example of handling these events.
+You can look in the demo at listViewComplex_CellEditStarting(), listViewComplex_CellEditValidating() and listViewComplex_CellEditFinishing() to see an example of handling these events.
 
 
 
@@ -1172,7 +1172,7 @@ You listen for FormatRow or FormatCell event.
 
 To show customers in red when they owe money, you would set up a handler for the FormatRow event in the IDE, and then do something like this:
 ```
-private void olv1\_FormatRow(object sender, FormatRowEventArgs e) {
+private void olv1_FormatRow(object sender, FormatRowEventArgs e) {
     Customer customer = (Customer)e.Model;
     if (customer.Credit < 0)
         e.Item.BackColor = Color.Red;
@@ -1180,7 +1180,7 @@ private void olv1\_FormatRow(object sender, FormatRowEventArgs e) {
 ```
 To change the formatting of an individual cell, you need to set UseCellFormatEvents to _true_ and then listen for FormatCell events. To show just the credit balance in red, you could do something like this:
 ```
-private void olv1\_FormatCell(object sender, FormatCellEventArgs e) {
+private void olv1_FormatCell(object sender, FormatCellEventArgs e) {
     if (e.ColumnIndex == this.creditBalanceColumn.Index) {
         Customer customer = (Customer)e.Model;
         if (customer.Credit < 0)
@@ -1299,14 +1299,14 @@ However, if you really _have to_ programmatically set the Checked property on a 
 
 So, this code – which tries to toggle the checkedness of the selected rows – will cause problems for your FluentListView:
 ```
-private void objectListView1\_ItemActivate(object sender, EventArgs e) {
+private void objectListView1_ItemActivate(object sender, EventArgs e) {
     foreach (ListViewItem lvi in objectListView1.SelectedItems)
         lvi.Checked = !lvi.Checked;
 }
 ```
 This will work – once! After that, it will not work again. Worse, the check boxes will stop responding to user clicks. To work properly, you treat the items as OLVListItem:
 ```
-private void objectListView1\_ItemActivate(object sender, EventArgs e) {
+private void objectListView1_ItemActivate(object sender, EventArgs e) {
     foreach (OLVListItem olvi in objectListView1.SelectedItems)
         olvi.Checked = !olvi.Checked;
 }
@@ -1562,9 +1562,9 @@ With a very little bit of work, you can display tool tips like this:
 
 Example:
 ```
-this.olv.CellToolTipShowing += new EventHandler<ToolTipShowingEventArgs\>(olv\_CellToolTipShowing);
+this.olv.CellToolTipShowing += new EventHandler<ToolTipShowingEventArgs\>(olv_CellToolTipShowing);
 ...
-void olv\_CellToolTipShowing(object sender, ToolTipShowingEventArgs e) {
+void olv_CellToolTipShowing(object sender, ToolTipShowingEventArgs e) {
     // Show a long tooltip over cells only when the control key is down
     if (Control.ModifierKeys == Keys.Control) {
         Song s = (Song)x;
@@ -1653,7 +1653,7 @@ Decorations are similar to overlays in that they are drawn over the top of the F
 
 Decorations are normally assigned to a row or cell during a FormatRow or FormatCell event. In the demo, a love heart appears next to someone named “Nicola”:
 ```
-private void listViewComplex\_FormatCell(object sender, FormatCellEventArgs e) {
+private void listViewComplex_FormatCell(object sender, FormatCellEventArgs e) {
     Person p = (Person)e.Model;
 
     // Put a love heart next to Nicola's name :)
@@ -1700,12 +1700,179 @@ Like overlays, decorations are purely cosmetic. They do not respond to any user 
 
 
 
+
+
+
 How can I use drag and drop in an FluentListView?
 -----------------------------------------------------------------------------------------------------------------------------------------
 
-This needs its own page to explain properly. [FluentListView and Drag & Drop](dragdrop.html#dragdrop-label).
 
-To see a detailed walk-through, have a look at [this blog](blog4.html#blog-rearrangingtreelistview).
+Dropping the drag from Drag & Drop
+----------------------------------
+
+FluentListView has sophisticated support for dragging and dropping. This support makes it easy to support interapplication drag and drop, dragging within your application, and making lists that can be rearranged by dragging.
+
+The easy way
+-----------------------------------------------------------
+
+The simpliest way to use drag and drop in an FluentListView is through the IsSimpleDragSource and IsSimpleDropSink properties (which can be set through the IDE).
+
+Setting these gives an FluentListView that will allow objects to be dragged and dropped on items, like this:
+
+![_images/dragdrop-example1.png](_images/dragdrop-example1.png)
+
+If you set IsSimpleDragSource to _true_, the FluentListView will be able to initiate drags. It will drag the currently selected items, as well as creating text and HTML versions of those rows that can be dropped onto other programs.
+
+If you set IsSimpleDropSink to _true_, the FluentListView will be able to receive drops. The normal drop sink does a lot of work for you: figuring out which item is under the mouse, handling auto scrolling, drawing user feedback. However, there are two things that it can’t figure out for itself:
+
+1.  Are the dragged objects allowed to be dropped at the current point?
+2.  What should happen when the drop occurs?
+
+So, the normal drop sink triggers two events: CanDrop and Dropped. To actually be useful, you need to handle these events. You can set up handlers for these events within the IDE, like normal.
+
+You can alternatively listen for the ModelCanDrop and ModelDropped events. This second pair of events are triggered when the source of the drag is another FluentListView. These events work the same as the CanDrop and Dropped events except that the argument block includes useful information:
+
+*   The FluentListView initiated the drag
+*   The model objects are being dragged
+*   The model object is current target of the drop
+
+Handling the events - CanDrop
+-------------------------------------------------------------------------------------------
+
+In the CanDrop (or ModelCanDrop) event, the handler has to decide if the currently dragged items can be dropped at the current location. To indicate what operation is allowed, the handler must set the Effect property:
+```
+private void listViewSimple_ModelCanDrop(object sender, ModelDropEventArgs e) {
+    Person person = e.TargetModel as Person;
+    if (person == null) {
+        e.Effect = DragDropEffects.None;
+    } else {
+        if (person.MaritalStatus == MaritalStatus.Married) {
+            e.Effect = DragDropEffects.None;
+            e.InfoMessage = "Can't drop on someone who is already married";
+        } else {
+            e.Effect = DragDropEffects.Move;
+        }
+    }
+}
+```
+Inside the CanDrop handler, you can set the InfoMessage property to a string. If you do this, the string will be shown to the user while they are dragging. This can be used to tell the user why something cannot be dropped at that particular point, or to explain what will happen if the drop occured there:
+
+![_images/dragdrop-infomsg.png](_images/dragdrop-infomsg.png)
+
+This message is displayed by a specialised TextOverlay, which is exposed through the Billboard property of the SimpleDropSink class. You can make changes to the messages appearance through this property.
+
+Handling the events - Dropped
+-------------------------------------------------------------------------------------------
+
+If the allowed effect was anything other than None, then when the items are dropped, a Dropped (or a ModelDropped) event will be triggered. This is where the actual work of processing the dropped item should occur. A silly example from the demo looks like this:
+```
+private void listViewSimple_ModelDropped(object sender, ModelDropEventArgs e) {
+    // If they didn't drop on anything, then don't do anything
+    if (e.TargetModel == null)
+        return;
+
+    // Change the dropped people plus the target person to be married
+    ((Person)e.TargetModel).MaritalStatus = MaritalStatus.Married;
+    foreach (Person p in e.SourceModels)
+        p.MaritalStatus = MaritalStatus.Married;
+
+    // Force them to refresh
+    e.RefreshObjects();
+}
+```
+The ModelDropped event has a convenience method, RefreshObjects(), which refreshes all the objects involved in the operation. This is particularly useful with operations on TreeListViews.
+
+Simply doing more
+---------------------------------------------------------------------
+
+If you want to do more than this, you have to start playing with the objects that actually implement the drag and drop: SimpleDataSource and SimpleDropSink (though calling the latter “simple” is a bit of a misnomer).
+
+### SimpleDataSource
+
+The major task of the SimpleDataSource is to setup a DataObject which can be used for dragging and dropping. If you want your FluentListView to support other data formats, you will need subclass SimpleDataSource and add the data formats you want.
+
+### SimpleDropSink
+
+SimpleDropSink is a lot more interesting and a lot more configurable.
+
+  
+
+It can be made to accept drops between items:
+```
+myDropSink.CanDropBetween = true;
+```
+![_images/dragdrop-dropbetween.png](_images/dragdrop-dropbetween.png)
+
+Or drops on the background:
+```
+myDropSink.CanDropbackground = true;
+```
+![_images/dragdrop-dropbackground.png](_images/dragdrop-dropbackground.png)
+
+Or drops on individual sub-items:
+```
+myDropSink.CanDropOnSubItems = true;
+```
+![_images/dragdrop-dropsubitem.png](_images/dragdrop-dropsubitem.png)
+
+It can also change the color used for the drag drop feedback:
+```
+myDropSink.FeedbackColor = Color.IndianRed;
+```
+![_images/dragdrop-feedbackcolor.png](_images/dragdrop-feedbackcolor.png)
+
+Doing a lot more - Drag and Drop the hard way[¶](#doing-a-lot-more-drag-and-drop-the-hard-way "Permalink to this headline")
+---------------------------------------------------------------------------------------------------------------------------
+
+It’s not really that hard – just more work than the easy way.
+
+If you want to have complete control of the dragging process, you can implement the IDragSource interface, and then give that implementation to the FluentListView by setting the DragSource property.
+
+Similarly, if you want to have complete control of the dropping process, you can implement the IDropSink interface, and then give that implementation to the FluentListView by setting the DropSink property.
+
+For maximum flexibility, the IDropSink basically just unifies the full suite of Windows drag-drop messages:
+```
+public interface IDropSink
+{
+    FluentListView ListView { get; set; }
+
+    void DrawFeedback(Graphics g, Rectangle bounds);
+    void Drop(DragEventArgs args);
+    void Enter(DragEventArgs args);
+    void GiveFeedback(GiveFeedbackEventArgs args);
+    void Leave();
+    void Over(DragEventArgs args);
+    void QueryContinue(QueryContinueDragEventArgs args);
+}
+```
+The only new method in this list is the DrawFeedback() method. This is where the DropSink can draw feedback onto the FluentListView to indicate the state of the drop. This drawing is done over the top of the FluentListView and this will normally involve some form of alpha blending.
+
+In almost all cases, you can subclass AbstractDropSink which provides minimal implementations of all these methods.
+
+Rearranging rows by dragging
+-------------------------------------------------------------------------------------------
+
+One common use for drag and drop is to provide a rearrangeable FluentListView. This is so common that there is a prebuild component to do this for you. This is done by installing a RearrangingDropSink:
+```
+this.objectListView1.DragSource = new SimpleDragSource();
+this.objectListView1.DropSink = new RearrangingDropSink(false);
+```
+This turns objectListView1 into a rearrangeble list, where the user can rearrange the rows by dragging them. The _false_ parameter says that this sink will not accept drags from other FluentListViews.
+
+The class is clever but it is not magical. It works even when the FluentListView is sorted or grouped, but it is up to the programmer to decide what rearranging such lists “means”.
+
+Example: if the control is grouping students by academic grade, and the user drags a “Fail” grade student into the “A+” group, it is the responsibility of the programmer to makes the appropriate changes to the model and redraw/rebuild the control so that the users action makes sense.
+
+Similarly, it is up to the programmer to decide what should happen if the user rearranges rows when the list is sorted.
+
+It also cannot work on DataListView, VirtualFluentListView and TreeListViews since the data in those control is outside the control of the FluentListView. For those controls, you will have to use (or subclass) a SimpleDropSink and do the actual rearranging and refreshing yourself.
+
+
+
+
+
+
+
 
 
 
@@ -1757,7 +1924,7 @@ If you want to show the same menu, regardless of where the user clicks, you can 
 
 If you want to show a context menu specific to the object clicked, you can listen for CellRightClick events:
 ```
-private void olv\_CellRightClick(object sender, CellRightClickEventArgs e) {
+private void olv_CellRightClick(object sender, CellRightClickEventArgs e) {
     e.MenuStrip = this.DecideRightClickMenu(e.Model, e.Column);
 }
 ```
@@ -2228,10 +2395,10 @@ How can I stop the user expanding/collapsing a group?
 
 Listen for the GroupExpandingCollapsing event, and then set Canceled to _true_ if the event should be prevented.
 
-This handler will stop a group from expanding if the group starts with “NO\_EXPAND”:
+This handler will stop a group from expanding if the group starts with “NO_EXPAND”:
 ```
-private void olv1\_GroupExpandingCollapsing(object sender, GroupExpandingCollapsingEventArgs e) {
-    e.Canceled = e.IsExpanding && e.Group.Header.StartsWith("NO\_EXPAND");
+private void olv1_GroupExpandingCollapsing(object sender, GroupExpandingCollapsingEventArgs e) {
+    e.Canceled = e.IsExpanding && e.Group.Header.StartsWith("NO_EXPAND");
 }
 ```
 
@@ -2241,7 +2408,7 @@ How do I put a _real_ background image onto an FluentListView?
 
 > _That overlay stuff is just too tricky. I want a real background image and I want it now!_
 
-Since XP, the native ListView control has supported background images via the LVM\_SETBKIMAGE message. But it has always had serious limits, as this screen shot shows:
+Since XP, the native ListView control has supported background images via the LVM_SETBKIMAGE message. But it has always had serious limits, as this screen shot shows:
 
 ![_images/setbkimage.png](_images/setbkimage.png)
 
