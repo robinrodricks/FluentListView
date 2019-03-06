@@ -36,7 +36,7 @@ OK, here’s the bullet point feature list:
 
 *   Automatically transforms a list of model objects into a fully functional ListView, including automatically sorting and grouping rows.
 *   Easily [edit cell values](#how-do-i-let-the-user-edit-the-values-shown-in-the-list).
-*   Easily [use drag and drop](#how-can-i-use-drag-and-drop-in-an-objectlistview).
+*   Easily [use drag and drop](#how-can-i-use-drag-and-drop).
 *   Supports all ListView views (report, list, large and small icons).
 *   Supports [owner drawing](ownerDraw.html#owner-draw-label), including rendering animated graphics and images stored in a database.
 *   Supports automatic grouping.
@@ -421,7 +421,7 @@ Why take the time to learn how to use an FluentListView? What’s the benefit? T
 *   [Custom row and cell formatting](#custom-row-and-cell-formatting)
 *   [Custom selection colours](#custom-selection-colours)
 *   [Data binding](#data-binding)
-*   [Different flavours of FluentListView for different purposes](#different-flavours-of-objectlistview-for-different-purposes)
+*   [Different flavours of FluentListView for different purposes](#different-flavours-of-fluentlistview-for-different-purposes)
 *   [Displays a “list is empty” message](#displays-a-list-is-empty-message)
 *   [Drag and drop](#drag-and-drop)
 *   [Ease of use](#ease-of-use)
@@ -553,7 +553,7 @@ In many cases, an FluentListView becomes a full drag source by setting IsSimpleD
 
 Similarly, to accept drops, it is usually enough to set IsSimpleDropSink to _true_, and then handle the CanDrop and Dropped events (or the ModelCanDrop and ModelDropped events, if you only want to handle drops from other FluentListViews in your application).
 
-See [FluentListView and Drag & Drop](#how-can-i-use-drag-and-drop-in-an-objectlistview) for more information.
+See [FluentListView and Drag & Drop](#how-can-i-use-drag-and-drop) for more information.
 
 Supports all ListView views
 -----------------------------------------------------------------------------------------
@@ -785,19 +785,19 @@ Learning to cook.
 
 (G)-rated techniques for loving the ListView
 
-1.   [What flavour of FluentListView do I want to use?](#what-flavour-of-objectlistview-do-i-want-to-use)
+1.   [What flavour of FluentListView do I want to use?](#what-flavour-of-fluentlistview-do-i-want-to-use)
 2.   [How do I let the user edit the values shown in the list?](#how-do-i-let-the-user-edit-the-values-shown-in-the-list)
 3.   [How can I do some fancy sorting?](#how-can-i-do-some-fancy-sorting)
 4.   [How can I draw the values in the cell’s myself?](#how-can-i-draw-the-values-in-the-cell-s-myself)
 5.   [How can I stop the user from making a column too narrow or too wide?](#how-can-i-stop-the-user-from-making-a-column-too-narrow-or-too-wide)
 6.   [How can I stop the user from resizing a column?](#how-can-i-stop-the-user-from-resizing-a-column)
-7.   [How can I make a column get bigger when the FluentListView is made bigger?](#how-can-i-make-a-column-get-bigger-when-the-objectlistview-is-made-bigger)
+7.   [How can I make a column get bigger when the FluentListView is made bigger?](#how-can-i-make-a-column-get-bigger-when-the-fluentlistview-is-made-bigger)
 8.   [How can I change the colours of a row or just a cell?](#how-can-i-change-the-colours-of-a-row-or-just-a-cell)
-9.   [How can I make my FluentListView into a shiny report?](#how-can-i-make-my-objectlistview-into-a-shiny-report)
-10.  [How do I use checkboxes in my FluentListView?](#how-do-i-use-checkboxes-in-my-objectlistview)
+9.   [How can I make my FluentListView into a shiny report?](#how-can-i-make-my-fluentlistview-into-a-shiny-report)
+10.  [How do I use checkboxes in my FluentListView?](#how-do-i-use-checkboxes-in-my-fluentlistview)
 11.  [How do change the information that’s displayed in Tile view?](#how-do-change-the-information-that-s-displayed-in-tile-view)
-12.  [How do I change the message that’s shown when the FluentListView is empty?](#how-do-i-change-the-message-that-s-shown-when-the-objectlistview-is-empty)
-13.  [On the rows of my FluentListView, I want to show images that come from a database. How do I do that?](#on-the-rows-of-my-objectlistview-i-want-to-show-images-that-come-from-a-database-how-do-i-do-that)
+12.  [How do I change the message that’s shown when the FluentListView is empty?](#how-do-i-change-the-message-that-s-shown-when-the-fluentlistview-is-empty)
+13.  [On the rows of my FluentListView, I want to show images that come from a database. How do I do that?](#on-the-rows-of-my-fluentlistview-i-want-to-show-images-that-come-from-a-database-how-do-i-do-that)
 14.  [Isn’t there are way to get rid of all the casts in the delegates?](#isn-t-there-are-way-to-get-rid-of-all-the-casts-in-the-delegates)
 15.  [How do I use a TreeListView?](#how-do-i-use-a-treelistview)
 16.  [When the user types, I want to be able to match values in a column other than the first one. How can I do that?](#when-the-user-types-i-want-to-be-able-to-match-values-in-a-column-other-than-the-first-one-how-can-i-do-that)
@@ -805,32 +805,32 @@ Learning to cook.
 18.  [How can I emphasise the row under the mouse?](#how-can-i-emphasise-the-row-under-the-mouse)
 19.  [How can I put an image (or some text) over the top of the ListView?](#how-can-i-put-an-image-or-some-text-over-the-top-of-the-listview)
 20.  [How can I put an image (or some text) over the top of a row or cell?](#how-can-i-put-an-image-or-some-text-over-the-top-of-a-row-or-cell)
-21.  [How can I use drag and drop in an FluentListView?](#how-can-i-use-drag-and-drop-in-an-objectlistview)
+21.  [How can I use drag and drop?](#how-can-i-use-drag-and-drop-in-an-fluentlistview)
 22.  [How do I make the sorted column have that slightly different colour?](#how-do-i-make-the-sorted-column-have-that-slightly-different-colour)
 23.  [How do I make a column that shows just an image?](#how-do-i-make-a-column-that-shows-just-an-image)
-24.  [How do I show a menu when the user right clicks on the FluentListView?](#how-do-i-show-a-menu-when-the-user-right-clicks-on-the-objectlistview)
+24.  [How do I show a menu when the user right clicks on the FluentListView?](#how-do-i-show-a-menu-when-the-user-right-clicks-on-the-fluentlistview)
 25.  [How do I change the font or color of the column headers?](#how-do-i-change-the-font-or-color-of-the-column-headers)
 26.  [How do I show a hyperlink in a cell?](#how-do-i-show-a-hyperlink-in-a-cell)
 27.  [How do I put an image next to a group heading?](#how-do-i-put-an-image-next-to-a-group-heading)
 28.  [How do I use that little clicky thing next to a group header?](#how-do-i-use-that-little-clicky-thing-next-to-a-group-header)
-29.  [Can I generate the whole FluentListView directly from my model?](#can-i-generate-the-whole-objectlistview-directly-from-my-model)
-30.  [Can the FluentListView use a selection scheme like Vista?](#can-the-objectlistview-use-a-selection-scheme-like-vista)
+29.  [Can I generate the whole FluentListView directly from my model?](#can-i-generate-the-whole-fluentlistview-directly-from-my-model)
+30.  [Can the FluentListView use a selection scheme like Vista?](#can-the-fluentlistview-use-a-selection-scheme-like-vista)
 31.  [Can I show groups on a virtual list?](#can-i-show-groups-on-a-virtual-list)
-32.  [Can I filter the contents of the FluentListView?](#can-i-filter-the-contents-of-the-objectlistview)
+32.  [Can I filter the contents of the FluentListView?](#can-i-filter-the-contents-of-the-fluentlistview)
 33.  [Is there an easy way to only show rows that contain some text?](#is-there-an-easy-way-to-only-show-rows-that-contain-some-text)
-34.  [How do I put something animated onto my FluentListView?](#how-do-i-put-something-animated-onto-my-objectlistview)
-35.  [How can I save and restore the state of the FluentListView?](#how-can-i-save-and-restore-the-state-of-the-objectlistview)
+34.  [How do I put something animated onto my FluentListView?](#how-do-i-put-something-animated-onto-my-fluentlistview)
+35.  [How can I save and restore the state of the FluentListView?](#how-can-i-save-and-restore-the-state-of-the-fluentlistview)
 36.  [How can I put an image in the column header?](#how-can-i-put-an-image-in-the-column-header)
 37.  [Can I make a header take up even less space? Can it be drawn vertical?](#can-i-make-a-header-take-up-even-less-space-can-it-be-drawn-vertical)
 38.  [I want to make the cell being edited more obvious](#i-want-to-make-the-cell-being-edited-more-obvious)
 39.  [How can I change the ordering of groups or rows within a group?](#how-can-i-change-the-ordering-of-groups-or-rows-within-a-group)
 40.  [How do I change what happens the user presses Tab or Enter when editing a cell?](#how-do-i-change-what-happens-the-user-presses-tab-or-enter-when-editing-a-cell)
 41.  [How do I change the way the “Filtering” menu works?](#how-do-i-change-the-way-the-filtering-menu-works)
-42.  [How can I change the way the user can choose the columns in an FluentListView?](#how-can-i-change-the-way-the-user-can-choose-the-columns-in-an-objectlistview)
-43.  [How can I make checkboxes keep their values when filtering an FluentListView?](#how-can-i-make-checkboxes-keep-their-values-when-filtering-an-objectlistview)
+42.  [How can I change the way the user can choose the columns in an FluentListView?](#how-can-i-change-the-way-the-user-can-choose-the-columns-in-an-fluentlistview)
+43.  [How can I make checkboxes keep their values when filtering an FluentListView?](#how-can-i-make-checkboxes-keep-their-values-when-filtering-an-fluentlistview)
 44.  [How can I stop the user expanding/collapsing a group?](#how-can-i-stop-the-user-expanding-collapsing-a-group)
-45.  [How do I put a _real_ background image onto an FluentListView?](#how-do-i-put-a-real-background-image-onto-an-objectlistview)
-46.  [How do I bind a DataSet to an FluentListView?](#how-do-i-bind-a-dataset-to-an-objectlistview)
+45.  [How do I put a _real_ background image onto an FluentListView?](#how-do-i-put-a-real-background-image-onto-an-fluentlistview)
+46.  [How do I bind a DataSet to an FluentListView?](#how-do-i-bind-a-dataset-to-an-fluentlistview)
 47.  [Why can’t I data-bind the TreeListView?](#why-can-t-i-data-bind-the-treelistview)
 48.  [Can a TreeListView calculate checkboxes based on subitems?](#can-a-treelistview-calculate-checkboxes-based-on-subitems)
 49.  [Can rows be disabled?](#can-rows-be-disabled)
@@ -1213,7 +1213,7 @@ You make a ListViewReporter object in your IDE, and you set the ListView propert
 
 There is a whole article available on CodeProject explaining in detail how to do this: [Turning a ListView into a nice report](http://www.codeproject.com/KB/miscctrl/ListViewPrinter.aspx). Read the article and play with demo to see how it works. However don’t use the code from that article – it is defunct. The ListViewReporter code in FluentListView project is up-to-date.
 
-10\. How do I use checkboxes in my FluentListView?
+How do I use checkboxes in my FluentListView?
 ---------------------------------------------------------------------------------------------------------------------------------
 
 To uses checkboxes with an FluentListView, you must set the FluentListView.CheckBoxes property to _true_. If you want the user to be able to give check boxes the _Indeterminate_ value, you should set the FluentListView.TriStateCheckBoxes property to _true_.
@@ -1257,11 +1257,11 @@ If CheckedAspectName is too simple for your needs, you can install CheckStateGet
 
 There are two flavour of check state getter/putters: there are CheckStateGetter and CheckStatePutter delegates which deal with CheckStates; and there are BooleanCheckStateGetter and BooleanCheckStatePutter delegates which deal only with booleans. If you are only interested in checkboxes being on or off, the boolean versions are what you want. However, if you want to deal with indeterminate values too, you must use the CheckState versions:
 ```
-this.objectListView1.BooleanCheckStateGetter = delegate(Object rowObject) {
+this.fluentListView1.BooleanCheckStateGetter = delegate(Object rowObject) {
     return ((Person)rowObject).IsActive;
 };
 
-this.objectListView1.BooleanCheckStatePutter = delegate(Object rowObject, bool newValue) {
+this.fluentListView1.BooleanCheckStatePutter = delegate(Object rowObject, bool newValue) {
     ((Person)rowObject).IsActive = newValue;
     return newValue; // return the value that you want the control to use
 };
@@ -1298,15 +1298,15 @@ However, if you really _have to_ programmatically set the Checked property on a 
 
 So, this code – which tries to toggle the checkedness of the selected rows – will cause problems for your FluentListView:
 ```
-private void objectListView1_ItemActivate(object sender, EventArgs e) {
-    foreach (ListViewItem lvi in objectListView1.SelectedItems)
+private void fluentListView1_ItemActivate(object sender, EventArgs e) {
+    foreach (ListViewItem lvi in fluentListView1.SelectedItems)
         lvi.Checked = !lvi.Checked;
 }
 ```
 This will work – once! After that, it will not work again. Worse, the check boxes will stop responding to user clicks. To work properly, you treat the items as OLVListItem:
 ```
-private void objectListView1_ItemActivate(object sender, EventArgs e) {
-    foreach (OLVListItem olvi in objectListView1.SelectedItems)
+private void fluentListView1_ItemActivate(object sender, EventArgs e) {
+    foreach (OLVListItem olvi in fluentListView1.SelectedItems)
         olvi.Checked = !olvi.Checked;
 }
 ```
@@ -1344,12 +1344,12 @@ When an FluentListView is empty, it can display a “this list is empty” type 
 
 The EmptyListMsg is the property that holds the string that appears when an FluentListView is empty. This string is rendered using the EmptyListMsgFont:
 ```
-this.objectListView1.EmptyListMsg = "This database has no rows";
-this.objectListView1.EmptyListMsgFont = new Font("Tahoma", 24);
+this.fluentListView1.EmptyListMsg = "This database has no rows";
+this.fluentListView1.EmptyListMsgFont = new Font("Tahoma", 24);
 ```
 The empty message list is actually implemented as an overlay. You can access that overlay though the EmptyListMsgOverlay property. By default, this is a TextOverlay that you can customise to your hearts content:
 ```
-TextOverlay textOverlay = this.objectListView1.EmptyListMsgOverlay as TextOverlay;
+TextOverlay textOverlay = this.fluentListView1.EmptyListMsgOverlay as TextOverlay;
 textOverlay.TextColor = Color.Firebrick;
 textOverlay.BackColor = Color.AntiqueWhite;
 textOverlay.BorderColor = Color.DarkRed;
@@ -1412,15 +1412,15 @@ Yes. You can use a TypedFluentListView wrapper.
 
 One annoyance with FluentListView is all the casting that is needed. Because the FluentListView makes no assumptions about what sort of model objects you will be using, it handles all models as objects and it#8217;s up to you to cast them to the right type when you need to. This leads to many delegates starting with a cast like this:
 ```
-this.objectListView1.SomeDelegate = delegate(object x) {
+this.fluentListView1.SomeDelegate = delegate(object x) {
     MyModelObject model = (MyModelObject)x;
     ...
 }
 ```
 which becomes tiresome after a while. It would be nice if you could tell the FluentListView that it would always be displaying, say, Person objects. Something like:
 ```
-this.objectListView1 = new FluentListView<Person\>();
-this.objectListView1.SomeDelegate = delegate(Person model) {
+this.fluentListView1 = new FluentListView<Person\>();
+this.fluentListView1.SomeDelegate = delegate(Person model) {
     ...
 }
 ```
@@ -1629,7 +1629,7 @@ Once you have implemented this interface, you add it to an FluentListView via th
 ```
 MyFantasticOverlay myOverlay = new MyFantasticOverlay();
 myOverlay.ConfigureToDoAmazingThings();
-this.objectListView1.AddOverlay(myOverlay);
+this.fluentListView1.AddOverlay(myOverlay);
 ```
 Overlays are actually quite tricky to implement. If you use your FluentListView in a “normal” way (design your interface through the IDE using normal WinForm controls), they will work flawlessly.
 
@@ -1702,7 +1702,7 @@ Like overlays, decorations are purely cosmetic. They do not respond to any user 
 
 
 
-How can I use drag and drop in an FluentListView?
+How can I use drag and drop?
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -1853,10 +1853,10 @@ Rearranging rows by dragging
 
 One common use for drag and drop is to provide a rearrangeable FluentListView. This is so common that there is a prebuild component to do this for you. This is done by installing a RearrangingDropSink:
 ```
-this.objectListView1.DragSource = new SimpleDragSource();
-this.objectListView1.DropSink = new RearrangingDropSink(false);
+this.fluentListView1.DragSource = new SimpleDragSource();
+this.fluentListView1.DropSink = new RearrangingDropSink(false);
 ```
-This turns objectListView1 into a rearrangeble list, where the user can rearrange the rows by dragging them. The _false_ parameter says that this sink will not accept drags from other FluentListViews.
+This turns fluentListView1 into a rearrangeble list, where the user can rearrange the rows by dragging them. The _false_ parameter says that this sink will not accept drags from other FluentListViews.
 
 The class is clever but it is not magical. It works even when the FluentListView is sorted or grouped, but it is up to the programmer to decide what rearranging such lists “means”.
 
@@ -1882,7 +1882,7 @@ If you set TintSortColumn property to _true_, the sort column will be automatica
 
 You can tint a different column (other than the sort column) by setting the SelectedColumn property, or by installing TintedColumnDecoration for the column that you want to color:
 ```
-this.objectListView1.AddDecoration(new TintedColumnDecoration(columnToTint));
+this.fluentListView1.AddDecoration(new TintedColumnDecoration(columnToTint));
 ```
 This latter option lets you tint more than one column.
 
