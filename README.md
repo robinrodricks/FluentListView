@@ -786,62 +786,62 @@ Learning to cook.
 
 (G)-rated techniques for loving the ListView
 
-*   [1\. What flavour of FluentListView do I want to use?](#what-flavour-of-objectlistview-do-i-want-to-use)
-*   [2\. How do I let the user edit the values shown in the list?](#how-do-i-let-the-user-edit-the-values-shown-in-the-list)
-*   [3\. How can I do some fancy sorting?](#how-can-i-do-some-fancy-sorting)
-*   [4\. How can I draw the values in the cell’s myself?](#how-can-i-draw-the-values-in-the-cell-s-myself)
-*   [5\. How can I stop the user from making a column too narrow or too wide?](#how-can-i-stop-the-user-from-making-a-column-too-narrow-or-too-wide)
-*   [6\. How can I stop the user from resizing a column?](#how-can-i-stop-the-user-from-resizing-a-column)
-*   [7\. How can I make a column get bigger when the FluentListView is made bigger?](#how-can-i-make-a-column-get-bigger-when-the-objectlistview-is-made-bigger)
-*   [8\. How can I change the colours of a row or just a cell?](#how-can-i-change-the-colours-of-a-row-or-just-a-cell)
-*   [9\. How can I make my FluentListView into a shiny report?](#how-can-i-make-my-objectlistview-into-a-shiny-report)
-*   [10\. How do I use checkboxes in my FluentListView?](#how-do-i-use-checkboxes-in-my-objectlistview)
-*   [11\. How do change the information that’s displayed in Tile view?](#how-do-change-the-information-that-s-displayed-in-tile-view)
-*   [12\. How do I change the message that’s shown when the FluentListView is empty?](#how-do-i-change-the-message-that-s-shown-when-the-objectlistview-is-empty)
-*   [13\. On the rows of my FluentListView, I want to show images that come from a database. How do I do that?](#on-the-rows-of-my-objectlistview-i-want-to-show-images-that-come-from-a-database-how-do-i-do-that)
-*   [14\. Isn’t there are way to get rid of all the casts in the delegates?](#isn-t-there-are-way-to-get-rid-of-all-the-casts-in-the-delegates)
-*   [15\. How do I use a TreeListView?](#how-do-i-use-a-treelistview)
-*   [16\. When the user types, I want to be able to match values in a column other than the first one. How can I do that?](#when-the-user-types-i-want-to-be-able-to-match-values-in-a-column-other-than-the-first-one-how-can-i-do-that)
-*   [17\. How can I show more information in the tooltip when the mouse hovers over a cell?](#how-can-i-show-more-information-in-the-tooltip-when-the-mouse-hovers-over-a-cell)
-*   [18\. How can I emphasise the row under the mouse?](#how-can-i-emphasise-the-row-under-the-mouse)
-*   [19\. How can I put an image (or some text) over the top of the ListView?](#how-can-i-put-an-image-or-some-text-over-the-top-of-the-listview)
-*   [20\. How can I put an image (or some text) over the top of a row or cell?](#how-can-i-put-an-image-or-some-text-over-the-top-of-a-row-or-cell)
-*   [21\. How can I use drag and drop in an FluentListView?](#how-can-i-use-drag-and-drop-in-an-objectlistview)
-*   [22\. How do I make the sorted column have that slightly different colour?](#how-do-i-make-the-sorted-column-have-that-slightly-different-colour)
-*   [23\. How do I make a column that shows just an image?](#how-do-i-make-a-column-that-shows-just-an-image)
-*   [24\. How do I show a menu when the user right clicks on the FluentListView?](#how-do-i-show-a-menu-when-the-user-right-clicks-on-the-objectlistview)
-*   [25\. How do I change the font or color of the column headers?](#how-do-i-change-the-font-or-color-of-the-column-headers)
-*   [26\. How do I show a hyperlink in a cell?](#how-do-i-show-a-hyperlink-in-a-cell)
-*   [27\. How do I put an image next to a group heading?](#how-do-i-put-an-image-next-to-a-group-heading)
-*   [28\. How do I use that little clicky thing next to a group header?](#how-do-i-use-that-little-clicky-thing-next-to-a-group-header)
-*   [29\. Can I generate the whole FluentListView directly from my model?](#can-i-generate-the-whole-objectlistview-directly-from-my-model)
-*   [30\. Can the FluentListView use a selection scheme like Vista?](#can-the-objectlistview-use-a-selection-scheme-like-vista)
-*   [31\. Can I show groups on a virtual list?](#can-i-show-groups-on-a-virtual-list)
-*   [32\. Can I filter the contents of the FluentListView?](#can-i-filter-the-contents-of-the-objectlistview)
-*   [33\. Is there an easy way to only show rows that contain some text?](#is-there-an-easy-way-to-only-show-rows-that-contain-some-text)
-*   [34\. How do I put something animated onto my FluentListView?](#how-do-i-put-something-animated-onto-my-objectlistview)
-*   [35\. How can I save and restore the state of the FluentListView?](#how-can-i-save-and-restore-the-state-of-the-objectlistview)
-*   [36\. How can I put an image in the column header?](#how-can-i-put-an-image-in-the-column-header)
-*   [37\. Can I make a header take up even less space? Can it be drawn vertical?](#can-i-make-a-header-take-up-even-less-space-can-it-be-drawn-vertical)
-*   [38\. I want to make the cell being edited more obvious](#i-want-to-make-the-cell-being-edited-more-obvious)
-*   [39\. How can I change the ordering of groups or rows within a group?](#how-can-i-change-the-ordering-of-groups-or-rows-within-a-group)
-*   [40\. How do I change what happens the user presses Tab or Enter when editing a cell?](#how-do-i-change-what-happens-the-user-presses-tab-or-enter-when-editing-a-cell)
-*   [41\. How do I change the way the “Filtering” menu works?](#how-do-i-change-the-way-the-filtering-menu-works)
-*   [42\. How can I change the way the user can choose the columns in an FluentListView?](#how-can-i-change-the-way-the-user-can-choose-the-columns-in-an-objectlistview)
-*   [43\. How can I make checkboxes keep their values when filtering an FluentListView?](#how-can-i-make-checkboxes-keep-their-values-when-filtering-an-objectlistview)
-*   [44\. How can I stop the user expanding/collapsing a group?](#how-can-i-stop-the-user-expanding-collapsing-a-group)
-*   [45\. How do I put a _real_ background image onto an FluentListView?](#how-do-i-put-a-real-background-image-onto-an-objectlistview)
-*   [46\. How do I bind a DataSet to an FluentListView?](#how-do-i-bind-a-dataset-to-an-objectlistview)
-*   [47\. Why can’t I data-bind the TreeListView?](#why-can-t-i-data-bind-the-treelistview)
-*   [48\. Can a TreeListView calculate checkboxes based on subitems?](#can-a-treelistview-calculate-checkboxes-based-on-subitems)
-*   [49\. Can rows be disabled?](#can-rows-be-disabled)
-*   [50\. How can I put a checkbox in a column header?](#how-can-i-put-a-checkbox-in-a-column-header)
-*   [51\. Can I get rid of the RefreshObject() calls?](#can-i-get-rid-of-the-refreshobject-calls)
-*   [52\. How can I put a button into a cell?](#how-can-i-put-a-button-into-a-cell)
-*   [53\. How can I reduce the CPU usage on mouse move?](#how-can-i-reduce-the-cpu-usage-on-mouse-move)
-*   [54\. How can I put a description under something that looks like a title?](#how-can-i-put-a-description-under-something-that-looks-like-a-title)
+1.   [What flavour of FluentListView do I want to use?](#what-flavour-of-objectlistview-do-i-want-to-use)
+2.   [How do I let the user edit the values shown in the list?](#how-do-i-let-the-user-edit-the-values-shown-in-the-list)
+3.   [How can I do some fancy sorting?](#how-can-i-do-some-fancy-sorting)
+4.   [How can I draw the values in the cell’s myself?](#how-can-i-draw-the-values-in-the-cell-s-myself)
+5.   [How can I stop the user from making a column too narrow or too wide?](#how-can-i-stop-the-user-from-making-a-column-too-narrow-or-too-wide)
+6.   [How can I stop the user from resizing a column?](#how-can-i-stop-the-user-from-resizing-a-column)
+7.   [How can I make a column get bigger when the FluentListView is made bigger?](#how-can-i-make-a-column-get-bigger-when-the-objectlistview-is-made-bigger)
+8.   [How can I change the colours of a row or just a cell?](#how-can-i-change-the-colours-of-a-row-or-just-a-cell)
+9.   [How can I make my FluentListView into a shiny report?](#how-can-i-make-my-objectlistview-into-a-shiny-report)
+10.  [How do I use checkboxes in my FluentListView?](#how-do-i-use-checkboxes-in-my-objectlistview)
+11.  [How do change the information that’s displayed in Tile view?](#how-do-change-the-information-that-s-displayed-in-tile-view)
+12.  [How do I change the message that’s shown when the FluentListView is empty?](#how-do-i-change-the-message-that-s-shown-when-the-objectlistview-is-empty)
+13.  [On the rows of my FluentListView, I want to show images that come from a database. How do I do that?](#on-the-rows-of-my-objectlistview-i-want-to-show-images-that-come-from-a-database-how-do-i-do-that)
+14.  [Isn’t there are way to get rid of all the casts in the delegates?](#isn-t-there-are-way-to-get-rid-of-all-the-casts-in-the-delegates)
+15.  [How do I use a TreeListView?](#how-do-i-use-a-treelistview)
+16.  [When the user types, I want to be able to match values in a column other than the first one. How can I do that?](#when-the-user-types-i-want-to-be-able-to-match-values-in-a-column-other-than-the-first-one-how-can-i-do-that)
+17.  [How can I show more information in the tooltip when the mouse hovers over a cell?](#how-can-i-show-more-information-in-the-tooltip-when-the-mouse-hovers-over-a-cell)
+18.  [How can I emphasise the row under the mouse?](#how-can-i-emphasise-the-row-under-the-mouse)
+19.  [How can I put an image (or some text) over the top of the ListView?](#how-can-i-put-an-image-or-some-text-over-the-top-of-the-listview)
+20.  [How can I put an image (or some text) over the top of a row or cell?](#how-can-i-put-an-image-or-some-text-over-the-top-of-a-row-or-cell)
+21.  [How can I use drag and drop in an FluentListView?](#how-can-i-use-drag-and-drop-in-an-objectlistview)
+22.  [How do I make the sorted column have that slightly different colour?](#how-do-i-make-the-sorted-column-have-that-slightly-different-colour)
+23.  [How do I make a column that shows just an image?](#how-do-i-make-a-column-that-shows-just-an-image)
+24.  [How do I show a menu when the user right clicks on the FluentListView?](#how-do-i-show-a-menu-when-the-user-right-clicks-on-the-objectlistview)
+25.  [How do I change the font or color of the column headers?](#how-do-i-change-the-font-or-color-of-the-column-headers)
+26.  [How do I show a hyperlink in a cell?](#how-do-i-show-a-hyperlink-in-a-cell)
+27.  [How do I put an image next to a group heading?](#how-do-i-put-an-image-next-to-a-group-heading)
+28.  [How do I use that little clicky thing next to a group header?](#how-do-i-use-that-little-clicky-thing-next-to-a-group-header)
+29.  [Can I generate the whole FluentListView directly from my model?](#can-i-generate-the-whole-objectlistview-directly-from-my-model)
+30.  [Can the FluentListView use a selection scheme like Vista?](#can-the-objectlistview-use-a-selection-scheme-like-vista)
+31.  [Can I show groups on a virtual list?](#can-i-show-groups-on-a-virtual-list)
+32.  [Can I filter the contents of the FluentListView?](#can-i-filter-the-contents-of-the-objectlistview)
+33.  [Is there an easy way to only show rows that contain some text?](#is-there-an-easy-way-to-only-show-rows-that-contain-some-text)
+34.  [How do I put something animated onto my FluentListView?](#how-do-i-put-something-animated-onto-my-objectlistview)
+35.  [How can I save and restore the state of the FluentListView?](#how-can-i-save-and-restore-the-state-of-the-objectlistview)
+36.  [How can I put an image in the column header?](#how-can-i-put-an-image-in-the-column-header)
+37.  [Can I make a header take up even less space? Can it be drawn vertical?](#can-i-make-a-header-take-up-even-less-space-can-it-be-drawn-vertical)
+38.  [I want to make the cell being edited more obvious](#i-want-to-make-the-cell-being-edited-more-obvious)
+39.  [How can I change the ordering of groups or rows within a group?](#how-can-i-change-the-ordering-of-groups-or-rows-within-a-group)
+40.  [How do I change what happens the user presses Tab or Enter when editing a cell?](#how-do-i-change-what-happens-the-user-presses-tab-or-enter-when-editing-a-cell)
+41.  [How do I change the way the “Filtering” menu works?](#how-do-i-change-the-way-the-filtering-menu-works)
+42.  [How can I change the way the user can choose the columns in an FluentListView?](#how-can-i-change-the-way-the-user-can-choose-the-columns-in-an-objectlistview)
+43.  [How can I make checkboxes keep their values when filtering an FluentListView?](#how-can-i-make-checkboxes-keep-their-values-when-filtering-an-objectlistview)
+44.  [How can I stop the user expanding/collapsing a group?](#how-can-i-stop-the-user-expanding-collapsing-a-group)
+45.  [How do I put a _real_ background image onto an FluentListView?](#how-do-i-put-a-real-background-image-onto-an-objectlistview)
+46.  [How do I bind a DataSet to an FluentListView?](#how-do-i-bind-a-dataset-to-an-objectlistview)
+47.  [Why can’t I data-bind the TreeListView?](#why-can-t-i-data-bind-the-treelistview)
+48.  [Can a TreeListView calculate checkboxes based on subitems?](#can-a-treelistview-calculate-checkboxes-based-on-subitems)
+49.  [Can rows be disabled?](#can-rows-be-disabled)
+50.  [How can I put a checkbox in a column header?](#how-can-i-put-a-checkbox-in-a-column-header)
+51.  [Can I get rid of the RefreshObject() calls?](#can-i-get-rid-of-the-refreshobject-calls)
+52.  [How can I put a button into a cell?](#how-can-i-put-a-button-into-a-cell)
+53.  [How can I reduce the CPU usage on mouse move?](#how-can-i-reduce-the-cpu-usage-on-mouse-move)
+54.  [How can I put a description under something that looks like a title?](#how-can-i-put-a-description-under-something-that-looks-like-a-title)
 
-1\. What flavour of FluentListView do I want to use?[¶](#what-flavour-of-objectlistview-do-i-want-to-use "Permalink to this headline")
+What flavour of FluentListView do I want to use?[¶](#what-flavour-of-objectlistview-do-i-want-to-use "Permalink to this headline")
 --------------------------------------------------------------------------------------------------------------------------------------
 
 There are four basic flavours of FluentListView. Of those, three have data bound versions.
@@ -934,7 +934,7 @@ See [47\. Why can’t I data-bind the TreeListView?](#recipe-datatreelistview) f
 
 
 
-2\. How do I let the user edit the values shown in the list?[¶](#how-do-i-let-the-user-edit-the-values-shown-in-the-list "Permalink to this headline")
+How do I let the user edit the values shown in the list?[¶](#how-do-i-let-the-user-edit-the-values-shown-in-the-list "Permalink to this headline")
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -1084,7 +1084,7 @@ You can look in the demo at listViewComplex\_CellEditStarting(), listViewComplex
 
 
 
-3\. How can I do some fancy sorting?[¶](#how-can-i-do-some-fancy-sorting "Permalink to this headline")
+How can I do some fancy sorting?[¶](#how-can-i-do-some-fancy-sorting "Permalink to this headline")
 ------------------------------------------------------------------------------------------------------
 
 There are a couple of ways to change the standard sorting behaviour:
@@ -1135,12 +1135,12 @@ class MyCustomSortingDataSource : FastVirtualListDataSource
 ...
 this.myFastFluentListView.DataSource = new MyCustomSortingDataSource(this.myFastFluentListView);
 ```
-4\. How can I draw the values in the cell’s myself?[¶](#how-can-i-draw-the-values-in-the-cell-s-myself "Permalink to this headline")
+How can I draw the values in the cell’s myself?[¶](#how-can-i-draw-the-values-in-the-cell-s-myself "Permalink to this headline")
 ------------------------------------------------------------------------------------------------------------------------------------
 
 This needs a page to itself as well: [How to owner draw my values](ownerDraw.html#owner-draw-label)?
 
-5\. How can I stop the user from making a column too narrow or too wide?[¶](#how-can-i-stop-the-user-from-making-a-column-too-narrow-or-too-wide "Permalink to this headline")
+How can I stop the user from making a column too narrow or too wide?[¶](#how-can-i-stop-the-user-from-making-a-column-too-narrow-or-too-wide "Permalink to this headline")
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Columns have both MinimumWidth and MaximumWidth properties. By default, these are -1, which means that no limit is enforced. But if they are set to some other value, the column will be limited to the given minimum or maximum width.
@@ -1151,12 +1151,12 @@ this.titleColumn.MinimumWidth = 30
 ```
 will stop the “Title” column from becoming less than 30 pixels in width. This is useful for preventing users from shrinking columns to 0 width and then not being about to find them again.
 
-6\. How can I stop the user from resizing a column?[¶](#how-can-i-stop-the-user-from-resizing-a-column "Permalink to this headline")
+How can I stop the user from resizing a column?[¶](#how-can-i-stop-the-user-from-resizing-a-column "Permalink to this headline")
 ------------------------------------------------------------------------------------------------------------------------------------
 
 There are some columns just don’t make sense to be resizeable. A column that always shows a 16x16 status icon makes no sense to be resizeable. To make a column be fixed width and unresizable by the user, simply set both MinimumWidth and MaximumWidth to be the same value.
 
-7\. How can I make a column get bigger when the FluentListView is made bigger?[¶](#how-can-i-make-a-column-get-bigger-when-the-objectlistview-is-made-bigger "Permalink to this headline")
+How can I make a column get bigger when the FluentListView is made bigger?[¶](#how-can-i-make-a-column-get-bigger-when-the-objectlistview-is-made-bigger "Permalink to this headline")
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 On most columns, the column’s width is static, meaning that it doesn’t change by itself. But sometimes it would be useful if a column would resize itself to show more (or less) of itself when the user changed the size of the ListView. For example, the rightmost column of a personnel list might display “Comments” about that person. When the window was made larger, it would be nice if that column automatically expanded to show more of the comments about that person. You can make this happen by setting the FillsFreeSpace property to _true_ on that column.
@@ -1165,7 +1165,7 @@ An FluentListView can have more than one space filling column, and they generall
 
 You should be aware that as the FluentListView becomes smaller, the space filling columns will become smaller too, until they eventually disappear (have zero width). The MinimumWidth and MaximumWidth properties still work for space filling columns. So you can use the MinimumWidth property to make sure that a space filling column doesn’t disappear.
 
-8\. How can I change the colours of a row or just a cell?[¶](#how-can-i-change-the-colours-of-a-row-or-just-a-cell "Permalink to this headline")
+How can I change the colours of a row or just a cell?[¶](#how-can-i-change-the-colours-of-a-row-or-just-a-cell "Permalink to this headline")
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 You listen for FormatRow or FormatCell event.
@@ -1207,7 +1207,7 @@ The various formatting options are applied in this order, with later formatting 
 > 5.  Hyperlinks
 > 6.  Selection
 
-9\. How can I make my FluentListView into a shiny report?[¶](#how-can-i-make-my-objectlistview-into-a-shiny-report "Permalink to this headline")
+How can I make my FluentListView into a shiny report?[¶](#how-can-i-make-my-objectlistview-into-a-shiny-report "Permalink to this headline")
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 You make a ListViewReporter object in your IDE, and you set the ListView property to be the FluentListView you want to print.
@@ -1323,7 +1323,9 @@ But when a CheckStateGetter is installed, the only way the control can know whet
 
 Virtual lists persist the “checkedness” of individual objects across calls to SetObjects() (and other list modifying operations). To make the list forget the “checkedness” of all objects, call ClearObjects().
 
-11\. How do change the information that’s displayed in Tile view?[¶](#how-do-change-the-information-that-s-displayed-in-tile-view "Permalink to this headline")
+
+
+How do change the information that’s displayed in Tile view?[¶](#how-do-change-the-information-that-s-displayed-in-tile-view "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 The information that is shown when in Tile view is customisable. The primary column has to appear, but the other “rows” are configurable. In the example below, the Person’s name appears, since that is the primary column, but the “Occupation”, “Birthdate”, and “Hourly Rate” pieces of information are shown as well.
@@ -1334,7 +1336,9 @@ To do this, set IsTileViewColumn to _true_ for those columns that you want to ap
 
 If you really want to change the information in the Tile view, you can custom draw it! To do this, install an ItemRenderer on the list and set OwnerDraw to _true_. See BusinessCardRenderer in the demo project for an example implementation. To see that renderer in action, run the demo, switch to the “Complex” tab, click the “Owner Drawn” checkbox, and switch to Tile view.
 
-12\. How do I change the message that’s shown when the FluentListView is empty?[¶](#how-do-i-change-the-message-that-s-shown-when-the-objectlistview-is-empty "Permalink to this headline")
+
+
+How do I change the message that’s shown when the FluentListView is empty?[¶](#how-do-i-change-the-message-that-s-shown-when-the-objectlistview-is-empty "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 When an FluentListView is empty, it can display a “this list is empty” type message.
@@ -1360,7 +1364,9 @@ gives this:
 
 If you really want to, you can set the EmptyListMsgOverlay property to an object that implement the IOverlay interface, and then draw whatever you want to.
 
-13\. On the rows of my FluentListView, I want to show images that come from a database. How do I do that?[¶](#on-the-rows-of-my-objectlistview-i-want-to-show-images-that-come-from-a-database-how-do-i-do-that "Permalink to this headline")
+
+
+On the rows of my FluentListView, I want to show images that come from a database. How do I do that?[¶](#on-the-rows-of-my-objectlistview-i-want-to-show-images-that-come-from-a-database-how-do-i-do-that "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Normally, images that are shown on rows come from an ImageList. The ImageGetter delegate simply returns the index of the image that should be drawn against the cell. However, sometimes, the images that should be drawn are not known at compile time. Or they are generated dynamically from some characteristic of the model object being displayed. In such cases, the ImageList cannot be pre- populated with the images to be used. But with a little planning, you can still use your ImageList to manage your images, even when the Images are dynamically retrieved.
@@ -1398,7 +1404,9 @@ this.mainColumn.ImageGetter = delegate(object row) {
 ```
 If you only use Details view, you don’t need to maintain the LargeImageList, but if you use any other view, you must keep the SmallImageList and the LargeImageList in sync.
 
-14\. Isn’t there are way to get rid of all the casts in the delegates?[¶](#isn-t-there-are-way-to-get-rid-of-all-the-casts-in-the-delegates "Permalink to this headline")
+
+
+Isn’t there are way to get rid of all the casts in the delegates?[¶](#isn-t-there-are-way-to-get-rid-of-all-the-casts-in-the-delegates "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Yes. You can use a TypedFluentListView wrapper.
@@ -1447,7 +1455,9 @@ A side benefit of a TypedFluentListView is that it can automatically generate an
 
 This allows the convenience of reflection, but the speed of hand-written AspectGetters.
 
-15\. How do I use a TreeListView?[¶](#how-do-i-use-a-treelistview "Permalink to this headline")
+
+
+How do I use a TreeListView?[¶](#how-do-i-use-a-treelistview "Permalink to this headline")
 -----------------------------------------------------------------------------------------------
 
 A TreeListView shows a tree structure with its nice ability to expand and collapse, but also shows information in columns.
@@ -1519,7 +1529,9 @@ Instead of creating nodes, think in terms of your data model:
 
 With that mental mode, TreeListView will be much easier to understand and use.
 
-16\. When the user types, I want to be able to match values in a column other than the first one. How can I do that?[¶](#when-the-user-types-i-want-to-be-able-to-match-values-in-a-column-other-than-the-first-one-how-can-i-do-that "Permalink to this headline")
+
+
+When the user types, I want to be able to match values in a column other than the first one. How can I do that?[¶](#when-the-user-types-i-want-to-be-able-to-match-values-in-a-column-other-than-the-first-one-how-can-i-do-that "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 > I have a list that shows medical incidents. One of the columns is the doctor responsible for that incident. I’d like the users to be able to sort by the “Doctor” column and then type the first few characters of the doctors name and find the cases assigned to that doctor. Is there a way to do that?
@@ -1528,7 +1540,9 @@ Surprisingly, yes! If you set IsSearchOnSortColumn to _true_ (the default), then
 
 Remember: this searching works on the string representation of the value, rather than on the values themselves.
 
-17\. How can I show more information in the tooltip when the mouse hovers over a cell?[¶](#how-can-i-show-more-information-in-the-tooltip-when-the-mouse-hovers-over-a-cell "Permalink to this headline")
+
+
+How can I show more information in the tooltip when the mouse hovers over a cell?[¶](#how-can-i-show-more-information-in-the-tooltip-when-the-mouse-hovers-over-a-cell "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 The ListView default behaviour is to only use tool tips to show truncated cell values (even then only when FullRowSelect is _true_). But with an FluentListView, you are not so limited.
@@ -1568,7 +1582,9 @@ Previous versions used delegates to provide a subset of this functionality. Thes
 
 All of this extra functionality comes with a small cost. This functionality is beyond what a standard .NET ToolTip can provide. Because of this, you cannot assign a standard ToolTip to an FluentListView in the IDE. Well, actually you can (at least until I can figure out how to prevent it) but you shouldn’t. If you do, you will get an assertion error the first time a tooltip tries to show.
 
-18\. How can I emphasise the row under the mouse?[¶](#how-can-i-emphasise-the-row-under-the-mouse "Permalink to this headline")
+
+
+How can I emphasise the row under the mouse?[¶](#how-can-i-emphasise-the-row-under-the-mouse "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------------------------
 
 This is called “hot tracking”. The normal ListView can underline the text of the row under the mouse. FluentListView can do much more.
@@ -1593,7 +1609,9 @@ this.olv1.HotItemStyle.Decoration = rbd;
 ```
 There is a static property FluentListView.DefaultHotItemStyle. This style is used by default when no specific HotItemStyle is set. This is shared across all FluentListView.
 
-19\. How can I put an image (or some text) over the top of the ListView?[¶](#how-can-i-put-an-image-or-some-text-over-the-top-of-the-listview "Permalink to this headline")
+
+
+How can I put an image (or some text) over the top of the ListView?[¶](#how-can-i-put-an-image-or-some-text-over-the-top-of-the-listview "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 This is called an “overlay.” A normal FluentListView comes pre-equipped with two overlays ready to use: OverlayImage and OverlayText. These can be configured from within the IDE, controlling what image (or text) is displayed, the corner in which the overlay is shown, and its inset from the control edge.
@@ -1624,7 +1642,9 @@ Overlays are purely cosmetic. They do not respond to any user interactions.
 
 Overlays look simple but are quite complex underneath. If they seem to be misbehaving (e.g. if you are seeing GlassPanelForms in placing where you don’t want them), you can completely disable overlays by setting UseOverlays to _false_.
 
-20\. How can I put an image (or some text) over the top of a row or cell?[¶](#how-can-i-put-an-image-or-some-text-over-the-top-of-a-row-or-cell "Permalink to this headline")
+
+
+How can I put an image (or some text) over the top of a row or cell?[¶](#how-can-i-put-an-image-or-some-text-over-the-top-of-a-row-or-cell "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Decorations are similar to overlays in that they are drawn over the top of the FluentListView, but decoration are different in that they are attached to a row or cell and scroll with it. Here the love heart and the “Missing!” are decorations.
@@ -1678,14 +1698,18 @@ this.olv1.SelectedRowDecoration = rbd;
 ```
 Like overlays, decorations are purely cosmetic. They do not respond to any user interactions.
 
-21\. How can I use drag and drop in an FluentListView?[¶](#how-can-i-use-drag-and-drop-in-an-objectlistview "Permalink to this headline")
+
+
+How can I use drag and drop in an FluentListView?[¶](#how-can-i-use-drag-and-drop-in-an-objectlistview "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 This needs its own page to explain properly. [FluentListView and Drag & Drop](dragdrop.html#dragdrop-label).
 
 To see a detailed walk-through, have a look at [this blog](blog4.html#blog-rearrangingtreelistview).
 
-22\. How do I make the sorted column have that slightly different colour?[¶](#how-do-i-make-the-sorted-column-have-that-slightly-different-colour "Permalink to this headline")
+
+
+How do I make the sorted column have that slightly different colour?[¶](#how-do-i-make-the-sorted-column-have-that-slightly-different-colour "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 If you set TintSortColumn property to _true_, the sort column will be automatically tinted. The color of the tinting is controlled by the SelectedColumnTint property.
@@ -1696,7 +1720,9 @@ this.objectListView1.AddDecoration(new TintedColumnDecoration(columnToTint));
 ```
 This latter option lets you tint more than one column.
 
-23\. How do I make a column that shows just an image?[¶](#how-do-i-make-a-column-that-shows-just-an-image "Permalink to this headline")
+
+
+How do I make a column that shows just an image?[¶](#how-do-i-make-a-column-that-shows-just-an-image "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 > _I want to show a meetings room’s availability as an icon, without any text. What’s the best way to do that?_
@@ -1722,7 +1748,9 @@ By returning an aspect, sorting and grouping will still work. By forcing AspectT
 
 This works in both owner drawn or non-owner drawn lists.
 
-24\. How do I show a menu when the user right clicks on the FluentListView?[¶](#how-do-i-show-a-menu-when-the-user-right-clicks-on-the-objectlistview "Permalink to this headline")
+
+
+How do I show a menu when the user right clicks on the FluentListView?[¶](#how-do-i-show-a-menu-when-the-user-right-clicks-on-the-objectlistview "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 If you want to show the same menu, regardless of where the user clicks, you can simply assign that menu to the ContextMenuStrip property of the FluentListView (this is standard .NET, nothing specific to an FluentListView).
@@ -1737,7 +1765,9 @@ If MenuStrip is not null, it will be shown where the mouse was clicked.
 
 It’s entirely reasonable for e.Model to be _null_. That means the user clicked on the list background.
 
-25\. How do I change the font or color of the column headers?[¶](#how-do-i-change-the-font-or-color-of-the-column-headers "Permalink to this headline")
+
+
+How do I change the font or color of the column headers?[¶](#how-do-i-change-the-font-or-color-of-the-column-headers "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Set FluentListView.HeaderUsesThemes to _false_ and then create a HeaderFormatStyle object (either in code or within the IDE), give it the characteristics you want, and then assign that style to either FluentListView.HeaderFormatStyle (to format all column headers) or OLVColumn.HeaderFormatStyle (to format just one column header).
@@ -1758,7 +1788,9 @@ There is also FluentListView.HeaderWordWrap which when _true_ says to word wrap 
 
 ![_images/header-formatting.png](_images/header-formatting.png)
 
-26\. How do I show a hyperlink in a cell?[¶](#how-do-i-show-a-hyperlink-in-a-cell "Permalink to this headline")
+
+
+How do I show a hyperlink in a cell?[¶](#how-do-i-show-a-hyperlink-in-a-cell "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------
 
 To put a hyperlink into a cell, you have to:
@@ -1776,7 +1808,9 @@ Just to be complete, when a hyperlink is clicked, FluentListView triggers a Hype
 
 Finally, the appearance of all hyperlinks is controlled by the HyperlinkStyle property. In most cases, the default settings will work fine.
 
-27\. How do I put an image next to a group heading?[¶](#how-do-i-put-an-image-next-to-a-group-heading "Permalink to this headline")
+
+
+How do I put an image next to a group heading?[¶](#how-do-i-put-an-image-next-to-a-group-heading "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------------------
 
 On XP, you can’t. Groups on XP get a header and that is all.
@@ -1790,7 +1824,9 @@ There isn’t a GetGroupTitleImage delegate. Instead, there are two more general
 
 These mechanisms are more useful than a GetGroupTitleImage delegate, since they allow any or all of the group information to be altered, not just the TitleImage.
 
-28\. How do I use that little clicky thing next to a group header?[¶](#how-do-i-use-that-little-clicky-thing-next-to-a-group-header "Permalink to this headline")
+
+
+How do I use that little clicky thing next to a group header?[¶](#how-do-i-use-that-little-clicky-thing-next-to-a-group-header "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 That “little clicky thing” is called the group task. You set it through the GroupTask property during the AboutToCreateGroups event or GroupFormatter delegate (see [27\. How do I put an image next to a group heading?](#recipe-groupformatting)).
@@ -1803,7 +1839,9 @@ When the user clicks on the text, FluentListView triggers a GroupTaskClick event
 
 [Once again, this is not possible on XP]
 
-29\. Can I generate the whole FluentListView directly from my model?[¶](#can-i-generate-the-whole-objectlistview-directly-from-my-model "Permalink to this headline")
+
+
+Can I generate the whole FluentListView directly from my model?[¶](#can-i-generate-the-whole-objectlistview-directly-from-my-model "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 > _I’m writing software to a merchant bank and time to market is crucial. Is there a way I create a working FluentListView just using my model class?_
@@ -1874,7 +1912,9 @@ This gives a slightly more interesting control:
 
 [Thanks to John Kohler for this idea and the original implementation]
 
-30\. Can the FluentListView use a selection scheme like Vista?[¶](#can-the-objectlistview-use-a-selection-scheme-like-vista "Permalink to this headline")
+
+
+Can the FluentListView use a selection scheme like Vista?[¶](#can-the-objectlistview-use-a-selection-scheme-like-vista "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 There are two ways you can do this:
@@ -1892,7 +1932,9 @@ There are two ways you can do this:
 *   It does not play well with HotItemStyles.
 *   It looks a bit silly when FullRowSelect is _false_.
 
-31\. Can I show groups on a virtual list?[¶](#can-i-show-groups-on-a-virtual-list "Permalink to this headline")
+
+
+Can I show groups on a virtual list?[¶](#can-i-show-groups-on-a-virtual-list "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------
 
 If it is on XP or earlier, no. If the program is running on Vista or later, yes – but you may have to do some work.
@@ -1941,7 +1983,9 @@ One other problem is caused by the normal behaviour of a grouped listview: when 
 
 Implementing this feature required the use of undocumented features. That means there is no guarantee that it will continue working in later versions of Windows (or even on current versions). You have been warned.
 
-32\. Can I filter the contents of the FluentListView?[¶](#can-i-filter-the-contents-of-the-objectlistview "Permalink to this headline")
+
+
+Can I filter the contents of the FluentListView?[¶](#can-i-filter-the-contents-of-the-objectlistview "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 This needs a [whole page to itself](filtering.html#filtering-label).
@@ -1956,7 +2000,9 @@ this.olv1.ModelFilter = new ModelFilter(delegate(object x) {
 ```
 If you want your filter to co-operate with any [Excel-like filtering](filtering.html#column-filtering-label), set the AdditionalFilter property, instead of the ModelFilter.
 
-33\. Is there an easy way to only show rows that contain some text?[¶](#is-there-an-easy-way-to-only-show-rows-that-contain-some-text "Permalink to this headline")
+
+
+Is there an easy way to only show rows that contain some text?[¶](#is-there-an-easy-way-to-only-show-rows-that-contain-some-text "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 > _I want to do a text filter like iTunes’ search box, where only songs that contain the typed string are shown. Is there an easy way to do that?_
@@ -1997,12 +2043,16 @@ If you just want to highlight the text without actually filtering the rows, set 
 
 Remember: the list has to be owner drawn for the renderer to have any effect.
 
-34\. How do I put something animated onto my FluentListView?[¶](#how-do-i-put-something-animated-onto-my-objectlistview "Permalink to this headline")
+
+
+How do I put something animated onto my FluentListView?[¶](#how-do-i-put-something-animated-onto-my-objectlistview "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
 To Do
 
-35\. How can I save and restore the state of the FluentListView?[¶](#how-can-i-save-and-restore-the-state-of-the-objectlistview "Permalink to this headline")
+
+
+How can I save and restore the state of the FluentListView?[¶](#how-can-i-save-and-restore-the-state-of-the-objectlistview "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 > _In my app, I want to remember the ordering and size of the columns in the list so they can be restored when the user reruns the app. Is there a way to do that?_
@@ -2021,7 +2071,9 @@ These methods store the following characteristics:
 
 It does not include selection or scroll position.
 
-36\. How can I put an image in the column header?[¶](#how-can-i-put-an-image-in-the-column-header "Permalink to this headline")
+
+
+How can I put an image in the column header?[¶](#how-can-i-put-an-image-in-the-column-header "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------------------------
 
 [The second most requested feature ever]
@@ -2036,7 +2088,9 @@ If you only want an image in the header without any text showing, set OLVColumn.
 
 Don’t use ImageKey or ImageIndex. These are Microsoft standard properties, but they don’t work. Both are hidden from the code generation process so any value you set on them in the IDE _will not_ be persisted.
 
-37\. Can I make a header take up even less space? Can it be drawn vertical?[¶](#can-i-make-a-header-take-up-even-less-space-can-it-be-drawn-vertical "Permalink to this headline")
+
+
+Can I make a header take up even less space? Can it be drawn vertical?[¶](#can-i-make-a-header-take-up-even-less-space-can-it-be-drawn-vertical "Permalink to this headline")
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 For checkbox column, or image only columns, the header text can take up much more space than the data it is labelling. In such cases, you can make the columns header be drawn vertically, by setting OLVColumn.IsHeaderVertical property to _true_.
@@ -2051,7 +2105,9 @@ Vertical headers are text only. Setting HeaderImageKey does nothing.
 
 Vertical text is actually quite hard to read. If you use vertical headers, be kind to your users and give the header a tool tip (through the OLVColumn.HeaderToolTip property) that lets the user easily see what the header is trying to say.
 
-38\. I want to make the cell being edited more obvious[¶](#i-want-to-make-the-cell-being-edited-more-obvious "Permalink to this headline")
+
+
+I want to make the cell being edited more obvious[¶](#i-want-to-make-the-cell-being-edited-more-obvious "Permalink to this headline")
 ------------------------------------------------------------------------------------------------------------------------------------------
 
 > _My users sometimes get confused about whether they are editing a cell, and if so, which one. Is there any way to make these things more obvious?_
@@ -2068,7 +2124,9 @@ The EditingCellBorderDecoration has the usual swathe of properties controlling e
 
 OK, OK. This isn’t actually a very useful class, but it does look cool :)
 
-39\. How can I change the ordering of groups or rows within a group?[¶](#how-can-i-change-the-ordering-of-groups-or-rows-within-a-group "Permalink to this headline")
+
+
+How can I change the ordering of groups or rows within a group?[¶](#how-can-i-change-the-ordering-of-groups-or-rows-within-a-group "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 > _Your way of ordering groups and the rows within the groups is stupid. I want to be able to do it myself._
@@ -2079,7 +2137,9 @@ If you don’t want the items within the group to be sorted at all, set PrimaryS
 
 There is no way to NOT sort the groups. They have to be ordered in some fashion.
 
-40\. How do I change what happens the user presses Tab or Enter when editing a cell?[¶](#how-do-i-change-what-happens-the-user-presses-tab-or-enter-when-editing-a-cell "Permalink to this headline")
+
+
+How do I change what happens the user presses Tab or Enter when editing a cell?[¶](#how-do-i-change-what-happens-the-user-presses-tab-or-enter-when-editing-a-cell "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 > _In my app, I want the user to be able to edit all cells just by repeatedly hitting [Tab]. So, when the user hits [Tab] when editing the last cell, I don’t want it to wrap back to the first cell – I want it to change rows. How can do I that?_
@@ -2102,7 +2162,9 @@ olv1.CellEditKeyEngine.SetKeyBehaviour(Keys.Up|Keys.Control, CellEditCharacterBe
 ```
 NOTE: The interface to CellEditKeyEngine will almost certainly change in the next version.
 
-41\. How do I change the way the “Filtering” menu works?[¶](#how-do-i-change-the-way-the-filtering-menu-works "Permalink to this headline")
+
+
+How do I change the way the “Filtering” menu works?[¶](#how-do-i-change-the-way-the-filtering-menu-works "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------------------------------------
 
 > _I really like the ‘Filter’ menu, but I want to change the values that are shown in the check list. How do I do that?_
@@ -2117,7 +2179,9 @@ To hide the ‘Filter’ menu item for all columns, set ShowFilterMenuOnRightCli
 
 To hide the ‘Filter’ menu item for a particular column, set UsesFiltering to _false_ on that column.
 
-42\. How can I change the way the user can choose the columns in an FluentListView?[¶](#how-can-i-change-the-way-the-user-can-choose-the-columns-in-an-objectlistview "Permalink to this headline")
+
+
+How can I change the way the user can choose the columns in an FluentListView?[¶](#how-can-i-change-the-way-the-user-can-choose-the-columns-in-an-objectlistview "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 In general, the user is able to select which columns they wish to see in an FluentListView. The user interface mechanism for this is that when the user right clicks on any header, they will presented with a menu that lets them choose which columns they wish to see.
@@ -2142,7 +2206,9 @@ If there are some columns that you do not want the user to be able to hide, set 
 
 Note: Column 0 can never be hidden. This is a limit of the underlying Windows control. If you wish to make your first column hide-able, move it to anywhere else in the column list, and then set its DisplayIndex to 0, so that it appears first.
 
-43\. How can I make checkboxes keep their values when filtering an FluentListView?[¶](#how-can-i-make-checkboxes-keep-their-values-when-filtering-an-objectlistview "Permalink to this headline")
+
+
+How can I make checkboxes keep their values when filtering an FluentListView?[¶](#how-can-i-make-checkboxes-keep-their-values-when-filtering-an-objectlistview "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Set PersistentCheckboxes to _true_ (this is the default).
@@ -2155,7 +2221,9 @@ If an FluentListView has CheckStateGetter and CheckStatePutters installed, the P
 
 This behaviour is new in v2.5.1. To revert to the previous behaviour, set PersistentCheckboxes to _false_.
 
-44\. How can I stop the user expanding/collapsing a group?[¶](#how-can-i-stop-the-user-expanding-collapsing-a-group "Permalink to this headline")
+
+
+How can I stop the user expanding/collapsing a group?[¶](#how-can-i-stop-the-user-expanding-collapsing-a-group "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
 Listen for the GroupExpandingCollapsing event, and then set Canceled to _true_ if the event should be prevented.
@@ -2166,7 +2234,9 @@ private void olv1\_GroupExpandingCollapsing(object sender, GroupExpandingCollaps
     e.Canceled = e.IsExpanding && e.Group.Header.StartsWith("NO\_EXPAND");
 }
 ```
-45\. How do I put a _real_ background image onto an FluentListView?[¶](#how-do-i-put-a-real-background-image-onto-an-objectlistview "Permalink to this headline")
+
+
+How do I put a _real_ background image onto an FluentListView?[¶](#how-do-i-put-a-real-background-image-onto-an-objectlistview "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 > _That overlay stuff is just too tricky. I want a real background image and I want it now!_
@@ -2202,7 +2272,9 @@ this.olv.SetNativeBackgroundTiledImage(Resource1.limeleaf);
 ```
 Apart from these limitations, native watermarks are quite neat. They are true backgrounds, not translucent overlays like the OverlayImage uses. They also have the decided advantage over overlays in that they work correctly even in MDI applications.
 
-46\. How do I bind a DataSet to an FluentListView?[¶](#how-do-i-bind-a-dataset-to-an-objectlistview "Permalink to this headline")
+
+
+How do I bind a DataSet to an FluentListView?[¶](#how-do-i-bind-a-dataset-to-an-objectlistview "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------------
 
 Each flavour of control has a data bindable version:
@@ -2270,7 +2342,9 @@ this.bindingNavigator1.BindingSource = bs;
 this.dataGridView1.DataSource = bs;
 this.dataListView1.DataSource = bs;
 ```
-47\. Why can’t I data-bind the TreeListView?[¶](#why-can-t-i-data-bind-the-treelistview "Permalink to this headline")
+
+
+Why can’t I data-bind the TreeListView?[¶](#why-can-t-i-data-bind-the-treelistview "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------
 
 > _I want a TreeListView but I’m basically too lazy to even lift a schooner to my mouth. Can’t you make it so I don’t have to write even a single line of code?_
@@ -2326,7 +2400,9 @@ Due to the limitations of the Designer in the IDE, RootKeyValue can only be give
 
 null is a valid value for RootKeyValue.
 
-48\. Can a TreeListView calculate checkboxes based on subitems?[¶](#can-a-treelistview-calculate-checkboxes-based-on-subitems "Permalink to this headline")
+
+
+Can a TreeListView calculate checkboxes based on subitems?[¶](#can-a-treelistview-calculate-checkboxes-based-on-subitems "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 > _I’d like the TreeListView to be able to check everything in a branch if the top of the branch is checked._
@@ -2359,7 +2435,9 @@ If you set CheckedObjects _and_ any of those objects haven’t already been reve
 
 Hierarchical checkboxes don’t work with CheckStateGetters or CheckStateSetters. Just don’t use them.
 
-49\. Can rows be disabled?[¶](#can-rows-be-disabled "Permalink to this headline")
+
+
+Can rows be disabled?[¶](#can-rows-be-disabled "Permalink to this headline")
 ---------------------------------------------------------------------------------
 
 As of v2.8, all flavours of FluentListView can have disabled rows.
@@ -2385,7 +2463,9 @@ As such, disabled rows look best when owner drawn (the above snapshot is in owne
 
 ![_images/blog8-greytext-colourimages.png](_images/blog8-greytext-colourimages.png)
 
-50\. How can I put a checkbox in a column header?[¶](#how-can-i-put-a-checkbox-in-a-column-header "Permalink to this headline")
+
+
+How can I put a checkbox in a column header?[¶](#how-can-i-put-a-checkbox-in-a-column-header "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------------------------
 
 Also as of v2.8, column headers can have a checkbox:
@@ -2435,7 +2515,9 @@ On OlvListViewHitTestInfo, ColumnIndex and HeaderDividerIndex tell exactly which
 
 Changed in mouse location are primarily reported through CellOver events. These events are now also raised when the mouse moves over the header. Since this is different from previous versions, this behaviour can be disabled by setting FluentListView.TriggerCellOverEventsWhenOverHeader to false.
 
-51\. Can I get rid of the RefreshObject() calls?[¶](#can-i-get-rid-of-the-refreshobject-calls "Permalink to this headline")
+
+
+Can I get rid of the RefreshObject() calls?[¶](#can-i-get-rid-of-the-refreshobject-calls "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------
 
 > _Whenever my model object changes, I have to call RefreshObject(). Can’t you do something so that I don’t have to remember to do that?_
@@ -2464,7 +2546,9 @@ Don’t use this mechanism on data-bound versions of FluentListView. They have t
 
 The notification mechanism is a convenience device, not a performance optimization. It is not particularly smart. If you change eight properties, FluentListView will refresh the corresponding item eight times.
 
-52\. How can I put a button into a cell?[¶](#how-can-i-put-a-button-into-a-cell "Permalink to this headline")
+
+
+How can I put a button into a cell?[¶](#how-can-i-put-a-button-into-a-cell "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------
 
 To make a button appear in a cell, set OLVColumn.IsButton to true. The column will then draw its aspect as a system-themed button (complete with hot highlighting).
@@ -2500,7 +2584,9 @@ Buttons are normally disabled when the row is disabled. If you want the button t
 
 Buttons are drawn using instances of ColumnButtonRenderer. You can create your own subclass of this and install it as the Renderer for the column to draw buttons as you want. You have to install your renderer _before_ setting IsButton to true, otherwise your renderer may not be correctly configured.
 
-53\. How can I reduce the CPU usage on mouse move?[¶](#how-can-i-reduce-the-cpu-usage-on-mouse-move "Permalink to this headline")
+
+
+How can I reduce the CPU usage on mouse move?[¶](#how-can-i-reduce-the-cpu-usage-on-mouse-move "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------------
 
 > _When I move the mouse back and forth quickly over the control, the CPU usage jumps to about 8%! What’s that all about and how can I stop it?_
@@ -2521,7 +2607,9 @@ But if you want to remove this CPU usage, you just have to turn off all “hot�
 
 With all these set to _false_, the control will no longer draw anything different when the mouse moves over it, but you will save all those CPU cycles.
 
-54\. How can I put a description under something that looks like a title?[¶](#how-can-i-put-a-description-under-something-that-looks-like-a-title "Permalink to this headline")
+
+
+How can I put a description under something that looks like a title?[¶](#how-can-i-put-a-description-under-something-that-looks-like-a-title "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 If you want to make something that looks pretty like this, FluentListView can help:
