@@ -103,7 +103,7 @@
     <Compile Include="Filtering\ClusteringStrategy.cs" />
     <Compile Include="Filtering\Cluster.cs" />
     <Compile Include="Filtering\ClustersFromGroupsStrategy.cs" />
-    <Compile Include="FastObjectListView.cs">
+    <Compile Include="FastFluentListView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Filtering\FilterMenuBuilder.cs" />
@@ -155,13 +155,12 @@
     <Compile Include="Utilities\TypedObjectListView.cs" />
     <Compile Include="Implementation\VirtualGroups.cs" />
     <Compile Include="Implementation\VirtualListDataSource.cs" />
-    <Compile Include="VirtualObjectListView.cs">
+    <Compile Include="VirtualFluentListView.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="CustomDictionary.xml" />
-    <None Include="FullClassDiagram.cd" />
     <None Include="ObjectListView2012.nuspec">
       <SubType>Designer</SubType>
     </None>
