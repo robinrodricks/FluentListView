@@ -16,7 +16,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// This form is an example of how an application could allows the user to select which columns 

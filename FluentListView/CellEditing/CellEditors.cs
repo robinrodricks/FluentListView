@@ -41,7 +41,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// These items allow combo boxes to remember a value and its description.

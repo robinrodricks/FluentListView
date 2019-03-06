@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FluentLV {
+namespace Fluent {
 
     /// <summary>
     /// An indication of where a hit was within FluentListView cell

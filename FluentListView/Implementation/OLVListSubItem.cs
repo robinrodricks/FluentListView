@@ -32,7 +32,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.ComponentModel;
 
-namespace FluentLV {
+namespace Fluent {
 
     /// <summary>
     /// A ListViewSubItem that knows which image should be drawn against it.

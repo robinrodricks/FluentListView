@@ -36,7 +36,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// Wrapper for all native method calls on ListView controls

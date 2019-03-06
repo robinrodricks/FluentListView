@@ -32,7 +32,7 @@ using System;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace FluentLV {
+namespace Fluent {
 
     #region Delegate declarations
 

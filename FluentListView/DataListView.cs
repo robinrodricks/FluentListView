@@ -43,7 +43,7 @@ using System.Diagnostics;
 using System.Drawing.Design;
 using System.Windows.Forms;
 
-namespace FluentLV
+namespace Fluent
 {
 
     /// <summary>

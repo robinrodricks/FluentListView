@@ -38,7 +38,7 @@ using System.Data;
 using System.Reflection;
 using System.Drawing;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// Interface for model-by-model filtering

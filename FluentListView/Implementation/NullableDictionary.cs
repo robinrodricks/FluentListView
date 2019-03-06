@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Collections;
 
-namespace FluentLV {
+namespace Fluent {
 
     /// <summary>
     /// A simple-minded implementation of a Dictionary that can handle null as a key.

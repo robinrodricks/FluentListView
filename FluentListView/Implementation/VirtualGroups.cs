@@ -34,7 +34,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// A IVirtualGroups is the interface that a virtual list must implement to support virtual groups

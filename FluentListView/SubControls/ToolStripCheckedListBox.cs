@@ -31,7 +31,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace FluentLV {
+namespace Fluent {
 
     /// <summary>
     /// Instances of this class put a CheckedListBox into a tool strip menu item.

@@ -40,7 +40,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// A decoration is an overlay that draws itself in relation to a given row or cell.

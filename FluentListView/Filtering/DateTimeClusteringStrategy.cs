@@ -28,7 +28,7 @@
 using System;
 using System.Globalization;
 
-namespace FluentLV {
+namespace Fluent {
 
     /// <summary>
     /// This enum is used to indicate various portions of a datetime

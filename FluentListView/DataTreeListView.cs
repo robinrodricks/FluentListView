@@ -37,7 +37,7 @@ using System.Diagnostics;
 using System.Drawing.Design;
 using System.Windows.Forms;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// A DataTreeListView is a TreeListView that calculates its hierarchy based on

@@ -44,7 +44,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// The interface for an object which can draw itself over the top of
@@ -112,7 +112,7 @@ namespace FluentLV
     /// <summary>
     /// An overlay that will draw an image over the top of the FluentListView
     /// </summary>
-    [TypeConverter("FluentLV.Design.OverlayConverter")]
+    [TypeConverter("Fluent.Design.OverlayConverter")]
     public class ImageOverlay : ImageAdornment, ITransparentOverlay
     {
         /// <summary>
@@ -174,7 +174,7 @@ namespace FluentLV
     /// <summary>
     /// An overlay that will draw text over the top of the FluentListView
     /// </summary>
-    [TypeConverter("FluentLV.Design.OverlayConverter")]
+    [TypeConverter("Fluent.Design.OverlayConverter")]
     public class TextOverlay : TextAdornment, ITransparentOverlay
     {
         /// <summary>

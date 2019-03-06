@@ -39,7 +39,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// This attribute is used to mark a property of a model

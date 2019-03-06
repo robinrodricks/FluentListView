@@ -36,9 +36,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-using FluentLV;
+using Fluent;
 
-namespace FluentLV {
+namespace Fluent {
     /// <summary>
     /// Indicates the behavior of a key when a cell "on the edge" is being edited.
     /// and the normal behavior of that key would exceed the edge. For example,

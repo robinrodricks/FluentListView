@@ -58,10 +58,10 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Windows.Forms.VisualStyles;
 using System.Drawing.Drawing2D;
-using FluentLV.Properties;
+using Fluent.Properties;
 using System.Security.Permissions;
 
-namespace FluentLV {
+namespace Fluent {
 
     /// <summary>
     /// Class used to capture window messages for the header of the list view

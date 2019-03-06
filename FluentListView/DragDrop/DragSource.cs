@@ -39,7 +39,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// An IDragSource controls how drag out from the FluentListView will behave

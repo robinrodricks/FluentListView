@@ -586,7 +586,7 @@ using System.Windows.Forms.VisualStyles;
 using System.Runtime.Serialization.Formatters;
 using System.Threading;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// An FluentListView is a much easier to use, and much more powerful, version of the ListView.
@@ -639,7 +639,7 @@ namespace FluentLV
     /// <item><description>System.Windows.Forms (obviously)</description></item>
     /// </list>
     /// </remarks>
-    [Designer(typeof(FluentLV.Design.FluentListViewDesigner))]   
+    [Designer(typeof(Fluent.Design.FluentListViewDesigner))]   
     public partial class FluentListView : ListView, ISupportInitialize {
         
         #region Life and death
@@ -1304,7 +1304,7 @@ namespace FluentLV
         /// Gets Columns for this list. We hide the original so we can associate
         /// a specialised editor with it.
         /// </summary>
-        [Editor("FluentLV.Design.OLVColumnCollectionEditor", "System.Drawing.Design.UITypeEditor")]
+        [Editor("Fluent.Design.OLVColumnCollectionEditor", "System.Drawing.Design.UITypeEditor")]
         new public ListView.ColumnHeaderCollection Columns {
             get {
                 return base.Columns;
@@ -7078,12 +7078,12 @@ namespace FluentLV
         /// <summary>
         /// Gets or sets the image that will be place next to the Sort Ascending command
         /// </summary>
-        static public Bitmap SortAscendingImage = FluentLV.Properties.Resources.SortAscending;
+        static public Bitmap SortAscendingImage = Fluent.Properties.Resources.SortAscending;
 
         /// <summary>
         /// Gets or sets the image that will be placed next to the Sort Descending command
         /// </summary>
-        static public Bitmap SortDescendingImage = FluentLV.Properties.Resources.SortDescending;
+        static public Bitmap SortDescendingImage = Fluent.Properties.Resources.SortDescending;
 
         /// <summary>
         /// Append the column selection menu items to the given menu strip.

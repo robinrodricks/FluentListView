@@ -38,7 +38,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// ColumnComparer is the workhorse for all comparison between two values of a particular column.

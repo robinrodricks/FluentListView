@@ -35,7 +35,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Drawing.Design;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// A FastDataListView virtualizes the display of data from a DataSource. It operates on

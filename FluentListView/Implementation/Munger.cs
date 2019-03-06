@@ -44,7 +44,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// An instance of Munger gets a value from or puts a value into a target object. The property

@@ -41,7 +41,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// A TypedFluentListView is a type-safe wrapper around an FluentListView.

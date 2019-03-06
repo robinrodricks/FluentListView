@@ -47,7 +47,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// A GlassPanelForm sits transparently over an FluentListView to show overlays.

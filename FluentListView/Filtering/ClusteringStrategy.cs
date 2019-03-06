@@ -29,7 +29,7 @@ using System;
 using System.Collections;
 using System.Text;
 
-namespace FluentLV {
+namespace Fluent {
 
     /// <summary>
     /// This class provides a useful base implemention of a clustering

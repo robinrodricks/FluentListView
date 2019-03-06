@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FluentLV {
+namespace Fluent {
 
     /// <summary>
     /// Concrete implementation of the ICluster interface.

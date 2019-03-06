@@ -35,7 +35,7 @@ using System;
 using System.Collections;
 using System.Windows.Forms;
 
-namespace FluentLV {
+namespace Fluent {
     
     /// <summary>
     /// A data transfer object that knows how to transform a list of model

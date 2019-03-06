@@ -284,7 +284,7 @@ To do something smarter like this, we would change the AspectName of our third c
 ```
 this.sizeColumn.AspectToStringConverter = delegate(object x) {
     long size = (long)x;
-    int[] limits = new int[] { 1024 \* 1024 \* 1024, 1024 \* 1024, 1024 };
+    int[] limits = new int[] { 1024 * 1024 * 1024, 1024 * 1024, 1024 };
     string[] units = new string[] { "GB", "MB", "KB" };
 
     for (int i = 0; i < limits.Length; i++) {
@@ -701,7 +701,7 @@ FluentListViews can draw images and text over the top of the control. This drawi
 
 Overlays are drawing over the control itself. Decorations are added to rows and subitems.
 
-See: \* [19\. How can I put an image (or some text) over the top of the ListView?](#recipe-overlays) for how to use them; \* [Overlays and Decorations](overlays.html#overlays-label) for some gotchas \* [Technical Blog - Overlays](blog1.html#blog-overlays) for the history of their development.
+See: [19\. How can I put an image (or some text) over the top of the ListView?](#recipe-overlays) for how to use them; [Overlays and Decorations](overlays.html#overlays-label) for some gotchas [Technical Blog - Overlays](blog1.html#blog-overlays) for the history of their development.
 
 Cell events
 ---------------------------------------------------------

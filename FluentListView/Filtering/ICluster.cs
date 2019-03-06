@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FluentLV {
+namespace Fluent {
 
     /// <summary>
     /// A cluster is a like collection of objects that can be usefully filtered

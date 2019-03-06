@@ -38,7 +38,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Drawing;
 
-namespace FluentLV {
+namespace Fluent {
 
     /// <summary>
     /// Instances of this class include only those rows of the listview

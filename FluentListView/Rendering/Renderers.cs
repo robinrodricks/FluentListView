@@ -114,7 +114,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using Timer = System.Threading.Timer;
 
-namespace FluentLV {
+namespace Fluent {
     /// <summary>
     /// Renderers are the mechanism used for owner drawing cells. As such, they can also handle
     /// hit detection and positioning of cell editing rectangles.

@@ -33,7 +33,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FluentLV{
+namespace Fluent{
 
     /// <summary>
     /// Implementation of this interface control the selecting of cluster keys

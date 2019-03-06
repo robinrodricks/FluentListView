@@ -38,7 +38,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace FluentLV {
+namespace Fluent {
 
     /// <summary>
     /// OLVListItems are specialized ListViewItems that know which row object they came from,

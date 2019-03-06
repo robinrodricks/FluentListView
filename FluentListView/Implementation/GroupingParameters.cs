@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FluentLV {
+namespace Fluent {
 
     /// <summary>
     /// This class contains all the settings used when groups are created

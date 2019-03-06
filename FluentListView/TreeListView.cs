@@ -128,7 +128,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Forms;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// A TreeListView combines an expandable tree structure with list view columns.

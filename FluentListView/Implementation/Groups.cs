@@ -40,7 +40,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// These values indicate what is the state of the group. These values

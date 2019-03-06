@@ -40,7 +40,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// An adorment is the common base for overlays and decorations.

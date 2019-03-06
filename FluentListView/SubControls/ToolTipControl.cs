@@ -43,7 +43,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Security.Permissions;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// A limited wrapper around a Windows tooltip window.

@@ -31,7 +31,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace FluentLV {
+namespace Fluent {
     /// <summary>
     /// An OLVExporter converts a collection of rows from an FluentListView
     /// into a variety of textual formats.

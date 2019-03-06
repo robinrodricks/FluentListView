@@ -38,7 +38,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.Drawing.Design;
 
-namespace FluentLV {
+namespace Fluent {
 
     // TODO
     //[TypeConverter(typeof(ExpandableObjectConverter))]

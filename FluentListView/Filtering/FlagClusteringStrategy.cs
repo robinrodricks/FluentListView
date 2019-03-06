@@ -31,7 +31,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace FluentLV {
+namespace Fluent {
 
     /// <summary>
     /// Instances of this class cluster model objects on the basis of a

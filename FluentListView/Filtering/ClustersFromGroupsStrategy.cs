@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FluentLV {
+namespace Fluent {
 
     /// <summary>
     /// This class calculates clusters from the groups that the column uses.

@@ -39,7 +39,7 @@ using System.Windows.Forms;
 using System.Collections;
 using System.Drawing;
 
-namespace FluentLV {
+namespace Fluent {
 
     /// <summary>
     /// Instances of this class know how to build a Filter menu.
@@ -83,12 +83,12 @@ namespace FluentLV {
         /// <summary>
         /// Gets or sets the image that will be placed next to the Clear Filtering menu item
         /// </summary>
-        static public Bitmap ClearFilteringImage = FluentLV.Properties.Resources.ClearFiltering;
+        static public Bitmap ClearFilteringImage = Fluent.Properties.Resources.ClearFiltering;
 
         /// <summary>
         /// Gets or sets the image that will be placed next to all "Apply" menu items on the filtering menu
         /// </summary>
-        static public Bitmap FilteringImage = FluentLV.Properties.Resources.Filtering;
+        static public Bitmap FilteringImage = Fluent.Properties.Resources.Filtering;
 
         #endregion
 

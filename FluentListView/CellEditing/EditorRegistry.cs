@@ -32,7 +32,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
 
-namespace FluentLV {
+namespace Fluent {
 
     /// <summary>
     /// A delegate that creates an editor for the given value

@@ -8,7 +8,7 @@
     <ProjectGuid>{18FEDA0C-D147-4286-B39A-01204808106A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FluentLV</RootNamespace>
+    <RootNamespace>Fluent</RootNamespace>
     <AssemblyName>FluentListView</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>

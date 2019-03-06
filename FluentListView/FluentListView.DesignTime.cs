@@ -45,7 +45,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 
-namespace FluentLV.Design
+namespace Fluent.Design
 {
 
     /// <summary>

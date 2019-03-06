@@ -34,7 +34,7 @@ using System;
 using System.Collections;
 using System.Windows.Forms;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// A VirtualListDataSource is a complete manner to provide functionality to a virtual list.

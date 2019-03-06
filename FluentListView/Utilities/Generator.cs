@@ -50,7 +50,7 @@ using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// An object that implements the IGenerator interface provides the ability 

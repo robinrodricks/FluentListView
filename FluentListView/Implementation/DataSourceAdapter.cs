@@ -40,7 +40,7 @@ using System.Data;
 using System.Windows.Forms;
 using System.Diagnostics;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// A helper class that translates DataSource events for an FluentListView

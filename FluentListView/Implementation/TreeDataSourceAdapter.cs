@@ -3,7 +3,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace FluentLV
+namespace Fluent
 {
     /// <summary>
     /// A TreeDataSourceAdapter knows how to build a tree structure from a binding list.

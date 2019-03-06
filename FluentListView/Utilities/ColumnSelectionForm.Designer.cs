@@ -1,4 +1,4 @@
-namespace FluentLV
+namespace Fluent
 {
     partial class ColumnSelectionForm
     {
@@ -34,8 +34,8 @@ namespace FluentLV
             this.label1 = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.objectListView1 = new FluentLV.FluentListView();
-            this.olvColumn1 = new FluentLV.OLVColumn();
+            this.objectListView1 = new Fluent.FluentListView();
+            this.olvColumn1 = new Fluent.OLVColumn();
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -124,7 +124,7 @@ namespace FluentLV
             this.objectListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.objectListView1.CellEditActivation = FluentLV.FluentListView.CellEditActivateMode.SingleClick;
+            this.objectListView1.CellEditActivation = Fluent.FluentListView.CellEditActivateMode.SingleClick;
             this.objectListView1.CheckBoxes = true;
             this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1});
@@ -177,12 +177,12 @@ namespace FluentLV
 
         #endregion
 
-        private FluentLV.FluentListView objectListView1;
+        private Fluent.FluentListView objectListView1;
         private System.Windows.Forms.Button buttonMoveUp;
         private System.Windows.Forms.Button buttonMoveDown;
         private System.Windows.Forms.Button buttonShow;
         private System.Windows.Forms.Button buttonHide;
-        private FluentLV.OLVColumn olvColumn1;
+        private Fluent.OLVColumn olvColumn1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
