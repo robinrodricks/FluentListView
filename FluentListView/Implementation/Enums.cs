@@ -31,7 +31,7 @@ using System.Text;
 
 namespace Fluent {
 
-    public partial class FluentListView {
+    public partial class AdvancedListView {
         /// <summary>
         /// How does a user indicate that they want to edit cells?
         /// </summary>

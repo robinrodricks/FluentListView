@@ -52,7 +52,7 @@ namespace Fluent
         /// <summary>
         /// Make a DataSourceAdapter
         /// </summary>
-        public DataSourceAdapter(FluentListView olv) {
+        public DataSourceAdapter(AdvancedListView olv) {
             if (olv == null) throw new ArgumentNullException("olv");
 
             this.ListView = olv;
@@ -128,11 +128,11 @@ namespace Fluent
         /// <summary>
         /// Gets the FluentListView upon which this adaptor will operate
         /// </summary>
-        public FluentListView ListView {
+        public AdvancedListView ListView {
             get { return listView; }
             internal set { listView = value; }
         }
-        private FluentListView listView;
+        private AdvancedListView listView;
 
         #endregion
 
@@ -155,7 +155,7 @@ namespace Fluent
         /// 
         /// </summary>
         /// <param name="olv"></param>
-        protected virtual void BindListView(FluentListView olv) {
+        protected virtual void BindListView(AdvancedListView olv) {
             if (olv == null)
                 return;
 
@@ -168,7 +168,7 @@ namespace Fluent
         /// 
         /// </summary>
         /// <param name="olv"></param>
-        protected virtual void UnbindListView(FluentListView olv) {
+        protected virtual void UnbindListView(AdvancedListView olv) {
             if (olv == null)
                 return;
 

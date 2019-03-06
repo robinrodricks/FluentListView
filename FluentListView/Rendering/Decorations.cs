@@ -122,7 +122,7 @@ namespace Fluent
         /// <param name="olv"></param>
         /// <param name="g"></param>
         /// <param name="r"></param>
-        public virtual void Draw(FluentListView olv, Graphics g, Rectangle r) {
+        public virtual void Draw(AdvancedListView olv, Graphics g, Rectangle r) {
         }
 
         #endregion
@@ -204,7 +204,7 @@ namespace Fluent
         /// <param name="olv"></param>
         /// <param name="g"></param>
         /// <param name="r"></param>
-        public override void Draw(FluentListView olv, Graphics g, Rectangle r) {
+        public override void Draw(AdvancedListView olv, Graphics g, Rectangle r) {
 
             if (olv.View != System.Windows.Forms.View.Details)
                 return;
@@ -350,7 +350,7 @@ namespace Fluent
         /// <param name="olv"></param>
         /// <param name="g"></param>
         /// <param name="r"></param>
-        public override void Draw(FluentListView olv, Graphics g, Rectangle r) {
+        public override void Draw(AdvancedListView olv, Graphics g, Rectangle r) {
             Rectangle bounds = this.CalculateBounds();
             if (!bounds.IsEmpty)
                 this.DrawFilledBorder(g, bounds);
@@ -547,7 +547,7 @@ namespace Fluent
         /// <param name="olv"></param>
         /// <param name="g"></param>
         /// <param name="r"></param>
-        public override void Draw(FluentListView olv, Graphics g, Rectangle r) {
+        public override void Draw(AdvancedListView olv, Graphics g, Rectangle r) {
             if (!olv.IsCellEditing) 
                 return;
 
@@ -601,7 +601,7 @@ namespace Fluent
         /// <param name="olv"></param>
         /// <param name="g"></param>
         /// <param name="r"></param>
-        public override void Draw(FluentListView olv, Graphics g, Rectangle r) {
+        public override void Draw(AdvancedListView olv, Graphics g, Rectangle r) {
             if (!r.Contains(olv.PointToClient(Cursor.Position)))
                 return;
 
@@ -713,7 +713,7 @@ namespace Fluent
         /// <param name="olv">The FluentListView being decorated</param>
         /// <param name="g">The Graphics used for drawing</param>
         /// <param name="r">The bounds of the rendering</param>
-        public virtual void Draw(FluentListView olv, Graphics g, Rectangle r) {
+        public virtual void Draw(AdvancedListView olv, Graphics g, Rectangle r) {
             this.DrawImage(g, this.CalculateItemBounds(this.ListItem, this.SubItem));
         }
 
@@ -811,7 +811,7 @@ namespace Fluent
         /// <param name="olv">The FluentListView being decorated</param>
         /// <param name="g">The Graphics used for drawing</param>
         /// <param name="r">The bounds of the rendering</param>
-        public virtual void Draw(FluentListView olv, Graphics g, Rectangle r) {
+        public virtual void Draw(AdvancedListView olv, Graphics g, Rectangle r) {
             this.DrawText(g, this.CalculateItemBounds(this.ListItem, this.SubItem));
         }
 

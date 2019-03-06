@@ -389,11 +389,11 @@ namespace Fluent
         /// Gets the FluentListView that this group belongs to
         /// </summary>
         /// <remarks>If this is null, the group has not yet been created.</remarks>
-        public FluentListView ListView {
+        public AdvancedListView ListView {
             get { return this.listView; }
             protected set { this.listView = value; }
         }
-        private FluentListView listView;
+        private AdvancedListView listView;
 
         /// <summary>
         /// Gets or sets the name of the group
@@ -588,7 +588,7 @@ namespace Fluent
         /// </summary>
         /// <param name="olv"></param>
         /// <remarks>This is used when creating virtual groups</remarks>
-        public void InsertGroupNewStyle(FluentListView olv) {
+        public void InsertGroupNewStyle(AdvancedListView olv) {
             this.ListView = olv;
             NativeMethods.InsertGroup(olv, this.AsNativeGroup(true));
         }
@@ -597,7 +597,7 @@ namespace Fluent
         /// Insert a native group into the underlying control via a ListViewGroup
         /// </summary>
         /// <param name="olv"></param>
-        public void InsertGroupOldStyle(FluentListView olv) {
+        public void InsertGroupOldStyle(AdvancedListView olv) {
             this.ListView = olv;
 
             // Create/update the associated ListViewGroup

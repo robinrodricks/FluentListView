@@ -785,7 +785,7 @@ namespace Fluent
 
             // Update any changed roots
             if (updatedRoots.Count > 0) {
-                ArrayList newRoots = FluentListView.EnumerableToArray(this.Roots, false);
+                ArrayList newRoots = AdvancedListView.EnumerableToArray(this.Roots, false);
                 bool changed = false;
                 foreach (Object model in updatedRoots) {
                     int index = newRoots.IndexOf(model);
@@ -1628,7 +1628,7 @@ namespace Fluent
             /// </summary>
             /// <param name="modelObjects"></param>
             public virtual void AddObjects(ICollection modelObjects) {
-                ArrayList newRoots = FluentListView.EnumerableToArray(this.treeView.Roots, true);
+                ArrayList newRoots = AdvancedListView.EnumerableToArray(this.treeView.Roots, true);
                 foreach (Object x in modelObjects)
                     newRoots.Add(x);
                 this.SetObjects(newRoots);
@@ -1674,7 +1674,7 @@ namespace Fluent
             /// <param name="index"></param>
             /// <param name="modelObject"></param>
             public void UpdateObject(int index, object modelObject) {
-                ArrayList newRoots = FluentListView.EnumerableToArray(this.treeView.Roots, false);
+                ArrayList newRoots = AdvancedListView.EnumerableToArray(this.treeView.Roots, false);
                 if (index < newRoots.Count)
                     newRoots[index] = modelObject;
                 SetObjects(newRoots);

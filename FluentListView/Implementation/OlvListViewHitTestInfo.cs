@@ -206,7 +206,7 @@ namespace Fluent {
             this.HitTestLocationEx = (HitTestLocationEx)flags;
             this.Group = group;
             this.ColumnIndex = iColumn;
-            this.ListView = olvListItem == null ? null : (FluentListView)olvListItem.ListView;
+            this.ListView = olvListItem == null ? null : (AdvancedListView)olvListItem.ListView;
 
             switch (location) {
                 case ListViewHitTestLocations.StateImage:
@@ -232,7 +232,7 @@ namespace Fluent {
         /// <summary>
         /// Create a OlvListViewHitTestInfo when the header was hit
         /// </summary>
-        public OlvListViewHitTestInfo(FluentListView olv, int iColumn, bool isOverCheckBox, int iDivider) {
+        public OlvListViewHitTestInfo(AdvancedListView olv, int iColumn, bool isOverCheckBox, int iDivider) {
             this.ListView = olv;
             this.ColumnIndex = iColumn;
             this.HeaderDividerIndex = iDivider;
@@ -313,11 +313,11 @@ namespace Fluent {
         /// <summary>
         /// Gets the FluentListView that was tested
         /// </summary>
-        public FluentListView ListView {
+        public AdvancedListView ListView {
             get { return listView; }
             internal set { listView = value; }
         }
-        private FluentListView listView;
+        private AdvancedListView listView;
 
         /// <summary>
         /// Gets the model object that was hit

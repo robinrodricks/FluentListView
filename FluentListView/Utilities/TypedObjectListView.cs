@@ -78,7 +78,7 @@ namespace Fluent
         /// Create a typed wrapper around the given list.
         /// </summary>
         /// <param name="olv">The listview to be wrapped</param>
-        public TypedFluentListView(FluentListView olv) {
+        public TypedFluentListView(AdvancedListView olv) {
             this.olv = olv;
         }
 
@@ -111,11 +111,11 @@ namespace Fluent
         /// <summary>
         /// The FluentListView that is being wrapped
         /// </summary>
-        public virtual FluentListView ListView {
+        public virtual AdvancedListView ListView {
             get { return olv; }
             set { olv = value; }
         }
-        private FluentListView olv;
+        private AdvancedListView olv;
 
         /// <summary>
         /// Get or set the list of all model objects

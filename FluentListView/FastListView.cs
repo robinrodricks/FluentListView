@@ -61,12 +61,12 @@ namespace Fluent
     /// </list>
     /// </para>
     /// </remarks>
-    public class FastFluentListView : VirtualFluentListView
+    public class FastListView : VirtualFluentListView
     {
         /// <summary>
         /// Make a FastFluentListView
         /// </summary>
-        public FastFluentListView() {
+        public FastListView() {
             this.VirtualListDataSource = new FastObjectListDataSource(this);
             this.GroupingStrategy = new FastListGroupingStrategy();
         }
@@ -164,7 +164,7 @@ namespace Fluent
         /// Create a FastObjectListDataSource
         /// </summary>
         /// <param name="listView"></param>
-        public FastObjectListDataSource(FastFluentListView listView)
+        public FastObjectListDataSource(FastListView listView)
             : base(listView) {
         }
 
@@ -304,7 +304,7 @@ namespace Fluent
         /// </summary>
         /// <param name="collection"></param>
         public override void SetObjects(IEnumerable collection) {
-            ArrayList newObjects = FluentListView.EnumerableToArray(collection, true);
+            ArrayList newObjects = AdvancedListView.EnumerableToArray(collection, true);
 
             this.fullObjectList = newObjects;
             this.FilterObjects();
@@ -397,7 +397,7 @@ namespace Fluent
             FilterEventArgs args = new FilterEventArgs(this.fullObjectList);
             this.listView.OnFilter(args);
             if (args.FilteredObjects != null) {
-                this.filteredObjectList = FluentListView.EnumerableToArray(args.FilteredObjects, false);
+                this.filteredObjectList = AdvancedListView.EnumerableToArray(args.FilteredObjects, false);
                 return;
             }
 
@@ -406,7 +406,7 @@ namespace Fluent
 
             // Apply the object filter if there is one
             if (this.modelFilter == null) {
-                this.filteredObjectList = FluentListView.EnumerableToArray(objects, false);
+                this.filteredObjectList = AdvancedListView.EnumerableToArray(objects, false);
             } else {
                 this.filteredObjectList = new ArrayList();
                 foreach (object model in objects) {

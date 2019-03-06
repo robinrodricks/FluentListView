@@ -152,7 +152,7 @@ namespace Fluent
             // Any changes made here may need to be reflected there
 
             // This strategy can only be used on FastFluentListViews
-            FastFluentListView folv = (FastFluentListView)parmameters.ListView;
+            FastListView folv = (FastListView)parmameters.ListView;
 
             // Separate the list view items into groups, using the group key as the descrimanent
             int objectCount = 0;

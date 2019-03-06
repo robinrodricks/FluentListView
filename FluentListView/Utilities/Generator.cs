@@ -66,7 +66,7 @@ namespace Fluent
         /// <param name="olv">The FluentListView to modify</param>
         /// <param name="type">The model type whose attributes will be considered.</param>
         /// <param name="allProperties">Will columns be generated for properties that are not marked with [OLVColumn].</param>
-        void GenerateAndReplaceColumns(FluentListView olv, Type type, bool allProperties);
+        void GenerateAndReplaceColumns(AdvancedListView olv, Type type, bool allProperties);
 
         /// <summary>
         /// Generate a list of OLVColumns based on the attributes of the given type
@@ -110,7 +110,7 @@ namespace Fluent
         /// </summary>
         /// <param name="olv">The FluentListView to modify</param>
         /// <param name="enumerable">The collection whose first element will be used to generate columns.</param>
-        static public void GenerateColumns(FluentListView olv, IEnumerable enumerable) {
+        static public void GenerateColumns(AdvancedListView olv, IEnumerable enumerable) {
             Generator.GenerateColumns(olv, enumerable, false);
         }
 
@@ -122,7 +122,7 @@ namespace Fluent
         /// <param name="olv">The FluentListView to modify</param>
         /// <param name="enumerable">The collection whose first element will be used to generate columns.</param>
         /// <param name="allProperties">Will columns be generated for properties that are not marked with [OLVColumn].</param>
-        static public void GenerateColumns(FluentListView olv, IEnumerable enumerable, bool allProperties) {
+        static public void GenerateColumns(AdvancedListView olv, IEnumerable enumerable, bool allProperties) {
             // Generate columns based on the type of the first model in the collection and then quit
             if (enumerable != null) {
                 foreach (object model in enumerable) {
@@ -141,7 +141,7 @@ namespace Fluent
         /// </summary>
         /// <param name="olv">The FluentListView to modify</param>
         /// <param name="type">The model type whose attributes will be considered.</param>
-        static public void GenerateColumns(FluentListView olv, Type type) {
+        static public void GenerateColumns(AdvancedListView olv, Type type) {
             Generator.Instance.GenerateAndReplaceColumns(olv, type, false);
         }
 
@@ -152,7 +152,7 @@ namespace Fluent
         /// <param name="olv">The FluentListView to modify</param>
         /// <param name="type">The model type whose attributes will be considered.</param>
         /// <param name="allProperties">Will columns be generated for properties that are not marked with [OLVColumn].</param>
-        static public void GenerateColumns(FluentListView olv, Type type, bool allProperties) {
+        static public void GenerateColumns(AdvancedListView olv, Type type, bool allProperties) {
             Generator.Instance.GenerateAndReplaceColumns(olv, type, allProperties);
         }
 
@@ -177,7 +177,7 @@ namespace Fluent
         /// <param name="olv">The FluentListView to modify</param>
         /// <param name="type">The model type whose attributes will be considered.</param>
         /// <param name="allProperties">Will columns be generated for properties that are not marked with [OLVColumn].</param>
-        public virtual void GenerateAndReplaceColumns(FluentListView olv, Type type, bool allProperties) {
+        public virtual void GenerateAndReplaceColumns(AdvancedListView olv, Type type, bool allProperties) {
             IList<OLVColumn> columns = this.GenerateColumns(type, allProperties);
             TreeListView tlv = olv as TreeListView;
             if (tlv != null)
@@ -244,7 +244,7 @@ namespace Fluent
         /// </summary>
         /// <param name="olv"></param>
         /// <param name="columns"></param>
-        protected virtual void ReplaceColumns(FluentListView olv, IList<OLVColumn> columns) {
+        protected virtual void ReplaceColumns(AdvancedListView olv, IList<OLVColumn> columns) {
             olv.Reset();
 
             // Are there new columns to add?
@@ -260,7 +260,7 @@ namespace Fluent
         /// Post process columns after creating them and adding them to the AllColumns collection.
         /// </summary>
         /// <param name="olv"></param>
-        public virtual void PostCreateColumns(FluentListView olv) {
+        public virtual void PostCreateColumns(AdvancedListView olv) {
             if (olv.AllColumns.Exists(delegate(OLVColumn x) { return x.CheckBoxes; }))
                 olv.UseSubItemCheckBoxes = true;
             if (olv.AllColumns.Exists(delegate(OLVColumn x) { return x.Index > 0 && (x.ImageGetter != null || !String.IsNullOrEmpty(x.ImageAspectName)); }))
@@ -413,7 +413,7 @@ namespace Fluent
             tlv.CanExpandGetter = delegate(object x) {
                 try {
                     IEnumerable result = childrenGetter.GetValueEx(x) as IEnumerable;
-                    return !FluentListView.IsEnumerableEmpty(result);
+                    return !AdvancedListView.IsEnumerableEmpty(result);
                 }
                 catch (MungerException ex) {
                     System.Diagnostics.Debug.WriteLine(ex);

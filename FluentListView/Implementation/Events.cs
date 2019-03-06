@@ -69,7 +69,7 @@ namespace Fluent
     /// </remarks>
     public delegate void CellEditEventHandler(object sender, CellEditEventArgs e);
 
-    public partial class FluentListView
+    public partial class AdvancedListView
     {
         //-----------------------------------------------------------------------------------
         #region Events
@@ -1388,11 +1388,11 @@ namespace Fluent
         /// <summary>
         /// Gets the FluentListView that is the source of the event
         /// </summary>
-        public FluentListView ListView {
+        public AdvancedListView ListView {
             get { return this.listView; }
             internal set { this.listView = value; }
         }
-        private FluentListView listView;
+        private AdvancedListView listView;
 
         /// <summary>
         /// Gets the model object under the cell
@@ -1622,11 +1622,11 @@ namespace Fluent
         /// <summary>
         /// Gets the FluentListView that is the source of the event
         /// </summary>
-        public FluentListView ListView {
+        public AdvancedListView ListView {
             get { return this.listView; }
             internal set { this.listView = value; }
         }
-        private FluentListView listView;
+        private AdvancedListView listView;
 
         /// <summary>
         /// Gets the model object under the cell
@@ -1715,11 +1715,11 @@ namespace Fluent
         /// <summary>
         /// Gets the FluentListView that is the source of the event
         /// </summary>
-        public FluentListView ListView {
+        public AdvancedListView ListView {
             get { return this.listView; }
             internal set { this.listView = value; }
         }
-        private FluentListView listView;
+        private AdvancedListView listView;
 
         /// <summary>
         /// Gets the model object under the cell
@@ -1777,11 +1777,11 @@ namespace Fluent
         /// <summary>
         /// Gets the FluentListView that is the source of the event
         /// </summary>
-        public FluentListView ListView {
+        public AdvancedListView ListView {
             get { return this.listView; }
             internal set { this.listView = value; }
         }
-        private FluentListView listView;
+        private AdvancedListView listView;
 
         /// <summary>
         /// Gets the item of the cell

@@ -48,7 +48,7 @@ namespace Fluent {
         /// Create a data object from the selected objects in the given FluentListView
         /// </summary>
         /// <param name="olv">The source of the data object</param>
-        public OLVDataObject(FluentListView olv)
+        public OLVDataObject(AdvancedListView olv)
             : this(olv, olv.SelectedObjects) {
         }
 
@@ -58,7 +58,7 @@ namespace Fluent {
         /// </summary>
         /// <param name="olv">The source of the data object</param>
         /// <param name="modelObjects">The model objects to be put into the data object</param>
-        public OLVDataObject(FluentListView olv, IList modelObjects) {
+        public OLVDataObject(AdvancedListView olv, IList modelObjects) {
             this.objectListView = olv;
             this.modelObjects = modelObjects;
             this.includeHiddenColumns = olv.IncludeHiddenColumnsInDataTransfer;
@@ -92,10 +92,10 @@ namespace Fluent {
         /// <summary>
         /// Gets the FluentListView that is being used as the source of the data
         /// </summary>
-        public FluentListView ListView {
+        public AdvancedListView ListView {
             get { return objectListView; }
         }
-        private readonly FluentListView objectListView;
+        private readonly AdvancedListView objectListView;
 
         /// <summary>
         /// Gets the model objects that are to be placed in the data object

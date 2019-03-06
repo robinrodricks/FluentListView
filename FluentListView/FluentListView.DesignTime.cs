@@ -49,7 +49,7 @@ namespace Fluent.Design
 {
 
     /// <summary>
-    /// Designer for <see cref="FluentListView"/> and its subclasses.
+    /// Designer for <see cref="AdvancedListView"/> and its subclasses.
     /// </summary>
     /// <remarks>
     /// <para>
@@ -209,7 +209,7 @@ namespace Fluent.Design
             // non-browsable attributes so that they are hidden from the user
             foreach (string unwantedProperty in unwantedProperties) {
                 PropertyDescriptor propertyDesc = TypeDescriptor.CreateProperty(
-                    typeof(FluentListView),
+                    typeof(AdvancedListView),
                     (PropertyDescriptor)properties[unwantedProperty],
                     new BrowsableAttribute(false));
                 properties[unwantedProperty] = propertyDesc;
@@ -253,7 +253,7 @@ namespace Fluent.Design
 
             foreach (string unwantedEvent in unwanted) {
                 EventDescriptor eventDesc = TypeDescriptor.CreateEvent(
-                   typeof(FluentListView),
+                   typeof(AdvancedListView),
                     (EventDescriptor)events[unwantedEvent],
                     new BrowsableAttribute(false));
                 events[unwantedEvent] = eventDesc;
@@ -495,7 +495,7 @@ namespace Fluent.Design
                 throw new ArgumentNullException("provider");
 
             // Figure out which FluentListView we are working on. This should be the Instance of the context.
-            FluentListView olv = context.Instance as FluentListView;
+            AdvancedListView olv = context.Instance as AdvancedListView;
             Debug.Assert(olv != null, "Instance must be an FluentListView");
 
             // Edit all the columns, not just the ones that are visible

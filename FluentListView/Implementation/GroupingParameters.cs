@@ -49,7 +49,7 @@ namespace Fluent {
         /// <param name="titleFormat"></param>
         /// <param name="titleSingularFormat"></param>
         /// <param name="sortItemsByPrimaryColumn"></param>
-        public GroupingParameters(FluentListView olv, OLVColumn groupByColumn, SortOrder groupByOrder,
+        public GroupingParameters(AdvancedListView olv, OLVColumn groupByColumn, SortOrder groupByOrder,
             OLVColumn column, SortOrder order, OLVColumn secondaryColumn, SortOrder secondaryOrder,
             string titleFormat, string titleSingularFormat, bool sortItemsByPrimaryColumn) {
             this.ListView = olv;
@@ -67,11 +67,11 @@ namespace Fluent {
         /// <summary>
         /// Gets or sets the FluentListView being grouped
         /// </summary>
-        public FluentListView ListView {
+        public AdvancedListView ListView {
             get { return this.listView; }
             set { this.listView = value; }
         }
-        private FluentListView listView;
+        private AdvancedListView listView;
 
         /// <summary>
         /// Gets or sets the column used to create groups

@@ -104,7 +104,7 @@ namespace Fluent
     /// <para>To enable grouping, you must provide an implmentation of IVirtualGroups interface, via the GroupingStrategy property.</para>
     /// <para>Similarly, to enable filtering on the list, your VirtualListDataSource must also implement the IFilterableDataSource interface.</para>
     /// </remarks>
-    public class VirtualFluentListView : FluentListView
+    public class VirtualFluentListView : AdvancedListView
     {
         /// <summary>
         /// Create a VirtualFluentListView
@@ -136,7 +136,7 @@ namespace Fluent
         public override bool CanShowGroups {
             get {
                 // Virtual lists need Vista and a grouping strategy to show groups
-                return (FluentListView.IsVistaOrLater && this.GroupingStrategy != null);
+                return (AdvancedListView.IsVistaOrLater && this.GroupingStrategy != null);
             }
         }
 
@@ -339,7 +339,7 @@ namespace Fluent
         override public bool ShowGroups {
             get {
                 // Pre-Vista, virtual lists cannot show groups
-                return FluentListView.IsVistaOrLater && this.showGroups;
+                return AdvancedListView.IsVistaOrLater && this.showGroups;
             }
             set {
                 this.showGroups = value;

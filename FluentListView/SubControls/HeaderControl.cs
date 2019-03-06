@@ -72,7 +72,7 @@ namespace Fluent {
         /// Create a header control for the given FluentListView.
         /// </summary>
         /// <param name="olv"></param>
-        public HeaderControl(FluentListView olv) {
+        public HeaderControl(AdvancedListView olv) {
             this.ListView = olv;
             this.AssignHandle(NativeMethods.GetHeaderControl(olv));
         }
@@ -185,12 +185,12 @@ namespace Fluent {
         /// <summary>
         /// Gets or sets the listview that this header belongs to
         /// </summary>
-        protected FluentListView ListView {
+        protected AdvancedListView ListView {
             get { return this.listView; }
             set { this.listView = value; }
         }
 
-        private FluentListView listView;
+        private AdvancedListView listView;
 
         /// <summary>
         /// Gets the maximum height of the header. -1 means no maximum.
@@ -639,7 +639,7 @@ namespace Fluent {
 
                     if (this.cachedNeedsCustomDraw) {
                         using (Graphics g = Graphics.FromHdc(nmcustomdraw.hdc)) {
-                            g.TextRenderingHint = FluentListView.TextRenderingHint;
+                            g.TextRenderingHint = AdvancedListView.TextRenderingHint;
                             this.CustomDrawHeaderCell(g, columnIndex, nmcustomdraw.uItemState);
                         }
                         m.Result = (IntPtr) CDRF_SKIPDEFAULT;
@@ -689,7 +689,7 @@ namespace Fluent {
             NativeMethods.WINDOWPOS wpos = (NativeMethods.WINDOWPOS) Marshal.PtrToStructure(hdlayout.pwpos, typeof (NativeMethods.WINDOWPOS));
 
             using (Graphics g = this.ListView.CreateGraphics()) {
-                g.TextRenderingHint = FluentListView.TextRenderingHint;
+                g.TextRenderingHint = AdvancedListView.TextRenderingHint;
                 int height = this.CalculateHeight(g);
                 wpos.hwnd = this.Handle;
                 wpos.hwndInsertAfter = IntPtr.Zero;

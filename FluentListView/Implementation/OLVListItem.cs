@@ -119,9 +119,9 @@ namespace Fluent {
             set {
                 if (this.Checked != value) {
                     if (value)
-                        ((FluentListView)this.ListView).CheckObject(this.RowObject);
+                        ((AdvancedListView)this.ListView).CheckObject(this.RowObject);
                     else
-                        ((FluentListView)this.ListView).UncheckObject(this.RowObject);
+                        ((AdvancedListView)this.ListView).UncheckObject(this.RowObject);
                 }
             }
         }

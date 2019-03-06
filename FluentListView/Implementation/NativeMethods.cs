@@ -989,7 +989,7 @@ namespace Fluent
         /// <param name="columnIndex"></param>
         /// <returns>A Point holding the left and right co-ords of the column.
         /// -1 means that the sides could not be retrieved.</returns>
-        public static Point GetColumnSides(FluentListView lv, int columnIndex) {
+        public static Point GetColumnSides(AdvancedListView lv, int columnIndex) {
             Point sides = new Point(-1, -1);
             IntPtr hdr = NativeMethods.GetHeaderControl(lv);
             if (hdr == IntPtr.Zero)
@@ -1186,23 +1186,23 @@ namespace Fluent
             public int y;
         }
 
-        public static int GetGroupInfo(FluentListView olv, int groupId, ref LVGROUP2 group) {
+        public static int GetGroupInfo(AdvancedListView olv, int groupId, ref LVGROUP2 group) {
             return (int)NativeMethods.SendMessage(olv.Handle, LVM_GETGROUPINFO, groupId, ref group);
         }
 
-        public static GroupState GetGroupState(FluentListView olv, int groupId, GroupState mask) {
+        public static GroupState GetGroupState(AdvancedListView olv, int groupId, GroupState mask) {
             return (GroupState)NativeMethods.SendMessage(olv.Handle, LVM_GETGROUPSTATE, groupId, (int)mask);
         }
 
-        public static int InsertGroup(FluentListView olv, LVGROUP2 group) {
+        public static int InsertGroup(AdvancedListView olv, LVGROUP2 group) {
             return (int)NativeMethods.SendMessage(olv.Handle, LVM_INSERTGROUP, -1, ref group);
         }
 
-        public static int SetGroupInfo(FluentListView olv, int groupId, LVGROUP2 group) {
+        public static int SetGroupInfo(AdvancedListView olv, int groupId, LVGROUP2 group) {
             return (int)NativeMethods.SendMessage(olv.Handle, LVM_SETGROUPINFO, groupId, ref group);
         }
 
-        public static int SetGroupMetrics(FluentListView olv, LVGROUPMETRICS metrics) {
+        public static int SetGroupMetrics(AdvancedListView olv, LVGROUPMETRICS metrics) {
             return (int)NativeMethods.SendMessage(olv.Handle, LVM_SETGROUPMETRICS, 0, ref metrics);
         }
 
@@ -1210,7 +1210,7 @@ namespace Fluent
             NativeMethods.SendMessage(virtualFluentListView.Handle, LVM_REMOVEALLGROUPS, 0, 0);
         }
 
-        public static void SetGroupImageList(FluentListView olv, ImageList il) {
+        public static void SetGroupImageList(AdvancedListView olv, ImageList il) {
             const int LVSIL_GROUPHEADER = 3;
             IntPtr handle = IntPtr.Zero;
             if (il != null)
@@ -1218,7 +1218,7 @@ namespace Fluent
             NativeMethods.SendMessage(olv.Handle, LVM_SETIMAGELIST, LVSIL_GROUPHEADER, handle);
         }
 
-        public static int HitTest(FluentListView olv, ref LVHITTESTINFO hittest)
+        public static int HitTest(AdvancedListView olv, ref LVHITTESTINFO hittest)
         {
             return (int)NativeMethods.SendMessage(olv.Handle, olv.View == View.Details ? LVM_SUBITEMHITTEST : LVM_HITTEST, -1, ref hittest);
         }

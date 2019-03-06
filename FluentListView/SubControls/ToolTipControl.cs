@@ -187,11 +187,11 @@ namespace Fluent
                 if (value) {
                     windowStyle |= (TTS_BALLOON | TTS_USEVISUALSTYLE);
                     // On XP, a border makes the ballon look wrong
-                    if (!FluentListView.IsVistaOrLater)
+                    if (!AdvancedListView.IsVistaOrLater)
                         windowStyle &= ~WS_BORDER; 
                 } else {
                     windowStyle &= ~(TTS_BALLOON | TTS_USEVISUALSTYLE);
-                    if (!FluentListView.IsVistaOrLater) {
+                    if (!AdvancedListView.IsVistaOrLater) {
                         if (this.hasBorder)
                             windowStyle |= WS_BORDER;
                         else
@@ -233,7 +233,7 @@ namespace Fluent
             set {
                 // For some reason, setting the color fails on Vista and messes up later ops.
                 // So we don't even try to set it.
-                if (!FluentListView.IsVistaOrLater) {
+                if (!AdvancedListView.IsVistaOrLater) {
                     int color = ColorTranslator.ToWin32(value);
                     NativeMethods.SendMessage(this.Handle, TTM_SETTIPBKCOLOR, color, 0);
                     //int x2 = Marshal.GetLastWin32Error();
@@ -252,7 +252,7 @@ namespace Fluent
             set {
                 // For some reason, setting the color fails on Vista and messes up later ops.
                 // So we don't even try to set it.
-                if (!FluentListView.IsVistaOrLater) {
+                if (!AdvancedListView.IsVistaOrLater) {
                     int color = ColorTranslator.ToWin32(value);
                     NativeMethods.SendMessage(this.Handle, TTM_SETTIPTEXTCOLOR, color, 0);
                 }

@@ -296,7 +296,7 @@ namespace Fluent {
         public virtual bool CellEditUseWholeCellEffective {
             get {
                 bool? columnSpecificValue = this.ListView.View == View.Details ? this.CellEditUseWholeCell : (bool?) null;
-                return (columnSpecificValue ?? ((FluentListView) this.ListView).CellEditUseWholeCell);
+                return (columnSpecificValue ?? ((AdvancedListView) this.ListView).CellEditUseWholeCell);
             }
         }
 
@@ -561,7 +561,7 @@ namespace Fluent {
                     return this.GroupWithItemCountFormat;
 
                 if (this.ListView != null) {
-                    cachedGroupWithItemCountFormat = ((FluentListView)this.ListView).GroupWithItemCountFormatOrDefault;
+                    cachedGroupWithItemCountFormat = ((AdvancedListView)this.ListView).GroupWithItemCountFormatOrDefault;
                     return cachedGroupWithItemCountFormat;
                 }
 
@@ -608,7 +608,7 @@ namespace Fluent {
                     return this.GroupWithItemCountSingularFormat;
 
                 if (this.ListView != null) {
-                    cachedGroupWithItemCountSingularFormat = ((FluentListView)this.ListView).GroupWithItemCountSingularFormatOrDefault;
+                    cachedGroupWithItemCountSingularFormat = ((AdvancedListView)this.ListView).GroupWithItemCountSingularFormatOrDefault;
                     return cachedGroupWithItemCountSingularFormat;
                 }
 
@@ -1223,7 +1223,7 @@ namespace Fluent {
         /// <para>
         /// If this is false, the only thing rendered in the column header will be the image from <see cref="HeaderImageKey"/>.
         /// </para>
-        /// <para>This setting is only considered when <see cref="FluentListView.HeaderUsesThemes"/> is false on the owning FluentListView.</para>
+        /// <para>This setting is only considered when <see cref="AdvancedListView.HeaderUsesThemes"/> is false on the owning FluentListView.</para>
         /// </remarks>
         [Category("FluentListView"),
          Description("Will the header for this column include text?"),
@@ -1456,7 +1456,7 @@ namespace Fluent {
             if (this.groupKeyToTitleConverter != null)
                 return this.groupKeyToTitleConverter(value);
 
-            return value == null ? FluentListView.GroupTitleDefault : this.ValueToString(value);
+            return value == null ? AdvancedListView.GroupTitleDefault : this.ValueToString(value);
         }
 
         /// <summary>
@@ -1563,12 +1563,12 @@ namespace Fluent {
             CheckState checkState = this.GetCheckState(rowObject);
 
             if (checkState == CheckState.Checked)
-                return FluentListView.CHECKED_KEY;
+                return AdvancedListView.CHECKED_KEY;
 
             if (checkState == CheckState.Unchecked)
-                return FluentListView.UNCHECKED_KEY;
+                return AdvancedListView.UNCHECKED_KEY;
 
-            return FluentListView.INDETERMINATE_KEY;
+            return AdvancedListView.INDETERMINATE_KEY;
         }
 
         /// <summary>
@@ -1701,7 +1701,7 @@ namespace Fluent {
         public Type DataType {
             get {
                 if (this.dataType == null) {
-                    FluentListView olv = this.ListView as FluentListView;
+                    AdvancedListView olv = this.ListView as AdvancedListView;
                     if (olv != null) {
                         object value = olv.GetFirstNonNullValue(this);
                         if (value != null)

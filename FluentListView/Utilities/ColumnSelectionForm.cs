@@ -42,7 +42,7 @@ namespace Fluent
         /// Open this form so it will edit the columns that are available in the listview's current view
         /// </summary>
         /// <param name="olv">The FluentListView whose columns are to be altered</param>
-        public void OpenOn(FluentListView olv)
+        public void OpenOn(AdvancedListView olv)
         {
             this.OpenOn(olv, olv.View);
         }
@@ -53,7 +53,7 @@ namespace Fluent
         /// </summary>
         /// <param name="olv">The FluentListView whose columns are to be altered</param>
         /// <param name="view">The view that is to be altered. Must be View.Details or View.Tile</param>
-        public void OpenOn(FluentListView olv, View view)
+        public void OpenOn(AdvancedListView olv, View view)
         {
             if (view != View.Details && view != View.Tile)
                 return;
@@ -68,7 +68,7 @@ namespace Fluent
         /// </summary>
         /// <param name="olv"></param>
         /// <param name="view"></param>
-        protected void InitializeForm(FluentListView olv, View view)
+        protected void InitializeForm(AdvancedListView olv, View view)
         {
             this.AllColumns = olv.AllColumns;
             this.RearrangableColumns = new List<OLVColumn>(this.AllColumns);
@@ -107,7 +107,7 @@ namespace Fluent
         /// </summary>
         /// <param name="olv"></param>
         /// <param name="view"></param>
-        protected void Apply(FluentListView olv, View view)
+        protected void Apply(AdvancedListView olv, View view)
         {
             olv.Freeze();
 

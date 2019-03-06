@@ -63,6 +63,9 @@
     <Compile Include="Filtering\DateTimeClusteringStrategy.cs" />
     <Compile Include="Filtering\FlagClusteringStrategy.cs" />
     <Compile Include="Filtering\TextMatchFilter.cs" />
+    <Compile Include="FluentListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Implementation\Delegates.cs" />
     <Compile Include="Implementation\Enums.cs">
       <SubType>Component</SubType>
@@ -135,7 +138,7 @@
     <Compile Include="Implementation\NativeMethods.cs" />
     <Compile Include="Implementation\Comparers.cs">
     </Compile>
-    <Compile Include="FluentListView.cs">
+    <Compile Include="AdvancedListView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FluentListView.DesignTime.cs" />

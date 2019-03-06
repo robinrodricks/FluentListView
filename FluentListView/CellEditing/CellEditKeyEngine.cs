@@ -197,7 +197,7 @@ namespace Fluent {
         /// <param name="olv"></param>
         /// <param name="keyData"></param>
         /// <returns>True if the key was completely handled.</returns>
-        public virtual bool HandleKey(FluentListView olv, Keys keyData) {
+        public virtual bool HandleKey(AdvancedListView olv, Keys keyData) {
             if (olv == null) throw new ArgumentNullException("olv");
 
             CellEditCharacterBehaviour behaviour;
@@ -238,11 +238,11 @@ namespace Fluent {
         /// Gets or sets the FluentListView on which the current key is being handled.
         /// This cannot be null.
         /// </summary>
-        protected FluentListView ListView {
+        protected AdvancedListView ListView {
             get { return listView; }
             set { listView = value; }
         }
-        private FluentListView listView;
+        private AdvancedListView listView;
 
         /// <summary>
         /// Gets the row of the cell that is currently being edited

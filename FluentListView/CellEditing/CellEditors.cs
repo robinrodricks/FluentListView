@@ -99,7 +99,7 @@ namespace Fluent
         /// </summary>
         /// <param name="lv"></param>
         /// <param name="column"></param>
-        public AutoCompleteCellEditor(FluentListView lv, OLVColumn column) {
+        public AutoCompleteCellEditor(AdvancedListView lv, OLVColumn column) {
             this.DropDownStyle = ComboBoxStyle.DropDown;
 
             Dictionary<String, bool> alreadySeen = new Dictionary<string, bool>();

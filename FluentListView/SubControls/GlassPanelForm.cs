@@ -106,7 +106,7 @@ namespace Fluent
         /// <summary>
         /// Attach this form to the given FluentListView
         /// </summary>        
-        public void Bind(FluentListView olv, IOverlay overlay) {
+        public void Bind(AdvancedListView olv, IOverlay overlay) {
             if (this.objectListView != null)
                 this.Unbind();
 
@@ -360,7 +360,7 @@ namespace Fluent
         /// <param name="sender"></param>
         /// <param name="e"></param>
         void objectListView_ParentChanged(object sender, EventArgs e) {
-            FluentListView olv = this.objectListView;
+            AdvancedListView olv = this.objectListView;
             IOverlay overlay = this.Overlay;
             this.Unbind();
             this.Bind(olv, overlay);
@@ -388,8 +388,8 @@ namespace Fluent
                 return;
 
             Graphics g = e.Graphics;
-            g.TextRenderingHint = FluentListView.TextRenderingHint;
-            g.SmoothingMode = FluentListView.SmoothingMode;
+            g.TextRenderingHint = AdvancedListView.TextRenderingHint;
+            g.SmoothingMode = AdvancedListView.SmoothingMode;
             //g.DrawRectangle(new Pen(Color.Green, 4.0f), this.ClientRectangle);
 
             // If we are part of an MDI app, make sure we don't draw outside the bounds
@@ -442,7 +442,7 @@ namespace Fluent
 
         #region Private variables
 
-        private FluentListView objectListView;
+        private AdvancedListView objectListView;
         private bool isDuringResizeSequence;
         private bool isGlassShown;
         private bool wasGlassShownBeforeResize;

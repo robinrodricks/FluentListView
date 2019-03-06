@@ -476,7 +476,7 @@ namespace Fluent
             if (this.Count <= 0)
                 return modelObjects;
 
-            ArrayList list = FluentListView.EnumerableToArray(modelObjects, false);
+            ArrayList list = AdvancedListView.EnumerableToArray(modelObjects, false);
 
             if (this.Count > list.Count)
                 return list;

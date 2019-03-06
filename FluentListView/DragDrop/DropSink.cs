@@ -61,7 +61,7 @@ namespace Fluent
         /// <summary>
         /// Gets or sets the FluentListView that is the drop sink
         /// </summary>
-        FluentListView ListView { get; set; }
+        AdvancedListView ListView { get; set; }
 
         /// <summary>
         /// Draw any feedback that is appropriate to the current drop state.
@@ -130,11 +130,11 @@ namespace Fluent
         /// <summary>
         /// Gets or sets the FluentListView that is the drop sink
         /// </summary>
-        public virtual FluentListView ListView {
+        public virtual AdvancedListView ListView {
             get { return listView; }
             set { this.listView = value; }
         }
-        private FluentListView listView;
+        private AdvancedListView listView;
 
         /// <summary>
         /// Draw any feedback that is appropriate to the current drop state.
@@ -603,7 +603,7 @@ namespace Fluent
         /// <param name="g">A Graphic for drawing</param>
         /// <param name="bounds">The contents bounds of the ListView (not including any header)</param>
         public override void DrawFeedback(Graphics g, Rectangle bounds) {
-            g.SmoothingMode = FluentListView.SmoothingMode;
+            g.SmoothingMode = AdvancedListView.SmoothingMode;
 
             if (this.EnableFeedback) {
                 switch (this.DropTargetLocation) {
@@ -1354,11 +1354,11 @@ namespace Fluent
         /// <summary>
         /// Get the FluentListView that is being dropped on
         /// </summary>
-        public FluentListView ListView {
+        public AdvancedListView ListView {
             get { return this.listView; }
             internal set { this.listView = value; }
         }
-        private FluentListView listView;
+        private AdvancedListView listView;
 
         /// <summary>
         /// Get the location of the mouse (in target ListView co-ords)
@@ -1416,11 +1416,11 @@ namespace Fluent
         /// <summary>
         /// Gets the FluentListView that is the source of the dragged objects.
         /// </summary>
-        public FluentListView SourceListView {
+        public AdvancedListView SourceListView {
             get { return this.sourceListView; }
             internal set { this.sourceListView = value; }
         }
-        private FluentListView sourceListView;
+        private AdvancedListView sourceListView;
 
         /// <summary>
         /// Get the model object that is being dropped upon.

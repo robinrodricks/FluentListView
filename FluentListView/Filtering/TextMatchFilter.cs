@@ -58,7 +58,7 @@ namespace Fluent {
         /// <param name="texts"></param>
         /// <returns></returns>
         /// <remarks>Any string that is not a valid regex expression will be ignored.</remarks>
-        public static TextMatchFilter Regex(FluentListView olv, params string[] texts) {
+        public static TextMatchFilter Regex(AdvancedListView olv, params string[] texts) {
             TextMatchFilter filter = new TextMatchFilter(olv);
             filter.RegexStrings = texts;
             return filter;
@@ -70,7 +70,7 @@ namespace Fluent {
         /// <param name="olv"></param>
         /// <param name="texts"></param>
         /// <returns></returns>
-        public static TextMatchFilter Prefix(FluentListView olv, params string[] texts) {
+        public static TextMatchFilter Prefix(AdvancedListView olv, params string[] texts) {
             TextMatchFilter filter = new TextMatchFilter(olv);
             filter.PrefixStrings = texts;
             return filter;
@@ -82,7 +82,7 @@ namespace Fluent {
         /// <param name="olv"></param>
         /// <param name="texts"></param>
         /// <returns></returns>
-        public static TextMatchFilter Contains(FluentListView olv, params string[] texts) {
+        public static TextMatchFilter Contains(AdvancedListView olv, params string[] texts) {
             TextMatchFilter filter = new TextMatchFilter(olv);
             filter.ContainsStrings = texts;
             return filter;
@@ -92,7 +92,7 @@ namespace Fluent {
         /// Create a TextFilter
         /// </summary>
         /// <param name="olv"></param>
-        public TextMatchFilter(FluentListView olv) {
+        public TextMatchFilter(AdvancedListView olv) {
             this.ListView = olv;
         }
 
@@ -101,7 +101,7 @@ namespace Fluent {
         /// </summary>
         /// <param name="olv"></param>
         /// <param name="text"></param>
-        public TextMatchFilter(FluentListView olv, string text) {
+        public TextMatchFilter(AdvancedListView olv, string text) {
             this.ListView = olv;
             this.ContainsStrings = new string[] { text };
         }
@@ -112,7 +112,7 @@ namespace Fluent {
         /// <param name="olv"></param>
         /// <param name="text"></param>
         /// <param name="comparison"></param>
-        public TextMatchFilter(FluentListView olv, string text, StringComparison comparison) {
+        public TextMatchFilter(AdvancedListView olv, string text, StringComparison comparison) {
             this.ListView = olv;
             this.ContainsStrings = new string[] { text };
             this.StringComparison = comparison;
@@ -176,11 +176,11 @@ namespace Fluent {
         /// You cannot really rebase a filter after it is created, so do not change this value.
         /// It is included so that it can be set in an object initializer.
         /// </remarks>
-        public FluentListView ListView {
+        public AdvancedListView ListView {
             get { return listView; }
             set { listView = value; }
         }
-        private FluentListView listView;
+        private AdvancedListView listView;
 
         /// <summary>
         /// Gets or sets the collection of strings that will be used for 

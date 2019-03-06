@@ -75,19 +75,19 @@ namespace Fluent {
         /// Create an exporter that will export all the rows of the given FluentListView
         /// </summary>
         /// <param name="olv"></param>
-        public OLVExporter(FluentListView olv) : this(olv, olv.Objects) {}
+        public OLVExporter(AdvancedListView olv) : this(olv, olv.Objects) {}
 
         /// <summary>
         /// Create an exporter that will export all the given rows from the given FluentListView
         /// </summary>
         /// <param name="olv"></param>
         /// <param name="objectsToExport"></param>
-        public OLVExporter(FluentListView olv, IEnumerable objectsToExport) {
+        public OLVExporter(AdvancedListView olv, IEnumerable objectsToExport) {
             if (olv == null) throw new ArgumentNullException("olv");
             if (objectsToExport == null) throw new ArgumentNullException("objectsToExport");
 
             this.ListView = olv;
-            this.ModelObjects = FluentListView.EnumerableToArray(objectsToExport, true);
+            this.ModelObjects = AdvancedListView.EnumerableToArray(objectsToExport, true);
         }
 
         #endregion
@@ -119,11 +119,11 @@ namespace Fluent {
         /// Gets the FluentListView that is being used as the source of the data
         /// to be exported
         /// </summary>
-        public FluentListView ListView {
+        public AdvancedListView ListView {
             get { return objectListView; }
             set { objectListView = value; }
         }
-        private FluentListView objectListView;
+        private AdvancedListView objectListView;
 
         /// <summary>
         /// Gets the model objects that are to be placed in the data object

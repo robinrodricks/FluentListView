@@ -293,7 +293,7 @@ namespace Fluent {
         /// <para>
         /// This setting only takes effect when the control is owner drawn.
         /// </para>
-        /// <para><see cref="FluentListView.CellPadding"/> for more details.</para>
+        /// <para><see cref="AdvancedListView.CellPadding"/> for more details.</para>
         /// </remarks>
         [Category("FluentListView"),
          Description("The number of pixels that renderer will leave empty around the edge of the cell"),
@@ -571,12 +571,12 @@ namespace Fluent {
         /// </summary>
         [Browsable(false),
          DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public FluentListView ListView {
+        public AdvancedListView ListView {
             get { return objectListView; }
             set { objectListView = value; }
         }
 
-        private FluentListView objectListView;
+        private AdvancedListView objectListView;
 
         /// <summary>
         /// Get the specialized OLVSubItem that this renderer is drawing
@@ -1074,7 +1074,7 @@ namespace Fluent {
             this.DrawItemEvent = e;
             this.ListItem = (OLVListItem)e.Item;
             this.SubItem = null;
-            this.ListView = (FluentListView)this.ListItem.ListView;
+            this.ListView = (AdvancedListView)this.ListItem.ListView;
             this.Column = this.ListView.GetColumn(0);
             this.RowObject = model;
             this.Bounds = itemBounds;
@@ -1107,7 +1107,7 @@ namespace Fluent {
             this.Event = e;
             this.ListItem = (OLVListItem)e.Item;
             this.SubItem = (OLVListSubItem)e.SubItem;
-            this.ListView = (FluentListView)this.ListItem.ListView;
+            this.ListView = (AdvancedListView)this.ListItem.ListView;
             this.Column = (OLVColumn)e.Header;
             this.RowObject = model;
             this.Bounds = cellBounds;
@@ -1151,7 +1151,7 @@ namespace Fluent {
         public override Rectangle GetEditRectangle(Graphics g, Rectangle cellBounds, OLVListItem item, int subItemIndex, Size preferredSize) {
             this.ClearState();
 
-            this.ListView = (FluentListView) item.ListView;
+            this.ListView = (AdvancedListView) item.ListView;
             this.ListItem = item;
             this.SubItem = item.GetSubItem(subItemIndex);
             this.Column = this.ListView.GetColumn(subItemIndex);
@@ -1259,7 +1259,7 @@ namespace Fluent {
             this.DrawAlignedImageAndText(g, r);
 
             // Show where the bounds of the cell padding are (debugging)
-            if (FluentListView.ShowCellPaddingBounds)
+            if (AdvancedListView.ShowCellPaddingBounds)
                 g.DrawRectangle(Pens.Purple, r);
         }
 
@@ -1537,7 +1537,7 @@ namespace Fluent {
                 if (!this.ListView.RenderNonEditableCheckboxesAsDisabled)
                     return false;
 
-                return (this.ListView.CellEditActivation == FluentListView.CellEditActivateMode.None ||
+                return (this.ListView.CellEditActivation == AdvancedListView.CellEditActivateMode.None ||
                         (this.Column != null && !this.Column.IsEditable));
             }
         }
@@ -2316,11 +2316,11 @@ namespace Fluent {
             CheckState state = this.Column.GetCheckState(this.RowObject);
             if (this.IsPrinting) {
                 // Renderers don't work onto printer DCs, so we have to draw the image ourselves
-                string key = FluentListView.CHECKED_KEY;
+                string key = AdvancedListView.CHECKED_KEY;
                 if (state == CheckState.Unchecked)
-                    key = FluentListView.UNCHECKED_KEY;
+                    key = AdvancedListView.UNCHECKED_KEY;
                 if (state == CheckState.Indeterminate)
-                    key = FluentListView.INDETERMINATE_KEY;
+                    key = AdvancedListView.INDETERMINATE_KEY;
                 this.DrawAlignedImage(g, r, this.ImageListOrDefault.Images[key]);
             } else {
                 r = this.CalculateCheckBoxBounds(g, r);
@@ -3816,7 +3816,7 @@ namespace Fluent {
                 return PushButtonState.Disabled;
 
             if (this.IsButtonHot)
-                return FluentListView.IsLeftMouseDown ? PushButtonState.Pressed : PushButtonState.Hot;
+                return AdvancedListView.IsLeftMouseDown ? PushButtonState.Pressed : PushButtonState.Hot;
 
             return PushButtonState.Normal;
         }
