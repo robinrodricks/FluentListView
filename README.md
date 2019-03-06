@@ -107,9 +107,7 @@ Keep this image in mind when reading the following text.
 Mental gear shift[¶](#mental-gear-shift "Permalink to this headline")
 ---------------------------------------------------------------------
 
-This is important. You need to understand this.
-
-ignored
+***Note! This is important. You need to understand this.***
 
 Before you start trying to use an FluentListView, you should understand that the process of using one is different to the process of using a normal ListView. A normal ListView is essentially passive: it sits there, and you poke and prod it and eventually it looks like you want. An FluentListView is much more active. You tell it what you want done and the FluentListView does it for you.
 
@@ -134,9 +132,7 @@ For more detailed discussion, see [here](http://www.artima.com/lejava/articles/s
 Unlearn you must[¶](#unlearn-you-must "Permalink to this headline")
 -------------------------------------------------------------------
 
-This section is for those who are familiar with using a ListView.
-
-> ignored
+***For those who are familiar with using a ListView.***
 
 This section is for those who are familiar with using a ListView, either from .NET or (shudder) from Petzold-style windows. Complete novices can skip this section.
 
@@ -198,9 +194,9 @@ Converting to strings[¶](#converting-to-strings "Permalink to this headline")
 OK, we’ve told our first column which bit of data it should display. For the Title, this is all that is necessary. But for our second column which will show LastPlayed, there is another configuration we should consider: converting our bit of data to a string.
 
 A ListView control can only display strings. Everything else - booleans, integers, dates, whatever - has to be converted to a string before it can be given to the ListView. By default, the FluentListView converts data to strings like this:
-
-stringForDisplay \= String.Format("{0}", aspectValue);
-
+```
+stringForDisplay = String.Format("{0}", aspectValue);
+```
 You can use a different format string (instead of the default “{0}”) by setting the AspectToStringFormat property. If the AspectToStringFormat property isn’t empty, its value will be used as the format string instead of “{0}”. See String.Format() documentation to understand its abilities. Some useful format strings are “{0:d}” to show a short date from a DateTime value, and “{0:C}” for currency values.
 
 So, we would configure our second column like this: AspectName: “LastPlayed”, AspectToStringFormat: “{0:d}”.
@@ -244,19 +240,19 @@ A delegate is basically a piece of code that you give to an FluentListView sayin
 _If the word “delegate” worries you, think of them as function pointers where the parameter and return types can be verified. If that makes no sense to you, just keep reading. It will (possibly) become clear with some examples._
 
 First, you need a method that matches the ImageGetterDelegate signature: it must accept a single object parameter and returns an object. A completely frivolous example might be like this, which displays a star image if the song has a rating 80 or higher and a normal song icon otherwise:
-
+```
 public object SongImageGetter(object rowObject) {
-    Song s \= (Song)rowObject;
+    Song s = (Song)rowObject;
     if (s.Rating \>= 80)
         return "star";
     else
         return "song";
 };
-
+```
 You install this delegate by assigning it to the ImageGetter property on the first column:
-
-this.titleColumn.ImageGetter \= new ImageGetterDelegate(this.SongImageGetter);
-
+```
+this.titleColumn.ImageGetter = new ImageGetterDelegate(this.SongImageGetter);
+```
 Some things to notice:[¶](#some-things-to-notice "Permalink to this headline")
 ------------------------------------------------------------------------------
 
@@ -267,15 +263,15 @@ The value returned from the ImageGetter delegate is used as an index into the Fl
 The ImageGetter delegate is installed on the column, since each column can have its own image.
 
 .NET 2.0 added the convenience of anonymous delegates (to C# at least – VB users are stuck with using separate methods). In an anonymous delegates, the code for the function is inlined, like this:
-
-this.titleColumn.ImageGetter \= delegate (object rowObject) {
-    Song s \= (Song)rowObject;
+```
+this.titleColumn.ImageGetter = delegate (object rowObject) {
+    Song s = (Song)rowObject;
     if (s.Rating \>= 80)
         return "star";
     else
         return "song";
 };
-
+```
 For small methods, anonymous delegate are much more convenient.
 
 Smarter string conversions[¶](#smarter-string-conversions "Permalink to this headline")
@@ -286,20 +282,20 @@ Another useful delegate that you can install is the AspectToStringConverter dele
 In our Song class, the actual size of the song is stored as long SizeInBytes. It would be nice if we could show the size as “360 bytes”, “901 KB”, or “1.1 GB” which ever was more appropriate.
 
 To do something smarter like this, we would change the AspectName of our third column to be “SizeInBytes” and install a AspectToStringConverter delegate, like this:
+```
+this.sizeColumn.AspectToStringConverter = delegate(object x) {
+    long size = (long)x;
+    int[] limits = new int[] { 1024 \* 1024 \* 1024, 1024 \* 1024, 1024 };
+    string[] units = new string[] { "GB", "MB", "KB" };
 
-this.sizeColumn.AspectToStringConverter \= delegate(object x) {
-    long size \= (long)x;
-    int\[\] limits \= new int\[\] { 1024 \* 1024 \* 1024, 1024 \* 1024, 1024 };
-    string\[\] units \= new string\[\] { "GB", "MB", "KB" };
-
-    for (int i \= 0; i < limits.Length; i++) {
-        if (size \>= limits\[i\])
-            return String.Format("{0:#,##0.##} " + units\[i\], ((double)size / limits\[i\]));
+    for (int i = 0; i < limits.Length; i++) {
+        if (size \>= limits[i])
+            return String.Format("{0:#,##0.##} " + units[i], ((double)size / limits[i]));
     }
 
     return String.Format("{0} bytes", size); ;
 };
-
+```
 Just a couple more things to configure. You need to make an ImageList, give it the images you want, and then assign it to the SmallImageList property of the FluentListView. And finally, we will set the UseAlternatingBackColors property to _true_.
 
 Putting all these bits together, we now have something that looks like this:
@@ -336,18 +332,18 @@ We need to improve the way the “Last Played” column is grouped. The default 
 ![_images/gettingstarted-example4.png](_images/gettingstarted-example4.png)
 
 We’ll change the “Last Played” column so that it groups songs by the month they were last played – all the songs last played in July should be in the same group. To do this, we install a GroupKeyGetter on the lastPlayedColumn:
-
-this.lastPlayedColumn.GroupKeyGetter \= delegate(object rowObject) {
-    Song song \= (Song)rowObject;
+```
+this.lastPlayedColumn.GroupKeyGetter = delegate(object rowObject) {
+    Song song = (Song)rowObject;
     return new DateTime(song.LastPlayed.Year, song.LastPlayed.Month, 1);
 };
-
+```
 This will group the songs by just their year and month. We also install another delegate that will convert our group key into a string that will be used as the label for the group:
-
-this.lastPlayedColumn.GroupKeyToTitleConverter \= delegate(object groupKey) {
+```
+this.lastPlayedColumn.GroupKeyToTitleConverter = delegate(object groupKey) {
     return ((DateTime)groupKey).ToString("MMMM yyyy");
 };
-
+```
 With these two simple delegates in place, now grouping by the “Last Played” column looks much better.
 
 ![_images/gettingstarted-example5.png](_images/gettingstarted-example5.png)
@@ -365,22 +361,22 @@ The “Last Played” column now groups nicely. Let’s see what we can do with 
 
 For our example, we’ll group them like this:
 
-  
+```
 Value | Group
 <=20 | “Why do you even have these songs?”
 21-39 | “Passable I suppose”
 40-79 | “Buy more like these”
 80-100 | “To be played continuously”
-
+```
 
 We could do this by installing a GroupKeyGetter and a GroupKeyToTitleConverter, but this is such a common use case, there’s a special function to do it for you: MakeGroupies(). We’ll use this method like this:
-
+```
 this.ratingColumn.MakeGroupies(
-    new int\[\] { 20, 39, 79 },
-    new string\[\] { "Why do you even have these songs?", "Passable I suppose",
+    new int[] { 20, 39, 79 },
+    new string[] { "Why do you even have these songs?", "Passable I suppose",
                        "Buy more like these", "To be played continuously" }
 );
-
+```
 The first array contains the cutoff points. Every group key less than or equal to the first cutoff point goes into one group. Keys greater than the first cutoff but less than or equal to the second cutoff go into another group, and so on. A group key greater than the last cutoff goes into yet another group.
 
 The second array contains the group labels for the matching cutoff point. This array must have one more item than the cutoff point array. This last item is the label for the group whose keys were greater than the last cutoff value.
@@ -955,21 +951,21 @@ The CustomSorter delegates needs a little further explanation. This delegate mus
 NOTE: This delegate does not sort the model objects themselves. Remember this control knows nothing about your model objects, so sorting them makes no difference to the control. You have to install the ListViewItemSorter.
 
 So if you were using a normal FluentListView to show a collection of medical incidents, and you wanted to sort them so that the emergencies were always shown first, you could install a delegate like this:
-
-this.incidentListView.CustomSorter \= delegate(OLVColumn column, SortOrder order) {
-    this.incidentListView.ListViewItemSorter \= new ColumnComparer(
+```
+this.incidentListView.CustomSorter = delegate(OLVColumn column, SortOrder order) {
+    this.incidentListView.ListViewItemSorter = new ColumnComparer(
             this.isEmergencyColumn, SortOrder.Descending, column, order);
 };
-
+```
 This says, sort the items by the value in the “Is Emergency?” column first, and secondarily by the column that the user just clicked on. Remember that the OLVColumn given to the ColumnComparer does not have to an active column in the control. You can create one just for the custom sorter. So, even if there was no “Is Emergency?” column, you could still sort by the incidents so that emergencies were shown first:
-
-this.incidentListView.CustomSorter \= delegate(OLVColumn column, SortOrder order) {
-    this.incidentListView.ListViewItemSorter \= new ColumnComparer(
+```
+this.incidentListView.CustomSorter = delegate(OLVColumn column, SortOrder order) {
+    this.incidentListView.ListViewItemSorter = new ColumnComparer(
             new OLVColumn("ignored", "IsEmergency"), SortOrder.Descending, column, order);
 };
-
+```
 And if you were using a VirtualFluentListView to show a collection of 10 million mailing addresses, and you wanted to sort them in some fashion, you would implement the SortObjects() method of the IVirtualListDataSource like this:
-
+```
 class MyMailingAddressesDataSource : AbstractVirtualListDataSource
 {
     ...
@@ -977,11 +973,11 @@ class MyMailingAddressesDataSource : AbstractVirtualListDataSource
         SortMailingAddressBy(column.AspectName, order);
     };
 };
-
+```
 ### No CustomSorter on FastFluentListView[¶](#no-customsorter-on-fastobjectlistview "Permalink to this headline")
 
 One incompatibility between v1.x and v2.0 is that FastFluentListViews can no longer have a CustomSorter. In v1.x it was possible, if tricky, to get a CustomSorter to work with a FastFluentListView, but that is no longer possible in v2.0 In v2.0, if you want to custom sort a FastFluentListView, you will have to subclass FastObjectListDataSource and override the SortObjects() method, then install that customized data source into your FastFluentListView:
-
+```
 class MyCustomSortingDataSource : FastVirtualListDataSource
 {
     override public void SortObjects(OLVColumn column, SortOrder order) {
@@ -990,8 +986,8 @@ class MyCustomSortingDataSource : FastVirtualListDataSource
     };
 };
 ...
-this.myFastFluentListView.DataSource \= new MyCustomSortingDataSource(this.myFastFluentListView);
-
+this.myFastFluentListView.DataSource = new MyCustomSortingDataSource(this.myFastFluentListView);
+```
 4\. How can I draw the values in the cell’s myself?[¶](#how-can-i-draw-the-values-in-the-cell-s-myself "Permalink to this headline")
 ------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1003,9 +999,9 @@ This needs a page to itself as well: [How to owner draw my values](ownerDraw.htm
 Columns have both MinimumWidth and MaximumWidth properties. By default, these are -1, which means that no limit is enforced. But if they are set to some other value, the column will be limited to the given minimum or maximum width.
 
 For example, this:
-
-this.titleColumn.MinimumWidth \= 30
-
+```
+this.titleColumn.MinimumWidth = 30
+```
 will stop the “Title” column from becoming less than 30 pixels in width. This is useful for preventing users from shrinking columns to 0 width and then not being about to find them again.
 
 6\. How can I stop the user from resizing a column?[¶](#how-can-i-stop-the-user-from-resizing-a-column "Permalink to this headline")
@@ -1028,23 +1024,23 @@ You should be aware that as the FluentListView becomes smaller, the space fillin
 You listen for FormatRow or FormatCell event.
 
 To show customers in red when they owe money, you would set up a handler for the FormatRow event in the IDE, and then do something like this:
-
+```
 private void olv1\_FormatRow(object sender, FormatRowEventArgs e) {
-    Customer customer \= (Customer)e.Model;
+    Customer customer = (Customer)e.Model;
     if (customer.Credit < 0)
-        e.Item.BackColor \= Color.Red;
+        e.Item.BackColor = Color.Red;
 }
-
+```
 To change the formatting of an individual cell, you need to set UseCellFormatEvents to _true_ and then listen for FormatCell events. To show just the credit balance in red, you could do something like this:
-
+```
 private void olv1\_FormatCell(object sender, FormatCellEventArgs e) {
-    if (e.ColumnIndex \== this.creditBalanceColumn.Index) {
-        Customer customer \= (Customer)e.Model;
+    if (e.ColumnIndex == this.creditBalanceColumn.Index) {
+        Customer customer = (Customer)e.Model;
         if (customer.Credit < 0)
-            e.SubItem.ForeColor \= Color.Red;
+            e.SubItem.ForeColor = Color.Red;
     }
 }
-
+```
 These events play well with UseAlternatingBackColors. Any formatting you do in these events takes precedence over the alternate back colours.
 
 These events know where the row is going to appear in the control, so the DisplayIndex property of the event can be used for more sophisticated alternate background colour schemes. The DisplayIndex is correct even when the list is showing groups and when the listview is virtual.
@@ -1114,16 +1110,16 @@ If your model object already has a property that directly matches whether or not
 If CheckedAspectName is too simple for your needs, you can install CheckStateGetter and CheckStatePutter delegates. The first delegate is used to decide if the checkbox on the row that is showing the given model object should be checked or unchecked. The second is called when the user clicked the check box.
 
 There are two flavour of check state getter/putters: there are CheckStateGetter and CheckStatePutter delegates which deal with CheckStates; and there are BooleanCheckStateGetter and BooleanCheckStatePutter delegates which deal only with booleans. If you are only interested in checkboxes being on or off, the boolean versions are what you want. However, if you want to deal with indeterminate values too, you must use the CheckState versions:
-
-this.objectListView1.BooleanCheckStateGetter \= delegate(Object rowObject) {
+```
+this.objectListView1.BooleanCheckStateGetter = delegate(Object rowObject) {
     return ((Person)rowObject).IsActive;
 };
 
-this.objectListView1.BooleanCheckStatePutter \= delegate(Object rowObject, bool newValue) {
-    ((Person)rowObject).IsActive \= newValue;
+this.objectListView1.BooleanCheckStatePutter = delegate(Object rowObject, bool newValue) {
+    ((Person)rowObject).IsActive = newValue;
     return newValue; // return the value that you want the control to use
 };
-
+```
 Note that the CheckStatePutter returns the value that will actually be used. This doesn’t have to be the same as the value that was given. So your delegate can refuse to accept the checking of a particular model if it wants.
 
 ### Sub-item checkboxes[¶](#sub-item-checkboxes "Permalink to this headline")
@@ -1155,19 +1151,19 @@ To modify the Checked property programmatically, it’s best to use the above li
 However, if you really _have to_ programmatically set the Checked property on a list view item, you _must_ do so through the OLVListItem.Checked property, NOT through the base class property, ListViewItem.Checked. If you programmatically set ListViewItem.Checked, FluentListView will never know that you have set that value, and strange things will happen (specifically, the checkbox on that row will stop responding to clicks).
 
 So, this code – which tries to toggle the checkedness of the selected rows – will cause problems for your FluentListView:
-
+```
 private void objectListView1\_ItemActivate(object sender, EventArgs e) {
     foreach (ListViewItem lvi in objectListView1.SelectedItems)
-        lvi.Checked \= !lvi.Checked;
+        lvi.Checked = !lvi.Checked;
 }
-
+```
 This will work – once! After that, it will not work again. Worse, the check boxes will stop responding to user clicks. To work properly, you treat the items as OLVListItem:
-
+```
 private void objectListView1\_ItemActivate(object sender, EventArgs e) {
     foreach (OLVListItem olvi in objectListView1.SelectedItems)
-        olvi.Checked \= !olvi.Checked;
+        olvi.Checked = !olvi.Checked;
 }
-
+```
 This will work as expected. But much better would be to simply use ToggleCheckObject().
 
 ### CheckBoxes and virtual lists[¶](#checkboxes-and-virtual-lists "Permalink to this headline")
@@ -1197,20 +1193,20 @@ If you really want to change the information in the Tile view, you can custom dr
 When an FluentListView is empty, it can display a “this list is empty” type message.
 
 The EmptyListMsg is the property that holds the string that appears when an FluentListView is empty. This string is rendered using the EmptyListMsgFont:
-
-this.objectListView1.EmptyListMsg \= "This database has no rows";
-this.objectListView1.EmptyListMsgFont \= new Font("Tahoma", 24);
-
+```
+this.objectListView1.EmptyListMsg = "This database has no rows";
+this.objectListView1.EmptyListMsgFont = new Font("Tahoma", 24);
+```
 The empty message list is actually implemented as an overlay. You can access that overlay though the EmptyListMsgOverlay property. By default, this is a TextOverlay that you can customise to your hearts content:
-
-TextOverlay textOverlay \= this.objectListView1.EmptyListMsgOverlay as TextOverlay;
-textOverlay.TextColor \= Color.Firebrick;
-textOverlay.BackColor \= Color.AntiqueWhite;
-textOverlay.BorderColor \= Color.DarkRed;
-textOverlay.BorderWidth \= 4.0f;
-textOverlay.Font \= new Font("Chiller", 36);
-textOverlay.Rotation \= \-5;
-
+```
+TextOverlay textOverlay = this.objectListView1.EmptyListMsgOverlay as TextOverlay;
+textOverlay.TextColor = Color.Firebrick;
+textOverlay.BackColor = Color.AntiqueWhite;
+textOverlay.BorderColor = Color.DarkRed;
+textOverlay.BorderWidth = 4.0f;
+textOverlay.Font = new Font("Chiller", 36);
+textOverlay.Rotation = \-5;
+```
 gives this:
 
 ![_images/emptylistmsg-example.png](_images/emptylistmsg-example.png)
@@ -1225,34 +1221,34 @@ Normally, images that are shown on rows come from an ImageList. The ImageGetter 
 First, give your FluentListView an empty SmallImageList and an empty LargeImageList.
 
 Secondly, install an ImageGetter delegate on your primary column that does something like this:
-
-this.mainColumn.ImageGetter \= delegate(object row) {
-    String key \= this.GetImageKey(row);
+```
+this.mainColumn.ImageGetter = delegate(object row) {
+    String key = this.GetImageKey(row);
     if (!this.listView.LargeImageList.Images.ContainsKey(key)) {
-        Image smallImage \= this.GetSmallImageFromStorage(key);
-        Image largeImage \= this.GetLargeImageFromStorage(key);
+        Image smallImage = this.GetSmallImageFromStorage(key);
+        Image largeImage = this.GetLargeImageFromStorage(key);
         this.listView.SmallImageList.Images.Add(key, smallImage);
         this.listView.LargeImageList.Images.Add(key, largeImage);
     }
     return key;
 };
-
+```
 This dynamically fetches the images if they haven’t been already fetched. You will need to write the GetImageKey(), GetSmallImageFromStorage() and GetLargeImageFromStorage() methods. Their names will probably be different, depending on exactly how you are deciding which image is shown against which model object.
 
 For example, if we were writing a File Explorer look-a-like, we might have something that looks like this:
-
-this.mainColumn.ImageGetter \= delegate(object row) {
-    File theFile \= (File)row;
-    String extension \= this.GetFileExtension(theFile);
+```
+this.mainColumn.ImageGetter = delegate(object row) {
+    File theFile = (File)row;
+    String extension = this.GetFileExtension(theFile);
     if (!this.listView.LargeImageList.Images.ContainsKey(extension)) {
-        Image smallImage \= this.GetSmallIconForFileType(extension);
-        Image largeImage \= this.GetLargeIconForFileType(extension);
+        Image smallImage = this.GetSmallIconForFileType(extension);
+        Image largeImage = this.GetLargeIconForFileType(extension);
         this.listView.SmallImageList.Images.Add(extension, smallImage);
         this.listView.LargeImageList.Images.Add(extension, largeImage);
     }
     return key;
 };
-
+```
 If you only use Details view, you don’t need to maintain the LargeImageList, but if you use any other view, you must keep the SmallImageList and the LargeImageList in sync.
 
 14\. Isn’t there are way to get rid of all the casts in the delegates?[¶](#isn-t-there-are-way-to-get-rid-of-all-the-casts-in-the-delegates "Permalink to this headline")
@@ -1261,43 +1257,43 @@ If you only use Details view, you don’t need to maintain the LargeImageList, b
 Yes. You can use a TypedFluentListView wrapper.
 
 One annoyance with FluentListView is all the casting that is needed. Because the FluentListView makes no assumptions about what sort of model objects you will be using, it handles all models as objects and it#8217;s up to you to cast them to the right type when you need to. This leads to many delegates starting with a cast like this:
-
-this.objectListView1.SomeDelegate \= delegate(object x) {
-    MyModelObject model \= (MyModelObject)x;
+```
+this.objectListView1.SomeDelegate = delegate(object x) {
+    MyModelObject model = (MyModelObject)x;
     ...
 }
-
+```
 which becomes tiresome after a while. It would be nice if you could tell the FluentListView that it would always be displaying, say, Person objects. Something like:
-
-this.objectListView1 \= new FluentListView<Person\>();
-this.objectListView1.SomeDelegate \= delegate(Person model) {
+```
+this.objectListView1 = new FluentListView<Person\>();
+this.objectListView1.SomeDelegate = delegate(Person model) {
     ...
 }
-
+```
 Unfortunately, this is not possible, so we have a TypedFluentListView class instead. This is not another FluentListView subclass, but rather it’s a typed wrapper around an existing FluentListView. To use one, you create an FluentListView within the IDE as normal. When it is time to implement your delegates, you create a TypedFluentListView wrapper around your list view, and declare your delegates against that wrapper. It’s easier to use than it is to explain, so look at this example:
-
-TypedFluentListView<Person\> tlist \= new TypedFluentListView<Person\>(this.listViewSimple);
-tlist.BooleanCheckStateGetter \= delegate(Person x) {
+```
+TypedFluentListView<Person\> tlist = new TypedFluentListView<Person\>(this.listViewSimple);
+tlist.BooleanCheckStateGetter = delegate(Person x) {
     return x.IsActive;
 };
-tlist.BooleanCheckStatePutter \= delegate(Person x, bool newValue) {
-    x.IsActive \= newValue;
+tlist.BooleanCheckStatePutter = delegate(Person x, bool newValue) {
+    x.IsActive = newValue;
     return newValue;
 };
-
+```
 Look ma! No casts! The delegates are declared against the typed wrapper, which does know what model objects are being used.
 
 You can also use the TypedFluentListView for typed access to the delegates on your columns:
-
-tlist.GetColumn(0).AspectGetter \= delegate(Person x) { return x.Name; };
-tlist.GetColumn(1).AspectGetter \= delegate(Person x) { return x.Occupation; };
-
+```
+tlist.GetColumn(0).AspectGetter = delegate(Person x) { return x.Name; };
+tlist.GetColumn(1).AspectGetter = delegate(Person x) { return x.Occupation; };
+```
 If you don’t like referring to columns by their index, you can create TypedColumn objects around a given ColumnHeader object:
-
-TypedColumn<Person\> tcol \= new TypedColumn<Person\>(this.columnHeader16);
-tcol.AspectGetter \= delegate(Person x) { return x.GetRate(); };
-tcol.AspectPutter \= delegate(Person x, object newValue) { x.SetRate((double)newValue); };
-
+```
+TypedColumn<Person\> tcol = new TypedColumn<Person\>(this.columnHeader16);
+tcol.AspectGetter = delegate(Person x) { return x.GetRate(); };
+tcol.AspectPutter = delegate(Person x, object newValue) { x.SetRate((double)newValue); };
+```
 ### Generating AspectGetters[¶](#generating-aspectgetters "Permalink to this headline")
 
 A side benefit of a TypedFluentListView is that it can automatically generate an AspectGetter for a column from its AspectName. So, rather than hand-coding AspectGetters like we have done above, you simply configure the AspectName in the IDE, and then call tlist.GenerateAspectGetters(). This can (should?) handle aspects of arbitrary complexity, like “Parent.HomeAddress.Phone.AreaCode”.
@@ -1321,18 +1317,18 @@ Like all the other FluentListViews, TreeListView relies on delegates. The two es
 *   ChildrenGetter is used to gather the children that will appear under a given model after it is expanded. This delegate is only called if CanExpandGetter has returned true for that model object.
 
 In the demo, there is an Explorer like example, which navigates the disks on the local computer. The tree list view in that demo is configured so that only directories can be expanded. It looks like this:
-
-this.treeListView.CanExpandGetter \= delegate(object x) {
+```
+this.treeListView.CanExpandGetter = delegate(object x) {
     return (x is DirectoryInfo);
 };
-
+```
 The ChildrenGetter delegate gets the contents of a directory when that directory is expanded:
-
-this.treeListView.ChildrenGetter \= delegate(object x) {
-    DirectoryInfo dir \= (DirectoryInfo)x;
+```
+this.treeListView.ChildrenGetter = delegate(object x) {
+    DirectoryInfo dir = (DirectoryInfo)x;
     return new ArrayList(dir.GetFileSystemInfos());
 };
-
+```
 Remember, ChildrenGetter delegates are only ever called if CanExpandGetter returns _true_, so this delegate knows that the parameter _x_ must be a DirectoryInfo instance.
 
 Once you have these two delegates installed, you populate the control by setting its Roots property. Roots are the top level branches of the tree. You can use the Roots property to set these top branches, or you can call SetObjects(), which does the same thing. To add or remove these top level branches, you can call AddObjects() and RemoveObjects(), since in a tree view, these operate on the top level branches.
@@ -1347,22 +1343,22 @@ CanExpandGetter is called often! It must be fast. Don’t do a database lookup, 
 
 When CanExpandGetter and ChildrenGetter are called, the TreeListView is in an unstable state. Do not do anything that will callback into the control.
 
-Both CanExpandGetter and ChildrenGetter must return immediately. If you can’t return immediately, return a dummy value, do whatever calculation you need, and then called RefreshObject() so that the dummy value is replaced \[RefreshObject() is thread-safe\] Something like this:
-
-this.treeListView.ChildrenGetter \= delegate(object x) {
-    var model \= (MyModelClass)x;
+Both CanExpandGetter and ChildrenGetter must return immediately. If you can’t return immediately, return a dummy value, do whatever calculation you need, and then called RefreshObject() so that the dummy value is replaced [RefreshObject() is thread-safe] Something like this:
+```
+this.treeListView.ChildrenGetter = delegate(object x) {
+    var model = (MyModelClass)x;
     if (model.HasChildrenAlready)
         return model.Children;
     if (!model.AlreadyStartedSlowFetch) {
-        model.AlreadyStartedSlowFetch \= true;
-        Task.Factory.StartNew(() \=> {
+        model.AlreadyStartedSlowFetch = true;
+        Task.Factory.StartNew(() => {
             model.SlowChildrenFetch();
             this.treeListView.RefreshObject(model);
         });
     }
     return new ArrayList();
 };
-
+```
 ### Unlearn[¶](#unlearn "Permalink to this headline")
 
 Do not try to use a TreeListView like a standard TreeView. They are not the same.
@@ -1404,21 +1400,21 @@ With a very little bit of work, you can display tool tips like this:
 ![_images/blog2-balloon2.png](_images/blog2-balloon2.png)
 
 Example:
-
+```
 this.olv.CellToolTipShowing += new EventHandler<ToolTipShowingEventArgs\>(olv\_CellToolTipShowing);
 ...
 void olv\_CellToolTipShowing(object sender, ToolTipShowingEventArgs e) {
     // Show a long tooltip over cells only when the control key is down
-    if (Control.ModifierKeys \== Keys.Control) {
-        Song s \= (Song)x;
-        e.Text \= String.Format("{0}\\r\\n{1}\\r\\n{2}", s.Title, s.Artist, s.Album);
+    if (Control.ModifierKeys == Keys.Control) {
+        Song s = (Song)x;
+        e.Text = String.Format("{0}\\r\\n{1}\\r\\n{2}", s.Title, s.Artist, s.Album);
     }
 };
-
+```
 If you change the properties in the parameter block, those properties will only affect that one showing of a tooltip. If you want to change all tooltips, you would set the properties of FluentListView.CellToolTipControl. So, if you want all tooltips to be shown in Tahoma 14 point, you would do this:
-
-this.olv.CellToolTipControl.Font \= new Font("Tahoma", 14);
-
+```
+this.olv.CellToolTipControl.Font = new Font("Tahoma", 14);
+```
 Similarly, to show a tooltip for a column header, you listen for a HeaderToolTipShowing event.
 
 Previous versions used delegates to provide a subset of this functionality. These delegates – CellToolTipGetter and HeaderToolTipGetter delegates – still function, but the events provide much great scope for customisation.
@@ -1437,17 +1433,17 @@ A HotItemStyle can set the text color, background color, font, and/or font style
 HotItemStyle also have Decoration and Overlay properties. These allow you easily add a decoration to the hot row, as well as display an overlay while there is a hot item.
 
 For example, this puts a translucent border around the row that the cursor is over:
-
+```
 // Make the decoration
-RowBorderDecoration rbd \= new RowBorderDecoration();
-rbd.BorderPen \= new Pen(Color.FromArgb(128, Color.LightSeaGreen), 2);
-rbd.BoundsPadding \= new Size(1, 1);
-rbd.CornerRounding \= 4.0f;
+RowBorderDecoration rbd = new RowBorderDecoration();
+rbd.BorderPen = new Pen(Color.FromArgb(128, Color.LightSeaGreen), 2);
+rbd.BoundsPadding = new Size(1, 1);
+rbd.CornerRounding = 4.0f;
 
 // Put the decoration onto the hot item
-this.olv1.HotItemStyle \= new HotItemStyle();
-this.olv1.HotItemStyle.Decoration \= rbd;
-
+this.olv1.HotItemStyle = new HotItemStyle();
+this.olv1.HotItemStyle.Decoration = rbd;
+```
 There is a static property FluentListView.DefaultHotItemStyle. This style is used by default when no specific HotItemStyle is set. This is shared across all FluentListView.
 
 19\. How can I put an image (or some text) over the top of the ListView?[¶](#how-can-i-put-an-image-or-some-text-over-the-top-of-the-listview "Permalink to this headline")
@@ -1458,19 +1454,19 @@ This is called an “overlay.” A normal FluentListView comes pre-equipped with
 TextOverlays can be further customised, by controlling the color and font of the text, the color of the background, the width and color of the border, and whether the border should have rounded corners. All these properties are controllable from inside the IDE.
 
 If you want to do something other than show a simple image or text, you can implement the IOverlay interface. This interface is very simple:
-
+```
 public interface IOverlay {
     void Draw(FluentListView olv, Graphics g, Rectangle r);
 }
-
+```
 Within the Draw() method, your implementation can draw whatever it likes.
 
 Once you have implemented this interface, you add it to an FluentListView via the AddOverlay() method:
-
-MyFantasticOverlay myOverlay \= new MyFantasticOverlay();
+```
+MyFantasticOverlay myOverlay = new MyFantasticOverlay();
 myOverlay.ConfigureToDoAmazingThings();
 this.objectListView1.AddOverlay(myOverlay);
-
+```
 Overlays are actually quite tricky to implement. If you use your FluentListView in a “normal” way (design your interface through the IDE using normal WinForm controls), they will work flawlessly.
 
 However, if you do “clever” things with your FluentListViews, you may need to read this: [Overlays and Decorations](overlays.html#overlays-label). “Clever” in this case means re-parenting the FluentListView after it has been created, or hiding it by rearranging the windows z-ordering. You may also need to read that if the FluentListView is hosted by a non-standard TabControl-like container.
@@ -1489,50 +1485,50 @@ Decorations are similar to overlays in that they are drawn over the top of the F
 ![_images/decorations-example.png](_images/decorations-example.png)
 
 Decorations are normally assigned to a row or cell during a FormatRow or FormatCell event. In the demo, a love heart appears next to someone named “Nicola”:
-
+```
 private void listViewComplex\_FormatCell(object sender, FormatCellEventArgs e) {
-    Person p \= (Person)e.Model;
+    Person p = (Person)e.Model;
 
     // Put a love heart next to Nicola's name :)
-    if (e.ColumnIndex \== 0) {
+    if (e.ColumnIndex == 0) {
         if (p.Name.ToLowerInvariant().StartsWith("nicola")) {
-            e.SubItem.Decoration \= new ImageDecoration(Resource1.loveheart, 64);
+            e.SubItem.Decoration = new ImageDecoration(Resource1.loveheart, 64);
         } else
-            e.SubItem.Decoration \= null;
+            e.SubItem.Decoration = null;
     }
 }
-
+```
 The “Missing!” decoration is actually a combination of two decorations and is done like this:
-
-if (e.ColumnIndex \== 1 && e.SubItem.Text \== "") {
+```
+if (e.ColumnIndex == 1 && e.SubItem.Text == "") {
     // Add a opaque, rotated text decoration
-    TextDecoration decoration \= new TextDecoration("Missing!", 255);
-    decoration.Alignment \= ContentAlignment.MiddleCenter;
-    decoration.Font \= new Font(this.Font.Name, this.Font.SizeInPoints+2);
-    decoration.TextColor \= Color.Firebrick;
-    decoration.Rotation \= \-20;
-    e.SubItem.Decoration \= decoration; //NB. Sets Decoration
+    TextDecoration decoration = new TextDecoration("Missing!", 255);
+    decoration.Alignment = ContentAlignment.MiddleCenter;
+    decoration.Font = new Font(this.Font.Name, this.Font.SizeInPoints+2);
+    decoration.TextColor = Color.Firebrick;
+    decoration.Rotation = \-20;
+    e.SubItem.Decoration = decoration; //NB. Sets Decoration
 
     // Put a border around the cell.
-    CellBorderDecoration cbd \= new CellBorderDecoration();
-    cbd.BorderPen \= new Pen(Color.FromArgb(128, Color.Firebrick));
-    cbd.FillBrush \= null;
-    cbd.CornerRounding \= 4.0f;
+    CellBorderDecoration cbd = new CellBorderDecoration();
+    cbd.BorderPen = new Pen(Color.FromArgb(128, Color.Firebrick));
+    cbd.FillBrush = null;
+    cbd.CornerRounding = 4.0f;
     e.SubItem.Decorations.Add(cbd); // N.B. Adds to Decorations
 }
-
+```
 Note that when we put a border around the cell, the code added it to Decorations property. Doing this adds a second decoration to the same cell. If the code set the Decoration property, it would replace the text decoration that had just been given.
 
 Decorations can also be attached to the hot item. Set the Decoration property of the HotItemStyle to something that will be drawn over the hot row/cell. See [18\. How can I emphasise the row under the mouse?](#recipe-hottracking).
 
 Decorations can also be attached to the selected rows. Set SelectedRowDecoration property of the FluentListView to a decoration, and that decoration will be draw over each selected row. This draws a translucent green border around each selected row:
-
-RowBorderDecoration rbd \= new RowBorderDecoration();
-rbd.BorderPen \= new Pen(Color.FromArgb(128, Color.Green), 2);
-rbd.BoundsPadding \= new Size(0, \-1);
-rbd.CornerRounding \= 12.0f;
-this.olv1.SelectedRowDecoration \= rbd;
-
+```
+RowBorderDecoration rbd = new RowBorderDecoration();
+rbd.BorderPen = new Pen(Color.FromArgb(128, Color.Green), 2);
+rbd.BoundsPadding = new Size(0, \-1);
+rbd.CornerRounding = 12.0f;
+this.olv1.SelectedRowDecoration = rbd;
+```
 Like overlays, decorations are purely cosmetic. They do not respond to any user interactions.
 
 21\. How can I use drag and drop in an FluentListView?[¶](#how-can-i-use-drag-and-drop-in-an-objectlistview "Permalink to this headline")
@@ -1548,9 +1544,9 @@ To see a detailed walk-through, have a look at [this blog](blog4.html#blog-rearr
 If you set TintSortColumn property to _true_, the sort column will be automatically tinted. The color of the tinting is controlled by the SelectedColumnTint property.
 
 You can tint a different column (other than the sort column) by setting the SelectedColumn property, or by installing TintedColumnDecoration for the column that you want to color:
-
+```
 this.objectListView1.AddDecoration(new TintedColumnDecoration(columnToTint));
-
+```
 This latter option lets you tint more than one column.
 
 23\. How do I make a column that shows just an image?[¶](#how-do-i-make-a-column-that-shows-just-an-image "Permalink to this headline")
@@ -1559,14 +1555,14 @@ This latter option lets you tint more than one column.
 > _I want to show a meetings room’s availability as an icon, without any text. What’s the best way to do that?_
 
 To show only an image in a column, do this:
-
-this.meetingColumn.AspectGetter \= delegate(object x) {
+```
+this.meetingColumn.AspectGetter = delegate(object x) {
     return ((MeetingRoom)x).Availability;
 };
-this.meetingColumn.AspectToStringConverter \= delegate(object x) {
+this.meetingColumn.AspectToStringConverter = delegate(object x) {
     return String.Empty;
 };
-this.meetingColumn.ImageGetter \= delegate(object x) {
+this.meetingColumn.ImageGetter = delegate(object x) {
     switch (((MeetingRoom)x).Availability) {
         case RoomAvailability.Free: return "free";
         case RoomAvailability.InUse: return "inuse";
@@ -1574,7 +1570,7 @@ this.meetingColumn.ImageGetter \= delegate(object x) {
     }
     return "unexpected";
 };
-
+```
 By returning an aspect, sorting and grouping will still work. By forcing AspectToStringConverter to return an empty string, no string will be drawn, only the image.
 
 This works in both owner drawn or non-owner drawn lists.
@@ -1585,11 +1581,11 @@ This works in both owner drawn or non-owner drawn lists.
 If you want to show the same menu, regardless of where the user clicks, you can simply assign that menu to the ContextMenuStrip property of the FluentListView (this is standard .NET, nothing specific to an FluentListView).
 
 If you want to show a context menu specific to the object clicked, you can listen for CellRightClick events:
-
+```
 private void olv\_CellRightClick(object sender, CellRightClickEventArgs e) {
-    e.MenuStrip \= this.DecideRightClickMenu(e.Model, e.Column);
+    e.MenuStrip = this.DecideRightClickMenu(e.Model, e.Column);
 }
-
+```
 If MenuStrip is not null, it will be shown where the mouse was clicked.
 
 It’s entirely reasonable for e.Model to be _null_. That means the user clicked on the list background.
@@ -1658,7 +1654,7 @@ In this snapshot, the “Check bank balance” is the group task.
 
 When the user clicks on the text, FluentListView triggers a GroupTaskClick event. This event contains the group whose task was clicked.
 
-\[Once again, this is not possible on XP\]
+[Once again, this is not possible on XP]
 
 29\. Can I generate the whole FluentListView directly from my model?[¶](#can-i-generate-the-whole-objectlistview-directly-from-my-model "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1678,7 +1674,7 @@ There are a couple of flavours of GenerateColumns(). This next one looks at the 
 Generator.GenerateColumns(this.olv1, this.myListOfObjects);
 
 So, if there was a foreign exchange management application, one of its model classes might look like this:
-
+```
 public class ForexTransaction {
     public DateTime When { get; set; }
     public decimal Rate { get; set; }
@@ -1688,7 +1684,7 @@ public class ForexTransaction {
     public decimal ToValue { get; set; }
     public string UserId { get; set; }
 }
-
+```
 So to generate columns for this class, you would do this:
 
 Generator.GenerateColumns(this.olv1, typeof(ForexTransaction), true);
@@ -1698,38 +1694,38 @@ This would generate reasonable, but boring, columns:
 ![_images/generator-boring.png](_images/generator-boring.png)
 
 If you want to make the columns more interesting, you can give them an OLVColumn attributes. Most properties of OLVColumn instances can be set through the OLVColumn attributes:
-
+```
 public class ForexTransaction {
 
- \[OLVColumn(Width = 150)\]
+ [OLVColumn(Width = 150)]
     public DateTime When { get; set; }
 
- \[OLVColumn(DisplayIndex = 5, Width = 75, TextAlign = HorizontalAlignment.Right)\]
+ [OLVColumn(DisplayIndex = 5, Width = 75, TextAlign = HorizontalAlignment.Right)]
     public decimal Rate { get; set; }
 
- \[OLVColumn("From", DisplayIndex=1, Width = 50, TextAlign = HorizontalAlignment.Center)\]
+ [OLVColumn("From", DisplayIndex=1, Width = 50, TextAlign = HorizontalAlignment.Center)]
     public string FromCurrency { get; set; }
 
- \[OLVColumn("To", DisplayIndex = 3, Width = 50, TextAlign = HorizontalAlignment.Center)\]
+ [OLVColumn("To", DisplayIndex = 3, Width = 50, TextAlign = HorizontalAlignment.Center)]
     public string ToCurrency { get; set; }
 
- \[OLVColumn("Amount", DisplayIndex = 2, AspectToStringFormat = "{0:C}", Width = 75, TextAlign = HorizontalAlignment.Right)\]
+ [OLVColumn("Amount", DisplayIndex = 2, AspectToStringFormat = "{0:C}", Width = 75, TextAlign = HorizontalAlignment.Right)]
     public decimal FromValue { get; set; }
 
- \[OLVColumn("Amount", DisplayIndex = 4, AspectToStringFormat = "{0:C}", Width = 75, TextAlign = HorizontalAlignment.Right)\]
+ [OLVColumn("Amount", DisplayIndex = 4, AspectToStringFormat = "{0:C}", Width = 75, TextAlign = HorizontalAlignment.Right)]
     public decimal ToValue { get; set; }
 
- \[OLVColumn(IsVisible = false)\]
+ [OLVColumn(IsVisible = false)]
     public string UserId { get; set; }
 }
-
+```
 DisplayIndex governs the ordering of the columns.
 
 This gives a slightly more interesting control:
 
 ![_images/generator-better.png](_images/generator-better.png)
 
-\[Thanks to John Kohler for this idea and the original implementation\]
+[Thanks to John Kohler for this idea and the original implementation]
 
 30\. Can the FluentListView use a selection scheme like Vista?[¶](#can-the-objectlistview-use-a-selection-scheme-like-vista "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1759,7 +1755,7 @@ A FastFluentListView supports groups as it stands. Simple set ShowGroups to _tru
 If you have your own VirtualFluentListView, you have to do a little bit more work to enable groups on your control. You need set the GroupStrategy property to an object which implement the IVirtualGroups interface.
 
 The IVirtualGroups interface looks like this:
-
+```
 public interface IVirtualGroups
 {
     // Return the list of groups that should be shown according to the given parameters
@@ -1777,7 +1773,7 @@ public interface IVirtualGroups
     // A hint that the given range of items are going to be required
     void CacheHint(int fromGroupIndex, int fromIndex, int toGroupIndex, int toIndex);
 }
-
+```
 All members must be fully implemented except CacheHint() which is only a hint.
 
 GetGroups() is the key function. It must return a list of OLVGroup in the order in which they should be created in the listview. Each OLVGroup must have at least Header and VirtualItemCount properties initialized.
@@ -1806,11 +1802,11 @@ This needs a [whole page to itself](filtering.html#filtering-label).
 In brief, you must set UseFiltering to _true_, and then set either the ModelFilter property or the ListFilter property to an appropriate filter.
 
 FluentListView provides a number of pre-built filter, including a text based filter (see [33\. Is there an easy way to only show rows that contain some text?](#recipe-text-filtering)). The base ModelFilter class can be given a delegate and used directly:
-
-this.olv1.ModelFilter \= new ModelFilter(delegate(object x) {
+```
+this.olv1.ModelFilter = new ModelFilter(delegate(object x) {
     return ((PhoneCall)x).IsEmergency;
 });
-
+```
 If you want your filter to co-operate with any [Excel-like filtering](filtering.html#column-filtering-label), set the AdditionalFilter property, instead of the ModelFilter.
 
 33\. Is there an easy way to only show rows that contain some text?[¶](#is-there-an-easy-way-to-only-show-rows-that-contain-some-text "Permalink to this headline")
@@ -1819,9 +1815,9 @@ If you want your filter to co-operate with any [Excel-like filtering](filtering.
 > _I want to do a text filter like iTunes’ search box, where only songs that contain the typed string are shown. Is there an easy way to do that?_
 
 Funnily enough, there is! It’s called TextMatchFilter. You use it thus:
-
-this.olv1.ModelFilter \= TextMatchFilter.Contains(this.olv1, "search");
-
+```
+this.olv1.ModelFilter = TextMatchFilter.Contains(this.olv1, "search");
+```
 After executing this line, the olv1 will only show rows where the text “search” occurs in at least one cell of that row.
 
 This searching uses each cell’s string representation. This can lead to some odd, but still accurate results, when owner drawn is _true_. For example, subitem check boxes are drawn as boxes, but their string representation is “true” and “false.” If you’re text filter is “rue” it will match all rows where a subitem check box is checked. To prevent this, you can make a column invisible to text filters by setting Searchable to _false_.
@@ -1829,21 +1825,21 @@ This searching uses each cell’s string representation. This can lead to some o
 Alternatively, the filter can be configured to only consider some of the columns in the FluentListView by setting the Columns property. This is useful for avoiding searching on columns that you know will return nonsensical results (like checkboxes above).
 
 It can also be set up to do regular expression searching:
-
-this.olv1.ModelFilter \= TextMatchFilter.Regex(this.olv1, "^\[0-9\]+");
-
+```
+this.olv1.ModelFilter = TextMatchFilter.Regex(this.olv1, "^[0-9]+");
+```
 Or prefix matching (all these factory methods can accept more than one string):
-
-this.olv1.ModelFilter \= TextMatchFilter.Prefix(this.olv1, "larry", "moe", "curly");
-
+```
+this.olv1.ModelFilter = TextMatchFilter.Prefix(this.olv1, "larry", "moe", "curly");
+```
 ### HighlightTextRenderer[¶](#highlighttextrenderer "Permalink to this headline")
 
 If your filtered FluentListView is owner drawn, you can pair this text searching with a special renderer, HighlightTextRenderer. This renderer draws a highlight box around any substring that matches the given filter. So:
-
-TextMatchFilter filter \= TextMatchFilter.Contains(this.olv1, "er");
-this.olv1.ModelFilter \= filter;
-this.olv1.DefaultRenderer \= new HighlightTextRenderer(filter);
-
+```
+TextMatchFilter filter = TextMatchFilter.Contains(this.olv1, "er");
+this.olv1.ModelFilter = filter;
+this.olv1.DefaultRenderer = new HighlightTextRenderer(filter);
+```
 would give something that looks like this:
 
 ![_images/text-filter-highlighting.png](_images/text-filter-highlighting.png)
@@ -1881,7 +1877,7 @@ It does not include selection or scroll position.
 36\. How can I put an image in the column header?[¶](#how-can-i-put-an-image-in-the-column-header "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------------------------
 
-\[The second most requested feature ever\]
+[The second most requested feature ever]
 
 Set OLVColumn.HeaderImageKey to the key of an image from the FluentListView’s SmallImageList. That image will appear to the left of the text in the header.
 
@@ -1918,9 +1914,9 @@ You could install a EditingCellBorderDecoration on your FluentListView. Then, wh
 ![_images/cell-editing-border.png](_images/cell-editing-border.png)
 
 To install this decoration, you do this:
-
-this.olv.AddDecoration(new EditingCellBorderDecoration { UseLightbox \= true });
-
+```
+this.olv.AddDecoration(new EditingCellBorderDecoration { UseLightbox = true });
+```
 The EditingCellBorderDecoration has the usual swathe of properties controlling exactly how it looks.
 
 OK, OK. This isn’t actually a very useful class, but it does look cool :)
@@ -1930,7 +1926,7 @@ OK, OK. This isn’t actually a very useful class, but it does look cool :)
 
 > _Your way of ordering groups and the rows within the groups is stupid. I want to be able to do it myself._
 
-O-K... Listen for the BeforeCreatingGroups event. In the parameter block for that event, set GroupComparer to control how groups are sorted, and ItemComparer to control how items within a group are sorted.
+OK... Listen for the BeforeCreatingGroups event. In the parameter block for that event, set GroupComparer to control how groups are sorted, and ItemComparer to control how items within a group are sorted.
 
 If you don’t want the items within the group to be sorted at all, set PrimarySortOrder to SortOrder.None.
 
@@ -1939,24 +1935,24 @@ There is no way to NOT sort the groups. They have to be ordered in some fashion.
 40\. How do I change what happens the user presses Tab or Enter when editing a cell?[¶](#how-do-i-change-what-happens-the-user-presses-tab-or-enter-when-editing-a-cell "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-> _In my app, I want the user to be able to edit all cells just by repeatedly hitting \[Tab\]. So, when the user hits \[Tab\] when editing the last cell, I don’t want it to wrap back to the first cell – I want it to change rows. How can do I that?_
+> _In my app, I want the user to be able to edit all cells just by repeatedly hitting [Tab]. So, when the user hits [Tab] when editing the last cell, I don’t want it to wrap back to the first cell – I want it to change rows. How can do I that?_
 
 There must be a thousand variations on this question, but the two most common are:
 
-1.  how to make \[Tab\] change rows when editing the last cell.
-2.  how to make \[Enter\] change rows, not just commit the change.
+1.  how to make [Tab] change rows when editing the last cell.
+2.  how to make [Enter] change rows, not just commit the change.
 
 To address these two most common case, FluentListView now has CellEditTabChangesRows and CellEditEnterChangesRows properties.
 
-*   CellEditTabChangesRows makes FluentListView change the row being edited when the user presses \[Tab\] while editing the last editable cell on a row.
-*   CellEditEnterChangesRows makes FluentListView try to edit the cell below the cell being edited when the user press \[Enter\].
+*   CellEditTabChangesRows makes FluentListView change the row being edited when the user presses [Tab] while editing the last editable cell on a row.
+*   CellEditEnterChangesRows makes FluentListView try to edit the cell below the cell being edited when the user press [Enter].
 
 These behaviours are achieved by modifying the CellEditKeyEngine settings. This engine allows you to completely customise the behaviour of keys during a cell edit operation.
 
-For example, to make \[Ctrl-Up\] start editing the cell above the current cell:
-
+For example, to make [Ctrl-Up] start editing the cell above the current cell:
+```
 olv1.CellEditKeyEngine.SetKeyBehaviour(Keys.Up|Keys.Control, CellEditCharacterBehaviour.ChangeRowUp, CellEditAtEdgeBehaviour.ChangeRow);
-
+```
 NOTE: The interface to CellEditKeyEngine will almost certainly change in the next version.
 
 41\. How do I change the way the “Filtering” menu works?[¶](#how-do-i-change-the-way-the-filtering-menu-works "Permalink to this headline")
@@ -2018,11 +2014,11 @@ This behaviour is new in v2.5.1. To revert to the previous behaviour, set Persis
 Listen for the GroupExpandingCollapsing event, and then set Canceled to _true_ if the event should be prevented.
 
 This handler will stop a group from expanding if the group starts with “NO\_EXPAND”:
-
+```
 private void olv1\_GroupExpandingCollapsing(object sender, GroupExpandingCollapsingEventArgs e) {
-    e.Canceled \= e.IsExpanding && e.Group.Header.StartsWith("NO\_EXPAND");
+    e.Canceled = e.IsExpanding && e.Group.Header.StartsWith("NO\_EXPAND");
 }
-
+```
 45\. How do I put a _real_ background image onto an FluentListView?[¶](#how-do-i-put-a-real-background-image-onto-an-objectlistview "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -2046,8 +2042,8 @@ Better but still not perfect. The limitations are still there:
 *   It looks odd when alternate row background colors are enabled.
 *   This for Windows 7, so obviously, it does not work at all on XP.
 
-If you can live with these limits, FluentListView now \[v2.5.1\] has built in support for native backgrounds:
-
+If you can live with these limits, FluentListView now [v2.5.1] has built in support for native backgrounds:
+```
 // Set a watermark in the bottom right of the control
 this.olv.SetNativeBackgroundWatermark(Resource1.redback1);
 
@@ -2056,7 +2052,7 @@ this.olv.SetNativeBackgroundImage(Resource1.redback1, 50, 75));
 
 // Set a tiled background to the control
 this.olv.SetNativeBackgroundTiledImage(Resource1.limeleaf);
-
+```
 Apart from these limitations, native watermarks are quite neat. They are true backgrounds, not translucent overlays like the OverlayImage uses. They also have the decided advantage over overlays in that they work correctly even in MDI applications.
 
 46\. How do I bind a DataSet to an FluentListView?[¶](#how-do-i-bind-a-dataset-to-an-objectlistview "Permalink to this headline")
@@ -2083,29 +2079,29 @@ When setting DataSource, the provided value should implement either IList, IBind
 When binding to a list container (i.e. one that implements the IListSource interface, such as DataSet) you must also set the DataMember property in order to identify which particular list you would like to display. You may also set the DataMember property even when DataSource refers to a list, since DataMember can also be used to navigate relations between lists.
 
 All of the following will show the “Persons” table from the data set:
+```
+DataSet ds = LoadDataset();
 
-DataSet ds \= LoadDataset();
-
-if (ds \== null || ds.Tables.Count \== 0)
+if (ds == null || ds.Tables.Count == 0)
   return;
 
 // Install a DataTable
-this.olvData.DataSource \= ds.Tables\["Person"\];
+this.olvData.DataSource = ds.Tables["Person"];
 
 // Install a DataView
-this.olvData.DataSource \= new DataView(ds.Tables\["Person"\]);
+this.olvData.DataSource = new DataView(ds.Tables["Person"]);
 
 // Use DataSet directly
-this.olvData.DataMember \= "Person";
-this.olvData.DataSource \= ds;
+this.olvData.DataMember = "Person";
+this.olvData.DataSource = ds;
 
 // Use a DataViewManager
-this.olvData.DataMember \= "Person";
-this.olvData.DataSource \= new DataViewManager(ds);
+this.olvData.DataMember = "Person";
+this.olvData.DataSource = new DataViewManager(ds);
 
 // Install a BindingSource
-this.olvData.DataSource \= new BindingSource(ds, "Person");
-
+this.olvData.DataSource = new BindingSource(ds, "Person");
+```
 Obviously, in the real world, you would only use one of these calls.
 
 ### Automatic column creation[¶](#automatic-column-creation "Permalink to this headline")
@@ -2121,12 +2117,12 @@ ListView columns will only be created if one doesn’t already exist for that da
 If there is a data column in the DataSet that you don’t want to display, create a column in the FluentListView, set the AspectName to the name of the data column and mark that column as IsVisible = _false_.
 
 If you wanted to use a navigator and synchronize several data bound controls, you will need a BindingSource and something like this:
-
-BindingSource bs \= new BindingSource(ds, "Person");
-this.bindingNavigator1.BindingSource \= bs;
-this.dataGridView1.DataSource \= bs;
-this.dataListView1.DataSource \= bs;
-
+```
+BindingSource bs = new BindingSource(ds, "Person");
+this.bindingNavigator1.BindingSource = bs;
+this.dataGridView1.DataSource = bs;
+this.dataListView1.DataSource = bs;
+```
 47\. Why can’t I data-bind the TreeListView?[¶](#why-can-t-i-data-bind-the-treelistview "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------
 
@@ -2148,23 +2144,12 @@ Imagine we have a table that looks like this:
 
 To show this table, the DataTreeListView would be configured like this:
 
-  
-
-Property
-
-Value
-
-KeyAspectName
-
-“Id”
-
-ParentKeyAspectName
-
-“ParentId”
-
-RootKeyValue
-
-0
+```
+Property	Value
+KeyAspectName	“Id”
+ParentKeyAspectName	“ParentId”
+RootKeyValue	0
+```
 
 This says, the unique of each row can be found in the “Id” column. The “ParentId” holds the parent id of each row. And the value “0” in the “ParentId” column indicates that the row should be shown a top level root.
 
@@ -2218,9 +2203,9 @@ CheckedObjects will behave somewhat differently. It will return:
 *   all objects whose ancestor was checked by the user AND that have been made visible in the control
 
 For example, with the above snapshot, CheckedObjects would return:
-
+```
 {"adb.exe", "fastboot.exe", "dell", "StageEula", "DBRM.ini", "OOBEDONE.flag", "welcome.reg"}
-
+```
 If “StageEula” had been expanded at some point, its contents would also be included in CheckedObjects – even if “StageEula” wasn’t expanded at the moment.
 
 If you set CheckedObjects _and_ any of those objects haven’t already been revealed in the TreeListView, then the control will not know where it fits in the hierarchy, and so won’t be able to calculate the check state of its ancestors. To get around this, you have to install a ParentGetter delegate. If this don’t make much sense to you, don’t worry about it.
@@ -2239,12 +2224,12 @@ Disabled rows cannot be selected, activated, edited or checked. They can be focu
 To disable some model objects, call DisableObjects(). To enable them again, call EnableObjects(). These both have single object versions. To get or set the entire collection of disabled models, use the DisabledObjects property.
 
 To change the appearance of disabled rows, make a SimpleRowStyle and assign it to DisabledRowStyle. If we were using a dark theme, this style might be more appropriate (except the font, which is just being silly):
-
-this.olv.DisabledItemStyle \= new SimpleItemStyle();
-this.olv.DisabledItemStyle.ForeColor \= Color.Gray;
-this.olv.DisabledItemStyle.BackColor \= Color.FromArgb(30, 30, 35);
-this.olv.DisabledItemStyle.Font \= new Font("Stencil", 10);
-
+```
+this.olv.DisabledItemStyle = new SimpleItemStyle();
+this.olv.DisabledItemStyle.ForeColor = Color.Gray;
+this.olv.DisabledItemStyle.BackColor = Color.FromArgb(30, 30, 35);
+this.olv.DisabledItemStyle.Font = new Font("Stencil", 10);
+```
 ### Disabled rows when not owner drawn[¶](#disabled-rows-when-not-owner-drawn "Permalink to this headline")
 
 Obviously, the underlying ListView control doesn’t actually support disabling rows. FluentListView has to do a lot of work to make the ListView control look as if it can.
@@ -2310,7 +2295,7 @@ Changed in mouse location are primarily reported through CellOver events. These 
 
 Of course I can – but I’ll still needs your help. FluentListView will happily update itself when your model object is updated – but it has to know when your model is updated. In the WPF world, the INotifyPropertyChanged interface is used for exactly this purpose, so FluentListView uses that too.
 
-\[If you aren’t familiar with the INotifyPropertyChanged interface, do a quick Google search and read up on what it’s for and how it works. Then come back and continue with this recipe. It’s OK... I’ll wait\]
+[If you aren’t familiar with the INotifyPropertyChanged interface, do a quick Google search and read up on what it’s for and how it works. Then come back and continue with this recipe. It’s OK... I’ll wait]
 
 To use this “auto updating” mechanism, you must:
 
@@ -2340,7 +2325,7 @@ To make a button appear in a cell, set OLVColumn.IsButton to true. The column wi
 ![_images/button-states.png](_images/button-states.png)
 
 When the user clicks on a button, the FluentListView will trigger a ButtonClicked event:
-
+```
 this.olv.ButtonClick += delegate(object sender, CellClickEventArgs e) {
     Debug.WriteLine(String.Format("Button clicked: ({0}, {1}, {2})", e.RowIndex, e.SubItem, e.Model));
 
@@ -2351,7 +2336,7 @@ this.olv.ButtonClick += delegate(object sender, CellClickEventArgs e) {
     // If something about the object changed, you probably want to refresh the model
     this.olv.RefreshObject(e.Model);
 };
-
+```
 ### Button sizing[¶](#button-sizing "Permalink to this headline")
 
 Buttons can either be fixed size, cell sized or resized to match their text. This is control by the ButtonSizing property:
@@ -2405,7 +2390,7 @@ In Use[¶](#in-use "Permalink to this headline")
 
 You will normally have to give the FluentListView a specific RowHeight that allows for both the title and description. This is not auto calculated for you.
 
-The images for the renderer will normally come from specific ImageList that contains larger than normal icons. You can give this specific ImageList to the renderer by setting the DescribedTaskRenderer.ImageList property. \[All renderers can do this, but with a DescribedTaskRenderer you will almost always want to have larger icons and will need to set the image list explicitly.\]
+The images for the renderer will normally come from specific ImageList that contains larger than normal icons. You can give this specific ImageList to the renderer by setting the DescribedTaskRenderer.ImageList property. [All renderers can do this, but with a DescribedTaskRenderer you will almost always want to have larger icons and will need to set the image list explicitly.]
 
 You can control the color and font of the title (TitleColor and TitleFont) and description – guess :).
 
