@@ -21,7 +21,7 @@ The TreeListView similarly make a tree structure look beautiful:
 
 ![_images/treelistview.png](_images/treelistview.png)
 
-Need to print a report? ListViewPrinter effortlessly produces reports from an FluentListView:
+Need to print a report? ListViewPrinter effortlessly produces reports from a FluentListView:
 
 ![_images/printpreview.png](_images/printpreview.png)
 
@@ -69,7 +69,7 @@ There are several flavours of FluentListView:
 *   TreeListView control combines [an expandable tree structure with the columns of a ListView](#recipe-treelistview).
 *   There are [data binding versions of each flavour](#recipe-databinding).
 
-Seriously, after using an FluentListView, you will never go back to using a plain ListView.
+Seriously, after using a FluentListView, you will never go back to using a plain ListView.
 
 OK, I’m interested. What do I do next?
 
@@ -109,13 +109,13 @@ Mental gear shift
 
 ***Note! This is important. You need to understand this.***
 
-Before you start trying to use an FluentListView, you should understand that the process of using one is different to the process of using a normal ListView. A normal ListView is essentially passive: it sits there, and you poke and prod it and eventually it looks like you want. An FluentListView is much more active. You tell it what you want done and the FluentListView does it for you.
+Before you start trying to use a FluentListView, you should understand that the process of using one is different to the process of using a normal ListView. A normal ListView is essentially passive: it sits there, and you poke and prod it and eventually it looks like you want. A FluentListView is much more active. You tell it what you want done and the FluentListView does it for you.
 
-An FluentListView is used declaratively: you state what you want the FluentListView to do (via its configuration), then you give it your collection of model objects, and the FluentListView does the work of building the ListView for you.
+A FluentListView is used declaratively: you state what you want the FluentListView to do (via its configuration), then you give it your collection of model objects, and the FluentListView does the work of building the ListView for you.
 
 This is a different approach to using a ListView. You must get your mind around this, especially if you have done any ListView programming before (See [Unlearn you must](#unlearn)).
 
-The crucial part of using an FluentListView is configuring it. Most of this configuration can be done within the IDE by setting properties on the FluentListView itself or on the columns that are used within the list. Some configuration cannot be done through properties: these more complex configurations are done by installing delegates (more on this later).
+The crucial part of using a FluentListView is configuring it. Most of this configuration can be done within the IDE by setting properties on the FluentListView itself or on the columns that are used within the list. Some configuration cannot be done through properties: these more complex configurations are done by installing delegates (more on this later).
 
 Once the columns and control are configured, putting it into action is simple. You give it the list of model objects you want it to display, and the FluentListView will build the ListView for you:
 
@@ -136,15 +136,15 @@ Unlearn you must
 
 This section is for those who are familiar with using a ListView, either from .NET or (shudder) from Petzold-style windows. Complete novices can skip this section.
 
-For those of you who have struggled with a ListView before, you must unlearn. An FluentListView is not a drop in replacement for a ListView. If you have an existing project, you cannot simply create an FluentListView instead of creating a ListView. An FluentListView needs a different mindset. If you can perform the mind-mangling step of changing your thinking, FluentListView will be your best friend.
+For those of you who have struggled with a ListView before, you must unlearn. A FluentListView is not a drop in replacement for a ListView. If you have an existing project, you cannot simply create a FluentListView instead of creating a ListView. A FluentListView needs a different mindset. If you can perform the mind-mangling step of changing your thinking, FluentListView will be your best friend.
 
-Beware of ListViewItems. You never need to add ListViewItems to an FluentListView. If you find yourself adding things to the Items collection, creating ListViewItems, or adding sub-items to anything, then you need to stop – you are being seduced to the dark side. An FluentListView does all that work for you. It owns the ListViewItems and will destroy and recreate them as needed. Your job is to tell the FluentListView what information you want the ListViewItems to contain, and then to give it the list of objects to show.
+Beware of ListViewItems. You never need to add ListViewItems to a FluentListView. If you find yourself adding things to the Items collection, creating ListViewItems, or adding sub-items to anything, then you need to stop – you are being seduced to the dark side. A FluentListView does all that work for you. It owns the ListViewItems and will destroy and recreate them as needed. Your job is to tell the FluentListView what information you want the ListViewItems to contain, and then to give it the list of objects to show.
 
 Resist the temptation to add, edit, remove, or otherwise mess with ListViewItems – it will not work.
 
 There is also no need to hide information in a ListViewItem. Old style ListView programming often required attaching a key of some sort to each ListViewItem, so that when the user did something with a row, the programmer would know which model object that row was related to. This attaching was often done by creating one or more zero-width columns, or by setting the Tag property on the ListViewItem.
 
-With an FluentListView, you do not need to do this. The FluentListView already knows which model object is behind each row. In many cases, the programmer simply uses the SelectedObjects property to find out which model objects the user wants to do something to.
+With a FluentListView, you do not need to do this. The FluentListView already knows which model object is behind each row. In many cases, the programmer simply uses the SelectedObjects property to find out which model objects the user wants to do something to.
 
 Close your eyes and imagine...
 --------------------------------------------------------------------------------------------
@@ -176,7 +176,7 @@ class Song {
 This bit goes here, that bit goes there
 ----------------------------------------------------------------------------------------------------------------
 
-The first configuration step is to tell each column which bit (called an “aspect”) of your model object it is going to display. You do this through a Columns properties. You can edit the Columns of an FluentListView by either:
+The first configuration step is to tell each column which bit (called an “aspect”) of your model object it is going to display. You do this through a Columns properties. You can edit the Columns of a FluentListView by either:
 
 1.  Finding the Columns property of the FluentListView and clicking the ellipsis (...) button next to it;
 2.  Or by showing the quick commands for the FluentListView (press on the small arrow at the top right of the control) and clicking “Edit Columns.”
@@ -234,7 +234,7 @@ OK, that’s good, but any real ListView needs to be able to put little icons ne
 
 Deciding which icon to put in a column cannot be done in the IDE. Very often the icon used depends on the model object being displayed. To decide on an icon, we need a more complex type of configuration: installing a delegate.
 
-A delegate is basically a piece of code that you give to an FluentListView saying, “When you need to do this, call this piece of code” where this can be any of several tasks. In this case, we install an ImageGetter delegate, which tells the FluentListView, “When you need to figure out the image for this model object, call this piece of code.”
+A delegate is basically a piece of code that you give to a FluentListView saying, “When you need to do this, call this piece of code” where this can be any of several tasks. In this case, we install an ImageGetter delegate, which tells the FluentListView, “When you need to figure out the image for this model object, call this piece of code.”
 
 _If the word “delegate” worries you, think of them as function pointers where the parameter and return types can be verified. If that makes no sense to you, just keep reading. It will (possibly) become clear with some examples._
 
@@ -391,7 +391,7 @@ With the MakeGroupies() in place, grouping by our Rating column, now looks like 
 And they’re off and running
 -----------------------------------------------------------------------------------------
 
-Well done! You’ve made it to the end of the tutorial. You should by now have a reasonable grasp of some of the things an FluentListView can do, and how to use it in your application.
+Well done! You’ve made it to the end of the tutorial. You should by now have a reasonable grasp of some of the things a FluentListView can do, and how to use it in your application.
 
 If you need further help, you can look at the [Cookbook](#cookbook-label) and the [Forum](https://sourceforge.net/forum/forum.php?forum_id=812922) for those questions that just don’t have answer anywhere else.
 
@@ -406,7 +406,7 @@ Don’t forget: Use The Source Luke! You have all the source code. If you can’
 
 # Features
 
-Why take the time to learn how to use an FluentListView? What’s the benefit? The return on investment? This page tries to document the useful features of an FluentListView. Not all features are equally useful, but it’s better to be aware of what’s available so that you can use it when the need arises.
+Why take the time to learn how to use a FluentListView? What’s the benefit? The return on investment? This page tries to document the useful features of a FluentListView. Not all features are equally useful, but it’s better to be aware of what’s available so that you can use it when the need arises.
 
 *   [Animations](#animations)
 *   [Alternate rows background colors](#alternate-rows-background-colors)
@@ -453,14 +453,14 @@ Why take the time to learn how to use an FluentListView? What’s the benefit? T
 Ease of use
 ---------------------------------------------------------
 
-**The** major goal of an FluentListView is to make your life easier. All common ListView tasks should be easier – or at least no more difficult – with an FluentListView. For the investment of configuration the Columns, you receive a great deal of convenience and value added functions.
+**The** major goal of a FluentListView is to make your life easier. All common ListView tasks should be easier – or at least no more difficult – with a FluentListView. For the investment of configuration the Columns, you receive a great deal of convenience and value added functions.
 
 See [Getting Started](gettingStarted.html#getting-started-label) for an introduction to the basics.
 
 Automatically create the ListView from model objects
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-The major way in which the FluentListView makes your life easier is by being able to automatically build the ListView from a collection of model objects. Once the columns are defined, an FluentListView is able to build the rows of the ListView without any other help. It only takes a single method call: SetObjects().
+The major way in which the FluentListView makes your life easier is by being able to automatically build the ListView from a collection of model objects. Once the columns are defined, a FluentListView is able to build the rows of the ListView without any other help. It only takes a single method call: SetObjects().
 
 Automatic grouping
 -----------------------------------------------------------------------
@@ -518,11 +518,11 @@ Sorting can be customised either by listening for the BeforeSorting event or by 
 Different flavours of FluentListView for different purposes
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
-An FluentListView is the plain vanilla version of the control. It accepts a list of model objects, and builds the control from those model objects.
+A FluentListView is the plain vanilla version of the control. It accepts a list of model objects, and builds the control from those model objects.
 
-A DataListView is a data bindable version of an FluentListView. Give it a data source, and it automatically keep itself in sync with the data source, propagating changes to and fro. It will even create the columns of the list view for you, if you don’t want to do it yourself.
+A DataListView is a data bindable version of a FluentListView. Give it a data source, and it automatically keep itself in sync with the data source, propagating changes to and fro. It will even create the columns of the list view for you, if you don’t want to do it yourself.
 
-A FastFluentListView is a faster version of an FluentListView. Typically, it can build a list of 10,000 objects in less than 0.1 seconds.
+A FastFluentListView is a faster version of a FluentListView. Typically, it can build a list of 10,000 objects in less than 0.1 seconds.
 
 A VirtualFluentListView does not require a list of model objects. Instead, it asks for model objects as it requires them. In this way, it can support an unlimited number of rows. Most simply, a VirtualFluentListView can be given a RowGetter delegate, which is called when the list needs to display a particular model object. This gives a functional, but limited ListView. It’s better to implement the IVirtualListDataSource interface to give a fully functional virtual ListView.
 
@@ -531,7 +531,7 @@ A TreeListView combines the tree structure of a TreeView with the multi-column d
 Editing cell values
 -------------------------------------------------------------------------
 
-ListViews normally allow only the primary cell (column 0) to be edited. An FluentListView allows all cells to be edited. This editing knows to use different editors for different data types. It also allows auto-completion based on existing values for that column.
+ListViews normally allow only the primary cell (column 0) to be edited. A FluentListView allows all cells to be edited. This editing knows to use different editors for different data types. It also allows auto-completion based on existing values for that column.
 
 See [FluentListView Cell Editing](#how-do-i-let-the-user-edit-the-values-shown-in-the-list) for more details.
 
@@ -549,7 +549,7 @@ Drag and drop
 
 FluentListView supports dragging rows to other places, including other application. It also supports accepting drops from other sources including cross-application drops. Special support is provide for drops from other FluentListViews in the same application.
 
-In many cases, an FluentListView becomes a full drag source by setting IsSimpleDragSource to _true_.
+In many cases, a FluentListView becomes a full drag source by setting IsSimpleDragSource to _true_.
 
 Similarly, to accept drops, it is usually enough to set IsSimpleDropSink to _true_, and then handle the CanDrop and Dropped events (or the ModelCanDrop and ModelDropped events, if you only want to handle drops from other FluentListViews in your application).
 
@@ -558,14 +558,14 @@ See [FluentListView and Drag & Drop](#how-can-i-use-drag-and-drop) for more info
 Supports all ListView views
 -----------------------------------------------------------------------------------------
 
-An FluentListView supports all views: report, tile, list, large and small icons. All functions should work equally in all views: drag and drop, editing, check state, icons, selection.
+A FluentListView supports all views: report, tile, list, large and small icons. All functions should work equally in all views: drag and drop, editing, check state, icons, selection.
 
 You can even owner draw the non-details views (through the ItemRenderer property).
 
 More control over column width
 -----------------------------------------------------------------------------------------------
 
-An FluentListView allows the programmer to have control over the width of columns after the ListView is created.
+A FluentListView allows the programmer to have control over the width of columns after the ListView is created.
 
 When a column is created, it is normally given a width in pixels. This is the width of the column when the ListView is first shown. After creation, the user can resize that column to be something else.
 
@@ -584,21 +584,21 @@ Displays a “list is empty” message
 
 An empty ListView can be confusing to the user: did something go wrong? Do I need to wait longer and then something will appear?
 
-An FluentListView can show a “this list is empty” message when there is nothing to show in the list, so that the user knows the control is supposed to be empty. You can even apply some fairly customizations to the appearance of the message.
+A FluentListView can show a “this list is empty” message when there is nothing to show in the list, so that the user knows the control is supposed to be empty. You can even apply some fairly customizations to the appearance of the message.
 
 See this recipe: [12\. How do I change the message that’s shown when the FluentListView is empty?](#recipe-emptymsg)
 
 Buttons in cells
 -------------------------------------------------------------------
 
-An FluentListView can put clickable buttons into cells.
+A FluentListView can put clickable buttons into cells.
 
 See this recipe for more details: [52\. How can I put a button into a cell?](#recipe-buttons).
 
 Checkboxes in any column
 -----------------------------------------------------------------------------------
 
-An FluentListView supports checkboxes on rows. In fact, it supports checkboxes in subitems, if you are really keen. These work even in virtual mode (which a normal ListView cannot do).
+A FluentListView supports checkboxes on rows. In fact, it supports checkboxes in subitems, if you are really keen. These work even in virtual mode (which a normal ListView cannot do).
 
 See this recipe for more details: [10\. How do I use checkboxes in my FluentListView?](#recipe-checkbox).
 
@@ -610,7 +610,7 @@ Having subtly different row colours for even and odd rows can make a ListView ea
 Custom row and cell formatting
 -----------------------------------------------------------------------------------------------
 
-An FluentListView allows rows and even cells to be formatted with custom colours and fonts. For example, you could draw clients with debts in red, or big spending customers could be given a gold background. See here: [8\. How can I change the colours of a row or just a cell?](#recipe-formatter)
+A FluentListView allows rows and even cells to be formatted with custom colours and fonts. For example, you could draw clients with debts in red, or big spending customers could be given a gold background. See here: [8\. How can I change the colours of a row or just a cell?](#recipe-formatter)
 
 Model object level operations
 ---------------------------------------------------------------------------------------------
@@ -629,7 +629,7 @@ In many cases, this is behaviour is quite intuitive. iTunes works in this fashio
 Hot item tracking
 ---------------------------------------------------------------------
 
-It sometimes useful to emphasis the row that the mouse is currently over. This is called “hot tracking.” The normal ListView can underline the text of the hot item. In an FluentListView, the font, font style, text color, and background color can all be set for the hot item.
+It sometimes useful to emphasis the row that the mouse is currently over. This is called “hot tracking.” The normal ListView can underline the text of the hot item. In a FluentListView, the font, font style, text color, and background color can all be set for the hot item.
 
 See this recipe for details: [18\. How can I emphasise the row under the mouse?](#recipe-hottracking)
 
@@ -667,9 +667,9 @@ If you set the TintSortColumn property, the sort column will automatically be se
 Row height can be changed
 -------------------------------------------------------------------------------------
 
-With a normal ListView, the row height is calculated from a combination of the control font and the SmallImageList height. It cannot be changed. But, an FluentListView has a RowHeight property which allows the height of all rows to be specified.
+With a normal ListView, the row height is calculated from a combination of the control font and the SmallImageList height. It cannot be changed. But, a FluentListView has a RowHeight property which allows the height of all rows to be specified.
 
-N.B. Every row has the same height. No variable height rows are allowed. See [Can an FluentListView have rows of different heights?](faq.html#rows-of-different-heights) to understand why.
+N.B. Every row has the same height. No variable height rows are allowed. See [Can a FluentListView have rows of different heights?](faq.html#rows-of-different-heights) to understand why.
 
 Custom selection colours
 -----------------------------------------------------------------------------------
@@ -681,7 +681,7 @@ Tool Tips
 
 A standard ListView cannot display tooltips on individual cells (apart from showing truncated cell values when FullRowSelect is true).
 
-But an FluentListView can show arbitrary tool tips for both cells and headers. See [17\. How can I show more information in the tooltip when the mouse hovers over a cell?](#recipe-tooltips) for details.
+But a FluentListView can show arbitrary tool tips for both cells and headers. See [17\. How can I show more information in the tooltip when the mouse hovers over a cell?](#recipe-tooltips) for details.
 
 In-place modifications of the list
 -------------------------------------------------------------------------------------------------------
@@ -826,11 +826,11 @@ Learning to cook.
 39.  [How can I change the ordering of groups or rows within a group?](#how-can-i-change-the-ordering-of-groups-or-rows-within-a-group)
 40.  [How do I change what happens the user presses Tab or Enter when editing a cell?](#how-do-i-change-what-happens-the-user-presses-tab-or-enter-when-editing-a-cell)
 41.  [How do I change the way the “Filtering” menu works?](#how-do-i-change-the-way-the-filtering-menu-works)
-42.  [How can I change the way the user can choose the columns in an FluentListView?](#how-can-i-change-the-way-the-user-can-choose-the-columns-in-an-fluentlistview)
-43.  [How can I make checkboxes keep their values when filtering an FluentListView?](#how-can-i-make-checkboxes-keep-their-values-when-filtering-an-fluentlistview)
+42.  [How can I change the way the user can choose the columns in a FluentListView?](#how-can-i-change-the-way-the-user-can-choose-the-columns-in-an-fluentlistview)
+43.  [How can I make checkboxes keep their values when filtering a FluentListView?](#how-can-i-make-checkboxes-keep-their-values-when-filtering-an-fluentlistview)
 44.  [How can I stop the user expanding/collapsing a group?](#how-can-i-stop-the-user-expanding-collapsing-a-group)
-45.  [How do I put a _real_ background image onto an FluentListView?](#how-do-i-put-a-real-background-image-onto-an-fluentlistview)
-46.  [How do I bind a DataSet to an FluentListView?](#how-do-i-bind-a-dataset-to-an-fluentlistview)
+45.  [How do I put a _real_ background image onto a FluentListView?](#how-do-i-put-a-real-background-image-onto-an-fluentlistview)
+46.  [How do I bind a DataSet to a FluentListView?](#how-do-i-bind-a-dataset-to-an-fluentlistview)
 47.  [Why can’t I data-bind the TreeListView?](#why-can-t-i-data-bind-the-treelistview)
 48.  [Can a TreeListView calculate checkboxes based on subitems?](#can-a-treelistview-calculate-checkboxes-based-on-subitems)
 49.  [Can rows be disabled?](#can-rows-be-disabled)
@@ -942,7 +942,7 @@ ListViews are normally used for displaying information. The standard ListView al
 Starting a cell edit
 ---------------------------------------------------------------------------
 
-The “editability” of an FluentListView is controlled by the CellEditActivation property. This property can be set to one of the following values:
+The “editability” of a FluentListView is controlled by the CellEditActivation property. This property can be set to one of the following values:
 
 *   CellEditActivateMode.None
     
@@ -1089,7 +1089,7 @@ How can I do some fancy sorting?
 There are a couple of ways to change the standard sorting behaviour:
 
 *   You can listen for the BeforeSorting event, do whatever sorting you like, and then set Handled to _true_ on the event so that no standard sorting is done. If you want to prevent sorting, you can set Canceled to _true_.
-*   If you are using an FluentListView or a DataListView, you can install a CustomSorter delegate.
+*   If you are using a FluentListView or a DataListView, you can install a CustomSorter delegate.
 *   If you are using a VirtualFluentListView (or one of its subclasses FastFluentListView or TreeListView), you cannot use the CustomSorter. You have to implement the SortObjects() method of the IVirtualListDataSource.
 
 The CustomSorter delegates needs a little further explanation. This delegate must install a ListViewItemSorter on the FluentListView. This installed item sorter will actually do the work of sorting the ListViewItems. See ColumnComparer in the code for an example of what an item sorter has to do.
@@ -1160,7 +1160,7 @@ How can I make a column get bigger when the FluentListView is made bigger?
 
 On most columns, the column’s width is static, meaning that it doesn’t change by itself. But sometimes it would be useful if a column would resize itself to show more (or less) of itself when the user changed the size of the ListView. For example, the rightmost column of a personnel list might display “Comments” about that person. When the window was made larger, it would be nice if that column automatically expanded to show more of the comments about that person. You can make this happen by setting the FillsFreeSpace property to _true_ on that column.
 
-An FluentListView can have more than one space filling column, and they generally share the available space equally between them (see the FreeSpaceProportion property to change this).
+A FluentListView can have more than one space filling column, and they generally share the available space equally between them (see the FreeSpaceProportion property to change this).
 
 You should be aware that as the FluentListView becomes smaller, the space filling columns will become smaller too, until they eventually disappear (have zero width). The MinimumWidth and MaximumWidth properties still work for space filling columns. So you can use the MinimumWidth property to make sure that a space filling column doesn’t disappear.
 
@@ -1216,7 +1216,7 @@ There is a whole article available on CodeProject explaining in detail how to do
 How do I use checkboxes in my FluentListView?
 ---------------------------------------------------------------------------------------------------------------------------------
 
-To uses checkboxes with an FluentListView, you must set the FluentListView.CheckBoxes property to _true_. If you want the user to be able to give check boxes the _Indeterminate_ value, you should set the FluentListView.TriStateCheckBoxes property to _true_.
+To uses checkboxes with a FluentListView, you must set the FluentListView.CheckBoxes property to _true_. If you want the user to be able to give check boxes the _Indeterminate_ value, you should set the FluentListView.TriStateCheckBoxes property to _true_.
 
 Owing to a limitation of the .NET ListView class, you cannot use CheckBoxes in Tile view. It just can’t be done.
 
@@ -1340,9 +1340,9 @@ If you really want to change the information in the Tile view, you can custom dr
 How do I change the message that’s shown when the FluentListView is empty?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-When an FluentListView is empty, it can display a “this list is empty” type message.
+When a FluentListView is empty, it can display a “this list is empty” type message.
 
-The EmptyListMsg is the property that holds the string that appears when an FluentListView is empty. This string is rendered using the EmptyListMsgFont:
+The EmptyListMsg is the property that holds the string that appears when a FluentListView is empty. This string is rendered using the EmptyListMsgFont:
 ```
 this.fluentListView1.EmptyListMsg = "This database has no rows";
 this.fluentListView1.EmptyListMsgFont = new Font("Tahoma", 24);
@@ -1424,7 +1424,7 @@ this.fluentListView1.SomeDelegate = delegate(Person model) {
     ...
 }
 ```
-Unfortunately, this is not possible, so we have a TypedFluentListView class instead. This is not another FluentListView subclass, but rather it’s a typed wrapper around an existing FluentListView. To use one, you create an FluentListView within the IDE as normal. When it is time to implement your delegates, you create a TypedFluentListView wrapper around your list view, and declare your delegates against that wrapper. It’s easier to use than it is to explain, so look at this example:
+Unfortunately, this is not possible, so we have a TypedFluentListView class instead. This is not another FluentListView subclass, but rather it’s a typed wrapper around an existing FluentListView. To use one, you create a FluentListView within the IDE as normal. When it is time to implement your delegates, you create a TypedFluentListView wrapper around your list view, and declare your delegates against that wrapper. It’s easier to use than it is to explain, so look at this example:
 ```
 TypedFluentListView<Person\> tlist = new TypedFluentListView<Person\>(this.listViewSimple);
 tlist.BooleanCheckStateGetter = delegate(Person x) {
@@ -1544,7 +1544,7 @@ Remember: this searching works on the string representation of the value, rather
 How can I show more information in the tooltip when the mouse hovers over a cell?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-The ListView default behaviour is to only use tool tips to show truncated cell values (even then only when FullRowSelect is _true_). But with an FluentListView, you are not so limited.
+The ListView default behaviour is to only use tool tips to show truncated cell values (even then only when FullRowSelect is _true_). But with a FluentListView, you are not so limited.
 
 To show a different tooltip when the mouse is over a cell, you should listen for the CellToolTipShowing event. The parameter block for this event tells where the mouse was, what cell it was over, the model for that row, and the value that is shown in the cell.
 
@@ -1579,7 +1579,7 @@ Similarly, to show a tooltip for a column header, you listen for a HeaderToolTip
 
 Previous versions used delegates to provide a subset of this functionality. These delegates – CellToolTipGetter and HeaderToolTipGetter delegates – still function, but the events provide much great scope for customisation.
 
-All of this extra functionality comes with a small cost. This functionality is beyond what a standard .NET ToolTip can provide. Because of this, you cannot assign a standard ToolTip to an FluentListView in the IDE. Well, actually you can (at least until I can figure out how to prevent it) but you shouldn’t. If you do, you will get an assertion error the first time a tooltip tries to show.
+All of this extra functionality comes with a small cost. This functionality is beyond what a standard .NET ToolTip can provide. Because of this, you cannot assign a standard ToolTip to a FluentListView in the IDE. Well, actually you can (at least until I can figure out how to prevent it) but you shouldn’t. If you do, you will get an assertion error the first time a tooltip tries to show.
 
 
 
@@ -1625,7 +1625,7 @@ public interface IOverlay {
 ```
 Within the Draw() method, your implementation can draw whatever it likes.
 
-Once you have implemented this interface, you add it to an FluentListView via the AddOverlay() method:
+Once you have implemented this interface, you add it to a FluentListView via the AddOverlay() method:
 ```
 MyFantasticOverlay myOverlay = new MyFantasticOverlay();
 myOverlay.ConfigureToDoAmazingThings();
@@ -1714,9 +1714,9 @@ FluentListView has sophisticated support for dragging and dropping. This support
 The easy way
 -----------------------------------------------------------
 
-The simpliest way to use drag and drop in an FluentListView is through the IsSimpleDragSource and IsSimpleDropSink properties (which can be set through the IDE).
+The simpliest way to use drag and drop in a FluentListView is through the IsSimpleDragSource and IsSimpleDropSink properties (which can be set through the IDE).
 
-Setting these gives an FluentListView that will allow objects to be dragged and dropped on items, like this:
+Setting these gives a FluentListView that will allow objects to be dragged and dropped on items, like this:
 
 ![_images/dragdrop-example1.png](_images/dragdrop-example1.png)
 
@@ -1919,7 +1919,7 @@ This works in both owner drawn or non-owner drawn lists.
 How do I show a menu when the user right clicks on the FluentListView?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-If you want to show the same menu, regardless of where the user clicks, you can simply assign that menu to the ContextMenuStrip property of the FluentListView (this is standard .NET, nothing specific to an FluentListView).
+If you want to show the same menu, regardless of where the user clicks, you can simply assign that menu to the ContextMenuStrip property of the FluentListView (this is standard .NET, nothing specific to a FluentListView).
 
 If you want to show a context menu specific to the object clicked, you can listen for CellRightClick events:
 ```
@@ -2347,10 +2347,10 @@ To hide the ‘Filter’ menu item for a particular column, set UsesFiltering to
 
 
 
-How can I change the way the user can choose the columns in an FluentListView?
+How can I change the way the user can choose the columns in a FluentListView?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-In general, the user is able to select which columns they wish to see in an FluentListView. The user interface mechanism for this is that when the user right clicks on any header, they will presented with a menu that lets them choose which columns they wish to see.
+In general, the user is able to select which columns they wish to see in a FluentListView. The user interface mechanism for this is that when the user right clicks on any header, they will presented with a menu that lets them choose which columns they wish to see.
 
 The exact behaviour of the column selection mechanism is governed by the SelectColumnsOnRightClickBehaviour property.
 
@@ -2374,7 +2374,7 @@ Note: Column 0 can never be hidden. This is a limit of the underlying Windows co
 
 
 
-How can I make checkboxes keep their values when filtering an FluentListView?
+How can I make checkboxes keep their values when filtering a FluentListView?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Set PersistentCheckboxes to _true_ (this is the default).
@@ -2383,7 +2383,7 @@ The “checkedness” of a row is maintained by the underlying ListView control.
 
 When PersistentCheckboxes is _true_, the FluentListView will remember the check state of each row, and ensure that it is correctly maintained whenever the list is rebuilt or filtered.
 
-If an FluentListView has CheckStateGetter and CheckStatePutters installed, the PersistentCheckboxes property does nothing, since the getter and putter must already persist the checkbox state.
+If a FluentListView has CheckStateGetter and CheckStatePutters installed, the PersistentCheckboxes property does nothing, since the getter and putter must already persist the checkbox state.
 
 This behaviour is new in v2.5.1. To revert to the previous behaviour, set PersistentCheckboxes to _false_.
 
@@ -2402,7 +2402,7 @@ private void olv1_GroupExpandingCollapsing(object sender, GroupExpandingCollapsi
 ```
 
 
-How do I put a _real_ background image onto an FluentListView?
+How do I put a _real_ background image onto a FluentListView?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 > _That overlay stuff is just too tricky. I want a real background image and I want it now!_
@@ -2440,7 +2440,7 @@ Apart from these limitations, native watermarks are quite neat. They are true ba
 
 
 
-How do I bind a DataSet to an FluentListView?
+How do I bind a DataSet to a FluentListView?
 ---------------------------------------------------------------------------------------------------------------------------------
 
 Each flavour of control has a data bindable version:
