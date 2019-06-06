@@ -49,6 +49,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Fluent.Lists;
 
 namespace Fluent
 {

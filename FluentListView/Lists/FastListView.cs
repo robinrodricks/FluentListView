@@ -43,7 +43,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace Fluent
+namespace Fluent.Lists
 {
     /// <summary>
     /// A FastFluentListView trades function for speed.

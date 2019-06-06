@@ -37,6 +37,7 @@ using System.Drawing;
 using System.Collections;
 using System.Diagnostics;
 using System.Drawing.Design;
+using Fluent.Lists;
 
 namespace Fluent {
 

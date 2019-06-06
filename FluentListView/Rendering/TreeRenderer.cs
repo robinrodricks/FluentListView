@@ -17,8 +17,9 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using System.Drawing.Drawing2D;
+using Fluent.Lists;
 
-namespace Fluent {
+namespace Fluent.Lists {
 
     public partial class TreeListView {
         /// <summary>

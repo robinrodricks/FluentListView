@@ -44,6 +44,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
+using Fluent.Lists;
 
 namespace Fluent.Design
 {

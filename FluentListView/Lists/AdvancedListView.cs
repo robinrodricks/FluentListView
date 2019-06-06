@@ -38,7 +38,7 @@ using System.Windows.Forms.VisualStyles;
 using System.Runtime.Serialization.Formatters;
 using System.Threading;
 
-namespace Fluent
+namespace Fluent.Lists
 {
     /// <summary>
     /// An FluentListView is a much easier to use, and much more powerful, version of the ListView.

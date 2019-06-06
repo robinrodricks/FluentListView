@@ -57,828 +57,828 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using Fluent.Lists;
+
+namespace Fluent.Lists {
+
+	public partial class AdvancedListView {
+		//-----------------------------------------------------------------------------------
+		#region Events
+
+		/// <summary>
+		/// Triggered after a FluentListView has been searched by the user typing into the list
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered after the control has done a search-by-typing action.")]
+		public event EventHandler<AfterSearchingEventArgs> AfterSearching;
+
+		/// <summary>
+		/// Triggered after a FluentListView has been sorted
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered after the items in the list have been sorted.")]
+		public event EventHandler<AfterSortingEventArgs> AfterSorting;
+
+		/// <summary>
+		/// Triggered before a FluentListView is searched by the user typing into the list
+		/// </summary>
+		/// <remarks>
+		/// Set Cancelled to true to prevent the searching from taking place.
+		/// Changing StringToFind or StartSearchFrom will change the subsequent search.
+		/// </remarks>
+		[Category("FluentListView"),
+		Description("This event is triggered before the control does a search-by-typing action.")]
+		public event EventHandler<BeforeSearchingEventArgs> BeforeSearching;
+
+		/// <summary>
+		/// Triggered before a FluentListView is sorted
+		/// </summary>
+		/// <remarks>
+		/// Set Cancelled to true to prevent the sort from taking place.
+		/// Changing ColumnToSort or SortOrder will change the subsequent sort.
+		/// </remarks>
+		[Category("FluentListView"),
+		Description("This event is triggered before the items in the list are sorted.")]
+		public event EventHandler<BeforeSortingEventArgs> BeforeSorting;
+
+		/// <summary>
+		/// Triggered after a FluentListView has created groups
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered after the groups are created.")]
+		public event EventHandler<CreateGroupsEventArgs> AfterCreatingGroups;
+
+		/// <summary>
+		/// Triggered before a FluentListView begins to create groups
+		/// </summary>
+		/// <remarks>
+		/// Set Groups to prevent the default group creation process
+		/// </remarks>
+		[Category("FluentListView"),
+		Description("This event is triggered before the groups are created.")]
+		public event EventHandler<CreateGroupsEventArgs> BeforeCreatingGroups;
+
+		/// <summary>
+		/// Triggered just before a FluentListView creates groups
+		/// </summary>
+		/// <remarks>
+		/// You can make changes to the groups, which have been created, before those
+		/// groups are created within the listview.
+		/// </remarks>
+		[Category("FluentListView"),
+		Description("This event is triggered when the groups are just about to be created.")]
+		public event EventHandler<CreateGroupsEventArgs> AboutToCreateGroups;
+
+		/// <summary>
+		/// Triggered when a button in a cell is left clicked.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when the user left clicks a button.")]
+		public event EventHandler<CellClickEventArgs> ButtonClick;
+
+		/// <summary>
+		/// This event is triggered when the user moves a drag over an FluentListView that
+		/// has a SimpleDropSink installed as the drop handler.
+		/// </summary>
+		/// <remarks>
+		/// Handlers for this event should set the Effect argument and optionally the
+		/// InfoMsg property. They can also change any of the DropTarget* setttings to change
+		/// the target of the drop.
+		/// </remarks>
+		[Category("FluentListView"),
+		Description("Can the user drop the currently dragged items at the current mouse location?")]
+		public event EventHandler<OlvDropEventArgs> CanDrop;
+
+		/// <summary>
+		/// Triggered when a cell has finished being edited.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered cell edit operation has completely finished")]
+		public event CellEditEventHandler CellEditFinished;
+
+		/// <summary>
+		/// Triggered when a cell is about to finish being edited.
+		/// </summary>
+		/// <remarks>If Cancel is already true, the user is cancelling the edit operation.
+		/// Set Cancel to true to prevent the value from the cell being written into the model.
+		/// You cannot prevent the editing from finishing within this event -- you need
+		/// the CellEditValidating event for that.</remarks>
+		[Category("FluentListView"),
+		Description("This event is triggered cell edit operation is finishing.")]
+		public event CellEditEventHandler CellEditFinishing;
+
+		/// <summary>
+		/// Triggered when a cell is about to be edited.
+		/// </summary>
+		/// <remarks>Set Cancel to true to prevent the cell being edited.
+		/// You can change the the Control to be something completely different.</remarks>
+		[Category("FluentListView"),
+		Description("This event is triggered when cell edit is about to begin.")]
+		public event CellEditEventHandler CellEditStarting;
+
+		/// <summary>
+		/// Triggered when a cell editor needs to be validated
+		/// </summary>
+		/// <remarks>
+		/// If this event is cancelled, focus will remain on the cell editor.
+		/// </remarks>
+		[Category("FluentListView"),
+		Description("This event is triggered when a cell editor is about to lose focus and its new contents need to be validated.")]
+		public event CellEditEventHandler CellEditValidating;
+
+		/// <summary>
+		/// Triggered when a cell is left clicked.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when the user left clicks a cell.")]
+		public event EventHandler<CellClickEventArgs> CellClick;
+
+		/// <summary>
+		/// Triggered when the mouse is above a cell.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when the mouse is over a cell.")]
+		public event EventHandler<CellOverEventArgs> CellOver;
+
+		/// <summary>
+		/// Triggered when a cell is right clicked.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when the user right clicks a cell.")]
+		public event EventHandler<CellRightClickEventArgs> CellRightClick;
+
+		/// <summary>
+		/// This event is triggered when a cell needs a tool tip.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when a cell needs a tool tip.")]
+		public event EventHandler<ToolTipShowingEventArgs> CellToolTipShowing;
+
+		/// <summary>
+		/// This event is triggered when a checkbox is checked/unchecked on a subitem
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when a checkbox is checked/unchecked on a subitem.")]
+		public event EventHandler<SubItemCheckingEventArgs> SubItemChecking;
+
+		/// <summary>
+		/// Triggered when a column header is right clicked.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when the user right clicks a column header.")]
+		public event ColumnRightClickEventHandler ColumnRightClick;
+
+		/// <summary>
+		/// This event is triggered when the user releases a drag over an FluentListView that
+		/// has a SimpleDropSink installed as the drop handler.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when the user dropped items onto the control.")]
+		public event EventHandler<OlvDropEventArgs> Dropped;
+
+		/// <summary>
+		/// This event is triggered when the control needs to filter its collection of objects.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when the control needs to filter its collection of objects.")]
+		public event EventHandler<FilterEventArgs> Filter;
+
+		/// <summary>
+		/// This event is triggered when a cell needs to be formatted.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when a cell needs to be formatted.")]
+		public event EventHandler<FormatCellEventArgs> FormatCell;
+
+		/// <summary>
+		/// This event is triggered when the frozeness of the control changes.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when frozeness of the control changes.")]
+		public event EventHandler<FreezeEventArgs> Freezing;
+
+		/// <summary>
+		/// This event is triggered when a row needs to be formatted.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when a row needs to be formatted.")]
+		public event EventHandler<FormatRowEventArgs> FormatRow;
+
+		/// <summary>
+		/// This event is triggered when a group is about to collapse or expand.
+		/// This can be cancelled to prevent the expansion.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when a group is about to collapse or expand.")]
+		public event EventHandler<GroupExpandingCollapsingEventArgs> GroupExpandingCollapsing;
+
+		/// <summary>
+		/// This event is triggered when a group changes state.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when a group changes state.")]
+		public event EventHandler<GroupStateChangedEventArgs> GroupStateChanged;
+
+		/// <summary>
+		/// This event is triggered when a header checkbox is changing value
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when a header checkbox changes value.")]
+		public event EventHandler<HeaderCheckBoxChangingEventArgs> HeaderCheckBoxChanging;
+
+		/// <summary>
+		/// This event is triggered when a header needs a tool tip.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when a header needs a tool tip.")]
+		public event EventHandler<ToolTipShowingEventArgs> HeaderToolTipShowing;
+
+		/// <summary>
+		/// Triggered when the "hot" item changes
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when the hot item changed.")]
+		public event EventHandler<HotItemChangedEventArgs> HotItemChanged;
+
+		/// <summary>
+		/// Triggered when a hyperlink cell is clicked.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when a hyperlink cell is clicked.")]
+		public event EventHandler<HyperlinkClickedEventArgs> HyperlinkClicked;
+
+		/// <summary>
+		/// Triggered when the task text of a group is clicked.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when the task text of a group is clicked.")]
+		public event EventHandler<GroupTaskClickedEventArgs> GroupTaskClicked;
+
+		/// <summary>
+		/// Is the value in the given cell a hyperlink.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when the control needs to know if a given cell contains a hyperlink.")]
+		public event EventHandler<IsHyperlinkEventArgs> IsHyperlink;
+
+		/// <summary>
+		/// Some new objects are about to be added to an FluentListView.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when objects are about to be added to the control")]
+		public event EventHandler<ItemsAddingEventArgs> ItemsAdding;
+
+		/// <summary>
+		/// The contents of the FluentListView has changed.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when the contents of the control have changed.")]
+		public event EventHandler<ItemsChangedEventArgs> ItemsChanged;
+
+		/// <summary>
+		/// The contents of the FluentListView is about to change via a SetObjects call
+		/// </summary>
+		/// <remarks>
+		/// <para>Set Cancelled to true to prevent the contents of the list changing. This does not work with virtual lists.</para>
+		/// </remarks>
+		[Category("FluentListView"),
+		Description("This event is triggered when the contents of the control changes.")]
+		public event EventHandler<ItemsChangingEventArgs> ItemsChanging;
+
+		/// <summary>
+		/// Some objects are about to be removed from an FluentListView.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when objects are removed from the control.")]
+		public event EventHandler<ItemsRemovingEventArgs> ItemsRemoving;
+
+		/// <summary>
+		/// This event is triggered when the user moves a drag over an FluentListView that
+		/// has a SimpleDropSink installed as the drop handler, and when the source control
+		/// for the drag was an FluentListView.
+		/// </summary>
+		/// <remarks>
+		/// Handlers for this event should set the Effect argument and optionally the
+		/// InfoMsg property. They can also change any of the DropTarget* setttings to change
+		/// the target of the drop.
+		/// </remarks>
+		[Category("FluentListView"),
+		Description("Can the dragged collection of model objects be dropped at the current mouse location")]
+		public event EventHandler<ModelDropEventArgs> ModelCanDrop;
+
+		/// <summary>
+		/// This event is triggered when the user releases a drag over an FluentListView that
+		/// has a SimpleDropSink installed as the drop handler and when the source control
+		/// for the drag was an FluentListView.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("A collection of model objects from a FluentListView has been dropped on this control")]
+		public event EventHandler<ModelDropEventArgs> ModelDropped;
+
+		/// <summary>
+		/// This event is triggered once per user action that changes the selection state
+		/// of one or more rows.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered once per user action that changes the selection state of one or more rows.")]
+		public event EventHandler SelectionChanged;
+
+		/// <summary>
+		/// This event is triggered when the contents of the FluentListView has scrolled.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when the contents of the FluentListView has scrolled.")]
+		public event EventHandler<ScrollEventArgs> Scroll;
+
+		#endregion
+
+		//-----------------------------------------------------------------------------------
+		#region OnEvents
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnAboutToCreateGroups(CreateGroupsEventArgs e) {
+			if (this.AboutToCreateGroups != null)
+				this.AboutToCreateGroups(this, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnBeforeCreatingGroups(CreateGroupsEventArgs e) {
+			if (this.BeforeCreatingGroups != null)
+				this.BeforeCreatingGroups(this, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnAfterCreatingGroups(CreateGroupsEventArgs e) {
+			if (this.AfterCreatingGroups != null)
+				this.AfterCreatingGroups(this, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnAfterSearching(AfterSearchingEventArgs e) {
+			if (this.AfterSearching != null)
+				this.AfterSearching(this, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnAfterSorting(AfterSortingEventArgs e) {
+			if (this.AfterSorting != null)
+				this.AfterSorting(this, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnBeforeSearching(BeforeSearchingEventArgs e) {
+			if (this.BeforeSearching != null)
+				this.BeforeSearching(this, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnBeforeSorting(BeforeSortingEventArgs e) {
+			if (this.BeforeSorting != null)
+				this.BeforeSorting(this, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		protected virtual void OnButtonClick(CellClickEventArgs args) {
+			if (this.ButtonClick != null)
+				this.ButtonClick(this, args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		protected virtual void OnCanDrop(OlvDropEventArgs args) {
+			if (this.CanDrop != null)
+				this.CanDrop(this, args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		protected virtual void OnCellClick(CellClickEventArgs args) {
+			if (this.CellClick != null)
+				this.CellClick(this, args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		protected virtual void OnCellOver(CellOverEventArgs args) {
+			if (this.CellOver != null)
+				this.CellOver(this, args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		protected virtual void OnCellRightClick(CellRightClickEventArgs args) {
+			if (this.CellRightClick != null)
+				this.CellRightClick(this, args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		protected virtual void OnCellToolTip(ToolTipShowingEventArgs args) {
+			if (this.CellToolTipShowing != null)
+				this.CellToolTipShowing(this, args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		protected virtual void OnSubItemChecking(SubItemCheckingEventArgs args) {
+			if (this.SubItemChecking != null)
+				this.SubItemChecking(this, args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnColumnRightClick(ColumnClickEventArgs e) {
+			if (this.ColumnRightClick != null)
+				this.ColumnRightClick(this, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		protected virtual void OnDropped(OlvDropEventArgs args) {
+			if (this.Dropped != null)
+				this.Dropped(this, args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		internal protected virtual void OnFilter(FilterEventArgs e) {
+			if (this.Filter != null)
+				this.Filter(this, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		protected virtual void OnFormatCell(FormatCellEventArgs args) {
+			if (this.FormatCell != null)
+				this.FormatCell(this, args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		protected virtual void OnFormatRow(FormatRowEventArgs args) {
+			if (this.FormatRow != null)
+				this.FormatRow(this, args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		protected virtual void OnFreezing(FreezeEventArgs args) {
+			if (this.Freezing != null)
+				this.Freezing(this, args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		protected virtual void OnGroupExpandingCollapsing(GroupExpandingCollapsingEventArgs args) {
+			if (this.GroupExpandingCollapsing != null)
+				this.GroupExpandingCollapsing(this, args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		protected virtual void OnGroupStateChanged(GroupStateChangedEventArgs args) {
+			if (this.GroupStateChanged != null)
+				this.GroupStateChanged(this, args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		protected virtual void OnHeaderCheckBoxChanging(HeaderCheckBoxChangingEventArgs args) {
+			if (this.HeaderCheckBoxChanging != null)
+				this.HeaderCheckBoxChanging(this, args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		protected virtual void OnHeaderToolTip(ToolTipShowingEventArgs args) {
+			if (this.HeaderToolTipShowing != null)
+				this.HeaderToolTipShowing(this, args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnHotItemChanged(HotItemChangedEventArgs e) {
+			if (this.HotItemChanged != null)
+				this.HotItemChanged(this, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnHyperlinkClicked(HyperlinkClickedEventArgs e) {
+			if (this.HyperlinkClicked != null)
+				this.HyperlinkClicked(this, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnGroupTaskClicked(GroupTaskClickedEventArgs e) {
+			if (this.GroupTaskClicked != null)
+				this.GroupTaskClicked(this, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnIsHyperlink(IsHyperlinkEventArgs e) {
+			if (this.IsHyperlink != null)
+				this.IsHyperlink(this, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnItemsAdding(ItemsAddingEventArgs e) {
+			if (this.ItemsAdding != null)
+				this.ItemsAdding(this, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnItemsChanged(ItemsChangedEventArgs e) {
+			if (this.ItemsChanged != null)
+				this.ItemsChanged(this, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnItemsChanging(ItemsChangingEventArgs e) {
+			if (this.ItemsChanging != null)
+				this.ItemsChanging(this, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnItemsRemoving(ItemsRemovingEventArgs e) {
+			if (this.ItemsRemoving != null)
+				this.ItemsRemoving(this, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		protected virtual void OnModelCanDrop(ModelDropEventArgs args) {
+			if (this.ModelCanDrop != null)
+				this.ModelCanDrop(this, args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		protected virtual void OnModelDropped(ModelDropEventArgs args) {
+			if (this.ModelDropped != null)
+				this.ModelDropped(this, args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnSelectionChanged(EventArgs e) {
+			if (this.SelectionChanged != null)
+				this.SelectionChanged(this, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnScroll(ScrollEventArgs e) {
+			if (this.Scroll != null)
+				this.Scroll(this, e);
+		}
+
+
+		/// <summary>
+		/// Tell the world when a cell is about to be edited.
+		/// </summary>
+		protected virtual void OnCellEditStarting(CellEditEventArgs e) {
+			if (this.CellEditStarting != null)
+				this.CellEditStarting(this, e);
+		}
+
+		/// <summary>
+		/// Tell the world when a cell is about to finish being edited.
+		/// </summary>
+		protected virtual void OnCellEditorValidating(CellEditEventArgs e) {
+			// Hack. ListView is an imperfect control container. It does not manage validation
+			// perfectly. If the ListView is part of a TabControl, and the cell editor loses
+			// focus by the user clicking on another tab, the TabControl processes the click
+			// and switches tabs, even if this Validating event cancels. This results in the
+			// strange situation where the cell editor is active, but isn't visible. When the
+			// user switches back to the tab with the ListView, composite controls like spin
+			// controls, DateTimePicker and ComboBoxes do not work properly. Specifically,
+			// keyboard input still works fine, but the controls do not respond to mouse
+			// input. SO, if the validation fails, we have to specifically give focus back to
+			// the cell editor. (this is the Select() call in the code below). 
+			// But (there is always a 'but'), doing that changes the focus so the cell editor
+			// triggers another Validating event -- which fails again. From the user's point
+			// of view, they click away from the cell editor, and the validating code
+			// complains twice. So we only trigger a Validating event if more than 0.1 seconds
+			// has elapsed since the last validate event.
+			// I know it's a hack. I'm very open to hear a neater solution.
+
+			// Also, this timed response stops us from sending a series of validation events
+			// if the user clicks and holds on the OLV scroll bar.
+			//System.Diagnostics.Debug.WriteLine(Environment.TickCount - lastValidatingEvent);
+			if ((Environment.TickCount - lastValidatingEvent) < 100) {
+				e.Cancel = true;
+			} else {
+				lastValidatingEvent = Environment.TickCount;
+				if (this.CellEditValidating != null)
+					this.CellEditValidating(this, e);
+			}
+			lastValidatingEvent = Environment.TickCount;
+		}
+		private int lastValidatingEvent = 0;
+
+		/// <summary>
+		/// Tell the world when a cell is about to finish being edited.
+		/// </summary>
+		protected virtual void OnCellEditFinishing(CellEditEventArgs e) {
+			if (this.CellEditFinishing != null)
+				this.CellEditFinishing(this, e);
+		}
+
+		/// <summary>
+		/// Tell the world when a cell has finished being edited.
+		/// </summary>
+		protected virtual void OnCellEditFinished(CellEditEventArgs e) {
+			if (this.CellEditFinished != null)
+				this.CellEditFinished(this, e);
+		}
+
+		#endregion
+	}
+
+	public partial class TreeListView {
+
+		#region Events
+
+		/// <summary>
+		/// This event is triggered when user input requests the expansion of a list item.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when a branch is about to expand.")]
+		public event EventHandler<TreeBranchExpandingEventArgs> Expanding;
+
+		/// <summary>
+		/// This event is triggered when user input requests the collapse of a list item.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when a branch is about to collapsed.")]
+		public event EventHandler<TreeBranchCollapsingEventArgs> Collapsing;
+
+		/// <summary>
+		/// This event is triggered after the expansion of a list item due to user input.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when a branch has been expanded.")]
+		public event EventHandler<TreeBranchExpandedEventArgs> Expanded;
+
+		/// <summary>
+		/// This event is triggered after the collapse of a list item due to user input.
+		/// </summary>
+		[Category("FluentListView"),
+		Description("This event is triggered when a branch has been collapsed.")]
+		public event EventHandler<TreeBranchCollapsedEventArgs> Collapsed;
+
+		#endregion
+
+		#region OnEvents
+
+		/// <summary>
+		/// Trigger the expanding event
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnExpanding(TreeBranchExpandingEventArgs e) {
+			if (this.Expanding != null)
+				this.Expanding(this, e);
+		}
+
+		/// <summary>
+		/// Trigger the collapsing event
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnCollapsing(TreeBranchCollapsingEventArgs e) {
+			if (this.Collapsing != null)
+				this.Collapsing(this, e);
+		}
+
+		/// <summary>
+		/// Trigger the expanded event
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnExpanded(TreeBranchExpandedEventArgs e) {
+			if (this.Expanded != null)
+				this.Expanded(this, e);
+		}
+
+		/// <summary>
+		/// Trigger the collapsed event
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnCollapsed(TreeBranchCollapsedEventArgs e) {
+			if (this.Collapsed != null)
+				this.Collapsed(this, e);
+		}
+
+		#endregion
+	}
+
+}
 
 namespace Fluent
 {
-    /// <summary>
-    /// The callbacks for CellEditing events
-    /// </summary>
-    /// <remarks> this 
-    /// We could replace this with EventHandler&lt;CellEditEventArgs&gt; but that would break all
-    /// cell editing event code from v1.x.
-    /// </remarks>
-    public delegate void CellEditEventHandler(object sender, CellEditEventArgs e);
 
-    public partial class AdvancedListView
-    {
-        //-----------------------------------------------------------------------------------
-        #region Events
-
-        /// <summary>
-        /// Triggered after a FluentListView has been searched by the user typing into the list
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered after the control has done a search-by-typing action.")]
-        public event EventHandler<AfterSearchingEventArgs> AfterSearching;
-
-        /// <summary>
-        /// Triggered after a FluentListView has been sorted
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered after the items in the list have been sorted.")]
-        public event EventHandler<AfterSortingEventArgs> AfterSorting;
-
-        /// <summary>
-        /// Triggered before a FluentListView is searched by the user typing into the list
-        /// </summary>
-        /// <remarks>
-        /// Set Cancelled to true to prevent the searching from taking place.
-        /// Changing StringToFind or StartSearchFrom will change the subsequent search.
-        /// </remarks>
-        [Category("FluentListView"),
-        Description("This event is triggered before the control does a search-by-typing action.")]
-        public event EventHandler<BeforeSearchingEventArgs> BeforeSearching;
-
-        /// <summary>
-        /// Triggered before a FluentListView is sorted
-        /// </summary>
-        /// <remarks>
-        /// Set Cancelled to true to prevent the sort from taking place.
-        /// Changing ColumnToSort or SortOrder will change the subsequent sort.
-        /// </remarks>
-        [Category("FluentListView"),
-        Description("This event is triggered before the items in the list are sorted.")]
-        public event EventHandler<BeforeSortingEventArgs> BeforeSorting;
-
-        /// <summary>
-        /// Triggered after a FluentListView has created groups
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered after the groups are created.")]
-        public event EventHandler<CreateGroupsEventArgs> AfterCreatingGroups;
-
-        /// <summary>
-        /// Triggered before a FluentListView begins to create groups
-        /// </summary>
-        /// <remarks>
-        /// Set Groups to prevent the default group creation process
-        /// </remarks>
-        [Category("FluentListView"),
-        Description("This event is triggered before the groups are created.")]
-        public event EventHandler<CreateGroupsEventArgs> BeforeCreatingGroups;
-
-        /// <summary>
-        /// Triggered just before a FluentListView creates groups
-        /// </summary>
-        /// <remarks>
-        /// You can make changes to the groups, which have been created, before those
-        /// groups are created within the listview.
-        /// </remarks>
-        [Category("FluentListView"),
-        Description("This event is triggered when the groups are just about to be created.")]
-        public event EventHandler<CreateGroupsEventArgs> AboutToCreateGroups;
-
-        /// <summary>
-        /// Triggered when a button in a cell is left clicked.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when the user left clicks a button.")]
-        public event EventHandler<CellClickEventArgs> ButtonClick;
-
-        /// <summary>
-        /// This event is triggered when the user moves a drag over an FluentListView that
-        /// has a SimpleDropSink installed as the drop handler.
-        /// </summary>
-        /// <remarks>
-        /// Handlers for this event should set the Effect argument and optionally the
-        /// InfoMsg property. They can also change any of the DropTarget* setttings to change
-        /// the target of the drop.
-        /// </remarks>
-        [Category("FluentListView"),
-        Description("Can the user drop the currently dragged items at the current mouse location?")]
-        public event EventHandler<OlvDropEventArgs> CanDrop;
-
-        /// <summary>
-        /// Triggered when a cell has finished being edited.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered cell edit operation has completely finished")]
-        public event CellEditEventHandler CellEditFinished;
-
-        /// <summary>
-        /// Triggered when a cell is about to finish being edited.
-        /// </summary>
-        /// <remarks>If Cancel is already true, the user is cancelling the edit operation.
-        /// Set Cancel to true to prevent the value from the cell being written into the model.
-        /// You cannot prevent the editing from finishing within this event -- you need
-        /// the CellEditValidating event for that.</remarks>
-        [Category("FluentListView"),
-        Description("This event is triggered cell edit operation is finishing.")]
-        public event CellEditEventHandler CellEditFinishing;
-
-        /// <summary>
-        /// Triggered when a cell is about to be edited.
-        /// </summary>
-        /// <remarks>Set Cancel to true to prevent the cell being edited.
-        /// You can change the the Control to be something completely different.</remarks>
-        [Category("FluentListView"),
-        Description("This event is triggered when cell edit is about to begin.")]
-        public event CellEditEventHandler CellEditStarting;
-
-        /// <summary>
-        /// Triggered when a cell editor needs to be validated
-        /// </summary>
-        /// <remarks>
-        /// If this event is cancelled, focus will remain on the cell editor.
-        /// </remarks>
-        [Category("FluentListView"),
-        Description("This event is triggered when a cell editor is about to lose focus and its new contents need to be validated.")]
-        public event CellEditEventHandler CellEditValidating;
-
-        /// <summary>
-        /// Triggered when a cell is left clicked.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when the user left clicks a cell.")]
-        public event EventHandler<CellClickEventArgs> CellClick;
-
-        /// <summary>
-        /// Triggered when the mouse is above a cell.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when the mouse is over a cell.")]
-        public event EventHandler<CellOverEventArgs> CellOver;
-
-        /// <summary>
-        /// Triggered when a cell is right clicked.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when the user right clicks a cell.")]
-        public event EventHandler<CellRightClickEventArgs> CellRightClick;
-
-        /// <summary>
-        /// This event is triggered when a cell needs a tool tip.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when a cell needs a tool tip.")]
-        public event EventHandler<ToolTipShowingEventArgs> CellToolTipShowing;
-
-        /// <summary>
-        /// This event is triggered when a checkbox is checked/unchecked on a subitem
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when a checkbox is checked/unchecked on a subitem.")]
-        public event EventHandler<SubItemCheckingEventArgs> SubItemChecking;
-
-        /// <summary>
-        /// Triggered when a column header is right clicked.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when the user right clicks a column header.")]
-        public event ColumnRightClickEventHandler ColumnRightClick;
-
-        /// <summary>
-        /// This event is triggered when the user releases a drag over an FluentListView that
-        /// has a SimpleDropSink installed as the drop handler.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when the user dropped items onto the control.")]
-        public event EventHandler<OlvDropEventArgs> Dropped;
-
-        /// <summary>
-        /// This event is triggered when the control needs to filter its collection of objects.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when the control needs to filter its collection of objects.")]
-        public event EventHandler<FilterEventArgs> Filter;
-
-        /// <summary>
-        /// This event is triggered when a cell needs to be formatted.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when a cell needs to be formatted.")]
-        public event EventHandler<FormatCellEventArgs> FormatCell;
-
-        /// <summary>
-        /// This event is triggered when the frozeness of the control changes.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when frozeness of the control changes.")]
-        public event EventHandler<FreezeEventArgs> Freezing;
-
-        /// <summary>
-        /// This event is triggered when a row needs to be formatted.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when a row needs to be formatted.")]
-        public event EventHandler<FormatRowEventArgs> FormatRow;
-
-        /// <summary>
-        /// This event is triggered when a group is about to collapse or expand.
-        /// This can be cancelled to prevent the expansion.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when a group is about to collapse or expand.")]
-        public event EventHandler<GroupExpandingCollapsingEventArgs> GroupExpandingCollapsing;
-
-        /// <summary>
-        /// This event is triggered when a group changes state.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when a group changes state.")]
-        public event EventHandler<GroupStateChangedEventArgs> GroupStateChanged;
-
-        /// <summary>
-        /// This event is triggered when a header checkbox is changing value
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when a header checkbox changes value.")]
-        public event EventHandler<HeaderCheckBoxChangingEventArgs> HeaderCheckBoxChanging;
-
-        /// <summary>
-        /// This event is triggered when a header needs a tool tip.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when a header needs a tool tip.")]
-        public event EventHandler<ToolTipShowingEventArgs> HeaderToolTipShowing;
-
-        /// <summary>
-        /// Triggered when the "hot" item changes
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when the hot item changed.")]
-        public event EventHandler<HotItemChangedEventArgs> HotItemChanged;
-
-        /// <summary>
-        /// Triggered when a hyperlink cell is clicked.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when a hyperlink cell is clicked.")]
-        public event EventHandler<HyperlinkClickedEventArgs> HyperlinkClicked;
-
-        /// <summary>
-        /// Triggered when the task text of a group is clicked.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when the task text of a group is clicked.")]
-        public event EventHandler<GroupTaskClickedEventArgs> GroupTaskClicked;
-
-        /// <summary>
-        /// Is the value in the given cell a hyperlink.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when the control needs to know if a given cell contains a hyperlink.")]
-        public event EventHandler<IsHyperlinkEventArgs> IsHyperlink;
-
-        /// <summary>
-        /// Some new objects are about to be added to an FluentListView.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when objects are about to be added to the control")]
-        public event EventHandler<ItemsAddingEventArgs> ItemsAdding;
-
-        /// <summary>
-        /// The contents of the FluentListView has changed.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when the contents of the control have changed.")]
-        public event EventHandler<ItemsChangedEventArgs> ItemsChanged;
-
-        /// <summary>
-        /// The contents of the FluentListView is about to change via a SetObjects call
-        /// </summary>
-        /// <remarks>
-        /// <para>Set Cancelled to true to prevent the contents of the list changing. This does not work with virtual lists.</para>
-        /// </remarks>
-        [Category("FluentListView"),
-        Description("This event is triggered when the contents of the control changes.")]
-        public event EventHandler<ItemsChangingEventArgs> ItemsChanging;
-
-        /// <summary>
-        /// Some objects are about to be removed from an FluentListView.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when objects are removed from the control.")]
-        public event EventHandler<ItemsRemovingEventArgs> ItemsRemoving;
-
-        /// <summary>
-        /// This event is triggered when the user moves a drag over an FluentListView that
-        /// has a SimpleDropSink installed as the drop handler, and when the source control
-        /// for the drag was an FluentListView.
-        /// </summary>
-        /// <remarks>
-        /// Handlers for this event should set the Effect argument and optionally the
-        /// InfoMsg property. They can also change any of the DropTarget* setttings to change
-        /// the target of the drop.
-        /// </remarks>
-        [Category("FluentListView"),
-        Description("Can the dragged collection of model objects be dropped at the current mouse location")]
-        public event EventHandler<ModelDropEventArgs> ModelCanDrop;
-
-        /// <summary>
-        /// This event is triggered when the user releases a drag over an FluentListView that
-        /// has a SimpleDropSink installed as the drop handler and when the source control
-        /// for the drag was an FluentListView.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("A collection of model objects from a FluentListView has been dropped on this control")]
-        public event EventHandler<ModelDropEventArgs> ModelDropped;
-
-        /// <summary>
-        /// This event is triggered once per user action that changes the selection state
-        /// of one or more rows.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered once per user action that changes the selection state of one or more rows.")]
-        public event EventHandler SelectionChanged;
-
-        /// <summary>
-        /// This event is triggered when the contents of the FluentListView has scrolled.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when the contents of the FluentListView has scrolled.")]
-        public event EventHandler<ScrollEventArgs> Scroll;
-
-        #endregion
-
-        //-----------------------------------------------------------------------------------
-        #region OnEvents
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnAboutToCreateGroups(CreateGroupsEventArgs e) {
-            if (this.AboutToCreateGroups != null)
-                this.AboutToCreateGroups(this, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnBeforeCreatingGroups(CreateGroupsEventArgs e) {
-            if (this.BeforeCreatingGroups != null)
-                this.BeforeCreatingGroups(this, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnAfterCreatingGroups(CreateGroupsEventArgs e) {
-            if (this.AfterCreatingGroups != null)
-                this.AfterCreatingGroups(this, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnAfterSearching(AfterSearchingEventArgs e) {
-            if (this.AfterSearching != null)
-                this.AfterSearching(this, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnAfterSorting(AfterSortingEventArgs e) {
-            if (this.AfterSorting != null)
-                this.AfterSorting(this, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnBeforeSearching(BeforeSearchingEventArgs e) {
-            if (this.BeforeSearching != null)
-                this.BeforeSearching(this, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnBeforeSorting(BeforeSortingEventArgs e) {
-            if (this.BeforeSorting != null)
-                this.BeforeSorting(this, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
-        protected virtual void OnButtonClick(CellClickEventArgs args)
-        {
-            if (this.ButtonClick != null)
-                this.ButtonClick(this, args);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
-        protected virtual void OnCanDrop(OlvDropEventArgs args) {
-            if (this.CanDrop != null)
-                this.CanDrop(this, args);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
-        protected virtual void OnCellClick(CellClickEventArgs args) {
-            if (this.CellClick != null)
-                this.CellClick(this, args);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
-        protected virtual void OnCellOver(CellOverEventArgs args) {
-            if (this.CellOver != null)
-                this.CellOver(this, args);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
-        protected virtual void OnCellRightClick(CellRightClickEventArgs args) {
-            if (this.CellRightClick != null)
-                this.CellRightClick(this, args);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
-        protected virtual void OnCellToolTip(ToolTipShowingEventArgs args) {
-            if (this.CellToolTipShowing != null)
-                this.CellToolTipShowing(this, args);
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
-        protected virtual void OnSubItemChecking(SubItemCheckingEventArgs args) {
-            if (this.SubItemChecking != null)
-                this.SubItemChecking(this, args);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnColumnRightClick(ColumnClickEventArgs e) {
-            if (this.ColumnRightClick != null)
-                this.ColumnRightClick(this, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
-        protected virtual void OnDropped(OlvDropEventArgs args) {
-            if (this.Dropped != null)
-                this.Dropped(this, args);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        internal protected virtual void OnFilter(FilterEventArgs e) {
-            if (this.Filter != null)
-                this.Filter(this, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
-        protected virtual void OnFormatCell(FormatCellEventArgs args) {
-            if (this.FormatCell != null)
-                this.FormatCell(this, args);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
-        protected virtual void OnFormatRow(FormatRowEventArgs args) {
-            if (this.FormatRow != null)
-                this.FormatRow(this, args);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
-        protected virtual void OnFreezing(FreezeEventArgs args) {
-            if (this.Freezing != null)
-                this.Freezing(this, args);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
-        protected virtual void OnGroupExpandingCollapsing(GroupExpandingCollapsingEventArgs args)
-        {
-            if (this.GroupExpandingCollapsing != null)
-                this.GroupExpandingCollapsing(this, args);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
-        protected virtual void OnGroupStateChanged(GroupStateChangedEventArgs args)
-        {
-            if (this.GroupStateChanged != null)
-                this.GroupStateChanged(this, args);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
-        protected virtual void OnHeaderCheckBoxChanging(HeaderCheckBoxChangingEventArgs args)
-        {
-            if (this.HeaderCheckBoxChanging != null)
-                this.HeaderCheckBoxChanging(this, args);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
-        protected virtual void OnHeaderToolTip(ToolTipShowingEventArgs args)
-        {
-            if (this.HeaderToolTipShowing != null)
-                this.HeaderToolTipShowing(this, args);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnHotItemChanged(HotItemChangedEventArgs e) {
-            if (this.HotItemChanged != null)
-                this.HotItemChanged(this, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnHyperlinkClicked(HyperlinkClickedEventArgs e) {
-            if (this.HyperlinkClicked != null)
-                this.HyperlinkClicked(this, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnGroupTaskClicked(GroupTaskClickedEventArgs e) {
-            if (this.GroupTaskClicked != null)
-                this.GroupTaskClicked(this, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnIsHyperlink(IsHyperlinkEventArgs e) {
-            if (this.IsHyperlink != null)
-                this.IsHyperlink(this, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnItemsAdding(ItemsAddingEventArgs e) {
-            if (this.ItemsAdding != null)
-                this.ItemsAdding(this, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnItemsChanged(ItemsChangedEventArgs e) {
-            if (this.ItemsChanged != null)
-                this.ItemsChanged(this, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnItemsChanging(ItemsChangingEventArgs e) {
-            if (this.ItemsChanging != null)
-                this.ItemsChanging(this, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnItemsRemoving(ItemsRemovingEventArgs e) {
-            if (this.ItemsRemoving != null)
-                this.ItemsRemoving(this, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
-        protected virtual void OnModelCanDrop(ModelDropEventArgs args) {
-            if (this.ModelCanDrop != null)
-                this.ModelCanDrop(this, args);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
-        protected virtual void OnModelDropped(ModelDropEventArgs args) {
-            if (this.ModelDropped != null)
-                this.ModelDropped(this, args);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnSelectionChanged(EventArgs e) {
-            if (this.SelectionChanged != null)
-                this.SelectionChanged(this, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnScroll(ScrollEventArgs e) {
-            if (this.Scroll != null)
-                this.Scroll(this, e);
-        }
-
-
-        /// <summary>
-        /// Tell the world when a cell is about to be edited.
-        /// </summary>
-        protected virtual void OnCellEditStarting(CellEditEventArgs e) {
-            if (this.CellEditStarting != null)
-                this.CellEditStarting(this, e);
-        }
-
-        /// <summary>
-        /// Tell the world when a cell is about to finish being edited.
-        /// </summary>
-        protected virtual void OnCellEditorValidating(CellEditEventArgs e) {
-            // Hack. ListView is an imperfect control container. It does not manage validation
-            // perfectly. If the ListView is part of a TabControl, and the cell editor loses
-            // focus by the user clicking on another tab, the TabControl processes the click
-            // and switches tabs, even if this Validating event cancels. This results in the
-            // strange situation where the cell editor is active, but isn't visible. When the
-            // user switches back to the tab with the ListView, composite controls like spin
-            // controls, DateTimePicker and ComboBoxes do not work properly. Specifically,
-            // keyboard input still works fine, but the controls do not respond to mouse
-            // input. SO, if the validation fails, we have to specifically give focus back to
-            // the cell editor. (this is the Select() call in the code below). 
-            // But (there is always a 'but'), doing that changes the focus so the cell editor
-            // triggers another Validating event -- which fails again. From the user's point
-            // of view, they click away from the cell editor, and the validating code
-            // complains twice. So we only trigger a Validating event if more than 0.1 seconds
-            // has elapsed since the last validate event.
-            // I know it's a hack. I'm very open to hear a neater solution.
-
-            // Also, this timed response stops us from sending a series of validation events
-            // if the user clicks and holds on the OLV scroll bar.
-            //System.Diagnostics.Debug.WriteLine(Environment.TickCount - lastValidatingEvent);
-            if ((Environment.TickCount - lastValidatingEvent) < 100) {
-                e.Cancel = true;
-            } else {
-                lastValidatingEvent = Environment.TickCount;
-                if (this.CellEditValidating != null)
-                    this.CellEditValidating(this, e);
-            }
-            lastValidatingEvent = Environment.TickCount;
-        }
-        private int lastValidatingEvent = 0;
-
-        /// <summary>
-        /// Tell the world when a cell is about to finish being edited.
-        /// </summary>
-        protected virtual void OnCellEditFinishing(CellEditEventArgs e) {
-            if (this.CellEditFinishing != null)
-                this.CellEditFinishing(this, e);
-        }
-
-        /// <summary>
-        /// Tell the world when a cell has finished being edited.
-        /// </summary>
-        protected virtual void OnCellEditFinished(CellEditEventArgs e) {
-            if (this.CellEditFinished != null)
-                this.CellEditFinished(this, e);
-        }
-
-        #endregion
-    }
-    
-    public partial class TreeListView
-    {
-
-        #region Events
-
-        /// <summary>
-        /// This event is triggered when user input requests the expansion of a list item.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when a branch is about to expand.")]
-        public event EventHandler<TreeBranchExpandingEventArgs> Expanding;
- 
-        /// <summary>
-        /// This event is triggered when user input requests the collapse of a list item.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when a branch is about to collapsed.")]
-        public event EventHandler<TreeBranchCollapsingEventArgs> Collapsing;
- 
-        /// <summary>
-        /// This event is triggered after the expansion of a list item due to user input.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when a branch has been expanded.")]
-        public event EventHandler<TreeBranchExpandedEventArgs> Expanded;
- 
-        /// <summary>
-        /// This event is triggered after the collapse of a list item due to user input.
-        /// </summary>
-        [Category("FluentListView"),
-        Description("This event is triggered when a branch has been collapsed.")]
-        public event EventHandler<TreeBranchCollapsedEventArgs> Collapsed;
- 
-        #endregion
- 
-        #region OnEvents
-
-        /// <summary>
-        /// Trigger the expanding event
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnExpanding(TreeBranchExpandingEventArgs e) {
-            if (this.Expanding != null)
-                this.Expanding(this, e);
-        }
-
-        /// <summary>
-        /// Trigger the collapsing event
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnCollapsing(TreeBranchCollapsingEventArgs e) {
-            if (this.Collapsing != null)
-                this.Collapsing(this, e);
-        }
-
-        /// <summary>
-        /// Trigger the expanded event
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnExpanded(TreeBranchExpandedEventArgs e) {
-             if (this.Expanded != null)
-                 this.Expanded(this, e);
-        }
-
-        /// <summary>
-        /// Trigger the collapsed event
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnCollapsed(TreeBranchCollapsedEventArgs e) {
-            if (this.Collapsed != null)
-                this.Collapsed(this, e);
-        }
- 
-         #endregion
-    }
-
-    //-----------------------------------------------------------------------------------
-    #region Event Parameter Blocks
-
-    /// <summary>
-    /// Let the world know that a cell edit operation is beginning or ending
-    /// </summary>
-    public class CellEditEventArgs : EventArgs
+	/// <summary>
+	/// The callbacks for CellEditing events
+	/// </summary>
+	/// <remarks> this 
+	/// We could replace this with EventHandler&lt;CellEditEventArgs&gt; but that would break all
+	/// cell editing event code from v1.x.
+	/// </remarks>
+	public delegate void CellEditEventHandler(object sender, CellEditEventArgs e);
+
+
+	//-----------------------------------------------------------------------------------
+	#region Event Parameter Blocks
+
+	/// <summary>
+	/// Let the world know that a cell edit operation is beginning or ending
+	/// </summary>
+	public class CellEditEventArgs : EventArgs
     {
         /// <summary>
         /// Create an event args

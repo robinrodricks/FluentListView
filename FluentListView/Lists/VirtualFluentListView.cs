@@ -80,7 +80,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace Fluent
+namespace Fluent.Lists
 {
     /// <summary>
     /// A virtual object list view operates in virtual mode, that is, it only gets model objects for
