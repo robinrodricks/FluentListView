@@ -25,9 +25,9 @@ namespace Fluent {
 
 		/// <summary>
 		/// The items that are bound to this list. You only need to set this once.
-		/// When you change this collection, simply call Redraw() to update all the items.
+		/// When adding and removing items, please call AddItem and RemoveItem instead of modifying this list directly.
 		/// </summary>
-		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[Browsable(false)]
 		public IList Items {
 			get {
 				return items;
@@ -43,6 +43,7 @@ namespace Fluent {
 		/// You need to set these to configure which properties of your objects display as the Name, Icon and Description.
 		/// You can optionally add a list of Columns, to have those properties show as additional columns in the list.
 		/// </summary>
+		[Browsable(false)]
 		public FluentListProperties Properties { get { return properties; } }
 		/// <summary>
 		/// Whether the list will use a SimpleDragSource to initiate drags.
@@ -64,6 +65,10 @@ namespace Fluent {
 		/// The font used to display list items. Affects row height.
 		/// </summary>
 		public Font ItemFont { get; set; }
+		/// <summary>
+		/// The width of additional columns.
+		/// </summary>
+		public int ColumnWidth { get; set; }
 
 		/// <summary>
 		/// You need to set this if you are using EnableDragDropItems or EnableDrop, but not if you are using EnableDropFiles.
@@ -120,7 +125,7 @@ namespace Fluent {
 		/// <summary>
 		/// Gets the underlying AdvancedListView or FastListView UI control.
 		/// </summary>
-		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[Browsable(false)]
 		public AdvancedListView InnerList {
 			get {
 				if (InnerAdvList != null) {
@@ -135,9 +140,46 @@ namespace Fluent {
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the selected item.
+		/// </summary>
+		[Browsable(false)]
+		public object SelectedItem {
+			get {
+				if (InnerList != null) {
+					return InnerList.SelectedObject;
+				}
+				return null;
+			}
+			set {
+				if (InnerList != null) {
+					InnerList.SelectObject(value, true);
+					InnerList.EnsureModelVisible(value);
+				}
+			}
+		}
 
 		/// <summary>
-		/// Displays the items as a list. Items that are already created are re-used.
+		/// Gets or sets the selected items.
+		/// </summary>
+		[Browsable(false)]
+		public IList SelectedItems {
+			get {
+				if (InnerList != null) {
+					return InnerList.SelectedObjects;
+				}
+				return null;
+			}
+			set {
+				if (InnerList != null) {
+					InnerList.SelectedObjects = value;
+				}
+			}
+		}
+
+
+		/// <summary>
+		/// Displays the items as a list. Call this when the items have been added/removed to force-redraw.
 		/// </summary>
 		public void Redraw() {
 
@@ -148,6 +190,19 @@ namespace Fluent {
 			CreateDestroyList();
 
 			RedrawItems();
+
+		}
+
+		/// <summary>
+		/// Call this when the item column values have changed, and you want to simply update the view.
+		/// </summary>
+		public void RedrawValues() {
+
+			if (InnerList == null) {
+				return;
+			}
+
+			InnerList.RedrawItems(0, Items.Count - 1, false);
 
 		}
 
@@ -216,6 +271,10 @@ namespace Fluent {
 			list.Size = this.Size;
 			list.Name = "InnerList";
 			list.Visible = true;
+			list.BackColor = this.BackColor;
+			list.ForeColor = this.ForeColor;
+			list.BorderStyle = this.BorderStyle;
+			list.HideSelection = false;
 
 			// add headers
 			var showHeaders = false;
@@ -247,8 +306,6 @@ namespace Fluent {
 			// add and resize
 			this.Controls.Add(list);
 			list.Dock = DockStyle.Fill;
-			list.AutoSizeColumns();
-			list.AutoResizeColumns();
 
 			// configure drag & drop
 			if (EnableDragDropItems) {
@@ -322,9 +379,10 @@ namespace Fluent {
 			// always add a name property
 			columns.Add(new OLVColumn {
 				Name = "Name",
-				FillsFreeSpace = !ShowColumns,
+				Text = "Name",
+				FillsFreeSpace = true,
 				Groupable = (Properties.GroupBy == Properties.Name),
-				UseInitialLetterForGroup = true,
+				//UseInitialLetterForGroup = true,
 				AspectName = properties.Name,
 				IsVisible = true,
 				Width = 300,
@@ -342,13 +400,21 @@ namespace Fluent {
 			// add columns
 			if (ShowColumns && properties.Columns != null) {
 				showHeaders = true;
-				foreach (var column in properties.Columns) {
+				for (int c = 0; c < properties.Columns.Count; c++) {
+					var colProp = properties.Columns[c];
+					var colName = properties.ColumnNames != null ? properties.ColumnNames[c] : colProp;
+					var colWidth = ColumnWidth > 0 ? ColumnWidth : 100;
+
 					columns.Add(new OLVColumn {
-						Name = column,
-						Groupable = (Properties.GroupBy == column),
-						AspectName = column,
+						Name = colProp,
+						Text = colName,
+						Groupable = (Properties.GroupBy == colProp),
+						AspectName = colProp,
 						IsVisible = true,
-						Width = 100,
+						FillsFreeSpace = false,
+						//MaximumWidth = colWidth,
+						//MinimumWidth = colWidth,
+						Width = colWidth,
 					});
 				}
 			}
@@ -404,6 +470,16 @@ namespace Fluent {
 				}
 			}
 
+		}
+		/// <summary>
+		/// Quickly removes multiple items from the list.
+		/// </summary>
+		public void RemoveItems(IList items) {
+			if (items != null) {
+				foreach (var item in items) {
+					RemoveItem(item);
+				}
+			}
 		}
 
 		/// <summary>

@@ -12,7 +12,9 @@ namespace Fluent {
 		public string Icon { get; set; }
 
 		public List<string> Columns { get; set; }
-		
+
+		public List<string> ColumnNames { get; set; }
+
 		public string GroupBy { get; set; }
 
 		
