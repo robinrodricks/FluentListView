@@ -152,6 +152,8 @@ var selectedItems = list.SelectedItems.ToList<FileObject>();
 
 ## Advanced API
 
+FluentListView objects are a light-weight wrapper over `AdvancedListView` and `FastListView`. We needed to use the wrapper pattern because the underlying list is created depending on the features you enable. In most cases a `FastListView` suffices, but if certain advanced features are used we create a `AdvancedListView`. This gives you better performance in most use cases. A wrapper also allows us to expose a simpler and more out-of-the-box API.
+
 You can also directly modify the underlying [AdvancedListView](https://github.com/robinrodricks/FluentListView/blob/master/ADVANCED.md) if you need these:
 
 *  Sorting and grouping rows.
