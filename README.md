@@ -33,9 +33,9 @@ form.Controls.Add(list);
 
 
 // set basic visual properties
-list.Size = new System.Drawing.Size(800, 200);
+list.Size = new Size(800, 200);
 list.Theme = OLVTheme.VistaExplorer;
-list.ItemFont = new System.Drawing.Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+list.ItemFont = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 
 
 // display the the file name as the list item label
