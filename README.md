@@ -1,6 +1,17 @@
 # FluentListView
 FluentListView is a C# wrapper around a .NET ListView, supporting model-bound lists, in-place item editing, drag and drop, icons, themes, trees & data grids, and much more.
 
+Here is an example of what your FluentListView can look like:
+
+![_images/fancy-screenshot2.png](_images/fancy-screenshot2.png)
+
+Add graphics, buttons and descriptions to make your application come to life:
+
+![_images/described-task1.png](_images/described-task1.png)
+
+
+## How it works
+
 FluentListView is designed to view a list of strongly-typed objects. You don't need to create `ListItem` objects, you just feed it your list and everything is handled internally.
 
 It extracts certain properties from your objects, converts those properties to strings, and then displays those as list items.
