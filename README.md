@@ -9,9 +9,7 @@ It extracts certain properties from your objects, converts those properties to s
 
 ![_images/ModelToScreenProcess.png](_images/ModelToScreenProcess.png)
 
-*Diagram copyrighted © 2006-2019 by Phillip Piper.*
-
-*All credits go to Phillip Piper for creating the original project [ObjectListView](http://objectlistview.sourceforge.net/).*
+*Diagram copyrighted © 2006-2019 by Phillip Piper. All credits go to Phillip Piper for creating the original [ObjectListView](http://objectlistview.sourceforge.net/).*
 
 ## Example
 
