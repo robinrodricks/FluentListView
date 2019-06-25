@@ -76,11 +76,13 @@ list.OnDroppedFiles = delegate (List<string> paths) {
 		list.AddItem(item);
 	});
 };
+```
 
+You can later use these properties to get info about the list items and selection.
 
+```cs
 // get the currently displayed items
 var currentItems = ((List<FileObject>)list.Items);
-
 
 // get the currently selected items
 var selectedItems = list.SelectedItems.ToList<FileObject>();
