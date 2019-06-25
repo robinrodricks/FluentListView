@@ -9,7 +9,7 @@ It extracts certain properties from your objects, converts those properties to s
 
 *Diagram copyrighted © 2006-2019 by Phillip Piper.*
 
-All credits go to Phillip Piper for creating the original project [ObjectListView](http://objectlistview.sourceforge.net/).
+*All credits go to Phillip Piper for creating the original project [ObjectListView](http://objectlistview.sourceforge.net/).*
 
 ## Example
 
