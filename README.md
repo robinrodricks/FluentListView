@@ -62,7 +62,7 @@ list.Items = new List<FileObject>();
 list.EnableDropFiles = true;
 list.EnableDropOnLocations = DropTargetLocation.Background | DropTargetLocation.Item;
 list.OnDroppedFiles = delegate (List<string> paths) {
-	paths.ForEach(p => {
+	paths.ForEach(path => {
 	
 		// add the file to the list
 		var item = new FileObject {
