@@ -5,7 +5,7 @@ FluentListView is designed to view a list of strongly-typed objects. You don't n
 
 It extracts certain properties from your objects, converts those properties to strings, and then displays those as list items.
 
------------------------------------
+&nbsp;
 
 ![_images/ModelToScreenProcess.png](_images/ModelToScreenProcess.png)
 
