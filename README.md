@@ -26,22 +26,31 @@ using Fluent;
 using System.Windows.Forms;
 using System.Drawing;
 
+
+// create a list and add it into the form
 var list = new FluentListView();
+form.Controls.Add(list);
+
+
+// set basic visual properties
 list.Size = new System.Drawing.Size(800, 200);
 list.Theme = OLVTheme.VistaExplorer;
 list.ItemFont = new System.Drawing.Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-form.Controls.Add(list);
+
 
 // display the the file name as the list item label
 list.Properties.Name = "Name";
+
 
 // display some more properties from our objects as columns
 list.ShowColumns = true;
 list.Properties.Columns = new List<string>     { "DateCreated",  "DateModified",  "FullPath"  };
 list.Properties.ColumnNames = new List<string> { "Date Created", "Date Modified", "Full Path" };
 
+
 // set the default items
 list.Items = new List<FileObject>();
+
 
 // enable drag-and-drop files from Explorer
 list.EnableDropFiles = true;
@@ -62,8 +71,10 @@ list.OnDroppedFiles = delegate (List<string> paths) {
 	});
 };
 
+
 // get the currently displayed items
 var currentItems = ((List<FileObject>)list.Items);
+
 
 // get the currently selected items
 var selectedItems = list.SelectedItems.ToList<FileObject>();
