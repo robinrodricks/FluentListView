@@ -3,6 +3,8 @@
 
 This is the underlying component used in FluentListView.
 
+You can access this component using the `InnerList` property on any `FluentListView` instance.
+
 The following readme is copyrighted © 2006-2019 by Phillip Piper.
 
 
