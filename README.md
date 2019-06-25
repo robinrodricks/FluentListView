@@ -90,9 +90,19 @@ var selectedItems = list.SelectedItems.ToList<FileObject>();
 
 ## Basic API
 
-- list.**Properties** - You need to set these to configure which properties of your objects display as the Name, Icon and Description. You can optionally add a list of Columns, to have those properties show as additional columns in the list.
+- list.**Properties** - Which properties of your objects to display on the view.
+   
+   - list.**Properties.Name** - Which object property to display as the list item label. The property can be of any type.
+   
+   - list.**Properties.Icon** - Which object property to display as the icon. It must be a `Icon` or `Bitmap` property.
+   
+   - list.**Properties.Description** - Which object property to display as the description, just below the item label. The property can be of any type.
+   
+   - list.**Properties.Columns** - Which object properties to display as additional columns. The properties can be of any type.
+   
+   - list.**Properties.ColumnNames** - Friendly names to display as the column headers. Must be the same length as `Properties.Columns`. If you don't specify this, the `Properties.Columns` list is displayed as the column headers instead.
 
-- list.**Items** - The items that are bound to this list. Set this to your list of objects. You only need to set this once. When adding and removing a single item, please call `AddItem` and `RemoveItem` instead of modifying this list directly.
+- list.**Items** - The items that are bound to this list. Set this to your list of objects. You only need to set this once. When adding and removing a single item, please call `AddItem` and `RemoveItem` instead of modifying this list directly, or call `Redraw` to update the view.
 
 - list.**Theme** - Which visual theme to use to render items.
 
