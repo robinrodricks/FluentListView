@@ -146,11 +146,11 @@ var selectedItems = list.SelectedItems.ToList<FileObject>();
 You can also directly modify the underlying [AdvancedListView](https://github.com/robinrodricks/FluentListView/blob/master/ADVANCED.md) if you need these:
 
 *  Sorting and grouping rows.
-*  Edit cell values
-*  All ListView views (report, list, large and small icons).
+*  Editing cell values.
+*  Other views (report, list, large and small icons).
 *  Owner drawing, rendering animated graphics and images stored in a database.
-*  Display a “list is empty” messag.
-*  Fancy tooltips for cells and for headers.
-*  Buttons in cells
+*  Display a “list is empty” message.
+*  Fancy tooltips for cells and headers.
+*  Buttons in cells.
 *  Checkboxes in any column as well as tri-state checkboxes.
 *  [And much more...](https://github.com/robinrodricks/FluentListView/blob/master/ADVANCED.md)
