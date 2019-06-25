@@ -110,9 +110,9 @@ var selectedItems = list.SelectedItems.ToList<FileObject>();
 
 - list.**InnerList** - Gets the underlying AdvancedListView or FastListView UI control.
 
-- list.**SelectedItem** - Gets or sets the selected item.
+- list.**SelectedItem** - Gets or sets the selected item. Setting this property automatically scrolls to the item and highlights it.
 
-- list.**SelectedItems** - Gets or sets the selected items.
+- list.**SelectedItems** - Gets or sets the selected items. Setting this property highlights all the given items.
 
 
 ## Drag and Drop API
@@ -151,4 +151,4 @@ You can also directly modify the underlying [AdvancedListView](https://github.co
 *  Fancy tooltips for cells and for headers.
 *  Buttons in cells
 *  Checkboxes in any column as well as tri-state checkboxes.
-*  And much more...
+*  [And much more...](https://github.com/robinrodricks/FluentListView/blob/master/ADVANCED.md)
