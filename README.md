@@ -78,7 +78,7 @@ list.OnDroppedFiles = delegate (List<string> paths) {
 };
 ```
 
-You can later use these properties to get info about the list items and selection.
+You can later get info about the list items and selection.
 
 ```cs
 // get the currently displayed items
