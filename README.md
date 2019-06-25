@@ -113,7 +113,7 @@ var selectedItems = list.SelectedItems.ToList<FileObject>();
    
    - list.**Properties.ColumnNames** - Friendly names to display as the column headers. Must be the same length as `Properties.Columns`. If you don't specify this, the `Properties.Columns` list is displayed as the column headers instead.
 
-- list.**Items** - The items that are bound to this list. Set this to your list of objects. You only need to set this once. When adding and removing a single item, please call `AddItem` and `RemoveItem` instead of modifying this list directly, or call `Redraw` to update the view.
+- list.**Items** - The items that are bound to this list. Set this to your list of objects. You only need to set this once. When adding and removing a single item, please call `AddItem` and `RemoveItem`. If modify this list directly, call `Redraw` to update the view.
 
 - list.**Theme** - Which visual theme to use to render items.
 
