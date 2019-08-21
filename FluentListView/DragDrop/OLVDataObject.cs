@@ -37,150 +37,146 @@ using System.Windows.Forms;
 using Fluent.Lists;
 
 namespace Fluent {
-    
-    /// <summary>
-    /// A data transfer object that knows how to transform a list of model
-    /// objects into a text and HTML representation.
-    /// </summary>
-    public class OLVDataObject : DataObject {
-        #region Life and death
+	/// <summary>
+	/// A data transfer object that knows how to transform a list of model
+	/// objects into a text and HTML representation.
+	/// </summary>
+	public class OLVDataObject : DataObject {
+		#region Life and death
 
-        /// <summary>
-        /// Create a data object from the selected objects in the given FluentListView
-        /// </summary>
-        /// <param name="olv">The source of the data object</param>
-        public OLVDataObject(AdvancedListView olv)
-            : this(olv, olv.SelectedObjects) {
-        }
+		/// <summary>
+		/// Create a data object from the selected objects in the given FluentListView
+		/// </summary>
+		/// <param name="olv">The source of the data object</param>
+		public OLVDataObject(AdvancedListView olv)
+			: this(olv, olv.SelectedObjects) {
+		}
 
-        /// <summary>
-        /// Create a data object which operates on the given model objects 
-        /// in the given FluentListView
-        /// </summary>
-        /// <param name="olv">The source of the data object</param>
-        /// <param name="modelObjects">The model objects to be put into the data object</param>
-        public OLVDataObject(AdvancedListView olv, IList modelObjects) {
-            this.objectListView = olv;
-            this.modelObjects = modelObjects;
-            this.includeHiddenColumns = olv.IncludeHiddenColumnsInDataTransfer;
-            this.includeColumnHeaders = olv.IncludeColumnHeadersInCopy;
-            this.CreateTextFormats();
-        }
+		/// <summary>
+		/// Create a data object which operates on the given model objects 
+		/// in the given FluentListView
+		/// </summary>
+		/// <param name="olv">The source of the data object</param>
+		/// <param name="modelObjects">The model objects to be put into the data object</param>
+		public OLVDataObject(AdvancedListView olv, IList modelObjects) {
+			objectListView = olv;
+			this.modelObjects = modelObjects;
+			includeHiddenColumns = olv.IncludeHiddenColumnsInDataTransfer;
+			includeColumnHeaders = olv.IncludeColumnHeadersInCopy;
+			CreateTextFormats();
+		}
 
-        #endregion
+		#endregion
 
-        #region Properties
+		#region Properties
 
-        /// <summary>
-        /// Gets or sets whether hidden columns will also be included in the text
-        /// and HTML representation. If this is false, only visible columns will
-        /// be included.
-        /// </summary>
-        public bool IncludeHiddenColumns {
-            get { return includeHiddenColumns; }
-        }
-        private readonly bool includeHiddenColumns;
+		/// <summary>
+		/// Gets or sets whether hidden columns will also be included in the text
+		/// and HTML representation. If this is false, only visible columns will
+		/// be included.
+		/// </summary>
+		public bool IncludeHiddenColumns => includeHiddenColumns;
 
-        /// <summary>
-        /// Gets or sets whether column headers will also be included in the text
-        /// and HTML representation.
-        /// </summary>
-        public bool IncludeColumnHeaders {
-            get { return includeColumnHeaders; }
-        }
-        private readonly bool includeColumnHeaders;
+		private readonly bool includeHiddenColumns;
 
-        /// <summary>
-        /// Gets the FluentListView that is being used as the source of the data
-        /// </summary>
-        public AdvancedListView ListView {
-            get { return objectListView; }
-        }
-        private readonly AdvancedListView objectListView;
+		/// <summary>
+		/// Gets or sets whether column headers will also be included in the text
+		/// and HTML representation.
+		/// </summary>
+		public bool IncludeColumnHeaders => includeColumnHeaders;
 
-        /// <summary>
-        /// Gets the model objects that are to be placed in the data object
-        /// </summary>
-        public IList ModelObjects {
-            get { return modelObjects; }
-        }
-        private readonly IList modelObjects;
+		private readonly bool includeColumnHeaders;
 
-        #endregion
+		/// <summary>
+		/// Gets the FluentListView that is being used as the source of the data
+		/// </summary>
+		public AdvancedListView ListView => objectListView;
 
-        /// <summary>
-        /// Put a text and HTML representation of our model objects
-        /// into the data object.
-        /// </summary>
-        public void CreateTextFormats() {
+		private readonly AdvancedListView objectListView;
 
-            OLVExporter exporter = this.CreateExporter();
+		/// <summary>
+		/// Gets the model objects that are to be placed in the data object
+		/// </summary>
+		public IList ModelObjects => modelObjects;
 
-            // Put both the text and html versions onto the clipboard.
-            // For some reason, SetText() with UnicodeText doesn't set the basic CF_TEXT format,
-            // but using SetData() does.
-            //this.SetText(sbText.ToString(), TextDataFormat.UnicodeText);
-            this.SetData(exporter.ExportTo(OLVExporter.ExportFormat.TabSeparated));
-            string exportTo = exporter.ExportTo(OLVExporter.ExportFormat.CSV);
-            if (!String.IsNullOrEmpty(exportTo))
-                this.SetText(exportTo, TextDataFormat.CommaSeparatedValue);
-            this.SetText(ConvertToHtmlFragment(exporter.ExportTo(OLVExporter.ExportFormat.HTML)), TextDataFormat.Html);
-        }
+		private readonly IList modelObjects;
 
-        /// <summary>
-        /// Create an exporter for the data contained in this object
-        /// </summary>
-        /// <returns></returns>
-        protected OLVExporter CreateExporter() {
-            OLVExporter exporter = new OLVExporter(this.ListView);
-            exporter.IncludeColumnHeaders = this.IncludeColumnHeaders;
-            exporter.IncludeHiddenColumns = this.IncludeHiddenColumns;
-            exporter.ModelObjects = this.ModelObjects;
-            return exporter;
-        }
+		#endregion
 
-        /// <summary>
-        /// Make a HTML representation of our model objects
-        /// </summary>
-        [Obsolete("Use OLVExporter directly instead", false)]
-        public string CreateHtml() {
-            OLVExporter exporter = this.CreateExporter();
-            return exporter.ExportTo(OLVExporter.ExportFormat.HTML);
-        }
+		/// <summary>
+		/// Put a text and HTML representation of our model objects
+		/// into the data object.
+		/// </summary>
+		public void CreateTextFormats() {
+			var exporter = CreateExporter();
 
-        /// <summary>
-        /// Convert the fragment of HTML into the Clipboards HTML format.
-        /// </summary>
-        /// <remarks>The HTML format is found here http://msdn2.microsoft.com/en-us/library/aa767917.aspx
-        /// </remarks>
-        /// <param name="fragment">The HTML to put onto the clipboard. It must be valid HTML!</param>
-        /// <returns>A string that can be put onto the clipboard and will be recognized as HTML</returns>
-        private string ConvertToHtmlFragment(string fragment) {
-            // Minimal implementation of HTML clipboard format
-            const string SOURCE = "http://www.codeproject.com/Articles/16009/A-Much-Easier-to-Use-ListView";
+			// Put both the text and html versions onto the clipboard.
+			// For some reason, SetText() with UnicodeText doesn't set the basic CF_TEXT format,
+			// but using SetData() does.
+			//this.SetText(sbText.ToString(), TextDataFormat.UnicodeText);
+			SetData(exporter.ExportTo(OLVExporter.ExportFormat.TabSeparated));
+			var exportTo = exporter.ExportTo(OLVExporter.ExportFormat.CSV);
+			if (!string.IsNullOrEmpty(exportTo)) {
+				SetText(exportTo, TextDataFormat.CommaSeparatedValue);
+			}
 
-            const String MARKER_BLOCK =
-                "Version:1.0\r\n" +
-                "StartHTML:{0,8}\r\n" +
-                "EndHTML:{1,8}\r\n" +
-                "StartFragment:{2,8}\r\n" +
-                "EndFragment:{3,8}\r\n" +
-                "StartSelection:{2,8}\r\n" +
-                "EndSelection:{3,8}\r\n" +
-                "SourceURL:{4}\r\n" +
-                "{5}";
+			SetText(ConvertToHtmlFragment(exporter.ExportTo(OLVExporter.ExportFormat.HTML)), TextDataFormat.Html);
+		}
 
-            int prefixLength = String.Format(MARKER_BLOCK, 0, 0, 0, 0, SOURCE, "").Length;
+		/// <summary>
+		/// Create an exporter for the data contained in this object
+		/// </summary>
+		/// <returns></returns>
+		protected OLVExporter CreateExporter() {
+			var exporter = new OLVExporter(ListView);
+			exporter.IncludeColumnHeaders = IncludeColumnHeaders;
+			exporter.IncludeHiddenColumns = IncludeHiddenColumns;
+			exporter.ModelObjects = ModelObjects;
+			return exporter;
+		}
 
-            const String DEFAULT_HTML_BODY =
-                "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">" +
-                "<HTML><HEAD></HEAD><BODY><!--StartFragment-->{0}<!--EndFragment--></BODY></HTML>";
+		/// <summary>
+		/// Make a HTML representation of our model objects
+		/// </summary>
+		[Obsolete("Use OLVExporter directly instead", false)]
+		public string CreateHtml() {
+			var exporter = CreateExporter();
+			return exporter.ExportTo(OLVExporter.ExportFormat.HTML);
+		}
 
-            string html = String.Format(DEFAULT_HTML_BODY, fragment);
-            int startFragment = prefixLength + html.IndexOf(fragment, StringComparison.Ordinal);
-            int endFragment = startFragment + fragment.Length;
+		/// <summary>
+		/// Convert the fragment of HTML into the Clipboards HTML format.
+		/// </summary>
+		/// <remarks>The HTML format is found here http://msdn2.microsoft.com/en-us/library/aa767917.aspx
+		/// </remarks>
+		/// <param name="fragment">The HTML to put onto the clipboard. It must be valid HTML!</param>
+		/// <returns>A string that can be put onto the clipboard and will be recognized as HTML</returns>
+		private string ConvertToHtmlFragment(string fragment) {
+			// Minimal implementation of HTML clipboard format
+			const string SOURCE = "http://www.codeproject.com/Articles/16009/A-Much-Easier-to-Use-ListView";
 
-            return String.Format(MARKER_BLOCK, prefixLength, prefixLength + html.Length, startFragment, endFragment, SOURCE, html);
-        }
-    }
+			const string MARKER_BLOCK =
+				"Version:1.0\r\n" +
+				"StartHTML:{0,8}\r\n" +
+				"EndHTML:{1,8}\r\n" +
+				"StartFragment:{2,8}\r\n" +
+				"EndFragment:{3,8}\r\n" +
+				"StartSelection:{2,8}\r\n" +
+				"EndSelection:{3,8}\r\n" +
+				"SourceURL:{4}\r\n" +
+				"{5}";
+
+			var prefixLength = string.Format(MARKER_BLOCK, 0, 0, 0, 0, SOURCE, "").Length;
+
+			const string DEFAULT_HTML_BODY =
+				"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">" +
+				"<HTML><HEAD></HEAD><BODY><!--StartFragment-->{0}<!--EndFragment--></BODY></HTML>";
+
+			var html = string.Format(DEFAULT_HTML_BODY, fragment);
+			var startFragment = prefixLength + html.IndexOf(fragment, StringComparison.Ordinal);
+			var endFragment = startFragment + fragment.Length;
+
+			return string.Format(MARKER_BLOCK, prefixLength, prefixLength + html.Length, startFragment, endFragment, SOURCE, html);
+		}
+	}
 }

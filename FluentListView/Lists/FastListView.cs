@@ -43,380 +43,381 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace Fluent.Lists
-{
-    /// <summary>
-    /// A FastFluentListView trades function for speed.
-    /// </summary>
-    /// <remarks>
-    /// <para>On my mid-range laptop, this view builds a list of 10,000 objects in 0.1 seconds,
-    /// as opposed to a normal FluentListView which takes 10-15 seconds. Lists of up to 50,000 items should be
-    /// able to be handled with sub-second response times even on low end machines.</para>
-    /// <para>
-    /// A FastFluentListView is implemented as a virtual list with many of the virtual modes limits (e.g. no sorting)
-    /// fixed through coding. There are some functions that simply cannot be provided. Specifically, a FastFluentListView cannot:
-    /// <list type="bullet">
-    /// <item><description>use Tile view</description></item>
-    /// <item><description>show groups on XP</description></item>
-    /// </list>
-    /// </para>
-    /// </remarks>
-    public class FastListView : VirtualFluentListView
-    {
-        /// <summary>
-        /// Make a FastFluentListView
-        /// </summary>
-        public FastListView() {
-            this.VirtualListDataSource = new FastObjectListDataSource(this);
-            this.GroupingStrategy = new FastListGroupingStrategy();
-        }
+namespace Fluent.Lists {
+	/// <summary>
+	/// A FastFluentListView trades function for speed.
+	/// </summary>
+	/// <remarks>
+	/// <para>On my mid-range laptop, this view builds a list of 10,000 objects in 0.1 seconds,
+	/// as opposed to a normal FluentListView which takes 10-15 seconds. Lists of up to 50,000 items should be
+	/// able to be handled with sub-second response times even on low end machines.</para>
+	/// <para>
+	/// A FastFluentListView is implemented as a virtual list with many of the virtual modes limits (e.g. no sorting)
+	/// fixed through coding. There are some functions that simply cannot be provided. Specifically, a FastFluentListView cannot:
+	/// <list type="bullet">
+	/// <item><description>use Tile view</description></item>
+	/// <item><description>show groups on XP</description></item>
+	/// </list>
+	/// </para>
+	/// </remarks>
+	public class FastListView : VirtualFluentListView {
+		/// <summary>
+		/// Make a FastFluentListView
+		/// </summary>
+		public FastListView() {
+			VirtualListDataSource = new FastObjectListDataSource(this);
+			GroupingStrategy = new FastListGroupingStrategy();
+		}
 
-        /// <summary>
-        /// Gets the collection of objects that survive any filtering that may be in place.
-        /// </summary>
-        [Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public override IEnumerable FilteredObjects {
-            get {
-                // This is much faster than the base method
-                return ((FastObjectListDataSource)this.VirtualListDataSource).FilteredObjectList;
-            }
-        }
+		/// <summary>
+		/// Gets the collection of objects that survive any filtering that may be in place.
+		/// </summary>
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public override IEnumerable FilteredObjects => ((FastObjectListDataSource) VirtualListDataSource).FilteredObjectList;
 
-        /// <summary>
-        /// Get/set the collection of objects that this list will show
-        /// </summary>
-        /// <remarks>
-        /// <para>
-        /// The contents of the control will be updated immediately after setting this property.
-        /// </para>
-        /// <para>This method preserves selection, if possible. Use SetObjects() if
-        /// you do not want to preserve the selection. Preserving selection is the slowest part of this
-        /// code and performance is O(n) where n is the number of selected rows.</para>
-        /// <para>This method is not thread safe.</para>
-        /// </remarks>
-        [Browsable(false),
-         DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public override IEnumerable Objects {
-            get {
-                // This is much faster than the base method
-                return ((FastObjectListDataSource)this.VirtualListDataSource).ObjectList;
-            }
-            set { base.Objects = value; }
-        }
+		/// <summary>
+		/// Get/set the collection of objects that this list will show
+		/// </summary>
+		/// <remarks>
+		/// <para>
+		/// The contents of the control will be updated immediately after setting this property.
+		/// </para>
+		/// <para>This method preserves selection, if possible. Use SetObjects() if
+		/// you do not want to preserve the selection. Preserving selection is the slowest part of this
+		/// code and performance is O(n) where n is the number of selected rows.</para>
+		/// <para>This method is not thread safe.</para>
+		/// </remarks>
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public override IEnumerable Objects {
+			get => ((FastObjectListDataSource) VirtualListDataSource).ObjectList;
+			set => base.Objects = value;
+		}
 
-        /// <summary>
-        /// Move the given collection of objects to the given index.
-        /// </summary>
-        /// <remarks>This operation only makes sense on non-grouped FluentListViews.</remarks>
-        /// <param name="index"></param>
-        /// <param name="modelObjects"></param>
-        public override void MoveObjects(int index, ICollection modelObjects) {
-            if (this.InvokeRequired) {
-                this.Invoke((MethodInvoker)delegate() { this.MoveObjects(index, modelObjects); });
-                return;
-            }
+		/// <summary>
+		/// Move the given collection of objects to the given index.
+		/// </summary>
+		/// <remarks>This operation only makes sense on non-grouped FluentListViews.</remarks>
+		/// <param name="index"></param>
+		/// <param name="modelObjects"></param>
+		public override void MoveObjects(int index, ICollection modelObjects) {
+			if (InvokeRequired) {
+				Invoke((MethodInvoker) delegate() { MoveObjects(index, modelObjects); });
+				return;
+			}
 
-            // If any object that is going to be moved is before the point where the insertion 
-            // will occur, then we have to reduce the location of our insertion point
-            int displacedObjectCount = 0;
-            foreach (object modelObject in modelObjects) {
-                int i = this.IndexOf(modelObject);
-                if (i >= 0 && i <= index)
-                    displacedObjectCount++;
-            }
-            index -= displacedObjectCount;
+			// If any object that is going to be moved is before the point where the insertion 
+			// will occur, then we have to reduce the location of our insertion point
+			var displacedObjectCount = 0;
+			foreach (var modelObject in modelObjects) {
+				var i = IndexOf(modelObject);
+				if (i >= 0 && i <= index) {
+					displacedObjectCount++;
+				}
+			}
 
-            this.BeginUpdate();
-            try {
-                this.RemoveObjects(modelObjects);
-                this.InsertObjects(index, modelObjects);
-            }
-            finally {
-                this.EndUpdate();
-            }
-        }
+			index -= displacedObjectCount;
 
-        /// <summary>
-        /// Remove any sorting and revert to the given order of the model objects
-        /// </summary>
-        /// <remarks>To be really honest, Unsort() doesn't work on FastFluentListViews since
-        /// the original ordering of model objects is lost when Sort() is called. So this method
-        /// effectively just turns off sorting.</remarks>
-        public override void Unsort() {
-            this.ShowGroups = false;
-            this.PrimarySortColumn = null;
-            this.PrimarySortOrder = SortOrder.None;
-            this.SetObjects(this.Objects);
-        }
-    }
+			BeginUpdate();
+			try {
+				RemoveObjects(modelObjects);
+				InsertObjects(index, modelObjects);
+			}
+			finally {
+				EndUpdate();
+			}
+		}
 
-    /// <summary>
-    /// Provide a data source for a FastFluentListView
-    /// </summary>
-    /// <remarks>
-    /// This class isn't intended to be used directly, but it is left as a public
-    /// class just in case someone wants to subclass it.
-    /// </remarks>
-    public class FastObjectListDataSource : AbstractVirtualListDataSource
-    {
-        /// <summary>
-        /// Create a FastObjectListDataSource
-        /// </summary>
-        /// <param name="listView"></param>
-        public FastObjectListDataSource(FastListView listView)
-            : base(listView) {
-        }
+		/// <summary>
+		/// Remove any sorting and revert to the given order of the model objects
+		/// </summary>
+		/// <remarks>To be really honest, Unsort() doesn't work on FastFluentListViews since
+		/// the original ordering of model objects is lost when Sort() is called. So this method
+		/// effectively just turns off sorting.</remarks>
+		public override void Unsort() {
+			ShowGroups = false;
+			PrimarySortColumn = null;
+			PrimarySortOrder = SortOrder.None;
+			SetObjects(Objects);
+		}
+	}
 
-        #region IVirtualListDataSource Members
+	/// <summary>
+	/// Provide a data source for a FastFluentListView
+	/// </summary>
+	/// <remarks>
+	/// This class isn't intended to be used directly, but it is left as a public
+	/// class just in case someone wants to subclass it.
+	/// </remarks>
+	public class FastObjectListDataSource : AbstractVirtualListDataSource {
+		/// <summary>
+		/// Create a FastObjectListDataSource
+		/// </summary>
+		/// <param name="listView"></param>
+		public FastObjectListDataSource(FastListView listView)
+			: base(listView) {
+		}
 
-        /// <summary>
-        /// Get n'th object
-        /// </summary>
-        /// <param name="n"></param>
-        /// <returns></returns>
-        public override object GetNthObject(int n) {
-            if (n >= 0 && n < this.filteredObjectList.Count)
-                return this.filteredObjectList[n];
-            
-            return null;
-        }
+		#region IVirtualListDataSource Members
 
-        /// <summary>
-        /// How many items are in the data source
-        /// </summary>
-        /// <returns></returns>
-        public override int GetObjectCount() {
-            return this.filteredObjectList.Count;
-        }
+		/// <summary>
+		/// Get n'th object
+		/// </summary>
+		/// <param name="n"></param>
+		/// <returns></returns>
+		public override object GetNthObject(int n) {
+			if (n >= 0 && n < filteredObjectList.Count) {
+				return filteredObjectList[n];
+			}
 
-        /// <summary>
-        /// Get the index of the given model
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        public override int GetObjectIndex(object model) {
-            int index;
+			return null;
+		}
 
-            if (model != null && this.objectsToIndexMap.TryGetValue(model, out index))
-                return index;
-            
-            return -1;
-        }
+		/// <summary>
+		/// How many items are in the data source
+		/// </summary>
+		/// <returns></returns>
+		public override int GetObjectCount() {
+			return filteredObjectList.Count;
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="first"></param>
-        /// <param name="last"></param>
-        /// <param name="column"></param>
-        /// <returns></returns>
-        public override int SearchText(string text, int first, int last, OLVColumn column) {
-            if (first <= last) {
-                for (int i = first; i <= last; i++) {
-                    string data = column.GetStringValue(this.listView.GetNthItemInDisplayOrder(i).RowObject);
-                    if (data.StartsWith(text, StringComparison.CurrentCultureIgnoreCase))
-                        return i;
-                }
-            } else {
-                for (int i = first; i >= last; i--) {
-                    string data = column.GetStringValue(this.listView.GetNthItemInDisplayOrder(i).RowObject);
-                    if (data.StartsWith(text, StringComparison.CurrentCultureIgnoreCase))
-                        return i;
-                }
-            }
+		/// <summary>
+		/// Get the index of the given model
+		/// </summary>
+		/// <param name="model"></param>
+		/// <returns></returns>
+		public override int GetObjectIndex(object model) {
+			int index;
 
-            return -1;
-        }
+			if (model != null && objectsToIndexMap.TryGetValue(model, out index)) {
+				return index;
+			}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="column"></param>
-        /// <param name="sortOrder"></param>
-        public override void Sort(OLVColumn column, SortOrder sortOrder) {
-            if (sortOrder != SortOrder.None) {
-                ModelObjectComparer comparer = new ModelObjectComparer(column, sortOrder, this.listView.SecondarySortColumn, this.listView.SecondarySortOrder);
-                this.fullObjectList.Sort(comparer);
-                this.filteredObjectList.Sort(comparer);
-            }
-            this.RebuildIndexMap();
-        }
+			return -1;
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="modelObjects"></param>
-        public override void AddObjects(ICollection modelObjects) {
-            foreach (object modelObject in modelObjects) {
-                if (modelObject != null)
-                    this.fullObjectList.Add(modelObject);
-            }
-            this.FilterObjects();
-            this.RebuildIndexMap();
-        }
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="text"></param>
+		/// <param name="first"></param>
+		/// <param name="last"></param>
+		/// <param name="column"></param>
+		/// <returns></returns>
+		public override int SearchText(string text, int first, int last, OLVColumn column) {
+			if (first <= last) {
+				for (var i = first; i <= last; i++) {
+					var data = column.GetStringValue(listView.GetNthItemInDisplayOrder(i).RowObject);
+					if (data.StartsWith(text, StringComparison.CurrentCultureIgnoreCase)) {
+						return i;
+					}
+				}
+			}
+			else {
+				for (var i = first; i >= last; i--) {
+					var data = column.GetStringValue(listView.GetNthItemInDisplayOrder(i).RowObject);
+					if (data.StartsWith(text, StringComparison.CurrentCultureIgnoreCase)) {
+						return i;
+					}
+				}
+			}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="modelObjects"></param>
-        public override void InsertObjects(int index, ICollection modelObjects) {
-            this.fullObjectList.InsertRange(index, modelObjects);
-            this.FilterObjects();
-            this.RebuildIndexMap();
-        }
+			return -1;
+		}
 
-        /// <summary>
-        /// Remove the given collection of models from this source.
-        /// </summary>
-        /// <param name="modelObjects"></param>
-        public override void RemoveObjects(ICollection modelObjects) {
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="column"></param>
+		/// <param name="sortOrder"></param>
+		public override void Sort(OLVColumn column, SortOrder sortOrder) {
+			if (sortOrder != SortOrder.None) {
+				var comparer = new ModelObjectComparer(column, sortOrder, listView.SecondarySortColumn, listView.SecondarySortOrder);
+				fullObjectList.Sort(comparer);
+				filteredObjectList.Sort(comparer);
+			}
 
-            // We have to unselect any object that is about to be deleted
-            List<int> indicesToRemove = new List<int>();
-            foreach (object modelObject in modelObjects) {
-                int i = this.GetObjectIndex(modelObject);
-                if (i >= 0)
-                    indicesToRemove.Add(i);
-            }
+			RebuildIndexMap();
+		}
 
-            // Sort the indices from highest to lowest so that we
-            // remove latter ones before earlier ones. In this way, the
-            // indices of the rows doesn't change after the deletes.
-            indicesToRemove.Sort();
-            indicesToRemove.Reverse();
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="modelObjects"></param>
+		public override void AddObjects(ICollection modelObjects) {
+			foreach (var modelObject in modelObjects) {
+				if (modelObject != null) {
+					fullObjectList.Add(modelObject);
+				}
+			}
 
-            foreach (int i in indicesToRemove) 
-                this.listView.SelectedIndices.Remove(i);
+			FilterObjects();
+			RebuildIndexMap();
+		}
 
-            // Remove the objects from the unfiltered list
-            foreach (object modelObject in modelObjects)
-                this.fullObjectList.Remove(modelObject);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="index"></param>
+		/// <param name="modelObjects"></param>
+		public override void InsertObjects(int index, ICollection modelObjects) {
+			fullObjectList.InsertRange(index, modelObjects);
+			FilterObjects();
+			RebuildIndexMap();
+		}
 
-            this.FilterObjects();
-            this.RebuildIndexMap();
-        }
+		/// <summary>
+		/// Remove the given collection of models from this source.
+		/// </summary>
+		/// <param name="modelObjects"></param>
+		public override void RemoveObjects(ICollection modelObjects) {
+			// We have to unselect any object that is about to be deleted
+			var indicesToRemove = new List<int>();
+			foreach (var modelObject in modelObjects) {
+				var i = GetObjectIndex(modelObject);
+				if (i >= 0) {
+					indicesToRemove.Add(i);
+				}
+			}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="collection"></param>
-        public override void SetObjects(IEnumerable collection) {
-            ArrayList newObjects = AdvancedListView.EnumerableToArray(collection, true);
+			// Sort the indices from highest to lowest so that we
+			// remove latter ones before earlier ones. In this way, the
+			// indices of the rows doesn't change after the deletes.
+			indicesToRemove.Sort();
+			indicesToRemove.Reverse();
 
-            this.fullObjectList = newObjects;
-            this.FilterObjects();
-            this.RebuildIndexMap();
-        }
+			foreach (var i in indicesToRemove) {
+				listView.SelectedIndices.Remove(i);
+			}
 
-        /// <summary>
-        /// Update/replace the nth object with the given object
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="modelObject"></param>
-        public override void UpdateObject(int index, object modelObject) {
-            if (index < 0 || index >= this.filteredObjectList.Count)
-                return;
+			// Remove the objects from the unfiltered list
+			foreach (var modelObject in modelObjects) {
+				fullObjectList.Remove(modelObject);
+			}
 
-            int i = this.fullObjectList.IndexOf(this.filteredObjectList[index]);
-            if (i < 0)
-                return;
+			FilterObjects();
+			RebuildIndexMap();
+		}
 
-            if (ReferenceEquals(this.fullObjectList[i], modelObject))
-                return;
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="collection"></param>
+		public override void SetObjects(IEnumerable collection) {
+			var newObjects = AdvancedListView.EnumerableToArray(collection, true);
 
-            this.fullObjectList[i] = modelObject;
-            this.filteredObjectList[index] = modelObject;
-            this.objectsToIndexMap[modelObject] = index;
-        }
+			fullObjectList = newObjects;
+			FilterObjects();
+			RebuildIndexMap();
+		}
 
-        private ArrayList fullObjectList = new ArrayList();
-        private ArrayList filteredObjectList = new ArrayList();
-        private IModelFilter modelFilter;
-        private IListFilter listFilter;
+		/// <summary>
+		/// Update/replace the nth object with the given object
+		/// </summary>
+		/// <param name="index"></param>
+		/// <param name="modelObject"></param>
+		public override void UpdateObject(int index, object modelObject) {
+			if (index < 0 || index >= filteredObjectList.Count) {
+				return;
+			}
 
-        #endregion
+			var i = fullObjectList.IndexOf(filteredObjectList[index]);
+			if (i < 0) {
+				return;
+			}
 
-        #region IFilterableDataSource Members
+			if (ReferenceEquals(fullObjectList[i], modelObject)) {
+				return;
+			}
 
-        /// <summary>
-        /// Apply the given filters to this data source. One or both may be null.
-        /// </summary>
-        /// <param name="iModelFilter"></param>
-        /// <param name="iListFilter"></param>
-        public override void ApplyFilters(IModelFilter iModelFilter, IListFilter iListFilter) {
-            this.modelFilter = iModelFilter;
-            this.listFilter = iListFilter;
-            this.SetObjects(this.fullObjectList);
-        }
+			fullObjectList[i] = modelObject;
+			filteredObjectList[index] = modelObject;
+			objectsToIndexMap[modelObject] = index;
+		}
 
-        #endregion
+		private ArrayList fullObjectList = new ArrayList();
+		private ArrayList filteredObjectList = new ArrayList();
+		private IModelFilter modelFilter;
+		private IListFilter listFilter;
 
-        #region Implementation
+		#endregion
 
-        /// <summary>
-        /// Gets the full list of objects being used for this fast list. 
-        /// This list is unfiltered.
-        /// </summary>
-        public ArrayList ObjectList {
-            get { return fullObjectList; }
-        }
+		#region IFilterableDataSource Members
 
-        /// <summary>
-        /// Gets the list of objects from ObjectList which survive any installed filters.
-        /// </summary>
-        public ArrayList FilteredObjectList {
-            get { return filteredObjectList; }
-        }
+		/// <summary>
+		/// Apply the given filters to this data source. One or both may be null.
+		/// </summary>
+		/// <param name="iModelFilter"></param>
+		/// <param name="iListFilter"></param>
+		public override void ApplyFilters(IModelFilter iModelFilter, IListFilter iListFilter) {
+			modelFilter = iModelFilter;
+			listFilter = iListFilter;
+			SetObjects(fullObjectList);
+		}
 
-        /// <summary>
-        /// Rebuild the map that remembers which model object is displayed at which line
-        /// </summary>
-        protected void RebuildIndexMap() {
-            this.objectsToIndexMap.Clear();
-            for (int i = 0; i < this.filteredObjectList.Count; i++)
-                this.objectsToIndexMap[this.filteredObjectList[i]] = i;
-        }
-        readonly Dictionary<Object, int> objectsToIndexMap = new Dictionary<Object, int>();
+		#endregion
 
-        /// <summary>
-        /// Build our filtered list from our full list.
-        /// </summary>
-        protected void FilterObjects() {
+		#region Implementation
 
-            // If this list isn't filtered, we don't need to do anything else
-            if (!this.listView.UseFiltering) {
-                this.filteredObjectList = new ArrayList(this.fullObjectList);
-                return;
-            }
+		/// <summary>
+		/// Gets the full list of objects being used for this fast list. 
+		/// This list is unfiltered.
+		/// </summary>
+		public ArrayList ObjectList => fullObjectList;
 
-            // Tell the world to filter the objects. If they do so, don't do anything else
-            // ReSharper disable PossibleMultipleEnumeration
-            FilterEventArgs args = new FilterEventArgs(this.fullObjectList);
-            this.listView.OnFilter(args);
-            if (args.FilteredObjects != null) {
-                this.filteredObjectList = AdvancedListView.EnumerableToArray(args.FilteredObjects, false);
-                return;
-            }
+		/// <summary>
+		/// Gets the list of objects from ObjectList which survive any installed filters.
+		/// </summary>
+		public ArrayList FilteredObjectList => filteredObjectList;
 
-            IEnumerable objects = (this.listFilter == null) ?
-                this.fullObjectList : this.listFilter.Filter(this.fullObjectList);
+		/// <summary>
+		/// Rebuild the map that remembers which model object is displayed at which line
+		/// </summary>
+		protected void RebuildIndexMap() {
+			objectsToIndexMap.Clear();
+			for (var i = 0; i < filteredObjectList.Count; i++) {
+				objectsToIndexMap[filteredObjectList[i]] = i;
+			}
+		}
 
-            // Apply the object filter if there is one
-            if (this.modelFilter == null) {
-                this.filteredObjectList = AdvancedListView.EnumerableToArray(objects, false);
-            } else {
-                this.filteredObjectList = new ArrayList();
-                foreach (object model in objects) {
-                    if (this.modelFilter.Filter(model))
-                        this.filteredObjectList.Add(model);
-                }
-            }
-        }
+		private readonly Dictionary<object, int> objectsToIndexMap = new Dictionary<object, int>();
 
-        #endregion
-    }
+		/// <summary>
+		/// Build our filtered list from our full list.
+		/// </summary>
+		protected void FilterObjects() {
+			// If this list isn't filtered, we don't need to do anything else
+			if (!listView.UseFiltering) {
+				filteredObjectList = new ArrayList(fullObjectList);
+				return;
+			}
 
+			// Tell the world to filter the objects. If they do so, don't do anything else
+			// ReSharper disable PossibleMultipleEnumeration
+			var args = new FilterEventArgs(fullObjectList);
+			listView.OnFilter(args);
+			if (args.FilteredObjects != null) {
+				filteredObjectList = AdvancedListView.EnumerableToArray(args.FilteredObjects, false);
+				return;
+			}
+
+			var objects = listFilter == null ? fullObjectList : listFilter.Filter(fullObjectList);
+
+			// Apply the object filter if there is one
+			if (modelFilter == null) {
+				filteredObjectList = AdvancedListView.EnumerableToArray(objects, false);
+			}
+			else {
+				filteredObjectList = new ArrayList();
+				foreach (var model in objects) {
+					if (modelFilter.Filter(model)) {
+						filteredObjectList.Add(model);
+					}
+				}
+			}
+		}
+
+		#endregion
+	}
 }

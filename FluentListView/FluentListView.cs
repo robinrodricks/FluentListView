@@ -9,7 +9,6 @@ using Fluent.Lists;
 using System.Linq;
 
 namespace Fluent {
-
 	/// <summary>
 	/// FluentListView is a C# wrapper around a .NET ListView, supporting model-bound lists,
 	/// in-place item editing, drag and drop, icons, themes, trees &amp; data grids, and much more.
@@ -17,7 +16,6 @@ namespace Fluent {
 	/// If required, an AdvancedListView is created internally, otherwise a lightweight FastListView is created.
 	/// </summary>
 	public class FluentListView : UserControl {
-
 		private AdvancedListView InnerAdvList;
 		private FastListView InnerFastList;
 		private IList items = new List<object>();
@@ -29,9 +27,7 @@ namespace Fluent {
 		/// </summary>
 		[Browsable(false)]
 		public IList Items {
-			get {
-				return items;
-			}
+			get => items;
 			set {
 				items = value;
 				Redraw();
@@ -44,27 +40,33 @@ namespace Fluent {
 		/// You can optionally add a list of Columns, to have those properties show as additional columns in the list.
 		/// </summary>
 		[Browsable(false)]
-		public FluentListProperties Properties { get { return properties; } }
+		public FluentListProperties Properties => properties;
+
 		/// <summary>
 		/// Whether the list will use a SimpleDragSource to initiate drags.
 		/// </summary>
 		public bool EnableDragDropItems { get; set; }
+
 		/// <summary>
 		/// Whether the list will use a SimpleDropSink to accept dropping items from other sources.
 		/// </summary>
 		public bool EnableDrop { get; set; }
+
 		/// <summary>
 		/// Whether the list will accept dropping of files from Explorer.
 		/// </summary>
 		public bool EnableDropFiles { get; set; }
+
 		/// <summary>
 		/// Which visual theme to use to render items.
 		/// </summary>
 		public OLVTheme Theme { get; set; }
+
 		/// <summary>
 		/// The font used to display list items. Affects row height.
 		/// </summary>
 		public Font ItemFont { get; set; }
+
 		/// <summary>
 		/// The width of additional columns.
 		/// </summary>
@@ -74,49 +76,57 @@ namespace Fluent {
 		/// You need to set this if you are using EnableDragDropItems or EnableDrop, but not if you are using EnableDropFiles.
 		/// </summary>
 		public Func<OlvDropEventArgs, bool> OnCanDrop;
+
 		/// <summary>
 		/// You need to set this if you are using EnableDragDropItems or EnableDrop, but not if you are using EnableDropFiles.
 		/// </summary>
 		public Action<OlvDropEventArgs> OnDropped;
+
 		/// You need to set this if you are using EnableDropFiles.
 		/// </summary>
 		public Action<List<string>> OnDroppedFiles;
+
 		/// <summary>
 		/// You need to set this if you are using drag or drag-drop.
 		/// </summary>
 		public DropTargetLocation EnableDropOnLocations;
 
 
-
-
 		/// <summary>
 		/// WIP. Will show an icon near the name.
 		/// </summary>
 		public bool ShowIcons { get; set; }
+
 		/// <summary>
 		/// WIP. Will show a description line below the name.
 		/// </summary>
 		public bool ShowDescription { get; set; }
+
 		/// <summary>
 		/// Used to control if additional columns are displayed based on Properties.Columns.
 		/// </summary>
 		public bool ShowColumns { get; set; }
+
 		/// <summary>
 		/// WIP. Will group up the items on a given property.
 		/// </summary>
 		public bool ShowGroups { get; set; }
+
 		/// <summary>
 		/// WIP. Only used to select between AdvancedListView and FastListView.
 		/// </summary>
 		public bool EnableGifs { get; set; }
+
 		/// <summary>
 		/// WIP. Only used to select between AdvancedListView and FastListView.
 		/// </summary>
 		public bool EnableTileView { get; set; }
+
 		/// <summary>
 		/// WIP. Only used to select between AdvancedListView and FastListView.
 		/// </summary>
 		public bool EnableRenaming { get; set; }
+
 		/// <summary>
 		/// WIP. Only used to select between AdvancedListView and FastListView.
 		/// </summary>
@@ -149,6 +159,7 @@ namespace Fluent {
 				if (InnerList != null) {
 					return InnerList.SelectedObject;
 				}
+
 				return null;
 			}
 			set {
@@ -168,6 +179,7 @@ namespace Fluent {
 				if (InnerList != null) {
 					return InnerList.SelectedObjects;
 				}
+
 				return null;
 			}
 			set {
@@ -182,7 +194,6 @@ namespace Fluent {
 		/// Displays the items as a list. Call this when the items have been added/removed to force-redraw.
 		/// </summary>
 		public void Redraw() {
-
 			if (items == null) {
 				return;
 			}
@@ -190,25 +201,21 @@ namespace Fluent {
 			CreateDestroyList();
 
 			RedrawItems();
-
 		}
 
 		/// <summary>
 		/// Call this when the item column values have changed, and you want to simply update the view.
 		/// </summary>
 		public void RedrawValues() {
-
 			if (InnerList == null) {
 				return;
 			}
 
 			InnerList.RedrawItems(0, Items.Count - 1, false);
-
 		}
 
 		private void RedrawItems() {
-
-			this.SuspendLayout();
+			SuspendLayout();
 
 			if (InnerAdvList != null) {
 				InnerAdvList.SetObjects(items);
@@ -218,16 +225,13 @@ namespace Fluent {
 				InnerFastList.SetObjects(items);
 			}
 
-			this.ResumeLayout();
-
+			ResumeLayout();
 		}
 
 		private void CreateDestroyList() {
-
-			this.SuspendLayout();
+			SuspendLayout();
 
 			if (ShouldCreateAdvancedListView()) {
-
 				// create advanced list if required
 				if (InnerAdvList == null) {
 					InnerAdvList = new AdvancedListView();
@@ -236,13 +240,12 @@ namespace Fluent {
 
 				// destroy fast list if created
 				if (InnerFastList != null) {
-					this.Controls.Remove(InnerFastList);
+					Controls.Remove(InnerFastList);
 					InnerFastList.Dispose();
 					InnerFastList = null;
 				}
-
-			} else {
-
+			}
+			else {
 				// else create fast list
 				if (InnerFastList == null) {
 					InnerFastList = new FastListView();
@@ -251,14 +254,13 @@ namespace Fluent {
 
 				// destroy advanced list if created
 				if (InnerAdvList != null) {
-					this.Controls.Remove(InnerAdvList);
+					Controls.Remove(InnerAdvList);
 					InnerAdvList.Dispose();
 					InnerAdvList = null;
 				}
 			}
 
-			this.ResumeLayout();
-
+			ResumeLayout();
 		}
 
 		private bool ShouldCreateAdvancedListView() {
@@ -266,14 +268,13 @@ namespace Fluent {
 		}
 
 		private void ConfigureList(AdvancedListView list) {
-
 			// basics
-			list.Size = this.Size;
+			list.Size = Size;
 			list.Name = "InnerList";
 			list.Visible = true;
-			list.BackColor = this.BackColor;
-			list.ForeColor = this.ForeColor;
-			list.BorderStyle = this.BorderStyle;
+			list.BackColor = BackColor;
+			list.ForeColor = ForeColor;
+			list.BorderStyle = BorderStyle;
 			list.HideSelection = false;
 
 			// add headers
@@ -296,32 +297,33 @@ namespace Fluent {
 			if (Theme == OLVTheme.Vista) {
 				list.UseTranslucentSelection = true;
 				list.UseTranslucentHotItem = true;
-			} else if (Theme == OLVTheme.VistaExplorer) {
+			}
+			else if (Theme == OLVTheme.VistaExplorer) {
 				list.UseExplorerTheme = true;
 			}
+
 			if (ItemFont != null) {
 				list.Font = ItemFont;
 			}
 
 			// add and resize
-			this.Controls.Add(list);
+			Controls.Add(list);
 			list.Dock = DockStyle.Fill;
 
 			// configure drag & drop
 			if (EnableDragDropItems) {
 				list.IsSimpleDragSource = true;
 			}
-			if (EnableDragDropItems || EnableDrop || EnableDropFiles) {
 
+			if (EnableDragDropItems || EnableDrop || EnableDropFiles) {
 				// drop locations allowed
 				list.AllowDrop = true;
 				list.IsSimpleDropSink = true;
-				((SimpleDropSink)list.DropSink).AcceptableLocations = EnableDropOnLocations;
-				((SimpleDropSink)list.DropSink).CanDropOnBackground = Enum.IsDefined(typeof(DropTargetLocation), DropTargetLocation.Background);
+				((SimpleDropSink) list.DropSink).AcceptableLocations = EnableDropOnLocations;
+				((SimpleDropSink) list.DropSink).CanDropOnBackground = Enum.IsDefined(typeof(DropTargetLocation), DropTargetLocation.Background);
 
 				// drop event handling
-				list.CanDrop += delegate (object sender, OlvDropEventArgs args) {
-
+				list.CanDrop += delegate(object sender, OlvDropEventArgs args) {
 					// if dropping files is enabled, internally manage the drop handling of files
 					if (EnableDropFiles) {
 						var files = GetDroppedFiles(args);
@@ -342,8 +344,7 @@ namespace Fluent {
 				};
 
 				// when dropped
-				list.Dropped += delegate (object sender, OlvDropEventArgs args) {
-
+				list.Dropped += delegate(object sender, OlvDropEventArgs args) {
 					// if dropping files is enabled, internally manage the drop handling of files
 					if (EnableDropFiles) {
 						var files = GetDroppedFiles(args);
@@ -369,9 +370,11 @@ namespace Fluent {
 			if (Properties.Name == null) {
 				throw new ArgumentNullException("You need to set 'FluentListView.Properties.Name' to the property you wish to use as the display text for the objects! Set it to a blank string to call the ToString() method on the objects.");
 			}
+
 			if (ShowIcons && properties.Icon == null) {
 				throw new ArgumentNullException("You need to set 'FluentListView.Properties.Icon' to the property that contains an Icon or Bitmap object for the objects!");
 			}
+
 			if (ShowDescription && properties.Description == null) {
 				throw new ArgumentNullException("You need to set 'FluentListView.Properties.Description' to the property you wish to use as the description text for the objects!");
 			}
@@ -381,7 +384,8 @@ namespace Fluent {
 				Name = "Name",
 				Text = "Name",
 				FillsFreeSpace = true,
-				Groupable = (Properties.GroupBy == Properties.Name),
+				Groupable = Properties.GroupBy == Properties.Name,
+
 				//UseInitialLetterForGroup = true,
 				AspectName = properties.Name,
 				IsVisible = true,
@@ -400,7 +404,7 @@ namespace Fluent {
 			// add columns
 			if (ShowColumns && properties.Columns != null) {
 				showHeaders = true;
-				for (int c = 0; c < properties.Columns.Count; c++) {
+				for (var c = 0; c < properties.Columns.Count; c++) {
 					var colProp = properties.Columns[c];
 					var colName = properties.ColumnNames != null ? properties.ColumnNames[c] : colProp;
 					var colWidth = ColumnWidth > 0 ? ColumnWidth : 100;
@@ -408,10 +412,11 @@ namespace Fluent {
 					columns.Add(new OLVColumn {
 						Name = colProp,
 						Text = colName,
-						Groupable = (Properties.GroupBy == colProp),
+						Groupable = Properties.GroupBy == colProp,
 						AspectName = colProp,
 						IsVisible = true,
 						FillsFreeSpace = false,
+
 						//MaximumWidth = colWidth,
 						//MinimumWidth = colWidth,
 						Width = colWidth,
@@ -426,30 +431,28 @@ namespace Fluent {
 		/// Quickly adds an item to the list.
 		/// </summary>
 		public void AddItem(object item) {
-
 			items.Add(item);
 
 			// redraw the whole list if never done it before
 			if (InnerAdvList == null && InnerFastList == null) {
 				Redraw();
-			} else {
-
+			}
+			else {
 				// quickly just add the object to the list
 				if (InnerAdvList != null) {
 					InnerAdvList.AddObject(item);
 				}
+
 				if (InnerFastList != null) {
 					InnerFastList.AddObject(item);
 				}
-
 			}
-
 		}
+
 		/// <summary>
 		/// Quickly removes an item from the list.
 		/// </summary>
 		public void RemoveItem(object item) {
-
 			// if the item is found in the array
 			if (items.Contains(item)) {
 				items.Remove(item);
@@ -457,20 +460,20 @@ namespace Fluent {
 				// redraw the whole list if never done it before
 				if (InnerAdvList == null && InnerFastList == null) {
 					Redraw();
-				} else {
-
+				}
+				else {
 					// quickly just add the object to the list
 					if (InnerAdvList != null) {
 						InnerAdvList.RemoveObject(item);
 					}
+
 					if (InnerFastList != null) {
 						InnerFastList.RemoveObject(item);
 					}
-
 				}
 			}
-
 		}
+
 		/// <summary>
 		/// Quickly removes multiple items from the list.
 		/// </summary>
@@ -489,12 +492,13 @@ namespace Fluent {
 		/// <returns></returns>
 		public List<string> GetDroppedFiles(OlvDropEventArgs args) {
 			try {
-				return ((string[])args.DragEventArgs.Data.GetData(DataFormats.FileDrop)).ToList<string>();
-			} catch (Exception) {
+				return ((string[]) args.DragEventArgs.Data.GetData(DataFormats.FileDrop)).ToList<string>();
 			}
+			catch (Exception) {
+			}
+
 			return null;
 		}
-
 	}
 
 	public enum OLVTheme {
@@ -502,15 +506,15 @@ namespace Fluent {
 		/// This will style your list like the old Windows XP theme.
 		/// </summary>
 		XP = 1,
+
 		/// <summary>
 		/// This will give a selection and hot item mechanism that is similar to that used by Vista. It is not the same, I know. Do not complain.
 		/// </summary>
 		Vista = 2,
+
 		/// <summary>
 		/// If you absolutely have to look like Vista, this is your property. But it only works on Windows Vista and later, and does not work well with AlternateRowBackColors or HotItemStyles.
 		/// </summary>
 		VistaExplorer = 3
 	}
-
-
 }

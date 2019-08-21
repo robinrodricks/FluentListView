@@ -30,96 +30,101 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Fluent {
+	/// <summary>
+	/// Concrete implementation of the ICluster interface.
+	/// </summary>
+	public class Cluster : ICluster {
+		#region Life and death
 
-    /// <summary>
-    /// Concrete implementation of the ICluster interface.
-    /// </summary>
-    public class Cluster : ICluster {
+		/// <summary>
+		/// Create a cluster
+		/// </summary>
+		/// <param name="key">The key for the cluster</param>
+		public Cluster(object key) {
+			Count = 1;
+			ClusterKey = key;
+		}
 
-        #region Life and death
+		#endregion
 
-        /// <summary>
-        /// Create a cluster
-        /// </summary>
-        /// <param name="key">The key for the cluster</param>
-        public Cluster(object key) {
-            this.Count = 1;
-            this.ClusterKey = key;
-        }
+		#region Public overrides
 
-        #endregion
+		/// <summary>
+		/// Return a string representation of this cluster
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString() {
+			return DisplayLabel ?? "[empty]";
+		}
 
-        #region Public overrides
+		#endregion
 
-        /// <summary>
-        /// Return a string representation of this cluster
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString() {
-            return this.DisplayLabel ?? "[empty]";
-        }
+		#region Implementation of ICluster
 
-        #endregion
+		/// <summary>
+		/// Gets or sets how many items belong to this cluster
+		/// </summary>
+		public int Count {
+			get => count;
+			set => count = value;
+		}
 
-        #region Implementation of ICluster
+		private int count;
 
-        /// <summary>
-        /// Gets or sets how many items belong to this cluster
-        /// </summary>
-        public int Count {
-            get { return count; }
-            set { count = value; }
-        }
-        private int count;
+		/// <summary>
+		/// Gets or sets the label that will be shown to the user to represent
+		/// this cluster
+		/// </summary>
+		public string DisplayLabel {
+			get => displayLabel;
+			set => displayLabel = value;
+		}
 
-        /// <summary>
-        /// Gets or sets the label that will be shown to the user to represent
-        /// this cluster
-        /// </summary>
-        public string DisplayLabel {
-            get { return displayLabel; }
-            set { displayLabel = value; }
-        }
-        private string displayLabel;
+		private string displayLabel;
 
-        /// <summary>
-        /// Gets or sets the actual data object that all members of this cluster
-        /// have commonly returned.
-        /// </summary>
-        public object ClusterKey {
-            get { return clusterKey; }
-            set { clusterKey = value; }
-        }
-        private object clusterKey;
+		/// <summary>
+		/// Gets or sets the actual data object that all members of this cluster
+		/// have commonly returned.
+		/// </summary>
+		public object ClusterKey {
+			get => clusterKey;
+			set => clusterKey = value;
+		}
 
-        #endregion
+		private object clusterKey;
 
-        #region Implementation of IComparable
+		#endregion
 
-        /// <summary>
-        /// Return an indication of the ordering between this object and the given one
-        /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
-        public int CompareTo(object other) {
-            if (other == null || other == System.DBNull.Value)
-                return 1;
+		#region Implementation of IComparable
 
-            ICluster otherCluster = other as ICluster;
-            if (otherCluster == null)
-                return 1;
+		/// <summary>
+		/// Return an indication of the ordering between this object and the given one
+		/// </summary>
+		/// <param name="other"></param>
+		/// <returns></returns>
+		public int CompareTo(object other) {
+			if (other == null || other == DBNull.Value) {
+				return 1;
+			}
 
-            string keyAsString = this.ClusterKey as string;
-            if (keyAsString != null)
-                return String.Compare(keyAsString, otherCluster.ClusterKey as string, StringComparison.CurrentCultureIgnoreCase);
+			var otherCluster = other as ICluster;
+			if (otherCluster == null) {
+				return 1;
+			}
 
-            IComparable keyAsComparable = this.ClusterKey as IComparable;
-            if (keyAsComparable != null)
-                return keyAsComparable.CompareTo(otherCluster.ClusterKey);
+			var keyAsString = ClusterKey as string;
+			if (keyAsString != null) {
+				return string.Compare(keyAsString, otherCluster.ClusterKey as string, StringComparison.CurrentCultureIgnoreCase);
+			}
 
-            return -1;
-        }
+			var keyAsComparable = ClusterKey as IComparable;
+			if (keyAsComparable != null) {
+				return keyAsComparable.CompareTo(otherCluster.ClusterKey);
+			}
 
-        #endregion
-    }
+			return -1;
+		}
+
+		#endregion
+	}
 }

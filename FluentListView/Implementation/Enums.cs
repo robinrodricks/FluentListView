@@ -30,7 +30,6 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Fluent.Lists {
-
 	public partial class AdvancedListView {
 		/// <summary>
 		/// How does a user indicate that they want to edit cells?
@@ -64,45 +63,43 @@ namespace Fluent.Lists {
 			/// </summary>
 			SingleClickAlways = 4,
 		}
-
 	}
 }
 
 namespace Fluent {
+	/// <summary>
+	/// These values specify how column selection will be presented to the user
+	/// </summary>
+	public enum ColumnSelectBehaviour {
+		/// <summary>
+		/// No column selection will be presented 
+		/// </summary>
+		None,
 
-    /// <summary>
-    /// These values specify how column selection will be presented to the user
-    /// </summary>
-    public enum ColumnSelectBehaviour {
-        /// <summary>
-        /// No column selection will be presented 
-        /// </summary>
-        None,
+		/// <summary>
+		/// The columns will be show in the main menu
+		/// </summary>
+		InlineMenu,
 
-        /// <summary>
-        /// The columns will be show in the main menu
-        /// </summary>
-        InlineMenu,
+		/// <summary>
+		/// The columns will be shown in a submenu
+		/// </summary>
+		Submenu,
 
-        /// <summary>
-        /// The columns will be shown in a submenu
-        /// </summary>
-        Submenu,
+		/// <summary>
+		/// A model dialog will be presented to allow the user to choose columns
+		/// </summary>
+		ModelDialog,
 
-        /// <summary>
-        /// A model dialog will be presented to allow the user to choose columns
-        /// </summary>
-        ModelDialog,
-
-        /*
-            * NonModelDialog is just a little bit tricky since the OLV can change views while the dialog is showing
-            * So, just comment this out for the time being.
-             
-        /// <summary>
-        /// A non-model dialog will be presented to allow the user to choose columns
-        /// </summary>
-        NonModelDialog
-            * 
-            */
-    }
+		/*
+		    * NonModelDialog is just a little bit tricky since the OLV can change views while the dialog is showing
+		    * So, just comment this out for the time being.
+		     
+		/// <summary>
+		/// A non-model dialog will be presented to allow the user to choose columns
+		/// </summary>
+		NonModelDialog
+		    * 
+		    */
+	}
 }

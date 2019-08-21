@@ -32,145 +32,156 @@ using System.Windows.Forms;
 using Fluent.Lists;
 
 namespace Fluent {
+	/// <summary>
+	/// This class contains all the settings used when groups are created
+	/// </summary>
+	public class GroupingParameters {
+		/// <summary>
+		/// Create a GroupingParameters
+		/// </summary>
+		/// <param name="olv"></param>
+		/// <param name="groupByColumn"></param>
+		/// <param name="groupByOrder"></param>
+		/// <param name="column"></param>
+		/// <param name="order"></param>
+		/// <param name="secondaryColumn"></param>
+		/// <param name="secondaryOrder"></param>
+		/// <param name="titleFormat"></param>
+		/// <param name="titleSingularFormat"></param>
+		/// <param name="sortItemsByPrimaryColumn"></param>
+		public GroupingParameters(AdvancedListView olv, OLVColumn groupByColumn, SortOrder groupByOrder,
+			OLVColumn column, SortOrder order, OLVColumn secondaryColumn, SortOrder secondaryOrder,
+			string titleFormat, string titleSingularFormat, bool sortItemsByPrimaryColumn) {
+			ListView = olv;
+			GroupByColumn = groupByColumn;
+			GroupByOrder = groupByOrder;
+			PrimarySort = column;
+			PrimarySortOrder = order;
+			SecondarySort = secondaryColumn;
+			SecondarySortOrder = secondaryOrder;
+			SortItemsByPrimaryColumn = sortItemsByPrimaryColumn;
+			TitleFormat = titleFormat;
+			TitleSingularFormat = titleSingularFormat;
+		}
 
-    /// <summary>
-    /// This class contains all the settings used when groups are created
-    /// </summary>
-    public class GroupingParameters {
-        /// <summary>
-        /// Create a GroupingParameters
-        /// </summary>
-        /// <param name="olv"></param>
-        /// <param name="groupByColumn"></param>
-        /// <param name="groupByOrder"></param>
-        /// <param name="column"></param>
-        /// <param name="order"></param>
-        /// <param name="secondaryColumn"></param>
-        /// <param name="secondaryOrder"></param>
-        /// <param name="titleFormat"></param>
-        /// <param name="titleSingularFormat"></param>
-        /// <param name="sortItemsByPrimaryColumn"></param>
-        public GroupingParameters(AdvancedListView olv, OLVColumn groupByColumn, SortOrder groupByOrder,
-            OLVColumn column, SortOrder order, OLVColumn secondaryColumn, SortOrder secondaryOrder,
-            string titleFormat, string titleSingularFormat, bool sortItemsByPrimaryColumn) {
-            this.ListView = olv;
-            this.GroupByColumn = groupByColumn;
-            this.GroupByOrder = groupByOrder;
-            this.PrimarySort = column;
-            this.PrimarySortOrder = order;
-            this.SecondarySort = secondaryColumn;
-            this.SecondarySortOrder = secondaryOrder;
-            this.SortItemsByPrimaryColumn = sortItemsByPrimaryColumn;
-            this.TitleFormat = titleFormat;
-            this.TitleSingularFormat = titleSingularFormat;
-        }
+		/// <summary>
+		/// Gets or sets the FluentListView being grouped
+		/// </summary>
+		public AdvancedListView ListView {
+			get => listView;
+			set => listView = value;
+		}
 
-        /// <summary>
-        /// Gets or sets the FluentListView being grouped
-        /// </summary>
-        public AdvancedListView ListView {
-            get { return this.listView; }
-            set { this.listView = value; }
-        }
-        private AdvancedListView listView;
+		private AdvancedListView listView;
 
-        /// <summary>
-        /// Gets or sets the column used to create groups
-        /// </summary>
-        public OLVColumn GroupByColumn {
-            get { return this.groupByColumn; }
-            set { this.groupByColumn = value; }
-        }
-        private OLVColumn groupByColumn;
+		/// <summary>
+		/// Gets or sets the column used to create groups
+		/// </summary>
+		public OLVColumn GroupByColumn {
+			get => groupByColumn;
+			set => groupByColumn = value;
+		}
 
-        /// <summary>
-        /// In what order will the groups themselves be sorted?
-        /// </summary>
-        public SortOrder GroupByOrder {
-            get { return this.groupByOrder; }
-            set { this.groupByOrder = value; }
-        }
-        private SortOrder groupByOrder;
+		private OLVColumn groupByColumn;
 
-        /// <summary>
-        /// If this is set, this comparer will be used to order the groups
-        /// </summary>
-        public IComparer<OLVGroup> GroupComparer {
-            get { return this.groupComparer; }
-            set { this.groupComparer = value; }
-        }
-        private IComparer<OLVGroup> groupComparer;
+		/// <summary>
+		/// In what order will the groups themselves be sorted?
+		/// </summary>
+		public SortOrder GroupByOrder {
+			get => groupByOrder;
+			set => groupByOrder = value;
+		}
 
-        /// <summary>
-        /// If this is set, this comparer will be used to order items within each group
-        /// </summary>
-        public IComparer<OLVListItem> ItemComparer {
-            get { return this.itemComparer; }
-            set { this.itemComparer = value; }
-        }
-        private IComparer<OLVListItem> itemComparer;
+		private SortOrder groupByOrder;
 
-        /// <summary>
-        /// Gets or sets the column that will be the primary sort
-        /// </summary>
-        public OLVColumn PrimarySort {
-            get { return this.primarySort; }
-            set { this.primarySort = value; }
-        }
-        private OLVColumn primarySort;
+		/// <summary>
+		/// If this is set, this comparer will be used to order the groups
+		/// </summary>
+		public IComparer<OLVGroup> GroupComparer {
+			get => groupComparer;
+			set => groupComparer = value;
+		}
 
-        /// <summary>
-        /// Gets or sets the ordering for the primary sort
-        /// </summary>
-        public SortOrder PrimarySortOrder {
-            get { return this.primarySortOrder; }
-            set { this.primarySortOrder = value; }
-        }
-        private SortOrder primarySortOrder;
+		private IComparer<OLVGroup> groupComparer;
 
-        /// <summary>
-        /// Gets or sets the column used for secondary sorting
-        /// </summary>
-        public OLVColumn SecondarySort {
-            get { return this.secondarySort; }
-            set { this.secondarySort = value; }
-        }
-        private OLVColumn secondarySort;
+		/// <summary>
+		/// If this is set, this comparer will be used to order items within each group
+		/// </summary>
+		public IComparer<OLVListItem> ItemComparer {
+			get => itemComparer;
+			set => itemComparer = value;
+		}
 
-        /// <summary>
-        /// Gets or sets the ordering for the secondary sort
-        /// </summary>
-        public SortOrder SecondarySortOrder {
-            get { return this.secondarySortOrder; }
-            set { this.secondarySortOrder = value; }
-        }
-        private SortOrder secondarySortOrder;
+		private IComparer<OLVListItem> itemComparer;
 
-        /// <summary>
-        /// Gets or sets the title format used for groups with zero or more than one element
-        /// </summary>
-        public string TitleFormat {
-            get { return this.titleFormat; }
-            set { this.titleFormat = value; }
-        }
-        private string titleFormat;
+		/// <summary>
+		/// Gets or sets the column that will be the primary sort
+		/// </summary>
+		public OLVColumn PrimarySort {
+			get => primarySort;
+			set => primarySort = value;
+		}
 
-        /// <summary>
-        /// Gets or sets the title format used for groups with only one element
-        /// </summary>
-        public string TitleSingularFormat {
-            get { return this.titleSingularFormat; }
-            set { this.titleSingularFormat = value; }
-        }
-        private string titleSingularFormat;
+		private OLVColumn primarySort;
 
-        /// <summary>
-        /// Gets or sets whether the items should be sorted by the primary column
-        /// </summary>
-        public bool SortItemsByPrimaryColumn {
-            get { return this.sortItemsByPrimaryColumn; }
-            set { this.sortItemsByPrimaryColumn = value; }
-        }
-        private bool sortItemsByPrimaryColumn;
-    }
+		/// <summary>
+		/// Gets or sets the ordering for the primary sort
+		/// </summary>
+		public SortOrder PrimarySortOrder {
+			get => primarySortOrder;
+			set => primarySortOrder = value;
+		}
+
+		private SortOrder primarySortOrder;
+
+		/// <summary>
+		/// Gets or sets the column used for secondary sorting
+		/// </summary>
+		public OLVColumn SecondarySort {
+			get => secondarySort;
+			set => secondarySort = value;
+		}
+
+		private OLVColumn secondarySort;
+
+		/// <summary>
+		/// Gets or sets the ordering for the secondary sort
+		/// </summary>
+		public SortOrder SecondarySortOrder {
+			get => secondarySortOrder;
+			set => secondarySortOrder = value;
+		}
+
+		private SortOrder secondarySortOrder;
+
+		/// <summary>
+		/// Gets or sets the title format used for groups with zero or more than one element
+		/// </summary>
+		public string TitleFormat {
+			get => titleFormat;
+			set => titleFormat = value;
+		}
+
+		private string titleFormat;
+
+		/// <summary>
+		/// Gets or sets the title format used for groups with only one element
+		/// </summary>
+		public string TitleSingularFormat {
+			get => titleSingularFormat;
+			set => titleSingularFormat = value;
+		}
+
+		private string titleSingularFormat;
+
+		/// <summary>
+		/// Gets or sets whether the items should be sorted by the primary column
+		/// </summary>
+		public bool SortItemsByPrimaryColumn {
+			get => sortItemsByPrimaryColumn;
+			set => sortItemsByPrimaryColumn = value;
+		}
+
+		private bool sortItemsByPrimaryColumn;
+	}
 }

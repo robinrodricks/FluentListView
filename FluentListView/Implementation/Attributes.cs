@@ -39,297 +39,315 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace Fluent
-{
-    /// <summary>
-    /// This attribute is used to mark a property of a model
-    /// class that should be noticed by Generator class.
-    /// </summary>
-    /// <remarks>
-    /// All the attributes of this class match their equivilent properties on OLVColumn.
-    /// </remarks>
-    [AttributeUsage(AttributeTargets.Property)]
-    public class OLVColumnAttribute : Attribute
-    {
-        #region Constructor
+namespace Fluent {
+	/// <summary>
+	/// This attribute is used to mark a property of a model
+	/// class that should be noticed by Generator class.
+	/// </summary>
+	/// <remarks>
+	/// All the attributes of this class match their equivilent properties on OLVColumn.
+	/// </remarks>
+	[AttributeUsage(AttributeTargets.Property)]
+	public class OLVColumnAttribute : Attribute {
+		#region Constructor
 
-        // There are several property where we actually want nullable value (bool?, int?),
-        // but it seems attribute properties can't be nullable types.
-        // So we explicitly track if those properties have been set.
+		// There are several property where we actually want nullable value (bool?, int?),
+		// but it seems attribute properties can't be nullable types.
+		// So we explicitly track if those properties have been set.
 
-        /// <summary>
-        /// Create a new OLVColumnAttribute
-        /// </summary>
-        public OLVColumnAttribute() {
-        }
+		/// <summary>
+		/// Create a new OLVColumnAttribute
+		/// </summary>
+		public OLVColumnAttribute() {
+		}
 
-        /// <summary>
-        /// Create a new OLVColumnAttribute with the given title
-        /// </summary>
-        /// <param name="title">The title of the column</param>
-        public OLVColumnAttribute(string title) {
-            this.Title = title;
-        }
+		/// <summary>
+		/// Create a new OLVColumnAttribute with the given title
+		/// </summary>
+		/// <param name="title">The title of the column</param>
+		public OLVColumnAttribute(string title) {
+			Title = title;
+		}
 
-        #endregion
+		#endregion
 
-        #region Public properties
+		#region Public properties
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string AspectToStringFormat {
-            get { return aspectToStringFormat; }
-            set { aspectToStringFormat = value; }
-        }
-        private string aspectToStringFormat;
+		/// <summary>
+		/// 
+		/// </summary>
+		public string AspectToStringFormat {
+			get => aspectToStringFormat;
+			set => aspectToStringFormat = value;
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool CheckBoxes {
-            get { return checkBoxes; }
-            set {
-                checkBoxes = value;
-                this.IsCheckBoxesSet = true;
-            }
-        }
-        private bool checkBoxes;
-        internal bool IsCheckBoxesSet = false;
+		private string aspectToStringFormat;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public int DisplayIndex {
-            get { return displayIndex; }
-            set { displayIndex = value; }
-        }
-        private int displayIndex = -1;
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool CheckBoxes {
+			get => checkBoxes;
+			set {
+				checkBoxes = value;
+				IsCheckBoxesSet = true;
+			}
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool FillsFreeSpace {
-            get { return fillsFreeSpace; }
-            set { fillsFreeSpace = value; }
-        }
-        private bool fillsFreeSpace;
+		private bool checkBoxes;
+		internal bool IsCheckBoxesSet = false;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public int FreeSpaceProportion {
-            get { return freeSpaceProportion; }
-            set {
-                freeSpaceProportion = value;
-                IsFreeSpaceProportionSet = true;
-            }
-        }
-        private int freeSpaceProportion;
-        internal bool IsFreeSpaceProportionSet = false;
+		/// <summary>
+		/// 
+		/// </summary>
+		public int DisplayIndex {
+			get => displayIndex;
+			set => displayIndex = value;
+		}
 
-        /// <summary>
-        /// An array of IComparables that mark the cutoff points for values when
-        /// grouping on this column. 
-        /// </summary>
-        public object[] GroupCutoffs {
-            get { return groupCutoffs; }
-            set { groupCutoffs = value; }
-        }
-        private object[] groupCutoffs;
+		private int displayIndex = -1;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string[] GroupDescriptions {
-            get { return groupDescriptions; }
-            set { groupDescriptions = value; }
-        }
-        private string[] groupDescriptions;
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool FillsFreeSpace {
+			get => fillsFreeSpace;
+			set => fillsFreeSpace = value;
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string GroupWithItemCountFormat {
-            get { return groupWithItemCountFormat; }
-            set { groupWithItemCountFormat = value; }
-        }
-        private string groupWithItemCountFormat;
+		private bool fillsFreeSpace;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string GroupWithItemCountSingularFormat {
-            get { return groupWithItemCountSingularFormat; }
-            set { groupWithItemCountSingularFormat = value; }
-        }
-        private string groupWithItemCountSingularFormat;
+		/// <summary>
+		/// 
+		/// </summary>
+		public int FreeSpaceProportion {
+			get => freeSpaceProportion;
+			set {
+				freeSpaceProportion = value;
+				IsFreeSpaceProportionSet = true;
+			}
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool Hyperlink {
-            get { return hyperlink; }
-            set { hyperlink = value; }
-        }
-        private bool hyperlink;
+		private int freeSpaceProportion;
+		internal bool IsFreeSpaceProportionSet = false;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string ImageAspectName {
-            get { return imageAspectName; }
-            set { imageAspectName = value; }
-        }
-        private string imageAspectName;
+		/// <summary>
+		/// An array of IComparables that mark the cutoff points for values when
+		/// grouping on this column. 
+		/// </summary>
+		public object[] GroupCutoffs {
+			get => groupCutoffs;
+			set => groupCutoffs = value;
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool IsEditable {
-            get { return isEditable; }
-            set {
-                isEditable = value;
-                this.IsEditableSet = true;
-            }
-        }
-        private bool isEditable = true;
-        internal bool IsEditableSet = false;
+		private object[] groupCutoffs;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool IsVisible {
-            get { return isVisible; }
-            set { isVisible = value; }
-        }
-        private bool isVisible = true;
+		/// <summary>
+		/// 
+		/// </summary>
+		public string[] GroupDescriptions {
+			get => groupDescriptions;
+			set => groupDescriptions = value;
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool IsTileViewColumn {
-            get { return isTileViewColumn; }
-            set { isTileViewColumn = value; }
-        }
-        private bool isTileViewColumn;
+		private string[] groupDescriptions;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public int MaximumWidth {
-            get { return maximumWidth; }
-            set { maximumWidth = value; }
-        }
-        private int maximumWidth = -1;
+		/// <summary>
+		/// 
+		/// </summary>
+		public string GroupWithItemCountFormat {
+			get => groupWithItemCountFormat;
+			set => groupWithItemCountFormat = value;
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public int MinimumWidth {
-            get { return minimumWidth; }
-            set { minimumWidth = value; }
-        }
-        private int minimumWidth = -1;
+		private string groupWithItemCountFormat;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public String Name {
-            get { return name; }
-            set { name = value; }
-        }
-        private String name;
+		/// <summary>
+		/// 
+		/// </summary>
+		public string GroupWithItemCountSingularFormat {
+			get => groupWithItemCountSingularFormat;
+			set => groupWithItemCountSingularFormat = value;
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public HorizontalAlignment TextAlign {
-            get { return this.textAlign; }
-            set {
-                this.textAlign = value;
-                IsTextAlignSet = true;
-            }
-        }
-        private HorizontalAlignment textAlign = HorizontalAlignment.Left;
-        internal bool IsTextAlignSet = false;
+		private string groupWithItemCountSingularFormat;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public String Tag {
-            get { return tag; }
-            set { tag = value; }
-        }
-        private String tag;
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool Hyperlink {
+			get => hyperlink;
+			set => hyperlink = value;
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public String Title {
-            get { return title; }
-            set { title = value; }
-        }
-        private String title;
+		private bool hyperlink;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public String ToolTipText {
-            get { return toolTipText; }
-            set { toolTipText = value; }
-        }
-        private String toolTipText;
+		/// <summary>
+		/// 
+		/// </summary>
+		public string ImageAspectName {
+			get => imageAspectName;
+			set => imageAspectName = value;
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool TriStateCheckBoxes {
-            get { return triStateCheckBoxes; }
-            set { 
-                triStateCheckBoxes = value;
-                this.IsTriStateCheckBoxesSet = true;
-            }
-        }
-        private bool triStateCheckBoxes;
-        internal bool IsTriStateCheckBoxesSet = false;
+		private string imageAspectName;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool UseInitialLetterForGroup {
-            get { return useInitialLetterForGroup; }
-            set { useInitialLetterForGroup = value; }
-        }
-        private bool useInitialLetterForGroup;
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool IsEditable {
+			get => isEditable;
+			set {
+				isEditable = value;
+				IsEditableSet = true;
+			}
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public int Width {
-            get { return width; }
-            set { width = value; }
-        }
-        private int width = 150;
+		private bool isEditable = true;
+		internal bool IsEditableSet = false;
 
-        #endregion
-    }
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool IsVisible {
+			get => isVisible;
+			set => isVisible = value;
+		}
 
-    /// <summary>
-    /// Properties marked with [OLVChildren] will be used as the children source in a TreeListView.
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Property)]
-    public class OLVChildrenAttribute : Attribute
-    {
-        
-    }
+		private bool isVisible = true;
 
-    /// <summary>
-    /// Properties marked with [OLVIgnore] will not have columns generated for them.
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Property)]
-    public class OLVIgnoreAttribute : Attribute
-    {
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool IsTileViewColumn {
+			get => isTileViewColumn;
+			set => isTileViewColumn = value;
+		}
 
-    }
+		private bool isTileViewColumn;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int MaximumWidth {
+			get => maximumWidth;
+			set => maximumWidth = value;
+		}
+
+		private int maximumWidth = -1;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int MinimumWidth {
+			get => minimumWidth;
+			set => minimumWidth = value;
+		}
+
+		private int minimumWidth = -1;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string Name {
+			get => name;
+			set => name = value;
+		}
+
+		private string name;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public HorizontalAlignment TextAlign {
+			get => textAlign;
+			set {
+				textAlign = value;
+				IsTextAlignSet = true;
+			}
+		}
+
+		private HorizontalAlignment textAlign = HorizontalAlignment.Left;
+		internal bool IsTextAlignSet = false;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string Tag {
+			get => tag;
+			set => tag = value;
+		}
+
+		private string tag;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string Title {
+			get => title;
+			set => title = value;
+		}
+
+		private string title;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string ToolTipText {
+			get => toolTipText;
+			set => toolTipText = value;
+		}
+
+		private string toolTipText;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool TriStateCheckBoxes {
+			get => triStateCheckBoxes;
+			set {
+				triStateCheckBoxes = value;
+				IsTriStateCheckBoxesSet = true;
+			}
+		}
+
+		private bool triStateCheckBoxes;
+		internal bool IsTriStateCheckBoxesSet = false;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool UseInitialLetterForGroup {
+			get => useInitialLetterForGroup;
+			set => useInitialLetterForGroup = value;
+		}
+
+		private bool useInitialLetterForGroup;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int Width {
+			get => width;
+			set => width = value;
+		}
+
+		private int width = 150;
+
+		#endregion
+	}
+
+	/// <summary>
+	/// Properties marked with [OLVChildren] will be used as the children source in a TreeListView.
+	/// </summary>
+	[AttributeUsage(AttributeTargets.Property)]
+	public class OLVChildrenAttribute : Attribute {
+	}
+
+	/// <summary>
+	/// Properties marked with [OLVIgnore] will not have columns generated for them.
+	/// </summary>
+	[AttributeUsage(AttributeTargets.Property)]
+	public class OLVIgnoreAttribute : Attribute {
+	}
 }
