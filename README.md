@@ -3,7 +3,7 @@
 [![Version](https://img.shields.io/nuget/vpre/FluentListView.svg)](https://www.nuget.org/packages/FluentListView)
 [![Downloads](https://img.shields.io/nuget/dt/FluentListView.svg)](https://www.nuget.org/packages/FluentListView)
 [![GitHub contributors](https://img.shields.io/github/contributors/robinrodricks/FluentListView.svg)](https://github.com/robinrodricks/FluentListView/graphs/contributors)
-[![Codacy grade](https://api.codacy.com/project/badge/Grade/92c386869a74455c9f2de50b523db641)](https://app.codacy.com/project/robinrodricks/FluentListView/dashboard)
+[![Codacy grade](https://api.codacy.com/project/badge/Grade/ed7975b8682c452fb37e0b7ad6566c14)](https://app.codacy.com/project/robinrodricks/FluentListView/dashboard)
 [![License](https://img.shields.io/github/license/robinrodricks/FluentListView.svg)](https://github.com/robinrodricks/FluentListView/blob/master/LICENSE)
 
 FluentListView is a C# wrapper around a .NET ListView, supporting model-bound lists, in-place item editing, drag and drop, icons, themes, trees & data grids, and much more.
