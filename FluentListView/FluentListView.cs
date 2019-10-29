@@ -29,8 +29,14 @@ namespace Fluent {
 		public IList Items {
 			get => items;
 			set {
-				items = value;
-				Redraw();
+
+				// FIX: suppress invalid data set during InitializeControl, due to codegen by Visual Studio Designer
+				if (this.ParentForm != null) {
+
+					// accept the items and redraw the list
+					items = value;
+					Redraw();
+				}
 			}
 		}
 
