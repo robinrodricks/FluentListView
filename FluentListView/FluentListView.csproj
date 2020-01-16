@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Version>3.0.3</Version>
-    <VersionPrefix>3.0.3</VersionPrefix>
+    <Version>3.0.4</Version>
+    <VersionPrefix>3.0.4</VersionPrefix>
     <TargetFramework>net45</TargetFramework>
     <Description>FluentListView is a C# wrapper around a .NET ListView, supporting model-bound lists, in-place item editing, drag and drop, icons, themes, trees &amp; data grids, and much more.</Description>
     <Copyright>GNU General Public License v3.0</Copyright>

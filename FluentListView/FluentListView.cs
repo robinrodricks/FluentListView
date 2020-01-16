@@ -26,17 +26,14 @@ namespace Fluent {
 		/// When adding and removing items, please call AddItem and RemoveItem instead of modifying this list directly.
 		/// </summary>
 		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public IList Items {
 			get => items;
 			set {
-
-				// FIX: suppress invalid data set during InitializeControl, due to codegen by Visual Studio Designer
-				if (this.ParentForm != null) {
-
-					// accept the items and redraw the list
-					items = value;
-					Redraw();
-				}
+				
+				// accept the items and redraw the list
+				items = value;
+				Redraw();
 			}
 		}
 
@@ -46,7 +43,26 @@ namespace Fluent {
 		/// You can optionally add a list of Columns, to have those properties show as additional columns in the list.
 		/// </summary>
 		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public FluentListProperties Properties => properties;
+
+		/// <summary>
+		/// This callback will be fired when the selection changes.
+		/// </summary>
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public Action<object> OnItemSelected;
+
+		/// <summary>
+		/// This callback will be fired an item is clicked with the mouse.
+		/// </summary>
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public Action<object> OnItemClick;
+
+		/// <summary>
+		/// This callback will be fired an item is double-clicked with the mouse.
+		/// </summary>
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public Action<object> OnItemDoubleClick;
 
 		/// <summary>
 		/// Whether the list will use a SimpleDragSource to initiate drags.
@@ -81,15 +97,18 @@ namespace Fluent {
 		/// <summary>
 		/// You need to set this if you are using EnableDragDropItems or EnableDrop, but not if you are using EnableDropFiles.
 		/// </summary>
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public Func<OlvDropEventArgs, bool> OnCanDrop;
 
 		/// <summary>
 		/// You need to set this if you are using EnableDragDropItems or EnableDrop, but not if you are using EnableDropFiles.
 		/// </summary>
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public Action<OlvDropEventArgs> OnDropped;
 
 		/// You need to set this if you are using EnableDropFiles.
 		/// </summary>
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public Action<List<string>> OnDroppedFiles;
 
 		/// <summary>
@@ -142,6 +161,7 @@ namespace Fluent {
 		/// Gets the underlying AdvancedListView or FastListView UI control.
 		/// </summary>
 		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public AdvancedListView InnerList {
 			get {
 				if (InnerAdvList != null) {
@@ -160,6 +180,7 @@ namespace Fluent {
 		/// Gets or sets the selected item.
 		/// </summary>
 		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public object SelectedItem {
 			get {
 				if (InnerList != null) {
@@ -180,6 +201,7 @@ namespace Fluent {
 		/// Gets or sets the selected items.
 		/// </summary>
 		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public IList SelectedItems {
 			get {
 				if (InnerList != null) {
@@ -246,6 +268,7 @@ namespace Fluent {
 
 				// destroy fast list if created
 				if (InnerFastList != null) {
+					UnconfigureList(InnerFastList);
 					Controls.Remove(InnerFastList);
 					InnerFastList.Dispose();
 					InnerFastList = null;
@@ -260,6 +283,7 @@ namespace Fluent {
 
 				// destroy advanced list if created
 				if (InnerAdvList != null) {
+					UnconfigureList(InnerAdvList);
 					Controls.Remove(InnerAdvList);
 					InnerAdvList.Dispose();
 					InnerAdvList = null;
@@ -366,6 +390,36 @@ namespace Fluent {
 						OnDropped(args);
 					}
 				};
+			}
+
+			// add item events
+			list.SelectionChanged += List_SelectionChanged;
+			list.MouseClick += List_MouseClick;
+			list.MouseDoubleClick += List_MouseDoubleClick;
+		}
+		private void UnconfigureList(AdvancedListView list) {
+
+			// remove item events
+			list.SelectionChanged -= List_SelectionChanged;
+			list.MouseClick -= List_MouseClick;
+			list.MouseDoubleClick -= List_MouseDoubleClick;
+		}
+
+		private void List_MouseDoubleClick(object sender, MouseEventArgs e) {
+			if (OnItemDoubleClick != null) {
+				OnItemDoubleClick(SelectedItem);
+			}
+		}
+
+		private void List_MouseClick(object sender, MouseEventArgs e) {
+			if (OnItemClick != null) {
+				OnItemClick(SelectedItem);
+			}
+		}
+
+		private void List_SelectionChanged(object sender, EventArgs e) {
+			if (OnItemSelected != null) {
+				OnItemSelected(SelectedItem);
 			}
 		}
 
