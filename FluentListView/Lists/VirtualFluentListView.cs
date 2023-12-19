@@ -391,15 +391,16 @@ namespace Fluent.Lists {
 				if (value == VirtualListSize || value < 0) {
 					return;
 				}
+				base.VirtualListSize = value;
 
 				// Get around the 'private' marker on 'virtualListSize' field using reflection
-				if (virtualListSizeFieldInfo == null) {
+				/*if (virtualListSizeFieldInfo == null) {
 					virtualListSizeFieldInfo = typeof(ListView).GetField("virtualListSize", BindingFlags.NonPublic | BindingFlags.Instance);
 					Debug.Assert(virtualListSizeFieldInfo != null);
 				}
 
 				// Set the base class private field so that it keeps on working
-				virtualListSizeFieldInfo.SetValue(this, value);
+				virtualListSizeFieldInfo.SetValue(this, value);*/
 
 				// Send a raw message to change the virtual list size *without* changing the scroll position
 				if (IsHandleCreated && !DesignMode) {
