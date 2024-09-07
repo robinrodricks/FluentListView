@@ -8,6 +8,8 @@
 
 FluentListView is a C# wrapper around a .NET ListView, supporting model-bound lists, in-place item editing, drag and drop, icons, themes, trees & data grids, and much more.
 
+Updated to support .NET 7+ (Windows only) and .NET Framework support has been dropped.
+
 Here is an example of what your FluentListView can look like:
 
 ![_images/fancy-screenshot2.png](_images/fancy-screenshot2.png)
